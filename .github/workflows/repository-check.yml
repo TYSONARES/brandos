@@ -13,7 +13,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm run check:docs
-      - run: npm run check:fixtures
-      - run: npm run check:repo
-      - run: npm run check:workflows
+      - run: npm run check:all

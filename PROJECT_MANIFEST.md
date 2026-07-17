@@ -4,7 +4,8 @@
 
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
-- Active workstream: Product Core v0.2
+- Latest completed workstream: Product Core v0.2
+- Next workstream: Design System v0.3
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -31,6 +32,11 @@ BrandOS product runtime code yet. It prepares the system for v0.2 Product Core.
 Product Core v0.2 defines the first official BrandOS product model. It captures the core domains,
 objects, roles, workflows, success metrics, and non-goals required before design system, AI agent,
 architecture, and infrastructure work become implementation-ready.
+
+## v0.2 Completion
+
+Product Core v0.2 is complete at repository definition level. See `docs/product/release-v0.2.0.md`
+and `docs/decisions/0012-product-core-v0.2-complete.md`.
 
 ## Definition of Done
 

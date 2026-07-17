@@ -5,24 +5,26 @@ Product Core v0.2 defines what BrandOS is before implementation begins.
 ## Status
 
 - Released baseline: Foundation v0.1.0
-- Active workstream: Product Core v0.2
-- Current goal: turn brand strategy operations into a coherent product model
+- Latest completed workstream: Product Core v0.2
+- Next workstream: Design System v0.3
+- Current goal: support later releases from a stable product model
 
 ## Read Order
 
 1. `v0.2-scope.md`
-2. `vision.md`
-3. `core-domains.md`
-4. `objects.md`
-5. `brand-profile.md`
-6. `source-claim-decision.md`
-7. `context-pack.md`
-8. `personas.md`
-9. `workflows.md`
-10. `workflows/README.md`
-11. `user-journeys.md`
-12. `success-metrics.md`
-13. `non-goals.md`
+2. `release-v0.2.0.md`
+3. `vision.md`
+4. `core-domains.md`
+5. `objects.md`
+6. `brand-profile.md`
+7. `source-claim-decision.md`
+8. `context-pack.md`
+9. `personas.md`
+10. `workflows.md`
+11. `workflows/README.md`
+12. `user-journeys.md`
+13. `success-metrics.md`
+14. `non-goals.md`
 
 ## Product Promise
 
