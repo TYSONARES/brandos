@@ -1,11 +1,17 @@
 # Prompt Contracts
 
-## AI Operating Baseline
+## Purpose
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+Prompt contracts define context requirements, task boundaries, output formats, and refusal rules.
 
-## Requirements
+## Schema
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+The draft contract is defined in `schemas/prompt-contract.schema.json`.
+
+## Fixture
+
+See `fixtures/prompt-contract.example.json`.
+
+## Rule
+
+Prompt contracts must name required context before they name output expectations.

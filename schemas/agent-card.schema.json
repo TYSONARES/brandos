@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/agent-card.schema.json",
+  "title": "Agent Card",
+  "type": "object",
+  "required": ["id", "name", "status", "purpose", "allowedInputs", "requiredContext", "outputs", "guardrails"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "purpose": { "type": "string" },
+    "allowedInputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "requiredContext": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "outputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "guardrails": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

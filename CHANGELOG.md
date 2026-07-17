@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - AI Agents v0.4
+
+- Started AI Agents workstream.
+- Added draft schemas and fixtures for Agent Card and Prompt Contract.
+- Added ADR 0015 for AI Agents v0.4 start.
+
 ## 0.3.0 - Design System
 
 - Started Design System workstream.

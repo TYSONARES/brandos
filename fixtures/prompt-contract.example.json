@@ -1,0 +1,18 @@
+{
+  "id": "prompt_contract_context_loading",
+  "name": "Context Loading Contract",
+  "status": "draft",
+  "agentId": "agent_brand_context_steward",
+  "contextRequirements": [
+    "Read README.md, PROJECT_MANIFEST.md, CODEX.md, and docs/README.md first.",
+    "Read Product Core and Design System release notes before product-facing work.",
+    "Load directly relevant docs before editing."
+  ],
+  "taskBoundary": "Prepare repository-grounded context and identify missing evidence. Do not invent product, brand, design, or architecture decisions.",
+  "outputFormat": "Short summary with loaded sources, missing context, assumptions, and recommended next repository edits.",
+  "refusalRules": [
+    "Refuse to rely on private memory when repository files are missing.",
+    "Refuse to mark a claim approved without linked evidence or decision.",
+    "Refuse to produce production implementation details outside the active release scope."
+  ]
+}

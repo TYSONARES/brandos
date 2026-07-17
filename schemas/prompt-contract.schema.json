@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/prompt-contract.schema.json",
+  "title": "Prompt Contract",
+  "type": "object",
+  "required": ["id", "name", "status", "agentId", "contextRequirements", "taskBoundary", "outputFormat", "refusalRules"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "agentId": { "type": "string" },
+    "contextRequirements": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "taskBoundary": { "type": "string" },
+    "outputFormat": { "type": "string" },
+    "refusalRules": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

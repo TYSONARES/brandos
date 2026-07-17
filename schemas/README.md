@@ -21,3 +21,5 @@ Examples and future implementation code should conform to these schemas unless a
 - `workflow-run.schema.json`
 - `design-token.schema.json`
 - `component-spec.schema.json`
+- `agent-card.schema.json`
+- `prompt-contract.schema.json`

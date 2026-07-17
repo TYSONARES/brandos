@@ -1,11 +1,21 @@
 # Agent Roles
 
-## AI Operating Baseline
+## Purpose
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+Agent roles define responsibilities and boundaries before runtime implementation.
 
-## Requirements
+## Initial Roles
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+- Brand Context Steward
+- Product Spec Assistant
+- Design System Assistant
+- Review and QA Assistant
+- Repository Maintenance Assistant
+
+## Schema
+
+The draft contract is defined in `schemas/agent-card.schema.json`.
+
+## Fixture
+
+See `fixtures/agent-card.example.json`.

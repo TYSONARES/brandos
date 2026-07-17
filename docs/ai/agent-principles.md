@@ -1,11 +1,13 @@
 # Agent Principles
 
-## AI Operating Baseline
+## Principles
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+- Repository truth comes first.
+- Agent outputs must be traceable.
+- Missing context must be named.
+- Scope boundaries must be respected.
+- Durable decisions belong in repository files.
 
-## Requirements
+## Rule
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+An agent that cannot identify its required repository context should stop and report the missing context.

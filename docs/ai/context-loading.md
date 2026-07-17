@@ -1,11 +1,16 @@
 # Context Loading
 
-## AI Operating Baseline
+## Required Base Context
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+- `README.md`
+- `PROJECT_MANIFEST.md`
+- `CODEX.md`
+- `docs/README.md`
 
-## Requirements
+## Task Context
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+Agents must load the release docs and domain docs relevant to the task.
+
+## Rule
+
+If required context is missing, the agent must state the gap and avoid inventing a decision.
