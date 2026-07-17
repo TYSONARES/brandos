@@ -14,6 +14,7 @@ Runtime baseline defines the first executable shape of BrandOS.
 - Persistence: in-memory examples only.
 - Initial state: deterministic Product Core example objects.
 - Initial use cases: Brand Profile overview and Context Pack readiness.
+- Initial render target: deterministic HTML string.
 
 ## Rules
 
@@ -22,6 +23,7 @@ Runtime baseline defines the first executable shape of BrandOS.
 - Runtime modules must expose named functions for future tests.
 - In-memory stores must remain replaceable by future persistence adapters.
 - Use cases must consume store interfaces instead of hard-coding fixture data.
+- Renderers must consume shell output instead of reading store data directly.
 - Console output should be concise and suitable for CI logs.
 
 ## Upgrade Path

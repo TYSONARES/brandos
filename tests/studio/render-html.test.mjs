@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+
+import { createBrandOSStudioShell } from '../../apps/studio/src/app.mjs';
+import { renderStudioHtml } from '../../apps/studio/src/render-html.mjs';
+
+test('Studio HTML render includes shell identity and Product Core summary', () => {
+  const html = renderStudioHtml(createBrandOSStudioShell());
+
+  assert.match(html, /<!doctype html>/);
+  assert.match(html, /BrandOS Studio/);
+  assert.match(html, /Product Core objects/);
+  assert.match(html, /Readiness blockers/);
+});
+
+test('Studio HTML render includes blocking Context Pack readiness reason', () => {
+  const html = renderStudioHtml(createBrandOSStudioShell());
+
+  assert.match(html, /Context readiness/);
+  assert.match(html, /blocked/);
+  assert.match(html, /Review is blocking release: review_example_001/);
+});

@@ -8,6 +8,7 @@ import {
 } from '../../../packages/domain/src/index.mjs';
 import { createContractSummary } from '../../../packages/contracts/src/index.mjs';
 import { createDesignSystemSummary } from '../../../packages/design-system/src/index.mjs';
+import { renderStudioHtml } from './render-html.mjs';
 
 export function createBrandOSStudioShell() {
   const store = createInMemoryProductCoreStore(createExampleProductCoreState());
@@ -37,4 +38,8 @@ export function renderSmokeSummary(shell = createBrandOSStudioShell()) {
 
 if (process.argv.includes('--smoke')) {
   console.log(renderSmokeSummary());
+}
+
+if (process.argv.includes('--html')) {
+  console.log(renderStudioHtml(createBrandOSStudioShell()));
 }

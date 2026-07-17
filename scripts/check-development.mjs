@@ -21,6 +21,7 @@ const required = [
   'docs/decisions/0021-development-ready-start.md',
   'apps/studio/README.md',
   'apps/studio/src/app.mjs',
+  'apps/studio/src/render-html.mjs',
   'packages/domain/README.md',
   'packages/domain/src/example-state.mjs',
   'packages/domain/src/in-memory-store.mjs',
@@ -32,7 +33,8 @@ const required = [
   'packages/contracts/src/product-core-contracts.mjs',
   'packages/design-system/README.md',
   'packages/design-system/src/index.mjs',
-  'tests/domain/product-core-use-cases.test.mjs'
+  'tests/domain/product-core-use-cases.test.mjs',
+  'tests/studio/render-html.test.mjs'
 ];
 
 const missing = required.filter((file) => !existsSync(file));
