@@ -1,13 +1,14 @@
 {
   "name": "brandos",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Repository-first foundation for BrandOS.",
   "scripts": {
-    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:components && npm run check:design-checklists && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design",
+    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:components && npm run check:design-checklists && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design && npm run check:design-release",
     "check:components": "node scripts/check-components.mjs",
     "check:design": "node scripts/check-design.mjs",
     "check:design-checklists": "node scripts/check-design-checklists.mjs",
+    "check:design-release": "node scripts/check-design-release.mjs",
     "check:docs": "node scripts/check-docs.mjs",
     "check:fixtures": "node scripts/check-fixtures.mjs",
     "check:release": "node scripts/check-release.mjs",

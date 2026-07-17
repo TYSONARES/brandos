@@ -4,8 +4,8 @@
 
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: Product Core v0.2
-- Active workstream: Design System v0.3
+- Latest completed workstream: Design System v0.3
+- Next workstream: AI Agents v0.4
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -42,6 +42,11 @@ and `docs/decisions/0012-product-core-v0.2-complete.md`.
 
 Design System v0.3 defines repository-level design standards for BrandOS tokens, components, accessibility,
 layout, interaction, content design, and review before implementation begins.
+
+## v0.3 Completion
+
+Design System v0.3 is complete at repository definition level. See `docs/design/release-v0.3.0.md`
+and `docs/decisions/0014-design-system-v0.3-complete.md`.
 
 ## Definition of Done
 

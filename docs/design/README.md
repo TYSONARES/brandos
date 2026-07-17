@@ -5,24 +5,26 @@ Design System v0.3 defines the visual and interaction standards BrandOS needs be
 ## Status
 
 - Released baseline: Product Core v0.2
-- Active workstream: Design System v0.3
-- Current goal: define tokens, components, accessibility, and design review standards
+- Latest completed workstream: Design System v0.3
+- Next workstream: AI Agents v0.4
+- Current goal: support later releases from stable design standards
 
 ## Read Order
 
 1. `v0.3-scope.md`
-2. `principles.md`
-3. `tokens.md`
-4. `token-set.md`
-5. `components.md`
-6. `component-set.md`
-7. `accessibility.md`
-8. `accessibility-checklist.md`
-9. `state-guidelines.md`
-10. `layout.md`
-11. `interaction.md`
-12. `design-review.md`
-13. `review-checklist.md`
+2. `release-v0.3.0.md`
+3. `principles.md`
+4. `tokens.md`
+5. `token-set.md`
+6. `components.md`
+7. `component-set.md`
+8. `accessibility.md`
+9. `accessibility-checklist.md`
+10. `state-guidelines.md`
+11. `layout.md`
+12. `interaction.md`
+13. `design-review.md`
+14. `review-checklist.md`
 
 ## Product Core Dependency
 

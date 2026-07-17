@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased - Design System v0.3
+## 0.3.0 - Design System
 
 - Started Design System workstream.
 - Added draft schemas and fixtures for Design Token and Component Spec.
@@ -8,6 +8,8 @@
 - Added draft component set for Product Core objects and workflows.
 - Added accessibility, state, and design review checklists.
 - Added ADR 0013 for Design System v0.3 start.
+- Added ADR 0014 and release checklist for Design System completion.
+- Added design release requirement validation.
 
 ## 0.2.0 - Product Core
 
