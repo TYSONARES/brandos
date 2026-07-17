@@ -3,7 +3,7 @@ export function renderStudioHtml(shell) {
   const blockingItems = shell.contextPackReadiness.blockingReasons
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
     .join('');
-  const actionItems = shell.contextPackReadiness.nextActions
+  const actionItems = shell.contextPackWorkflow.nextActions
     .map((action) => `<li>${escapeHtml(action.label)}</li>`)
     .join('');
 
@@ -76,7 +76,7 @@ export function renderStudioHtml(shell) {
       font-weight: 720;
     }
     .label, .meta { color: var(--secondary); font-size: 13px; }
-    .content {
+    .workflow-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 16px;
@@ -90,13 +90,21 @@ export function renderStudioHtml(shell) {
       margin: 10px 0 0;
       padding-left: 20px;
     }
+    .section-title {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin: 22px 0 10px;
+      text-transform: uppercase;
+    }
     .actions {
       margin-top: 14px;
       border-top: 1px solid #d7dce3;
       padding-top: 12px;
     }
     @media (max-width: 760px) {
-      header, .content { display: block; }
+      header, .workflow-grid { display: block; }
       .status { margin-top: 16px; }
       .grid { grid-template-columns: 1fr; }
       .panel { margin-bottom: 12px; }
@@ -131,7 +139,8 @@ export function renderStudioHtml(shell) {
       </article>
     </section>
 
-    <section class="content">
+    <p class="section-title">Brand overview</p>
+    <section class="workflow-grid" aria-label="Brand overview">
       <article class="panel">
         <h2>${escapeHtml(shell.brandProfileOverview.name)}</h2>
         <p>${escapeHtml(shell.brandProfileOverview.promise)}</p>
@@ -140,11 +149,25 @@ export function renderStudioHtml(shell) {
         <p class="meta">Decisions: ${shell.brandProfileOverview.acceptedDecisionCount}/${shell.brandProfileOverview.decisionCount} accepted</p>
       </article>
       <article class="panel">
+        <h2>Source health</h2>
+        <p class="meta">Claims: ${shell.brandProfileOverview.supportedClaimCount}/${shell.brandProfileOverview.claimCount} supported</p>
+        <p class="meta">Decisions: ${shell.brandProfileOverview.acceptedDecisionCount}/${shell.brandProfileOverview.decisionCount} accepted</p>
+      </article>
+    </section>
+
+    <p class="section-title">Context Pack workflow</p>
+    <section class="workflow-grid" aria-label="Context Pack workflow">
+      <article class="panel">
         <h2>${escapeHtml(shell.contextPackReadiness.name)}</h2>
         <p class="meta">Included claims: ${shell.contextPackReadiness.supportedClaimCount}/${shell.contextPackReadiness.includedClaimCount} supported</p>
         <p class="meta">Accepted decisions: ${shell.contextPackReadiness.acceptedDecisionCount}</p>
         <p class="meta">Reviews: ${shell.contextPackReadiness.reviewCount}</p>
         <ul>${blockingItems}</ul>
+      </article>
+      <article class="panel">
+        <h2>${escapeHtml(shell.contextPackWorkflow.title)}</h2>
+        <p class="meta">Current step: ${escapeHtml(shell.contextPackWorkflow.currentStep)}</p>
+        <p class="meta">Owner: ${escapeHtml(shell.contextPackWorkflow.owner)}</p>
         <div class="actions">
           <h2>Next action</h2>
           <ul>${actionItems}</ul>

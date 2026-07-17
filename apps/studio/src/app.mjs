@@ -15,6 +15,12 @@ export function createBrandOSStudioShell() {
   const state = summarizeProductCoreState(store);
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+  const contextPackWorkflow = {
+    title: 'Context Pack workflow',
+    currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
+    owner: 'operator@example.local',
+    nextActions: contextPackReadiness.nextActions
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -22,6 +28,7 @@ export function createBrandOSStudioShell() {
     state,
     brandProfileOverview,
     contextPackReadiness,
+    contextPackWorkflow,
     packages: [
       createDomainSummary(),
       createContractSummary(),
