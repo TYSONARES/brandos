@@ -23,6 +23,7 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `component-spec.example.json`
 - `agent-card.example.json`
 - `prompt-contract.example.json`
+- `evaluation-check.example.json`
 
 ## Agent Fixtures
 
@@ -39,6 +40,12 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `prompts/design-system.json`
 - `prompts/review-qa.json`
 - `prompts/repository-maintenance.json`
+
+## Evaluation Fixtures
+
+- `evaluations/repository-context-loaded.json`
+- `evaluations/traceable-output.json`
+- `evaluations/scope-boundary.json`
 
 ## Token Set Fixtures
 

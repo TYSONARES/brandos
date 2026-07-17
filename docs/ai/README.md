@@ -19,8 +19,10 @@ AI Agents v0.4 defines how BrandOS agents use repository truth safely and consis
 7. `context-loading.md`
 8. `memory-policy.md`
 9. `evaluation.md`
-10. `safety.md`
-11. `handoff.md`
+10. `output-formats.md`
+11. `safety.md`
+12. `handoff.md`
+13. `tool-use.md`
 
 ## Dependency
 

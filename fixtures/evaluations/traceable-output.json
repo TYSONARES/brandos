@@ -1,0 +1,14 @@
+{
+  "id": "eval_traceable_output",
+  "name": "Traceable Output",
+  "status": "draft",
+  "appliesTo": [
+    "all-agents"
+  ],
+  "criteria": [
+    "Output names the source docs or objects used.",
+    "Decisions are linked to ADRs or release docs when durable.",
+    "Assumptions are separated from repository facts."
+  ],
+  "failureMode": "Agent produces unsupported recommendations without source traceability."
+}

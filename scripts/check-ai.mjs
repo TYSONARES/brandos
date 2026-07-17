@@ -8,10 +8,18 @@ const requiredFiles = [
   'docs/ai/prompt-contracts.md',
   'docs/ai/prompt-contract-set.md',
   'docs/ai/context-loading.md',
+  'docs/ai/memory-policy.md',
+  'docs/ai/evaluation.md',
+  'docs/ai/output-formats.md',
+  'docs/ai/safety.md',
+  'docs/ai/handoff.md',
+  'docs/ai/tool-use.md',
   'schemas/agent-card.schema.json',
   'schemas/prompt-contract.schema.json',
+  'schemas/evaluation-check.schema.json',
   'fixtures/agent-card.example.json',
   'fixtures/prompt-contract.example.json',
+  'fixtures/evaluation-check.example.json',
   'fixtures/agents/brand-context-steward.json',
   'fixtures/agents/product-spec-assistant.json',
   'fixtures/agents/design-system-assistant.json',
@@ -22,6 +30,9 @@ const requiredFiles = [
   'fixtures/prompts/design-system.json',
   'fixtures/prompts/review-qa.json',
   'fixtures/prompts/repository-maintenance.json',
+  'fixtures/evaluations/repository-context-loaded.json',
+  'fixtures/evaluations/traceable-output.json',
+  'fixtures/evaluations/scope-boundary.json',
   'docs/decisions/0015-ai-agents-start.md'
 ];
 
@@ -51,6 +62,12 @@ const promptSetFiles = [
   'fixtures/prompts/review-qa.json',
   'fixtures/prompts/repository-maintenance.json'
 ];
+const evaluationFiles = [
+  'fixtures/evaluation-check.example.json',
+  'fixtures/evaluations/repository-context-loaded.json',
+  'fixtures/evaluations/traceable-output.json',
+  'fixtures/evaluations/scope-boundary.json'
+];
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
@@ -74,6 +91,7 @@ function validateFixture(schema, fixture, file) {
 
 const agentSchema = readJson('schemas/agent-card.schema.json');
 const promptSchema = readJson('schemas/prompt-contract.schema.json');
+const evaluationSchema = readJson('schemas/evaluation-check.schema.json');
 const agentIds = new Set();
 
 for (const file of exampleAgentFiles) {
@@ -101,6 +119,11 @@ for (const file of promptSetFiles) {
     console.error(`${file} references unknown agentId: ${fixture.agentId}`);
     process.exit(1);
   }
+}
+
+for (const file of evaluationFiles) {
+  const fixture = readJson(file);
+  validateFixture(evaluationSchema, fixture, file);
 }
 
 console.log('AI agent requirements passed.');

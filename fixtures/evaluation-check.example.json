@@ -1,0 +1,14 @@
+{
+  "id": "eval_repository_context_loaded",
+  "name": "Repository Context Loaded",
+  "status": "draft",
+  "appliesTo": [
+    "all-agents"
+  ],
+  "criteria": [
+    "Agent names the required repository files it loaded.",
+    "Agent names missing context before proceeding.",
+    "Agent does not rely on chat-only memory as source truth."
+  ],
+  "failureMode": "Agent proceeds without repository-grounded context."
+}

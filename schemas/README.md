@@ -23,3 +23,4 @@ Examples and future implementation code should conform to these schemas unless a
 - `component-spec.schema.json`
 - `agent-card.schema.json`
 - `prompt-contract.schema.json`
+- `evaluation-check.schema.json`

@@ -1,11 +1,13 @@
 # Tool Use
 
-## AI Operating Baseline
+## Purpose
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+Tool use rules keep agent actions traceable and scoped.
 
-## Requirements
+## Rules
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+- Inspect repository files before editing.
+- Run relevant validation scripts after changes.
+- Do not use tools to bypass repository decisions.
+- Prefer small, reviewable edits.
+- Record tool-driven outcomes in final summaries or handoffs.

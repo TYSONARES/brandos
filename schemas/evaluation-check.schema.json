@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/evaluation-check.schema.json",
+  "title": "Evaluation Check",
+  "type": "object",
+  "required": ["id", "name", "status", "appliesTo", "criteria", "failureMode"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "appliesTo": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "criteria": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "failureMode": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,11 +1,26 @@
 # Output Formats
 
-## AI Operating Baseline
+## Purpose
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+Output formats make agent work reviewable and consistent.
 
-## Requirements
+## Required Output Sections
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+- Sources loaded
+- Task result
+- Assumptions
+- Missing context
+- Repository changes recommended or made
+- Verification performed
+
+## Review Output
+
+Review and QA outputs must lead with findings before summaries.
+
+## Maintenance Output
+
+Repository maintenance outputs must list indexes, manifests, release docs, and validation scripts affected.
+
+## Rule
+
+Agents should keep outputs concise, but never omit missing context or verification status.

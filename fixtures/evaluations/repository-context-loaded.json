@@ -1,0 +1,18 @@
+{
+  "id": "eval_repository_context_loaded",
+  "name": "Repository Context Loaded",
+  "status": "draft",
+  "appliesTo": [
+    "agent_brand_context_steward",
+    "agent_product_spec_assistant",
+    "agent_design_system_assistant",
+    "agent_review_qa_assistant",
+    "agent_repository_maintenance_assistant"
+  ],
+  "criteria": [
+    "Base context files are loaded before task work.",
+    "Relevant release docs are loaded before domain work.",
+    "Missing context is reported as a blocker or assumption."
+  ],
+  "failureMode": "Agent relies on chat history or hidden memory instead of repository files."
+}

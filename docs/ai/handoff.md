@@ -1,11 +1,20 @@
 # Handoff
 
-## AI Operating Baseline
+## Purpose
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+Handoffs preserve context between agents without depending on hidden memory.
 
-## Requirements
+## Required Handoff Fields
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+- Task objective
+- Sources loaded
+- Files changed
+- Decisions made
+- Assumptions
+- Open questions
+- Verification performed
+- Recommended next agent or workflow
+
+## Rule
+
+A handoff is incomplete if another agent cannot continue from repository files and the handoff record alone.

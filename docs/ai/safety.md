@@ -1,11 +1,18 @@
 # Safety
 
-## AI Operating Baseline
+## Purpose
 
-BrandOS agents must load repository context before acting. The repository is the authority.
+Safety rules prevent BrandOS agents from converting weak or missing context into official project truth.
 
-## Requirements
+## Required Refusals
 
-- State assumptions when repository evidence is incomplete.
-- Prefer updating source files over relying on hidden memory.
-- Keep outputs traceable to product, brand, design, or architecture documents.
+- Refuse to rely on chat-only context as source truth.
+- Refuse to approve claims without evidence or accepted decision records.
+- Refuse to introduce implementation decisions outside active release scope.
+- Refuse to generate agent outputs that hide uncertainty.
+
+## Required Warnings
+
+- Warn when requested work conflicts with release scope.
+- Warn when product, design, architecture, or infrastructure decisions are missing.
+- Warn when generated output needs human review before becoming official.

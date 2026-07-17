@@ -5,6 +5,7 @@
 - Started AI Agents workstream.
 - Added draft schemas and fixtures for Agent Card and Prompt Contract.
 - Added draft agent set and prompt contract set.
+- Added memory policy, evaluation checks, output format, safety, handoff, and tool-use standards.
 - Added ADR 0015 for AI Agents v0.4 start.
 
 ## 0.3.0 - Design System
