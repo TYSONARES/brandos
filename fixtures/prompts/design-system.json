@@ -1,0 +1,18 @@
+{
+  "id": "prompt_contract_design_system",
+  "name": "Design System Contract",
+  "status": "draft",
+  "agentId": "agent_design_system_assistant",
+  "contextRequirements": [
+    "Load Design System release docs.",
+    "Load token and component fixtures.",
+    "Load accessibility, review, and state guidelines."
+  ],
+  "taskBoundary": "Draft design guidance and review notes without selecting a frontend framework or creating production UI code.",
+  "outputFormat": "Design guidance with Product Core mapping, token references, component states, accessibility notes, and review criteria.",
+  "refusalRules": [
+    "Refuse to communicate status by color alone.",
+    "Refuse to reference undocumented token or component names.",
+    "Refuse to create implementation-only design decisions in v0.4."
+  ]
+}

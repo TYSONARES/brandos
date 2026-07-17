@@ -13,12 +13,14 @@ AI Agents v0.4 defines how BrandOS agents use repository truth safely and consis
 1. `v0.4-scope.md`
 2. `agent-principles.md`
 3. `agent-roles.md`
-4. `prompt-contracts.md`
-5. `context-loading.md`
-6. `memory-policy.md`
-7. `evaluation.md`
-8. `safety.md`
-9. `handoff.md`
+4. `agent-set.md`
+5. `prompt-contracts.md`
+6. `prompt-contract-set.md`
+7. `context-loading.md`
+8. `memory-policy.md`
+9. `evaluation.md`
+10. `safety.md`
+11. `handoff.md`
 
 ## Dependency
 

@@ -24,6 +24,22 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `agent-card.example.json`
 - `prompt-contract.example.json`
 
+## Agent Fixtures
+
+- `agents/brand-context-steward.json`
+- `agents/product-spec-assistant.json`
+- `agents/design-system-assistant.json`
+- `agents/review-qa-assistant.json`
+- `agents/repository-maintenance-assistant.json`
+
+## Prompt Contract Fixtures
+
+- `prompts/context-loading.json`
+- `prompts/product-spec.json`
+- `prompts/design-system.json`
+- `prompts/review-qa.json`
+- `prompts/repository-maintenance.json`
+
 ## Token Set Fixtures
 
 - `tokens/color.json`

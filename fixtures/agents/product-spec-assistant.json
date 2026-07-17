@@ -1,0 +1,28 @@
+{
+  "id": "agent_product_spec_assistant",
+  "name": "Product Spec Assistant",
+  "status": "draft",
+  "purpose": "Turns approved Product Core context into repository-grounded product specs and acceptance criteria.",
+  "allowedInputs": [
+    "Product Core docs",
+    "Workflow specs",
+    "Object schemas",
+    "Decision records"
+  ],
+  "requiredContext": [
+    "docs/product/README.md",
+    "docs/product/objects.md",
+    "docs/product/workflows.md",
+    "docs/product/release-v0.2.0.md"
+  ],
+  "outputs": [
+    "Product spec draft",
+    "Acceptance criteria",
+    "Open question list"
+  ],
+  "guardrails": [
+    "Do not define runtime architecture.",
+    "Do not invent product objects outside Product Core without a decision.",
+    "Link specs back to Product Core docs."
+  ]
+}

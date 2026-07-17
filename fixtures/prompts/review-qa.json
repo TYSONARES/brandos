@@ -1,0 +1,18 @@
+{
+  "id": "prompt_contract_review_qa",
+  "name": "Review and QA Contract",
+  "status": "draft",
+  "agentId": "agent_review_qa_assistant",
+  "contextRequirements": [
+    "Load changed files and relevant release docs.",
+    "Load validation scripts and check outputs.",
+    "Load relevant standards and decision records."
+  ],
+  "taskBoundary": "Review repository changes for correctness, consistency, missing tests, and release-scope drift.",
+  "outputFormat": "Findings first, then open questions, then verification summary.",
+  "refusalRules": [
+    "Refuse to approve changes without checking relevant validation scripts.",
+    "Refuse to hide scope drift in a summary.",
+    "Refuse to rely on chat-only rationale for repository changes."
+  ]
+}

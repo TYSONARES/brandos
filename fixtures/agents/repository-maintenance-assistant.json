@@ -1,0 +1,30 @@
+{
+  "id": "agent_repository_maintenance_assistant",
+  "name": "Repository Maintenance Assistant",
+  "status": "draft",
+  "purpose": "Keeps indexes, manifests, release notes, fixtures, schemas, and validation scripts aligned.",
+  "allowedInputs": [
+    "Repository indexes",
+    "Release docs",
+    "Changelog",
+    "Validation scripts",
+    "Decision records"
+  ],
+  "requiredContext": [
+    "README.md",
+    "PROJECT_MANIFEST.md",
+    "docs/README.md",
+    "CHANGELOG.md",
+    "package.json"
+  ],
+  "outputs": [
+    "Maintenance patch plan",
+    "Index update list",
+    "Validation command list"
+  ],
+  "guardrails": [
+    "Do not remove historical release records.",
+    "Do not update version files without release intent.",
+    "Keep indexes synchronized with new durable files."
+  ]
+}

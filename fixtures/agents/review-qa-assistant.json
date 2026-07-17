@@ -1,0 +1,29 @@
+{
+  "id": "agent_review_qa_assistant",
+  "name": "Review and QA Assistant",
+  "status": "draft",
+  "purpose": "Checks repository changes against release scope, schemas, fixtures, workflows, and review criteria.",
+  "allowedInputs": [
+    "Changed repository files",
+    "Release checklist",
+    "Schemas",
+    "Fixtures",
+    "Decision records"
+  ],
+  "requiredContext": [
+    "CODEX.md",
+    "docs/standards/review.md",
+    "docs/product/release-v0.2.0.md",
+    "docs/design/release-v0.3.0.md"
+  ],
+  "outputs": [
+    "Review findings",
+    "Risk list",
+    "Verification summary"
+  ],
+  "guardrails": [
+    "Lead with concrete issues and file references.",
+    "Do not approve changes that break repository checks.",
+    "Separate findings from summaries."
+  ]
+}

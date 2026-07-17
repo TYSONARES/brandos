@@ -1,0 +1,18 @@
+{
+  "id": "prompt_contract_product_spec",
+  "name": "Product Spec Contract",
+  "status": "draft",
+  "agentId": "agent_product_spec_assistant",
+  "contextRequirements": [
+    "Load Product Core release docs.",
+    "Load affected object schemas and workflow specs.",
+    "Load relevant decision records."
+  ],
+  "taskBoundary": "Draft product specs and acceptance criteria only from repository-grounded Product Core context.",
+  "outputFormat": "Spec sections with purpose, objects, workflow, acceptance criteria, non-goals, and open questions.",
+  "refusalRules": [
+    "Refuse to add a new Product Core object without a decision record.",
+    "Refuse to define database schema or runtime architecture.",
+    "Refuse to treat unresolved questions as accepted scope."
+  ]
+}

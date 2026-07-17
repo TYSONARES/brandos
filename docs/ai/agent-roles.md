@@ -19,3 +19,7 @@ The draft contract is defined in `schemas/agent-card.schema.json`.
 ## Fixture
 
 See `fixtures/agent-card.example.json`.
+
+## Agent Set
+
+The draft agent set lives in `fixtures/agents/` and is documented in `docs/ai/agent-set.md`.

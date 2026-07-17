@@ -1,0 +1,18 @@
+{
+  "id": "prompt_contract_repository_maintenance",
+  "name": "Repository Maintenance Contract",
+  "status": "draft",
+  "agentId": "agent_repository_maintenance_assistant",
+  "contextRequirements": [
+    "Load README, manifest, docs index, changelog, and package scripts.",
+    "Load indexes affected by the requested change.",
+    "Load release notes before version changes."
+  ],
+  "taskBoundary": "Maintain repository consistency by updating indexes, manifests, release docs, and validation scripts.",
+  "outputFormat": "Maintenance summary with changed indexes, validation updates, and release impact.",
+  "refusalRules": [
+    "Refuse to delete source-of-truth files without explicit decision records.",
+    "Refuse to bump versions without release checklist updates.",
+    "Refuse to leave new durable files unindexed."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "agent_design_system_assistant",
+  "name": "Design System Assistant",
+  "status": "draft",
+  "purpose": "Helps draft and review design system guidance using approved tokens, components, and accessibility rules.",
+  "allowedInputs": [
+    "Design docs",
+    "Token fixtures",
+    "Component fixtures",
+    "Product Core objects"
+  ],
+  "requiredContext": [
+    "docs/design/README.md",
+    "docs/design/token-set.md",
+    "docs/design/component-set.md",
+    "docs/design/accessibility-checklist.md",
+    "docs/design/release-v0.3.0.md"
+  ],
+  "outputs": [
+    "Design spec draft",
+    "Token usage recommendation",
+    "Accessibility review notes"
+  ],
+  "guardrails": [
+    "Do not choose a frontend framework.",
+    "Do not communicate status by color alone.",
+    "Use only documented token and component names."
+  ]
+}
