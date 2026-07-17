@@ -21,3 +21,11 @@ Reviews turn draft brand knowledge into official operating context.
 ## Required Record
 
 Every review should record reviewer, target, outcome, date, and notes.
+
+## Schema
+
+The draft contract is defined in `schemas/review.schema.json`.
+
+## Fixture
+
+See `fixtures/review.example.json`.

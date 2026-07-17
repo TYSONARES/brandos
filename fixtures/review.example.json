@@ -1,0 +1,10 @@
+{
+  "id": "review_example_001",
+  "workspaceId": "workspace_example_001",
+  "targetObjectId": "context_pack_example_001",
+  "targetObjectType": "context-pack",
+  "reviewer": "brand-owner@example.local",
+  "status": "changes-needed",
+  "notes": "Add expiry date and exclude unapproved customer claims before approval.",
+  "reviewedAt": "2026-07-17"
+}

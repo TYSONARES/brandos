@@ -12,6 +12,22 @@ const checks = [
   {
     schema: 'schemas/claim.schema.json',
     fixture: 'fixtures/claim.example.json'
+  },
+  {
+    schema: 'schemas/source.schema.json',
+    fixture: 'fixtures/source.example.json'
+  },
+  {
+    schema: 'schemas/decision.schema.json',
+    fixture: 'fixtures/decision.example.json'
+  },
+  {
+    schema: 'schemas/review.schema.json',
+    fixture: 'fixtures/review.example.json'
+  },
+  {
+    schema: 'schemas/workflow-run.schema.json',
+    fixture: 'fixtures/workflow-run.example.json'
   }
 ];
 

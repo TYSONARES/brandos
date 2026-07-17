@@ -1,0 +1,17 @@
+{
+  "id": "decision_example_001",
+  "workspaceId": "workspace_example_001",
+  "title": "Use repository-first brand truth",
+  "status": "accepted",
+  "rationale": "AI-assisted brand work needs shared source context that survives individual chat sessions.",
+  "consequences": [
+    "Approved BrandOS objects must be represented in repository-backed product contracts.",
+    "Context Packs should cite included Claims and Decisions."
+  ],
+  "affectedObjects": [
+    "brand_profile_example_001",
+    "context_pack_example_001"
+  ],
+  "owner": "brand-owner@example.local",
+  "decidedAt": "2026-07-17"
+}

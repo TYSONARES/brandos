@@ -1,0 +1,17 @@
+{
+  "id": "workflow_run_example_001",
+  "workspaceId": "workspace_example_001",
+  "workflow": "generate-context-pack",
+  "status": "complete",
+  "inputObjectIds": [
+    "brand_profile_example_001",
+    "claim_example_001",
+    "decision_example_001"
+  ],
+  "outputObjectIds": [
+    "context_pack_example_001"
+  ],
+  "owner": "operator@example.local",
+  "startedAt": "2026-07-17",
+  "completedAt": "2026-07-17"
+}

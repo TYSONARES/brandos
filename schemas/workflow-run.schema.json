@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/workflow-run.schema.json",
+  "title": "Workflow Run",
+  "type": "object",
+  "required": ["id", "workspaceId", "workflow", "status", "inputObjectIds", "outputObjectIds", "owner", "startedAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "workflow": { "enum": ["create-brand-profile", "verify-claim", "approve-decision", "generate-context-pack", "run-review"] },
+    "status": { "enum": ["queued", "active", "blocked", "complete"] },
+    "inputObjectIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "outputObjectIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner": { "type": "string" },
+    "startedAt": { "type": "string" },
+    "completedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

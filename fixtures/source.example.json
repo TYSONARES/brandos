@@ -1,0 +1,11 @@
+{
+  "id": "source_example_001",
+  "workspaceId": "workspace_example_001",
+  "title": "Example Strategy Input",
+  "type": "strategy-doc",
+  "status": "verified",
+  "summary": "A sanitized strategy note describing the need for repository-first brand context.",
+  "uri": "docs/examples/brand-profile-example.md",
+  "owner": "strategist@example.local",
+  "capturedAt": "2026-07-17"
+}

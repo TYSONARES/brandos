@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/decision.schema.json",
+  "title": "Decision",
+  "type": "object",
+  "required": ["id", "workspaceId", "title", "status", "rationale", "consequences", "affectedObjects", "owner", "decidedAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "title": { "type": "string" },
+    "status": { "enum": ["proposed", "accepted", "deprecated", "rejected"] },
+    "rationale": { "type": "string" },
+    "consequences": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affectedObjects": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner": { "type": "string" },
+    "decidedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -4,6 +4,10 @@
 
 Detailed workflow specifications live in `docs/product/workflows/`.
 
+## Workflow Run Schema
+
+Workflow execution records use `schemas/workflow-run.schema.json`.
+
 ## Core Workflows
 
 ### Create Brand Profile

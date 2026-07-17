@@ -22,3 +22,15 @@ A Decision explains why a strategic choice became official.
 ## Approval Rule
 
 A Claim should not become approved unless it has at least one linked Source or one linked accepted Decision.
+
+## Schemas
+
+- Source: `schemas/source.schema.json`
+- Claim: `schemas/claim.schema.json`
+- Decision: `schemas/decision.schema.json`
+
+## Fixtures
+
+- Source: `fixtures/source.example.json`
+- Claim: `fixtures/claim.example.json`
+- Decision: `fixtures/decision.example.json`

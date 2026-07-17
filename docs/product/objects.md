@@ -25,3 +25,7 @@
 - Brand Profile: `schemas/brand-profile.schema.json`
 - Claim: `schemas/claim.schema.json`
 - Context Pack: `schemas/context-pack.schema.json`
+- Source: `schemas/source.schema.json`
+- Decision: `schemas/decision.schema.json`
+- Review: `schemas/review.schema.json`
+- Workflow Run: `schemas/workflow-run.schema.json`

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/source.schema.json",
+  "title": "Source",
+  "type": "object",
+  "required": ["id", "workspaceId", "title", "type", "status", "summary", "owner", "capturedAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "title": { "type": "string" },
+    "type": { "enum": ["research", "interview", "strategy-doc", "campaign-result", "competitor-note", "stakeholder-input"] },
+    "status": { "enum": ["draft", "verified", "rejected"] },
+    "summary": { "type": "string" },
+    "uri": { "type": "string" },
+    "owner": { "type": "string" },
+    "capturedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

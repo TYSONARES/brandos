@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/review.schema.json",
+  "title": "Review",
+  "type": "object",
+  "required": ["id", "workspaceId", "targetObjectId", "targetObjectType", "reviewer", "status", "notes", "reviewedAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "targetObjectId": { "type": "string" },
+    "targetObjectType": { "enum": ["brand-profile", "claim", "decision", "context-pack", "workflow-run"] },
+    "reviewer": { "type": "string" },
+    "status": { "enum": ["requested", "changes-needed", "approved", "rejected"] },
+    "notes": { "type": "string" },
+    "reviewedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}
