@@ -1,5 +1,9 @@
 # Workflows
 
+## Detailed Specs
+
+Detailed workflow specifications live in `docs/product/workflows/`.
+
 ## Core Workflows
 
 ### Create Brand Profile
