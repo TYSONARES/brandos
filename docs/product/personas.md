@@ -1,15 +1,27 @@
 # Personas
 
-## Intent
+## Primary Roles
 
-This is the official product workspace for personas.
+### Brand Owner
 
-## Foundation Position
+Owns brand truth, approves strategic direction, and decides what becomes official.
 
-Foundation v0.1.0 reserves this file for Product Core v0.2. Add only stable assumptions and open questions until v0.2 begins.
+### Strategist
 
-## Open Questions
+Structures research, positioning, messaging, audience insight, and decision rationale.
 
-- What decisions are required before implementation?
-- Which workflows must become testable product behavior?
-- Which brand operations should BrandOS automate first?
+### Designer
+
+Uses approved brand context to create interface, identity, campaign, or system outputs.
+
+### Operator
+
+Maintains workflows, keeps sources current, and coordinates review cycles.
+
+### AI Agent
+
+Consumes approved repository and product context to assist with drafting, analysis, QA, and implementation.
+
+## Role Principle
+
+Roles describe responsibilities, not job titles. One person can hold multiple roles in a Workspace.

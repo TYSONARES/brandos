@@ -1,4 +1,4 @@
-# BrandOS Foundation v0.1.0
+# BrandOS
 
 BrandOS is a repository-first operating system for building, governing, and scaling brand intelligence.
 This repository is the single source of truth for product direction, design standards, AI agent behavior,
@@ -6,8 +6,9 @@ architecture decisions, and delivery workflow.
 
 ## Current Release
 
-- Release: Foundation v0.1.0
-- Status: repository foundation
+- Released baseline: Foundation v0.1.0
+- Active workstream: Product Core v0.2
+- Status: product core definition
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -28,6 +29,11 @@ Every AI tool and human contributor must read these files before making changes:
 - v0.5 Architecture: application architecture, APIs, data, security, and integration patterns
 - v0.6 Infrastructure: environments, CI/CD, observability, and release operations
 - v1.0 Development Ready: implementation-ready baseline
+
+## Active Workstream
+
+Product Core v0.2 defines the first durable product model for BrandOS: workspace structure,
+brand profiles, source evidence, strategic decisions, workflows, approvals, and AI-ready context packs.
 
 ## Repository Contract
 

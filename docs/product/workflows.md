@@ -1,15 +1,38 @@
 # Workflows
 
-## Intent
+## Core Workflows
 
-This is the official product workspace for workflows.
+### Create Brand Profile
 
-## Foundation Position
+- Input: workspace, initial sources, owner intent
+- Output: draft Brand Profile
+- Owner: Brand Owner or Strategist
+- Acceptance: profile has audience, positioning, voice, proof, and open questions
 
-Foundation v0.1.0 reserves this file for Product Core v0.2. Add only stable assumptions and open questions until v0.2 begins.
+### Verify Claim
 
-## Open Questions
+- Input: claim and supporting sources
+- Output: supported, disputed, or approved claim
+- Owner: Strategist
+- Acceptance: claim links to evidence or a decision record
 
-- What decisions are required before implementation?
-- Which workflows must become testable product behavior?
-- Which brand operations should BrandOS automate first?
+### Approve Decision
+
+- Input: proposed decision, rationale, consequences
+- Output: accepted or rejected decision
+- Owner: Brand Owner
+- Acceptance: decision has status, date, owner, and affected objects
+
+### Generate Context Pack
+
+- Input: task type, approved claims, relevant decisions, output constraints
+- Output: AI-ready context bundle
+- Owner: Operator
+- Acceptance: pack declares scope, expiry, source objects, and usage notes
+
+### Run Review
+
+- Input: target object and reviewer list
+- Output: approved, changes-needed, or rejected review
+- Owner: Operator
+- Acceptance: review records feedback and final status

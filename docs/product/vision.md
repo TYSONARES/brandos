@@ -1,15 +1,26 @@
 # Vision
 
-## Intent
+## Product Vision
 
-This is the official product workspace for vision.
+BrandOS is the operating layer for brand intelligence. It gives teams one structured place to store brand truth,
+explain strategic decisions, brief collaborators, and prepare reliable context for AI-assisted work.
 
-## Foundation Position
+## Problem
 
-Foundation v0.1.0 reserves this file for Product Core v0.2. Add only stable assumptions and open questions until v0.2 begins.
+Brand work often lives across decks, notes, chats, ad hoc documents, and personal memory. AI tools amplify this
+fragmentation when they do not share the same source context.
 
-## Open Questions
+## Desired Outcome
 
-- What decisions are required before implementation?
-- Which workflows must become testable product behavior?
-- Which brand operations should BrandOS automate first?
+A team can open BrandOS and know:
+
+- what the brand believes
+- who the brand serves
+- what language the brand should use
+- which evidence supports each claim
+- which decisions are approved, draft, or deprecated
+- what context an AI agent should load before helping
+
+## Product Principle
+
+BrandOS does not replace strategic thinking. It makes strategic thinking durable, structured, reviewable, and reusable.

@@ -3,7 +3,8 @@
 ## Identity
 
 - Name: BrandOS
-- Release: Foundation v0.1.0
+- Released baseline: Foundation v0.1.0
+- Active workstream: Product Core v0.2
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -24,6 +25,12 @@ agent-assisted decisions, design standards, and product-ready implementation gui
 
 Foundation v0.1.0 establishes the professional GitHub repository skeleton. It does not implement
 BrandOS product runtime code yet. It prepares the system for v0.2 Product Core.
+
+## v0.2 Scope
+
+Product Core v0.2 defines the first official BrandOS product model. It captures the core domains,
+objects, roles, workflows, success metrics, and non-goals required before design system, AI agent,
+architecture, and infrastructure work become implementation-ready.
 
 ## Definition of Done
 

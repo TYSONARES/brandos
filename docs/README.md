@@ -6,7 +6,7 @@ This directory contains the operating knowledge for BrandOS. Read it as the map 
 
 - `standards/`: contribution, writing, naming, documentation, and review rules
 - `foundation/`: repository purpose, principles, glossary, roadmap, and release boundaries
-- `product/`: product strategy and future v0.2 working area
+- `product/`: active v0.2 product core, domains, workflows, roles, and objects
 - `brand/`: brand strategy, voice, positioning, and taxonomy
 - `design/`: future v0.3 design system foundations
 - `ai/`: future v0.4 AI agents, prompts, memory, and evaluation contracts

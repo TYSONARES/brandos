@@ -1,15 +1,16 @@
 # Permissions
 
-## Intent
+## Baseline Roles
 
-This is the official product workspace for permissions.
+| Role | Can View | Can Draft | Can Approve | Can Admin |
+| --- | --- | --- | --- | --- |
+| Owner | yes | yes | yes | yes |
+| Strategist | yes | yes | proposed only | no |
+| Designer | yes | limited | no | no |
+| Operator | yes | yes | workflow only | limited |
+| Viewer | yes | no | no | no |
+| AI Agent | scoped | scoped | no | no |
 
-## Foundation Position
+## Permission Rule
 
-Foundation v0.1.0 reserves this file for Product Core v0.2. Add only stable assumptions and open questions until v0.2 begins.
-
-## Open Questions
-
-- What decisions are required before implementation?
-- Which workflows must become testable product behavior?
-- Which brand operations should BrandOS automate first?
+AI Agents can only access the context explicitly granted by a Workspace, task, or Context Pack.

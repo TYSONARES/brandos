@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - Product Core v0.2
+
+- Started Product Core workstream.
+- Defined core domains, objects, roles, workflows, status model, review model, and context pack model.
+- Added ADR 0011 for the Product Core domain model.
+
 ## 0.1.0 - Foundation
 
 - Created repository-first BrandOS foundation.

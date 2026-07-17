@@ -1,15 +1,15 @@
-# Non Goals
+# Non-Goals
 
-## Intent
+## Product Core v0.2 Non-Goals
 
-This is the official product workspace for non goals.
+- Do not choose a frontend framework.
+- Do not define database tables as implementation schema.
+- Do not create visual components.
+- Do not create agent prompts beyond product-level context requirements.
+- Do not design billing, deployment, or infrastructure.
+- Do not treat example fixtures as customer-ready content.
 
-## Foundation Position
+## Why This Matters
 
-Foundation v0.1.0 reserves this file for Product Core v0.2. Add only stable assumptions and open questions until v0.2 begins.
-
-## Open Questions
-
-- What decisions are required before implementation?
-- Which workflows must become testable product behavior?
-- Which brand operations should BrandOS automate first?
+Product Core must make the product understandable before later releases decide how to build, design, automate,
+or operate it.

@@ -1,15 +1,16 @@
 # Success Metrics
 
-## Intent
+## Product Core Metrics
 
-This is the official product workspace for success metrics.
+- Time from empty Workspace to first approved Brand Profile
+- Percentage of approved claims with linked evidence
+- Number of context packs generated from approved knowledge
+- Review cycle completion rate
+- Deprecated claims removed from active context packs
+- AI outputs rejected due to missing or stale brand context
 
-## Foundation Position
+## v0.2 Readiness Metrics
 
-Foundation v0.1.0 reserves this file for Product Core v0.2. Add only stable assumptions and open questions until v0.2 begins.
-
-## Open Questions
-
-- What decisions are required before implementation?
-- Which workflows must become testable product behavior?
-- Which brand operations should BrandOS automate first?
+- Every core object has status, owner, and relationship rules.
+- Every primary workflow has input, output, owner, and acceptance criteria.
+- Every later roadmap release has a clear dependency on Product Core.
