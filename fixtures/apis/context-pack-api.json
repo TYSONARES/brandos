@@ -1,0 +1,22 @@
+{
+  "id": "api_context_pack",
+  "name": "Context Pack API",
+  "status": "draft",
+  "serviceId": "service_agent_context",
+  "purpose": "Expose scoped Context Pack data for AI agents and review workflows.",
+  "consumers": [
+    "Brand Context Steward",
+    "Review and QA Assistant",
+    "Context Pack Card"
+  ],
+  "operations": [
+    "List context packs by workspace",
+    "Read context pack by id",
+    "Read included claims, decisions, and exclusions"
+  ],
+  "constraints": [
+    "Do not expose expired context packs as active.",
+    "Do not include rejected or deprecated claims.",
+    "Return source identifiers for traceability."
+  ]
+}

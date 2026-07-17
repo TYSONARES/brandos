@@ -1,0 +1,25 @@
+{
+  "id": "entity_claim",
+  "name": "Claim",
+  "status": "draft",
+  "domain": "Evidence",
+  "ownerService": "service_brand_knowledge",
+  "fields": [
+    "id",
+    "workspaceId",
+    "statement",
+    "status",
+    "sourceIds",
+    "decisionIds",
+    "owner",
+    "updatedAt"
+  ],
+  "relationships": [
+    "belongs to Workspace",
+    "supported by Sources",
+    "linked to Decisions",
+    "used by Brand Profile",
+    "used by Context Pack"
+  ],
+  "retention": "Retain while referenced by approved Brand Profiles, Context Packs, or Decisions."
+}

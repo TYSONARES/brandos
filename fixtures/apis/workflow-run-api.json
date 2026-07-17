@@ -1,0 +1,22 @@
+{
+  "id": "api_workflow_run",
+  "name": "Workflow Run API",
+  "status": "draft",
+  "serviceId": "service_workflow",
+  "purpose": "Expose workflow run state for product operations and interface progress views.",
+  "consumers": [
+    "Workflow Stepper",
+    "Repository Maintenance Assistant",
+    "Review and QA Assistant"
+  ],
+  "operations": [
+    "Create workflow run",
+    "Read workflow run status",
+    "Record blocked or complete state"
+  ],
+  "constraints": [
+    "Blocked states must include a reason.",
+    "Workflow outputs must link to produced objects.",
+    "Workflow status must match Product Core status model."
+  ]
+}

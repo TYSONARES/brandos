@@ -1,0 +1,26 @@
+{
+  "id": "entity_context_pack",
+  "name": "Context Pack",
+  "status": "draft",
+  "domain": "Context Pack",
+  "ownerService": "service_agent_context",
+  "fields": [
+    "id",
+    "workspaceId",
+    "name",
+    "status",
+    "taskType",
+    "includedClaims",
+    "includedDecisions",
+    "excludedTopics",
+    "expiresAt"
+  ],
+  "relationships": [
+    "belongs to Workspace",
+    "references Brand Profile",
+    "references Claims",
+    "references Decisions",
+    "reviewed by Review"
+  ],
+  "retention": "Retain approved versions until expired, deprecated, or workspace archival policy applies."
+}

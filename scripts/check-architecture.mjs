@@ -6,7 +6,9 @@ const requiredFiles = [
   'docs/architecture/domain-model.md',
   'docs/architecture/service-boundaries.md',
   'docs/architecture/data-model.md',
+  'docs/architecture/data-entities.md',
   'docs/architecture/api-principles.md',
+  'docs/architecture/api-boundaries.md',
   'schemas/service-boundary.schema.json',
   'schemas/api-boundary.schema.json',
   'schemas/data-entity.schema.json',
@@ -17,7 +19,17 @@ const requiredFiles = [
   'fixtures/services/review-service.json',
   'fixtures/services/design-reference-service.json',
   'fixtures/api-boundary.example.json',
+  'fixtures/apis/brand-profile-api.json',
+  'fixtures/apis/context-pack-api.json',
+  'fixtures/apis/review-api.json',
+  'fixtures/apis/workflow-run-api.json',
+  'fixtures/apis/design-reference-api.json',
   'fixtures/data-entity.example.json',
+  'fixtures/entities/brand-profile.json',
+  'fixtures/entities/claim.json',
+  'fixtures/entities/context-pack.json',
+  'fixtures/entities/review.json',
+  'fixtures/entities/workflow-run.json',
   'docs/decisions/0017-architecture-start.md'
 ];
 
@@ -48,6 +60,20 @@ const serviceFiles = [
   'fixtures/services/review-service.json',
   'fixtures/services/design-reference-service.json'
 ];
+const apiFiles = [
+  'fixtures/apis/brand-profile-api.json',
+  'fixtures/apis/context-pack-api.json',
+  'fixtures/apis/review-api.json',
+  'fixtures/apis/workflow-run-api.json',
+  'fixtures/apis/design-reference-api.json'
+];
+const entityFiles = [
+  'fixtures/entities/brand-profile.json',
+  'fixtures/entities/claim.json',
+  'fixtures/entities/context-pack.json',
+  'fixtures/entities/review.json',
+  'fixtures/entities/workflow-run.json'
+];
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
@@ -74,6 +100,8 @@ for (const check of checks) {
 }
 
 const serviceSchema = readJson('schemas/service-boundary.schema.json');
+const apiSchema = readJson('schemas/api-boundary.schema.json');
+const entitySchema = readJson('schemas/data-entity.schema.json');
 const serviceIds = new Set();
 
 for (const file of serviceFiles) {
@@ -84,6 +112,36 @@ for (const file of serviceFiles) {
     process.exit(1);
   }
   serviceIds.add(fixture.id);
+}
+
+const apiIds = new Set();
+for (const file of apiFiles) {
+  const fixture = readJson(file);
+  validateFixture(apiSchema, fixture, file);
+  if (apiIds.has(fixture.id)) {
+    console.error(`Duplicate API id: ${fixture.id}`);
+    process.exit(1);
+  }
+  if (!serviceIds.has(fixture.serviceId)) {
+    console.error(`${file} references unknown serviceId: ${fixture.serviceId}`);
+    process.exit(1);
+  }
+  apiIds.add(fixture.id);
+}
+
+const entityIds = new Set();
+for (const file of entityFiles) {
+  const fixture = readJson(file);
+  validateFixture(entitySchema, fixture, file);
+  if (entityIds.has(fixture.id)) {
+    console.error(`Duplicate entity id: ${fixture.id}`);
+    process.exit(1);
+  }
+  if (!serviceIds.has(fixture.ownerService)) {
+    console.error(`${file} references unknown ownerService: ${fixture.ownerService}`);
+    process.exit(1);
+  }
+  entityIds.add(fixture.id);
 }
 
 console.log('Architecture requirements passed.');

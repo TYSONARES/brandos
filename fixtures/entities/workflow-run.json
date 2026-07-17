@@ -1,0 +1,25 @@
+{
+  "id": "entity_workflow_run",
+  "name": "Workflow Run",
+  "status": "draft",
+  "domain": "Workflow",
+  "ownerService": "service_workflow",
+  "fields": [
+    "id",
+    "workspaceId",
+    "workflow",
+    "status",
+    "inputObjectIds",
+    "outputObjectIds",
+    "owner",
+    "startedAt",
+    "completedAt"
+  ],
+  "relationships": [
+    "belongs to Workspace",
+    "references input objects",
+    "produces output objects",
+    "may request Review"
+  ],
+  "retention": "Retain workflow history for operational audit and debugging."
+}

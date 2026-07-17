@@ -1,0 +1,27 @@
+{
+  "id": "entity_brand_profile",
+  "name": "Brand Profile",
+  "status": "draft",
+  "domain": "Brand Profile",
+  "ownerService": "service_brand_knowledge",
+  "fields": [
+    "id",
+    "workspaceId",
+    "name",
+    "status",
+    "positioning",
+    "audience",
+    "voice",
+    "claims",
+    "decisions",
+    "owner",
+    "updatedAt"
+  ],
+  "relationships": [
+    "belongs to Workspace",
+    "references Claims",
+    "references Decisions",
+    "reviewed by Review"
+  ],
+  "retention": "Retain approved versions until deprecated by decision record or workspace archival policy."
+}

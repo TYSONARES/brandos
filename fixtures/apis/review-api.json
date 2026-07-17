@@ -1,0 +1,22 @@
+{
+  "id": "api_review",
+  "name": "Review API",
+  "status": "draft",
+  "serviceId": "service_review",
+  "purpose": "Expose review records and status transition requirements.",
+  "consumers": [
+    "Review and QA Assistant",
+    "Review Panel",
+    "Workflow Service"
+  ],
+  "operations": [
+    "Create review request",
+    "Read review by target object",
+    "Record review outcome"
+  ],
+  "constraints": [
+    "Reviewer identity must be recorded.",
+    "Changes-needed outcomes must include notes.",
+    "Status transitions must be auditable."
+  ]
+}

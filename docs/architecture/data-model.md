@@ -18,3 +18,7 @@ The draft contract is defined in `schemas/data-entity.schema.json`.
 ## Fixture
 
 See `fixtures/data-entity.example.json`.
+
+## Data Entity Set
+
+The draft data entity set lives in `fixtures/entities/` and is documented in `docs/architecture/data-entities.md`.

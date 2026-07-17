@@ -1,0 +1,22 @@
+{
+  "id": "api_brand_profile",
+  "name": "Brand Profile API",
+  "status": "draft",
+  "serviceId": "service_brand_knowledge",
+  "purpose": "Expose Brand Profile data with linked claims, decisions, and review state.",
+  "consumers": [
+    "Product Spec Assistant",
+    "Design System Assistant",
+    "Brand Profile Summary"
+  ],
+  "operations": [
+    "List brand profiles by workspace",
+    "Read brand profile by id",
+    "Read profile claims and decisions"
+  ],
+  "constraints": [
+    "Do not expose deprecated profiles as active.",
+    "Return linked claim and decision identifiers.",
+    "Preserve owner and updatedAt metadata."
+  ]
+}

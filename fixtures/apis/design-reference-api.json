@@ -1,0 +1,22 @@
+{
+  "id": "api_design_reference",
+  "name": "Design Reference API",
+  "status": "draft",
+  "serviceId": "service_design_reference",
+  "purpose": "Expose design tokens, component specs, and accessibility requirements for product surfaces.",
+  "consumers": [
+    "Design System Assistant",
+    "Review and QA Assistant",
+    "Repository Maintenance Assistant"
+  ],
+  "operations": [
+    "List design tokens",
+    "Read component spec by id",
+    "Read accessibility checklist"
+  ],
+  "constraints": [
+    "Do not expose deprecated tokens as recommended.",
+    "Component specs must include accessibility requirements.",
+    "Status presentation rules must remain available to consumers."
+  ]
+}

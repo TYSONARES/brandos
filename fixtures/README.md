@@ -36,6 +36,22 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `services/review-service.json`
 - `services/design-reference-service.json`
 
+## API Boundary Fixtures
+
+- `apis/brand-profile-api.json`
+- `apis/context-pack-api.json`
+- `apis/review-api.json`
+- `apis/workflow-run-api.json`
+- `apis/design-reference-api.json`
+
+## Data Entity Fixtures
+
+- `entities/brand-profile.json`
+- `entities/claim.json`
+- `entities/context-pack.json`
+- `entities/review.json`
+- `entities/workflow-run.json`
+
 ## Agent Fixtures
 
 - `agents/brand-context-steward.json`

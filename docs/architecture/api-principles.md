@@ -18,3 +18,7 @@ The draft contract is defined in `schemas/api-boundary.schema.json`.
 ## Fixture
 
 See `fixtures/api-boundary.example.json`.
+
+## API Boundary Set
+
+The draft API boundary set lives in `fixtures/apis/` and is documented in `docs/architecture/api-boundaries.md`.

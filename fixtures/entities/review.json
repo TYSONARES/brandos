@@ -1,0 +1,23 @@
+{
+  "id": "entity_review",
+  "name": "Review",
+  "status": "draft",
+  "domain": "Review",
+  "ownerService": "service_review",
+  "fields": [
+    "id",
+    "workspaceId",
+    "targetObjectId",
+    "targetObjectType",
+    "reviewer",
+    "status",
+    "notes",
+    "reviewedAt"
+  ],
+  "relationships": [
+    "targets Product Core object",
+    "may update object status",
+    "belongs to Workspace"
+  ],
+  "retention": "Retain as audit record for status transitions."
+}
