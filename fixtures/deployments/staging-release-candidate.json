@@ -1,0 +1,14 @@
+{
+  "id": "deploy_staging_release_candidate",
+  "name": "Staging Release Candidate",
+  "status": "draft",
+  "environmentId": "env_staging",
+  "purpose": "Validate release candidates against architecture, AI, design, and product contracts.",
+  "releaseGate": [
+    "All repository checks pass",
+    "Release checklist is approved",
+    "Rollback notes are documented",
+    "Incident owner is assigned"
+  ],
+  "rollback": "Revert staging to the previous release candidate and record failure notes."
+}

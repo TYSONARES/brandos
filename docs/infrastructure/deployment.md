@@ -17,3 +17,7 @@ The draft contract is defined in `schemas/deployment-target.schema.json`.
 ## Fixture
 
 See `fixtures/deployment-target.example.json`.
+
+## Deployment Target Set
+
+The draft deployment target set lives in `fixtures/deployments/` and is documented in `docs/infrastructure/deployment-targets.md`.

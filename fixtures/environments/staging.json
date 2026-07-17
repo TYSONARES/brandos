@@ -1,0 +1,17 @@
+{
+  "id": "env_staging",
+  "name": "Staging",
+  "status": "draft",
+  "purpose": "Pre-production validation environment for release candidates and operational checks.",
+  "dataPolicy": "Use seeded non-production data and sanitized imported examples.",
+  "allowedActions": [
+    "Run release candidate validation",
+    "Exercise architecture boundaries",
+    "Validate observability and incident procedures"
+  ],
+  "constraints": [
+    "Production data requires explicit approval and sanitization.",
+    "Secrets must be managed outside the repository.",
+    "Staging failures block production promotion."
+  ]
+}

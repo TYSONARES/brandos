@@ -1,0 +1,17 @@
+{
+  "id": "env_preview",
+  "name": "Preview",
+  "status": "draft",
+  "purpose": "Short-lived review environment for validating documentation, specs, and future UI changes before merge.",
+  "dataPolicy": "Use fixtures, generated samples, and sanitized preview data only.",
+  "allowedActions": [
+    "Run release checks",
+    "Preview generated artifacts",
+    "Collect review feedback"
+  ],
+  "constraints": [
+    "No production secrets.",
+    "No durable customer data.",
+    "Preview state can be destroyed without migration."
+  ]
+}

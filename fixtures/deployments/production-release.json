@@ -1,0 +1,14 @@
+{
+  "id": "deploy_production_release",
+  "name": "Production Release",
+  "status": "draft",
+  "environmentId": "env_production",
+  "purpose": "Promote an approved release to production after development readiness.",
+  "releaseGate": [
+    "Staging validation passed",
+    "Release owner approved",
+    "Observability signals are active",
+    "Rollback path is verified"
+  ],
+  "rollback": "Restore the last approved production release and open an incident review."
+}

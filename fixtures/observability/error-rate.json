@@ -1,0 +1,9 @@
+{
+  "id": "signal_error_rate",
+  "name": "Error Rate",
+  "status": "draft",
+  "signalType": "metric",
+  "owner": "Infrastructure owner",
+  "purpose": "Track failed requests, failed jobs, and failed workflow operations.",
+  "retention": "Retain according to environment observability policy."
+}

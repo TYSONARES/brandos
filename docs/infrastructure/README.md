@@ -12,13 +12,16 @@ Infrastructure v0.6 defines BrandOS environment, deployment, observability, secr
 
 1. `v0.6-scope.md`
 2. `environments.md`
-3. `deployment.md`
-4. `ci-cd.md`
-5. `observability.md`
-6. `secrets.md`
-7. `backups.md`
-8. `incident-response.md`
-9. `release-management.md`
+3. `environment-set.md`
+4. `deployment.md`
+5. `deployment-targets.md`
+6. `ci-cd.md`
+7. `observability.md`
+8. `observability-signals.md`
+9. `secrets.md`
+10. `backups.md`
+11. `incident-response.md`
+12. `release-management.md`
 
 ## Dependency
 

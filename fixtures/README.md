@@ -36,6 +36,25 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `observability-signal.example.json`
 - `secret-policy.example.json`
 
+## Environment Fixtures
+
+- `environments/local.json`
+- `environments/preview.json`
+- `environments/staging.json`
+- `environments/production.json`
+
+## Deployment Target Fixtures
+
+- `deployments/docs-preview.json`
+- `deployments/staging-release-candidate.json`
+- `deployments/production-release.json`
+
+## Observability Fixtures
+
+- `observability/release-validation.json`
+- `observability/error-rate.json`
+- `observability/audit-log.json`
+
 ## Service Boundary Fixtures
 
 - `services/brand-knowledge-service.json`

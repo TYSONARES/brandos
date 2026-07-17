@@ -4,6 +4,7 @@
 
 - Started Infrastructure workstream.
 - Added draft schemas and fixtures for Environment, Deployment Target, Observability Signal, and Secret Policy.
+- Added draft environment, deployment target, and observability signal sets.
 - Added ADR 0019 for Infrastructure v0.6 start.
 
 ## 0.5.0 - Architecture

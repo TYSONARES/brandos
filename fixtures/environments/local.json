@@ -1,0 +1,17 @@
+{
+  "id": "env_local",
+  "name": "Local",
+  "status": "draft",
+  "purpose": "Developer workstation environment for repository validation and local experimentation.",
+  "dataPolicy": "Use fixtures and sanitized local data only.",
+  "allowedActions": [
+    "Run validation scripts",
+    "Edit repository files",
+    "Preview documentation"
+  ],
+  "constraints": [
+    "Do not store production secrets.",
+    "Do not use customer data.",
+    "Do not treat local state as deployment truth."
+  ]
+}

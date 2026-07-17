@@ -18,3 +18,7 @@ The draft contract is defined in `schemas/environment.schema.json`.
 ## Fixture
 
 See `fixtures/environment.example.json`.
+
+## Environment Set
+
+The draft environment set lives in `fixtures/environments/` and is documented in `docs/infrastructure/environment-set.md`.

@@ -1,0 +1,9 @@
+{
+  "id": "signal_audit_log",
+  "name": "Audit Log",
+  "status": "draft",
+  "signalType": "audit",
+  "owner": "Security and operations owners",
+  "purpose": "Preserve approval, status transition, deployment, and access-sensitive actions.",
+  "retention": "Retain for compliance, incident review, and release traceability."
+}

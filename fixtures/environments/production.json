@@ -1,0 +1,17 @@
+{
+  "id": "env_production",
+  "name": "Production",
+  "status": "draft",
+  "purpose": "Live environment for approved BrandOS releases after development readiness.",
+  "dataPolicy": "Use only approved production data governed by security, retention, and access policies.",
+  "allowedActions": [
+    "Serve approved releases",
+    "Collect operational telemetry",
+    "Run incident response procedures"
+  ],
+  "constraints": [
+    "Requires release approval.",
+    "Requires rollback plan.",
+    "Requires observability and incident response coverage."
+  ]
+}
