@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased - Architecture v0.5
+## 0.5.0 - Architecture
 
 - Started Architecture workstream.
 - Added draft schemas and fixtures for Service Boundary, API Boundary, and Data Entity.
@@ -8,6 +8,8 @@
 - Added draft API boundary and data entity sets.
 - Added event, auth, integration, and test strategy architecture contracts.
 - Added ADR 0017 for Architecture v0.5 start.
+- Added ADR 0018 and release checklist for Architecture completion.
+- Added architecture release requirement validation.
 
 ## 0.4.0 - AI Agents
 

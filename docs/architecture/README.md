@@ -5,26 +5,28 @@ Architecture v0.5 defines BrandOS system boundaries before implementation.
 ## Status
 
 - Released baseline: AI Agents v0.4
-- Active workstream: Architecture v0.5
-- Current goal: define service boundaries, API boundaries, data entities, events, auth, testing, and integration rules
+- Latest completed workstream: Architecture v0.5
+- Next workstream: Infrastructure v0.6
+- Current goal: support infrastructure and implementation readiness from stable architecture contracts
 
 ## Read Order
 
 1. `v0.5-scope.md`
-2. `overview.md`
-3. `domain-model.md`
-4. `service-boundaries.md`
-5. `data-model.md`
-6. `data-entities.md`
-7. `api-principles.md`
-8. `api-boundaries.md`
-9. `frontend.md`
-10. `backend.md`
-11. `events.md`
-12. `auth.md`
-13. `permissions.md`
-14. `integrations.md`
-15. `testing.md`
+2. `release-v0.5.0.md`
+3. `overview.md`
+4. `domain-model.md`
+5. `service-boundaries.md`
+6. `data-model.md`
+7. `data-entities.md`
+8. `api-principles.md`
+9. `api-boundaries.md`
+10. `frontend.md`
+11. `backend.md`
+12. `events.md`
+13. `auth.md`
+14. `permissions.md`
+15. `integrations.md`
+16. `testing.md`
 
 ## Dependencies
 

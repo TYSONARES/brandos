@@ -4,8 +4,8 @@
 
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: AI Agents v0.4
-- Active workstream: Architecture v0.5
+- Latest completed workstream: Architecture v0.5
+- Next workstream: Infrastructure v0.6
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -62,6 +62,11 @@ and `docs/decisions/0016-ai-agents-v0.4-complete.md`.
 
 Architecture v0.5 defines repository-level service boundaries, API boundaries, data entities, events,
 auth, permissions, testing, and integration constraints.
+
+## v0.5 Completion
+
+Architecture v0.5 is complete at repository definition level. See `docs/architecture/release-v0.5.0.md`
+and `docs/decisions/0018-architecture-v0.5-complete.md`.
 
 ## Definition of Done
 

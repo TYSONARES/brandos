@@ -10,7 +10,7 @@ This directory contains the operating knowledge for BrandOS. Read it as the map 
 - `brand/`: brand strategy, voice, positioning, and taxonomy
 - `design/`: completed v0.3 design system foundations
 - `ai/`: completed v0.4 AI agents, prompts, memory, and evaluation contracts
-- `architecture/`: future v0.5 architecture decision space
+- `architecture/`: completed v0.5 architecture decision space
 - `infrastructure/`: future v0.6 operational baseline
 - `security/`: security, privacy, risk, and compliance baseline
 - `operations/`: release, quality, support, and planning workflow

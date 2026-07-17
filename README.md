@@ -7,9 +7,9 @@ architecture decisions, and delivery workflow.
 ## Current Release
 
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: AI Agents v0.4
-- Active workstream: Architecture v0.5
-- Status: architecture definition
+- Latest completed workstream: Architecture v0.5
+- Next workstream: Infrastructure v0.6
+- Status: architecture complete
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -46,7 +46,7 @@ handoff behavior, and safety rules for repository-grounded AI work.
 
 ## Active Workstream
 
-Architecture v0.5 defines service boundaries, API boundaries, data entities, events, auth, permissions,
+Architecture v0.5 defined service boundaries, API boundaries, data entities, events, auth, permissions,
 testing, and integration rules before runtime implementation begins.
 
 ## Repository Contract
