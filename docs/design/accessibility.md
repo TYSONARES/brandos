@@ -12,6 +12,10 @@ BrandOS interfaces must be usable with keyboard navigation, visible focus, reada
 - Forms and reviews must identify errors in text.
 - Tables and dense lists must preserve readable hierarchy.
 
+## Checklist
+
+Use `docs/design/accessibility-checklist.md` for reviewable acceptance criteria.
+
 ## Product Core Implication
 
 Reviews, claims, decisions, and context packs all have status. Status presentation must remain accessible in every component.

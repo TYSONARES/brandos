@@ -6,10 +6,8 @@ Design review confirms that a proposed interface pattern supports BrandOS produc
 
 ## Checklist
 
-- The design maps to a Product Core object or workflow.
-- Required object statuses are visible.
-- Primary actions are clear and predictable.
-- Empty, loading, error, and blocked states are defined.
-- Accessibility requirements are satisfied.
-- Copy avoids unsupported product claims.
-- Design tokens are used consistently.
+Use `docs/design/review-checklist.md` for reviewable acceptance criteria.
+
+## State Coverage
+
+Use `docs/design/state-guidelines.md` to evaluate status and state presentation.
