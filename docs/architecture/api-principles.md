@@ -1,11 +1,20 @@
-# Api Principles
+# API Principles
 
-## Architecture Baseline
+## Purpose
 
-This document reserves the official architecture location for api principles.
+API boundaries define how BrandOS services expose product truth to humans, agents, and future runtime surfaces.
 
-## Foundation Constraints
+## Principles
 
-- Do not introduce runtime architecture without a decision record.
-- Keep domain language aligned with product and brand documents.
-- Capture tradeoffs in `docs/decisions/`.
+- APIs must preserve traceability.
+- APIs must not expose deprecated or rejected content as active.
+- APIs must declare consumers and constraints.
+- APIs must map to a service boundary.
+
+## Schema
+
+The draft contract is defined in `schemas/api-boundary.schema.json`.
+
+## Fixture
+
+See `fixtures/api-boundary.example.json`.

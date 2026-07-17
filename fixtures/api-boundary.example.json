@@ -1,0 +1,22 @@
+{
+  "id": "api_context_pack_read",
+  "name": "Context Pack Read API",
+  "status": "draft",
+  "serviceId": "service_brand_knowledge",
+  "purpose": "Expose approved Context Pack data to humans and AI agents.",
+  "consumers": [
+    "Brand Context Steward",
+    "Product Spec Assistant",
+    "Review and QA Assistant"
+  ],
+  "operations": [
+    "List approved context packs",
+    "Read context pack by id",
+    "Read included claims and decisions"
+  ],
+  "constraints": [
+    "Do not expose expired context packs as active.",
+    "Do not include rejected or deprecated claims.",
+    "Return source identifiers for traceability."
+  ]
+}

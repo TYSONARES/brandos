@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/api-boundary.schema.json",
+  "title": "API Boundary",
+  "type": "object",
+  "required": ["id", "name", "status", "serviceId", "purpose", "consumers", "operations", "constraints"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "serviceId": { "type": "string" },
+    "purpose": { "type": "string" },
+    "consumers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "operations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

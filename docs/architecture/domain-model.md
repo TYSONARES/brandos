@@ -1,11 +1,27 @@
 # Domain Model
 
-## Architecture Baseline
+## Purpose
 
-This document reserves the official architecture location for domain model.
+The architecture domain model maps Product Core domains to system ownership boundaries.
 
-## Foundation Constraints
+## Product Core Domains
 
-- Do not introduce runtime architecture without a decision record.
-- Keep domain language aligned with product and brand documents.
-- Capture tradeoffs in `docs/decisions/`.
+- Workspace
+- Brand Profile
+- Evidence
+- Decision
+- Workflow
+- Context Pack
+- Review
+
+## Service Boundary Rule
+
+Each service boundary must own a clear set of domains and explicitly name what it does not own.
+
+## Schema
+
+The draft contract is defined in `schemas/service-boundary.schema.json`.
+
+## Fixture
+
+See `fixtures/service-boundary.example.json`.

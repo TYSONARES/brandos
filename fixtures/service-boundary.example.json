@@ -1,0 +1,31 @@
+{
+  "id": "service_brand_knowledge",
+  "name": "Brand Knowledge Service",
+  "status": "draft",
+  "ownsDomains": [
+    "Brand Profile",
+    "Evidence",
+    "Decision"
+  ],
+  "responsibilities": [
+    "Own approved brand knowledge objects.",
+    "Preserve source, claim, and decision traceability.",
+    "Expose brand context for workflows and agents."
+  ],
+  "inputs": [
+    "Source",
+    "Claim",
+    "Decision",
+    "Review"
+  ],
+  "outputs": [
+    "Brand Profile",
+    "Context Pack input",
+    "Traceability summary"
+  ],
+  "doesNotOwn": [
+    "Runtime agent orchestration",
+    "Visual component rendering",
+    "Infrastructure deployment"
+  ]
+}

@@ -24,6 +24,9 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `agent-card.example.json`
 - `prompt-contract.example.json`
 - `evaluation-check.example.json`
+- `service-boundary.example.json`
+- `api-boundary.example.json`
+- `data-entity.example.json`
 
 ## Agent Fixtures
 

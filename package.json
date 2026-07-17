@@ -6,7 +6,8 @@
   "scripts": {
     "check:ai": "node scripts/check-ai.mjs",
     "check:ai-release": "node scripts/check-ai-release.mjs",
-    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:components && npm run check:design-checklists && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design && npm run check:design-release && npm run check:ai && npm run check:ai-release",
+    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:components && npm run check:design-checklists && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design && npm run check:design-release && npm run check:ai && npm run check:ai-release && npm run check:architecture",
+    "check:architecture": "node scripts/check-architecture.mjs",
     "check:components": "node scripts/check-components.mjs",
     "check:design": "node scripts/check-design.mjs",
     "check:design-checklists": "node scripts/check-design-checklists.mjs",

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/data-entity.schema.json",
+  "title": "Data Entity",
+  "type": "object",
+  "required": ["id", "name", "status", "domain", "ownerService", "fields", "relationships", "retention"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "domain": { "type": "string" },
+    "ownerService": { "type": "string" },
+    "fields": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "relationships": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "retention": { "type": "string" }
+  },
+  "additionalProperties": false
+}

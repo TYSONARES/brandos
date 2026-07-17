@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/service-boundary.schema.json",
+  "title": "Service Boundary",
+  "type": "object",
+  "required": ["id", "name", "status", "ownsDomains", "responsibilities", "inputs", "outputs", "doesNotOwn"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "ownsDomains": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "inputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "outputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "doesNotOwn": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}
