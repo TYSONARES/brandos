@@ -13,14 +13,15 @@ Architecture v0.5 defines BrandOS system boundaries before implementation.
 1. `v0.5-scope.md`
 2. `overview.md`
 3. `domain-model.md`
-4. `data-model.md`
-5. `api-principles.md`
-6. `frontend.md`
-7. `backend.md`
-8. `events.md`
-9. `auth.md`
-10. `permissions.md`
-11. `testing.md`
+4. `service-boundaries.md`
+5. `data-model.md`
+6. `api-principles.md`
+7. `frontend.md`
+8. `backend.md`
+9. `events.md`
+10. `auth.md`
+11. `permissions.md`
+12. `testing.md`
 
 ## Dependencies
 

@@ -1,0 +1,32 @@
+{
+  "id": "service_agent_context",
+  "name": "Agent Context Service",
+  "status": "draft",
+  "ownsDomains": [
+    "Context Pack",
+    "Agent Card",
+    "Prompt Contract",
+    "Evaluation Check"
+  ],
+  "responsibilities": [
+    "Prepare approved context for AI agents.",
+    "Validate agent and prompt contract readiness.",
+    "Track evaluation requirements for agent-facing work."
+  ],
+  "inputs": [
+    "Context Pack",
+    "Agent Card",
+    "Prompt Contract",
+    "Evaluation Check"
+  ],
+  "outputs": [
+    "Agent context summary",
+    "Prompt contract readiness",
+    "Evaluation requirement list"
+  ],
+  "doesNotOwn": [
+    "Model provider selection",
+    "Runtime agent execution",
+    "Vector memory infrastructure"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "service_design_reference",
+  "name": "Design Reference Service",
+  "status": "draft",
+  "ownsDomains": [
+    "Design Token",
+    "Component Spec",
+    "Accessibility Checklist",
+    "Design Review"
+  ],
+  "responsibilities": [
+    "Expose design tokens and component specs.",
+    "Preserve accessibility and state presentation rules.",
+    "Map UI surfaces back to Product Core objects."
+  ],
+  "inputs": [
+    "Design Token",
+    "Component Spec",
+    "Accessibility Checklist",
+    "Design Review Checklist"
+  ],
+  "outputs": [
+    "Design reference context",
+    "Component requirement summary",
+    "Accessibility requirement summary"
+  ],
+  "doesNotOwn": [
+    "Frontend implementation framework",
+    "Runtime rendering",
+    "Brand identity finalization"
+  ]
+}

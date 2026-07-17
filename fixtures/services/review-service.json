@@ -1,0 +1,31 @@
+{
+  "id": "service_review",
+  "name": "Review Service",
+  "status": "draft",
+  "ownsDomains": [
+    "Review",
+    "Approval",
+    "Status Transition"
+  ],
+  "responsibilities": [
+    "Record review outcomes.",
+    "Protect object status transitions.",
+    "Expose changes-needed, approved, rejected, and blocked state."
+  ],
+  "inputs": [
+    "Target object",
+    "Reviewer",
+    "Review criteria",
+    "Review notes"
+  ],
+  "outputs": [
+    "Review record",
+    "Status transition",
+    "Required changes"
+  ],
+  "doesNotOwn": [
+    "Auth identity provider",
+    "Product object storage",
+    "Visual review component rendering"
+  ]
+}

@@ -25,3 +25,7 @@ The draft contract is defined in `schemas/service-boundary.schema.json`.
 ## Fixture
 
 See `fixtures/service-boundary.example.json`.
+
+## Service Boundary Set
+
+The draft service boundary set lives in `fixtures/services/` and is documented in `docs/architecture/service-boundaries.md`.

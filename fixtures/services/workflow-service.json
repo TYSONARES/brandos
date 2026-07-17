@@ -1,0 +1,30 @@
+{
+  "id": "service_workflow",
+  "name": "Workflow Service",
+  "status": "draft",
+  "ownsDomains": [
+    "Workflow",
+    "Workflow Run"
+  ],
+  "responsibilities": [
+    "Track workflow runs and statuses.",
+    "Coordinate product workflow steps.",
+    "Expose workflow state for review and UI surfaces."
+  ],
+  "inputs": [
+    "Workflow trigger",
+    "Target object id",
+    "Owner",
+    "Review criteria"
+  ],
+  "outputs": [
+    "Workflow Run",
+    "Workflow status",
+    "Blocked reason"
+  ],
+  "doesNotOwn": [
+    "Brand claim approval authority",
+    "Agent model execution",
+    "Persistent infrastructure scheduling"
+  ]
+}

@@ -28,6 +28,14 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `api-boundary.example.json`
 - `data-entity.example.json`
 
+## Service Boundary Fixtures
+
+- `services/brand-knowledge-service.json`
+- `services/workflow-service.json`
+- `services/agent-context-service.json`
+- `services/review-service.json`
+- `services/design-reference-service.json`
+
 ## Agent Fixtures
 
 - `agents/brand-context-steward.json`
