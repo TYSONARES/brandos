@@ -10,9 +10,13 @@ Package boundaries keep the implementation aligned with the architecture release
 
 Owns product primitives that map to Product Core v0.2.
 
+Initial runtime model metadata covers Brand Profile, Claim, Decision, Review, Workflow Run, and Context Pack.
+
 ### `packages/contracts`
 
 Owns implementation helpers for repository-backed contracts.
+
+Initial contract helpers expose Product Core schema and fixture paths for runtime code.
 
 ### `packages/design-system`
 

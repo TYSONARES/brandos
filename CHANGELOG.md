@@ -7,6 +7,7 @@
 - Added ADR 0021 for Development Ready v1.0 start.
 - Added first runnable BrandOS Studio app shell and package boundary stubs.
 - Added development readiness validation and app smoke command.
+- Added runtime Product Core model and contract metadata for the first app shell.
 
 ## 0.6.0 - Infrastructure
 

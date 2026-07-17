@@ -17,7 +17,8 @@ export function createBrandOSStudioShell() {
 
 export function renderSmokeSummary(shell = createBrandOSStudioShell()) {
   const packageNames = shell.packages.map((pkg) => pkg.name).join(', ');
-  return `${shell.app} ${shell.release}: ${shell.status}. Packages: ${packageNames}.`;
+  const domain = shell.packages.find((pkg) => pkg.name === 'domain');
+  return `${shell.app} ${shell.release}: ${shell.status}. Packages: ${packageNames}. Domain models: ${domain.modelCount}.`;
 }
 
 if (process.argv.includes('--smoke')) {
