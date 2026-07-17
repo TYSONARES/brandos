@@ -1,6 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { listProductCoreContracts } from '../packages/contracts/src/index.mjs';
-import { listProductCoreModels } from '../packages/domain/src/index.mjs';
+import {
+  createExampleProductCoreState,
+  createInMemoryProductCoreStore,
+  listProductCoreModels,
+  summarizeProductCoreState
+} from '../packages/domain/src/index.mjs';
 
 const required = [
   'docs/development/README.md',
@@ -15,6 +20,8 @@ const required = [
   'apps/studio/README.md',
   'apps/studio/src/app.mjs',
   'packages/domain/README.md',
+  'packages/domain/src/example-state.mjs',
+  'packages/domain/src/in-memory-store.mjs',
   'packages/domain/src/index.mjs',
   'packages/domain/src/product-core-models.mjs',
   'packages/contracts/README.md',
@@ -62,6 +69,13 @@ for (const model of models) {
 const contracts = listProductCoreContracts();
 if (contracts.length !== expectedProductCoreModels.length) {
   console.error(`Expected ${expectedProductCoreModels.length} Product Core contracts, found ${contracts.length}`);
+  process.exit(1);
+}
+
+const store = createInMemoryProductCoreStore(createExampleProductCoreState());
+const summary = summarizeProductCoreState(store);
+if (summary.objectCount !== expectedProductCoreModels.length) {
+  console.error(`Expected ${expectedProductCoreModels.length} example Product Core objects, found ${summary.objectCount}`);
   process.exit(1);
 }
 

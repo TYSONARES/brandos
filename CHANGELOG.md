@@ -8,6 +8,7 @@
 - Added first runnable BrandOS Studio app shell and package boundary stubs.
 - Added development readiness validation and app smoke command.
 - Added runtime Product Core model and contract metadata for the first app shell.
+- Added deterministic in-memory Product Core store and example state for Studio smoke output.
 
 ## 0.6.0 - Infrastructure
 

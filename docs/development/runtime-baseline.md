@@ -11,12 +11,14 @@ Runtime baseline defines the first executable shape of BrandOS.
 - External services: none.
 - Required secrets: none.
 - Persistence: in-memory examples only.
+- Initial state: deterministic Product Core example objects.
 
 ## Rules
 
 - Runtime code must be deterministic by default.
 - Smoke commands must not require network access.
 - Runtime modules must expose named functions for future tests.
+- In-memory stores must remain replaceable by future persistence adapters.
 - Console output should be concise and suitable for CI logs.
 
 ## Upgrade Path

@@ -12,6 +12,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - release readiness status
 - enabled package list
 - Product Core model count
+- Product Core object count from deterministic example state
 - smoke output for CI
 
 ## Rules
