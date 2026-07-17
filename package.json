@@ -6,7 +6,7 @@
   "scripts": {
     "check:ai": "node scripts/check-ai.mjs",
     "check:ai-release": "node scripts/check-ai-release.mjs",
-    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:components && npm run check:design-checklists && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design && npm run check:design-release && npm run check:ai && npm run check:ai-release && npm run check:architecture && npm run check:architecture-release && npm run check:infrastructure && npm run check:infrastructure-release && npm run check:development && npm run smoke:app",
+    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:components && npm run check:design-checklists && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design && npm run check:design-release && npm run check:ai && npm run check:ai-release && npm run check:architecture && npm run check:architecture-release && npm run check:infrastructure && npm run check:infrastructure-release && npm run check:development && npm test && npm run smoke:app",
     "check:architecture": "node scripts/check-architecture.mjs",
     "check:architecture-release": "node scripts/check-architecture-release.mjs",
     "check:components": "node scripts/check-components.mjs",
@@ -22,7 +22,8 @@
     "check:repo": "node scripts/check-repo.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:workflows": "node scripts/check-workflows.mjs",
-    "smoke:app": "node apps/studio/src/app.mjs --smoke"
+    "smoke:app": "node apps/studio/src/app.mjs --smoke",
+    "test": "node --test tests/**/*.test.mjs"
   },
   "keywords": ["brandos", "brand", "ai", "repository-foundation"],
   "license": "UNLICENSED"

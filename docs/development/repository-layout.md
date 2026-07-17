@@ -10,6 +10,7 @@ Repository layout defines where implementation files belong.
 - `packages/domain/`: product domain primitives.
 - `packages/contracts/`: shared repository-backed contracts.
 - `packages/design-system/`: implementation-facing design token access.
+- `tests/`: deterministic runtime behavior tests.
 - `scripts/`: repository validation and maintenance checks.
 - `docs/`: source of truth for decisions and operating standards.
 - `schemas/`: JSON schema contracts.

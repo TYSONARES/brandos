@@ -8,6 +8,7 @@ Runtime baseline defines the first executable shape of BrandOS.
 
 - Runtime: Node.js standard library.
 - Module format: ECMAScript modules through `.mjs` files.
+- Tests: Node.js built-in test runner.
 - External services: none.
 - Required secrets: none.
 - Persistence: in-memory examples only.

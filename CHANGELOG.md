@@ -10,6 +10,7 @@
 - Added runtime Product Core model and contract metadata for the first app shell.
 - Added deterministic in-memory Product Core store and example state for Studio smoke output.
 - Added first Product Core use cases for Brand Profile overview and Context Pack readiness.
+- Added Node test coverage for Product Core state and readiness behavior.
 
 ## 0.6.0 - Infrastructure
 

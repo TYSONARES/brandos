@@ -31,7 +31,8 @@ const required = [
   'packages/contracts/src/index.mjs',
   'packages/contracts/src/product-core-contracts.mjs',
   'packages/design-system/README.md',
-  'packages/design-system/src/index.mjs'
+  'packages/design-system/src/index.mjs',
+  'tests/domain/product-core-use-cases.test.mjs'
 ];
 
 const missing = required.filter((file) => !existsSync(file));
