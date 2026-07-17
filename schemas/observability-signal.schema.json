@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/observability-signal.schema.json",
+  "title": "Observability Signal",
+  "type": "object",
+  "required": ["id", "name", "status", "signalType", "owner", "purpose", "retention"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "signalType": { "enum": ["log", "metric", "trace", "audit"] },
+    "owner": { "type": "string" },
+    "purpose": { "type": "string" },
+    "retention": { "type": "string" }
+  },
+  "additionalProperties": false
+}

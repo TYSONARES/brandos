@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/deployment-target.schema.json",
+  "title": "Deployment Target",
+  "type": "object",
+  "required": ["id", "name", "status", "environmentId", "purpose", "releaseGate", "rollback"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "environmentId": { "type": "string" },
+    "purpose": { "type": "string" },
+    "releaseGate": { "type": "array", "items": { "type": "string" } },
+    "rollback": { "type": "string" }
+  },
+  "additionalProperties": false
+}

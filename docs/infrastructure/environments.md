@@ -1,9 +1,20 @@
 # Environments
 
-## Infrastructure Baseline
+## Purpose
 
-This file defines the future operating area for environments.
+Environment contracts define where BrandOS can run or be validated.
 
-## Foundation Guidance
+## Baseline Environments
 
-Infrastructure choices must be documented before becoming project defaults.
+- Local
+- Preview
+- Staging
+- Production
+
+## Schema
+
+The draft contract is defined in `schemas/environment.schema.json`.
+
+## Fixture
+
+See `fixtures/environment.example.json`.

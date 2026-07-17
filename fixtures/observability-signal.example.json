@@ -1,0 +1,9 @@
+{
+  "id": "signal_release_validation",
+  "name": "Release Validation Signal",
+  "status": "draft",
+  "signalType": "audit",
+  "owner": "Repository Maintenance Assistant",
+  "purpose": "Record validation evidence for release readiness.",
+  "retention": "Retain with release notes and decision records."
+}

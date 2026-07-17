@@ -1,9 +1,19 @@
 # Deployment
 
-## Infrastructure Baseline
+## Purpose
 
-This file defines the future operating area for deployment.
+Deployment contracts define release targets and gates before production deployment exists.
 
-## Foundation Guidance
+## Rules
 
-Infrastructure choices must be documented before becoming project defaults.
+- Deployment targets must name an environment.
+- Release gates must include validation evidence.
+- Rollback expectations must be documented.
+
+## Schema
+
+The draft contract is defined in `schemas/deployment-target.schema.json`.
+
+## Fixture
+
+See `fixtures/deployment-target.example.json`.

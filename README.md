@@ -8,8 +8,8 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Architecture v0.5
-- Next workstream: Infrastructure v0.6
-- Status: architecture complete
+- Active workstream: Infrastructure v0.6
+- Status: infrastructure definition
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -48,6 +48,11 @@ handoff behavior, and safety rules for repository-grounded AI work.
 
 Architecture v0.5 defined service boundaries, API boundaries, data entities, events, auth, permissions,
 testing, and integration rules before runtime implementation begins.
+
+## Active Workstream
+
+Infrastructure v0.6 defines environments, deployment gates, CI/CD expectations, observability, secrets,
+backups, incidents, and release operations before development readiness.
 
 ## Repository Contract
 

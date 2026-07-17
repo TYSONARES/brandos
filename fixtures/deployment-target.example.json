@@ -1,0 +1,13 @@
+{
+  "id": "deploy_docs_preview",
+  "name": "Documentation Preview",
+  "status": "draft",
+  "environmentId": "env_local",
+  "purpose": "Preview repository documentation and generated artifacts before release.",
+  "releaseGate": [
+    "npm run check:all passes",
+    "Release checklist is updated",
+    "No secrets are present"
+  ],
+  "rollback": "Revert preview artifact to the last passing repository state."
+}

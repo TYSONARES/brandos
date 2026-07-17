@@ -31,6 +31,10 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `auth-boundary.example.json`
 - `integration-boundary.example.json`
 - `test-strategy.example.json`
+- `environment.example.json`
+- `deployment-target.example.json`
+- `observability-signal.example.json`
+- `secret-policy.example.json`
 
 ## Service Boundary Fixtures
 

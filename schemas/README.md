@@ -31,3 +31,7 @@ Examples and future implementation code should conform to these schemas unless a
 - `auth-boundary.schema.json`
 - `integration-boundary.schema.json`
 - `test-strategy.schema.json`
+- `environment.schema.json`
+- `deployment-target.schema.json`
+- `observability-signal.schema.json`
+- `secret-policy.schema.json`

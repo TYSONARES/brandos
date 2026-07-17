@@ -1,9 +1,20 @@
 # Observability
 
-## Infrastructure Baseline
+## Purpose
 
-This file defines the future operating area for observability.
+Observability contracts define which signals BrandOS must preserve for operations and release confidence.
 
-## Foundation Guidance
+## Signal Types
 
-Infrastructure choices must be documented before becoming project defaults.
+- Log
+- Metric
+- Trace
+- Audit
+
+## Schema
+
+The draft contract is defined in `schemas/observability-signal.schema.json`.
+
+## Fixture
+
+See `fixtures/observability-signal.example.json`.

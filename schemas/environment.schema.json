@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/environment.schema.json",
+  "title": "Environment",
+  "type": "object",
+  "required": ["id", "name", "status", "purpose", "dataPolicy", "allowedActions", "constraints"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "purpose": { "type": "string" },
+    "dataPolicy": { "type": "string" },
+    "allowedActions": { "type": "array", "items": { "type": "string" } },
+    "constraints": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}
