@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased - Development Ready v1.0
+## 1.0.0 - Development Ready
 
 - Started Development Ready workstream.
 - Added development docs for v1.0 scope, local setup, repository layout, runtime baseline, app shell, package boundaries, and quality gates.
@@ -14,6 +14,8 @@
 - Added deterministic Studio HTML renderer and render tests.
 - Added static Studio build and build-output validation.
 - Added dependency-free local Studio preview server.
+- Added ADR 0022 and release checklist for Development Ready completion.
+- Added development release requirement validation.
 
 ## 0.6.0 - Infrastructure
 

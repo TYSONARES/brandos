@@ -7,9 +7,9 @@ architecture decisions, and delivery workflow.
 ## Current Release
 
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: Infrastructure v0.6
-- Active workstream: v1.0 Development Ready
-- Status: development readiness preparation
+- Latest completed workstream: Development Ready v1.0
+- Active workstream: post-v1.0 feature implementation
+- Status: implementation baseline ready
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -48,10 +48,12 @@ testing, and integration rules before runtime implementation begins.
 Infrastructure v0.6 defined environments, deployment gates, CI/CD expectations, observability, secrets,
 backups, incidents, and release operations before development readiness.
 
+Development Ready v1.0 established the first runnable app shell, package boundaries, local setup rules,
+runtime baseline, quality gates, static build, local preview server, and test-covered Product Core use cases.
+
 ## Active Workstream
 
-Development Ready v1.0 establishes the first runnable app shell, package boundaries, local setup rules,
-runtime baseline, and quality gates.
+Post-v1.0 feature implementation builds product workflows on the runnable BrandOS Studio baseline.
 
 ## Repository Contract
 

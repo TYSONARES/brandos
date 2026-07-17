@@ -4,8 +4,8 @@
 
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: Infrastructure v0.6
-- Active workstream: v1.0 Development Ready
+- Latest completed workstream: Development Ready v1.0
+- Active workstream: post-v1.0 feature implementation
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -83,6 +83,11 @@ and `docs/decisions/0020-infrastructure-v0.6-complete.md`.
 Development Ready v1.0 establishes the first runnable BrandOS implementation baseline. It introduces
 the app shell, package boundaries, local setup rules, runtime baseline, and quality gates required before
 feature implementation can begin.
+
+## v1.0 Completion
+
+Development Ready v1.0 is complete at implementation baseline level. See `docs/development/release-v1.0.0.md`
+and `docs/decisions/0022-development-ready-v1.0-complete.md`.
 
 ## Definition of Done
 
