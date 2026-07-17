@@ -1,0 +1,29 @@
+{
+  "id": "component_decision_record",
+  "name": "Decision Record",
+  "status": "draft",
+  "purpose": "Presents a Decision with rationale, consequences, affected objects, owner, and decision date.",
+  "productObjects": [
+    "decision",
+    "brand-profile",
+    "context-pack"
+  ],
+  "states": [
+    "proposed",
+    "accepted",
+    "deprecated",
+    "rejected"
+  ],
+  "accessibility": [
+    "Group rationale and consequences under clear headings.",
+    "Expose status and date in text.",
+    "Use descriptive links for affected objects."
+  ],
+  "tokens": [
+    "color.surface.muted",
+    "color.text.primary",
+    "type.body.strong",
+    "space.3",
+    "radius.2"
+  ]
+}

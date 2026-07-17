@@ -1,0 +1,28 @@
+{
+  "id": "component_workflow_stepper",
+  "name": "Workflow Stepper",
+  "status": "draft",
+  "purpose": "Shows progress through Product Core workflows such as Claim verification, Decision approval, and Context Pack generation.",
+  "productObjects": [
+    "workflow-run",
+    "review"
+  ],
+  "states": [
+    "queued",
+    "active",
+    "blocked",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose current step and workflow status in text.",
+    "Provide blocked reason when status is blocked.",
+    "Do not use motion as the only indicator of progress."
+  ],
+  "tokens": [
+    "color.surface.muted",
+    "color.action.primary",
+    "type.body.strong",
+    "space.2",
+    "motion.standard"
+  ]
+}

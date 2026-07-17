@@ -6,6 +6,7 @@ const required = [
   'docs/design/tokens.md',
   'docs/design/token-set.md',
   'docs/design/components.md',
+  'docs/design/component-set.md',
   'docs/design/accessibility.md',
   'docs/design/design-review.md',
   'schemas/design-token.schema.json',
@@ -18,6 +19,12 @@ const required = [
   'fixtures/tokens/radius.json',
   'fixtures/tokens/shadow.json',
   'fixtures/tokens/motion.json',
+  'fixtures/components/brand-profile-summary.json',
+  'fixtures/components/claim-status-row.json',
+  'fixtures/components/decision-record.json',
+  'fixtures/components/context-pack-card.json',
+  'fixtures/components/review-panel.json',
+  'fixtures/components/workflow-stepper.json',
   'docs/decisions/0013-design-system-start.md'
 ];
 

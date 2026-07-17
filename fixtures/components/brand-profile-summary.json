@@ -1,0 +1,29 @@
+{
+  "id": "component_brand_profile_summary",
+  "name": "Brand Profile Summary",
+  "status": "draft",
+  "purpose": "Shows the active Brand Profile with owner, status, positioning promise, audience, and review readiness.",
+  "productObjects": [
+    "brand-profile",
+    "claim",
+    "review"
+  ],
+  "states": [
+    "draft",
+    "approved",
+    "deprecated",
+    "changes-needed"
+  ],
+  "accessibility": [
+    "Expose profile status as text.",
+    "Use headings for positioning, audience, proof points, and constraints.",
+    "Keep review actions keyboard reachable."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.text.primary",
+    "type.heading.sm",
+    "space.4",
+    "radius.2"
+  ]
+}

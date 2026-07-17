@@ -30,3 +30,12 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `tokens/radius.json`
 - `tokens/shadow.json`
 - `tokens/motion.json`
+
+## Component Set Fixtures
+
+- `components/brand-profile-summary.json`
+- `components/claim-status-row.json`
+- `components/decision-record.json`
+- `components/context-pack-card.json`
+- `components/review-panel.json`
+- `components/workflow-stepper.json`

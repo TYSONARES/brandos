@@ -15,10 +15,11 @@ Design System v0.3 defines the visual and interaction standards BrandOS needs be
 3. `tokens.md`
 4. `token-set.md`
 5. `components.md`
-6. `accessibility.md`
-7. `layout.md`
-8. `interaction.md`
-9. `design-review.md`
+6. `component-set.md`
+7. `accessibility.md`
+8. `layout.md`
+9. `interaction.md`
+10. `design-review.md`
 
 ## Product Core Dependency
 

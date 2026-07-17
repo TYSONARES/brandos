@@ -21,6 +21,10 @@ The draft contract is defined in `schemas/component-spec.schema.json`.
 
 See `fixtures/component-spec.example.json`.
 
+## Component Set
+
+The draft component set lives in `fixtures/components/` and is documented in `docs/design/component-set.md`.
+
 ## Rule
 
 Do not add a component spec unless it supports a named Product Core object or workflow.

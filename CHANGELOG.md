@@ -5,6 +5,7 @@
 - Started Design System workstream.
 - Added draft schemas and fixtures for Design Token and Component Spec.
 - Added draft token set for color, typography, spacing, radius, shadow, and motion.
+- Added draft component set for Product Core objects and workflows.
 - Added ADR 0013 for Design System v0.3 start.
 
 ## 0.2.0 - Product Core

@@ -1,0 +1,30 @@
+{
+  "id": "component_claim_status_row",
+  "name": "Claim Status Row",
+  "status": "draft",
+  "purpose": "Displays a Claim with status, evidence count, linked decisions, owner, and verification action.",
+  "productObjects": [
+    "claim",
+    "source",
+    "decision"
+  ],
+  "states": [
+    "draft",
+    "supported",
+    "disputed",
+    "approved"
+  ],
+  "accessibility": [
+    "Do not rely on color alone for claim status.",
+    "Expose evidence links with descriptive names.",
+    "Keep row actions reachable with keyboard navigation."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.status.success",
+    "color.status.warning",
+    "color.status.danger",
+    "type.body",
+    "space.2"
+  ]
+}

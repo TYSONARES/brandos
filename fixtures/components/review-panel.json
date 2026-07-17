@@ -1,0 +1,32 @@
+{
+  "id": "component_review_panel",
+  "name": "Review Panel",
+  "status": "draft",
+  "purpose": "Supports review decisions with target object details, criteria, notes, outcome, and required changes.",
+  "productObjects": [
+    "review",
+    "brand-profile",
+    "claim",
+    "decision",
+    "context-pack"
+  ],
+  "states": [
+    "requested",
+    "changes-needed",
+    "approved",
+    "rejected"
+  ],
+  "accessibility": [
+    "Use explicit labels for review outcome controls.",
+    "Describe required changes in text.",
+    "Keep error and blocked states visible to screen readers."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.status.success",
+    "color.status.danger",
+    "type.body",
+    "space.4",
+    "shadow.focus"
+  ]
+}
