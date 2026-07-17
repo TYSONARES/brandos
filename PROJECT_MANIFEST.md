@@ -78,6 +78,12 @@ incident, cost, and release operations standards.
 Infrastructure v0.6 is complete at repository definition level. See `docs/infrastructure/release-v0.6.0.md`
 and `docs/decisions/0020-infrastructure-v0.6-complete.md`.
 
+## v1.0 Scope
+
+Development Ready v1.0 establishes the first runnable BrandOS implementation baseline. It introduces
+the app shell, package boundaries, local setup rules, runtime baseline, and quality gates required before
+feature implementation can begin.
+
 ## Definition of Done
 
 - Core repository files exist and are internally linked.

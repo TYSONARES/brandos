@@ -48,6 +48,11 @@ testing, and integration rules before runtime implementation begins.
 Infrastructure v0.6 defined environments, deployment gates, CI/CD expectations, observability, secrets,
 backups, incidents, and release operations before development readiness.
 
+## Active Workstream
+
+Development Ready v1.0 establishes the first runnable app shell, package boundaries, local setup rules,
+runtime baseline, and quality gates.
+
 ## Repository Contract
 
 If a decision is not represented in this repository, it is not official. Chat history, external notes,
