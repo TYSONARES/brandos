@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/brand-profile.schema.json",
+  "title": "Brand Profile",
+  "type": "object",
+  "required": [
+    "id",
+    "workspaceId",
+    "name",
+    "status",
+    "positioning",
+    "audience",
+    "voice",
+    "proofPoints",
+    "constraints",
+    "claims",
+    "decisions",
+    "owner",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "positioning": {
+      "type": "object",
+      "required": ["category", "promise", "differentiators"],
+      "properties": {
+        "category": { "type": "string" },
+        "promise": { "type": "string" },
+        "differentiators": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "audience": {
+      "type": "object",
+      "required": ["primary", "secondary"],
+      "properties": {
+        "primary": { "type": "string" },
+        "secondary": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "required": ["traits", "avoid"],
+      "properties": {
+        "traits": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "avoid": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "proofPoints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decisions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

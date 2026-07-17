@@ -1,0 +1,40 @@
+import { readFileSync } from 'node:fs';
+
+const checks = [
+  {
+    schema: 'schemas/brand-profile.schema.json',
+    fixture: 'fixtures/brand-profile.example.json'
+  },
+  {
+    schema: 'schemas/context-pack.schema.json',
+    fixture: 'fixtures/context-pack.example.json'
+  },
+  {
+    schema: 'schemas/claim.schema.json',
+    fixture: 'fixtures/claim.example.json'
+  }
+];
+
+function readJson(path) {
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+for (const check of checks) {
+  const schema = readJson(check.schema);
+  const fixture = readJson(check.fixture);
+  const missing = schema.required.filter((key) => !(key in fixture));
+
+  if (missing.length) {
+    console.error(`${check.fixture} is missing required fields: ${missing.join(', ')}`);
+    process.exit(1);
+  }
+
+  for (const [key, definition] of Object.entries(schema.properties)) {
+    if (definition.enum && fixture[key] !== undefined && !definition.enum.includes(fixture[key])) {
+      console.error(`${check.fixture} has invalid ${key}: ${fixture[key]}`);
+      process.exit(1);
+    }
+  }
+}
+
+console.log('Fixture contracts passed.');

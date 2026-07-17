@@ -19,3 +19,9 @@
 - A Claim should link to at least one Source or Decision before approval.
 - A Context Pack must declare its intended task and included knowledge scope.
 - A Review must identify reviewer, target object, status, and timestamp.
+
+## Schemas
+
+- Brand Profile: `schemas/brand-profile.schema.json`
+- Claim: `schemas/claim.schema.json`
+- Context Pack: `schemas/context-pack.schema.json`

@@ -1,0 +1,51 @@
+{
+  "id": "brand_profile_example_001",
+  "workspaceId": "workspace_example_001",
+  "name": "Example Brand",
+  "status": "draft",
+  "positioning": {
+    "category": "Brand intelligence workspace",
+    "promise": "Turns scattered brand knowledge into reusable operating context.",
+    "differentiators": [
+      "Repository-first source of truth",
+      "Evidence-linked claims",
+      "AI-ready context packs"
+    ]
+  },
+  "audience": {
+    "primary": "Teams building brand-led products with AI assistance",
+    "secondary": [
+      "Brand strategists",
+      "Product teams",
+      "Design teams"
+    ]
+  },
+  "voice": {
+    "traits": [
+      "clear",
+      "structured",
+      "confident"
+    ],
+    "avoid": [
+      "unsupported claims",
+      "generic marketing language",
+      "chat-only assumptions"
+    ]
+  },
+  "proofPoints": [
+    "Every approved claim links to evidence or a decision.",
+    "Every context pack declares scope and expiry."
+  ],
+  "constraints": [
+    "Do not treat draft claims as approved.",
+    "Do not generate AI context without source links."
+  ],
+  "claims": [
+    "claim_example_001"
+  ],
+  "decisions": [
+    "decision_example_001"
+  ],
+  "owner": "brand-owner@example.local",
+  "updatedAt": "2026-07-17"
+}

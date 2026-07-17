@@ -1,0 +1,14 @@
+{
+  "id": "claim_example_001",
+  "workspaceId": "workspace_example_001",
+  "statement": "BrandOS turns scattered brand knowledge into reusable operating context.",
+  "status": "supported",
+  "sourceIds": [
+    "source_example_001"
+  ],
+  "decisionIds": [
+    "decision_example_001"
+  ],
+  "owner": "strategist@example.local",
+  "updatedAt": "2026-07-17"
+}

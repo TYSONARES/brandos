@@ -5,6 +5,7 @@
   "description": "Repository-first foundation for BrandOS.",
   "scripts": {
     "check:docs": "node scripts/check-docs.mjs",
+    "check:fixtures": "node scripts/check-fixtures.mjs",
     "check:repo": "node scripts/check-repo.mjs"
   },
   "keywords": ["brandos", "brand", "ai", "repository-foundation"],

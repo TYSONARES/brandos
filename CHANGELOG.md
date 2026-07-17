@@ -4,6 +4,7 @@
 
 - Started Product Core workstream.
 - Defined core domains, objects, roles, workflows, status model, review model, and context pack model.
+- Added draft schemas and fixtures for Brand Profile, Claim, and Context Pack.
 - Added ADR 0011 for the Product Core domain model.
 
 ## 0.1.0 - Foundation

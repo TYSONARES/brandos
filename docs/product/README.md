@@ -14,11 +14,14 @@ Product Core v0.2 defines what BrandOS is before implementation begins.
 2. `vision.md`
 3. `core-domains.md`
 4. `objects.md`
-5. `personas.md`
-6. `workflows.md`
-7. `user-journeys.md`
-8. `success-metrics.md`
-9. `non-goals.md`
+5. `brand-profile.md`
+6. `source-claim-decision.md`
+7. `context-pack.md`
+8. `personas.md`
+9. `workflows.md`
+10. `user-journeys.md`
+11. `success-metrics.md`
+12. `non-goals.md`
 
 ## Product Promise
 

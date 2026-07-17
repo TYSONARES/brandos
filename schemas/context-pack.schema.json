@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/context-pack.schema.json",
+  "title": "Context Pack",
+  "type": "object",
+  "required": [
+    "id",
+    "workspaceId",
+    "name",
+    "status",
+    "taskType",
+    "intendedAudience",
+    "includedProfileSections",
+    "includedClaims",
+    "includedDecisions",
+    "excludedTopics",
+    "agentInstructions",
+    "owner",
+    "expiresAt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "expired"] },
+    "taskType": { "type": "string" },
+    "intendedAudience": { "type": "string" },
+    "includedProfileSections": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "includedClaims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "includedDecisions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "excludedTopics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "agentInstructions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner": { "type": "string" },
+    "expiresAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

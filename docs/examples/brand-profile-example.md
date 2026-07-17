@@ -1,9 +1,9 @@
 # Brand Profile Example
 
-## Example
+## Fixture
 
-This example demonstrates the future format for brand profile example.
+See `fixtures/brand-profile.example.json`.
 
 ## Status
 
-Draft fixture for Foundation v0.1.0.
+Draft fixture for Product Core v0.2.

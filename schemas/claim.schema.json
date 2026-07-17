@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/claim.schema.json",
+  "title": "Claim",
+  "type": "object",
+  "required": ["id", "workspaceId", "statement", "status", "sourceIds", "decisionIds", "owner", "updatedAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "statement": { "type": "string" },
+    "status": { "enum": ["draft", "supported", "disputed", "approved"] },
+    "sourceIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decisionIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner": { "type": "string" },
+    "updatedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "id": "context_pack_example_001",
+  "workspaceId": "workspace_example_001",
+  "name": "Example Brand Writing Context",
+  "status": "draft",
+  "taskType": "brand-writing",
+  "intendedAudience": "AI agents drafting product and brand copy",
+  "includedProfileSections": [
+    "positioning",
+    "audience",
+    "voice",
+    "constraints"
+  ],
+  "includedClaims": [
+    "claim_example_001"
+  ],
+  "includedDecisions": [
+    "decision_example_001"
+  ],
+  "excludedTopics": [
+    "pricing",
+    "legal promises",
+    "unapproved customer claims"
+  ],
+  "agentInstructions": [
+    "Use only included approved or explicitly scoped draft context.",
+    "State uncertainty when a requested claim is not included.",
+    "Do not invent proof points."
+  ],
+  "owner": "operator@example.local",
+  "expiresAt": "2026-10-17"
+}
