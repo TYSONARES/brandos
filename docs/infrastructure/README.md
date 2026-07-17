@@ -22,6 +22,7 @@ Infrastructure v0.6 defines BrandOS environment, deployment, observability, secr
 10. `backups.md`
 11. `incident-response.md`
 12. `release-management.md`
+13. `cost-management.md`
 
 ## Dependency
 

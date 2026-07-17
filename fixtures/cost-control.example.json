@@ -1,0 +1,12 @@
+{
+  "id": "cost_preview_limit",
+  "name": "Preview Environment Cost Limit",
+  "status": "draft",
+  "scope": "Preview and staging environments before production readiness.",
+  "owner": "Infrastructure owner",
+  "controls": [
+    "Destroy preview environments after review.",
+    "Avoid paid managed services until infrastructure decisions are accepted.",
+    "Record cost-impacting vendor choices in ADRs."
+  ]
+}

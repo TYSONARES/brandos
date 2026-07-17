@@ -1,9 +1,19 @@
 # Cost Management
 
-## Infrastructure Baseline
+## Purpose
 
-This file defines the future operating area for cost management.
+Cost controls keep infrastructure choices intentional before vendors and production environments exist.
 
-## Foundation Guidance
+## Rules
 
-Infrastructure choices must be documented before becoming project defaults.
+- Preview environments should be short-lived.
+- Paid vendor choices require ADRs.
+- Cost-impacting changes need owner and scope.
+
+## Schema
+
+The draft contract is defined in `schemas/cost-control.schema.json`.
+
+## Fixture
+
+See `fixtures/cost-control.example.json`.

@@ -1,9 +1,19 @@
-# Ci Cd
+# CI/CD
 
-## Infrastructure Baseline
+## Purpose
 
-This file defines the future operating area for ci cd.
+CI/CD standards define automated evidence required before release or deployment.
 
-## Foundation Guidance
+## Rules
 
-Infrastructure choices must be documented before becoming project defaults.
+- Checks must block release when source-truth validation fails.
+- CI commands must be represented in repository scripts.
+- Release evidence must be reproducible.
+
+## Schema
+
+The draft contract is defined in `schemas/ci-check.schema.json`.
+
+## Fixture
+
+See `fixtures/ci-check.example.json`.

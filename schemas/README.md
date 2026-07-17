@@ -35,3 +35,8 @@ Examples and future implementation code should conform to these schemas unless a
 - `deployment-target.schema.json`
 - `observability-signal.schema.json`
 - `secret-policy.schema.json`
+- `backup-policy.schema.json`
+- `incident-procedure.schema.json`
+- `release-operation.schema.json`
+- `cost-control.schema.json`
+- `ci-check.schema.json`

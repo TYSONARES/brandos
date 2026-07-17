@@ -1,0 +1,18 @@
+{
+  "id": "incident_release_blocker",
+  "name": "Release Blocker Incident",
+  "status": "draft",
+  "severity": "high",
+  "owner": "Infrastructure owner",
+  "steps": [
+    "Stop promotion.",
+    "Record failing check or missing release evidence.",
+    "Assign owner for remediation.",
+    "Rerun validation after fix."
+  ],
+  "postIncident": [
+    "Document root cause.",
+    "Update validation or release checklist.",
+    "Add decision record if process changes."
+  ]
+}

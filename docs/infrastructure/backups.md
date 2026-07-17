@@ -1,9 +1,19 @@
 # Backups
 
-## Infrastructure Baseline
+## Purpose
 
-This file defines the future operating area for backups.
+Backup policies protect repository truth, release history, and future runtime data.
 
-## Foundation Guidance
+## Rules
 
-Infrastructure choices must be documented before becoming project defaults.
+- Backup scope must be explicit.
+- Restore objective must be documented.
+- Restores must be verified with repository checks.
+
+## Schema
+
+The draft contract is defined in `schemas/backup-policy.schema.json`.
+
+## Fixture
+
+See `fixtures/backup-policy.example.json`.

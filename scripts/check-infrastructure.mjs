@@ -9,10 +9,20 @@ const requiredFiles = [
   'docs/infrastructure/observability.md',
   'docs/infrastructure/observability-signals.md',
   'docs/infrastructure/secrets.md',
+  'docs/infrastructure/backups.md',
+  'docs/infrastructure/incident-response.md',
+  'docs/infrastructure/release-management.md',
+  'docs/infrastructure/cost-management.md',
+  'docs/infrastructure/ci-cd.md',
   'schemas/environment.schema.json',
   'schemas/deployment-target.schema.json',
   'schemas/observability-signal.schema.json',
   'schemas/secret-policy.schema.json',
+  'schemas/backup-policy.schema.json',
+  'schemas/incident-procedure.schema.json',
+  'schemas/release-operation.schema.json',
+  'schemas/cost-control.schema.json',
+  'schemas/ci-check.schema.json',
   'fixtures/environment.example.json',
   'fixtures/environments/local.json',
   'fixtures/environments/preview.json',
@@ -27,6 +37,11 @@ const requiredFiles = [
   'fixtures/observability/error-rate.json',
   'fixtures/observability/audit-log.json',
   'fixtures/secret-policy.example.json',
+  'fixtures/backup-policy.example.json',
+  'fixtures/incident-procedure.example.json',
+  'fixtures/release-operation.example.json',
+  'fixtures/cost-control.example.json',
+  'fixtures/ci-check.example.json',
   'docs/decisions/0019-infrastructure-start.md'
 ];
 
@@ -40,7 +55,12 @@ const checks = [
   { schema: 'schemas/environment.schema.json', fixture: 'fixtures/environment.example.json' },
   { schema: 'schemas/deployment-target.schema.json', fixture: 'fixtures/deployment-target.example.json' },
   { schema: 'schemas/observability-signal.schema.json', fixture: 'fixtures/observability-signal.example.json' },
-  { schema: 'schemas/secret-policy.schema.json', fixture: 'fixtures/secret-policy.example.json' }
+  { schema: 'schemas/secret-policy.schema.json', fixture: 'fixtures/secret-policy.example.json' },
+  { schema: 'schemas/backup-policy.schema.json', fixture: 'fixtures/backup-policy.example.json' },
+  { schema: 'schemas/incident-procedure.schema.json', fixture: 'fixtures/incident-procedure.example.json' },
+  { schema: 'schemas/release-operation.schema.json', fixture: 'fixtures/release-operation.example.json' },
+  { schema: 'schemas/cost-control.schema.json', fixture: 'fixtures/cost-control.example.json' },
+  { schema: 'schemas/ci-check.schema.json', fixture: 'fixtures/ci-check.example.json' }
 ];
 const environmentFiles = [
   'fixtures/environments/local.json',

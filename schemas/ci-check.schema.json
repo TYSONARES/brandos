@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/ci-check.schema.json",
+  "title": "CI Check",
+  "type": "object",
+  "required": ["id", "name", "status", "command", "blocksRelease", "evidence"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "command": { "type": "string" },
+    "blocksRelease": { "type": "boolean" },
+    "evidence": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "backup_repository_truth",
+  "name": "Repository Truth Backup",
+  "status": "draft",
+  "scope": "Git repository source truth, release docs, schemas, fixtures, and validation scripts.",
+  "frequency": "Every merge to protected release branches and before production promotion.",
+  "restoreObjective": "Restore the last passing repository state with complete release history.",
+  "verification": [
+    "Confirm git history is available.",
+    "Run npm run check:all after restore.",
+    "Confirm release notes and ADRs are intact."
+  ]
+}

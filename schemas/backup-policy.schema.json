@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/backup-policy.schema.json",
+  "title": "Backup Policy",
+  "type": "object",
+  "required": ["id", "name", "status", "scope", "frequency", "restoreObjective", "verification"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "scope": { "type": "string" },
+    "frequency": { "type": "string" },
+    "restoreObjective": { "type": "string" },
+    "verification": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

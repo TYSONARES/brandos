@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/release-operation.schema.json",
+  "title": "Release Operation",
+  "type": "object",
+  "required": ["id", "name", "status", "trigger", "requiredEvidence", "approval"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "trigger": { "type": "string" },
+    "requiredEvidence": { "type": "array", "items": { "type": "string" } },
+    "approval": { "type": "string" }
+  },
+  "additionalProperties": false
+}

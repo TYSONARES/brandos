@@ -35,6 +35,11 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `deployment-target.example.json`
 - `observability-signal.example.json`
 - `secret-policy.example.json`
+- `backup-policy.example.json`
+- `incident-procedure.example.json`
+- `release-operation.example.json`
+- `cost-control.example.json`
+- `ci-check.example.json`
 
 ## Environment Fixtures
 

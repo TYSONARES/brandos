@@ -1,0 +1,8 @@
+{
+  "id": "ci_check_all",
+  "name": "Repository Check All",
+  "status": "draft",
+  "command": "npm run check:all",
+  "blocksRelease": true,
+  "evidence": "Passing check output is required before release commits."
+}

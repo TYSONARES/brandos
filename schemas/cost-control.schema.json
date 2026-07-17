@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/cost-control.schema.json",
+  "title": "Cost Control",
+  "type": "object",
+  "required": ["id", "name", "status", "scope", "owner", "controls"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "scope": { "type": "string" },
+    "owner": { "type": "string" },
+    "controls": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

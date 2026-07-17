@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/incident-procedure.schema.json",
+  "title": "Incident Procedure",
+  "type": "object",
+  "required": ["id", "name", "status", "severity", "owner", "steps", "postIncident"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "severity": { "enum": ["low", "medium", "high", "critical"] },
+    "owner": { "type": "string" },
+    "steps": { "type": "array", "items": { "type": "string" } },
+    "postIncident": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

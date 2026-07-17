@@ -1,0 +1,13 @@
+{
+  "id": "release_repository_version",
+  "name": "Repository Version Release",
+  "status": "draft",
+  "trigger": "A roadmap workstream reaches definition of done.",
+  "requiredEvidence": [
+    "Release note exists.",
+    "Completion ADR exists.",
+    "npm run check:all passes.",
+    "Changelog is updated."
+  ],
+  "approval": "Maintainer approves release commit after validation evidence is recorded."
+}
