@@ -3,6 +3,9 @@ export function renderStudioHtml(shell) {
   const blockingItems = shell.contextPackReadiness.blockingReasons
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
     .join('');
+  const actionItems = shell.contextPackReadiness.nextActions
+    .map((action) => `<li>${escapeHtml(action.label)}</li>`)
+    .join('');
 
   return `<!doctype html>
 <html lang="en">
@@ -87,6 +90,11 @@ export function renderStudioHtml(shell) {
       margin: 10px 0 0;
       padding-left: 20px;
     }
+    .actions {
+      margin-top: 14px;
+      border-top: 1px solid #d7dce3;
+      padding-top: 12px;
+    }
     @media (max-width: 760px) {
       header, .content { display: block; }
       .status { margin-top: 16px; }
@@ -137,6 +145,10 @@ export function renderStudioHtml(shell) {
         <p class="meta">Accepted decisions: ${shell.contextPackReadiness.acceptedDecisionCount}</p>
         <p class="meta">Reviews: ${shell.contextPackReadiness.reviewCount}</p>
         <ul>${blockingItems}</ul>
+        <div class="actions">
+          <h2>Next action</h2>
+          <ul>${actionItems}</ul>
+        </div>
       </article>
     </section>
   </main>

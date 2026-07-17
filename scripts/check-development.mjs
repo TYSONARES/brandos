@@ -95,7 +95,7 @@ if (overview.claimCount !== 1 || overview.acceptedDecisionCount !== 1) {
 }
 
 const readiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
-if (readiness.ready !== false || readiness.blockingReasons.length !== 1) {
+if (readiness.ready !== false || readiness.blockingReasons.length !== 1 || readiness.nextActions.length !== 1) {
   console.error('Context Pack readiness did not detect the expected blocking review.');
   process.exit(1);
 }

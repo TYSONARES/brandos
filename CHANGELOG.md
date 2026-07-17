@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Post-v1 Feature Implementation
+
+- Added Context Pack readiness next actions to domain and Studio render output.
+
 ## 1.0.0 - Development Ready
 
 - Started Development Ready workstream.

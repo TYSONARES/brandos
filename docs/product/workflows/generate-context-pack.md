@@ -43,3 +43,7 @@ Draft or approved Context Pack.
 - Pack includes stale or deprecated content.
 - Pack lacks expiry.
 - Pack asks an AI agent to infer unsupported strategy.
+
+## Runtime Behavior
+
+The Studio readiness flow reports blocking reasons and next actions for claims, decisions, and reviews.
