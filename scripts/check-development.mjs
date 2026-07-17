@@ -2,7 +2,9 @@ import { existsSync, readFileSync } from 'node:fs';
 import { listProductCoreContracts } from '../packages/contracts/src/index.mjs';
 import {
   createExampleProductCoreState,
+  createBrandProfileOverview,
   createInMemoryProductCoreStore,
+  evaluateContextPackReadiness,
   listProductCoreModels,
   summarizeProductCoreState
 } from '../packages/domain/src/index.mjs';
@@ -24,6 +26,7 @@ const required = [
   'packages/domain/src/in-memory-store.mjs',
   'packages/domain/src/index.mjs',
   'packages/domain/src/product-core-models.mjs',
+  'packages/domain/src/use-cases.mjs',
   'packages/contracts/README.md',
   'packages/contracts/src/index.mjs',
   'packages/contracts/src/product-core-contracts.mjs',
@@ -76,6 +79,18 @@ const store = createInMemoryProductCoreStore(createExampleProductCoreState());
 const summary = summarizeProductCoreState(store);
 if (summary.objectCount !== expectedProductCoreModels.length) {
   console.error(`Expected ${expectedProductCoreModels.length} example Product Core objects, found ${summary.objectCount}`);
+  process.exit(1);
+}
+
+const overview = createBrandProfileOverview(store, 'brand_profile_example_001');
+if (overview.claimCount !== 1 || overview.acceptedDecisionCount !== 1) {
+  console.error('Brand Profile overview did not resolve expected claim and decision counts.');
+  process.exit(1);
+}
+
+const readiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+if (readiness.ready !== false || readiness.blockingReasons.length !== 1) {
+  console.error('Context Pack readiness did not detect the expected blocking review.');
   process.exit(1);
 }
 

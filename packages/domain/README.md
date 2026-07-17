@@ -19,3 +19,8 @@ Model metadata must keep schema and fixture paths aligned with repository contra
 
 The initial store is deterministic and service-free. It exists to prove that the app shell can create,
 read, and summarize Product Core objects before a persistence decision is made.
+
+## Use Cases
+
+- Brand Profile overview resolves linked claims and decisions.
+- Context Pack readiness checks included claims, decisions, and blocking reviews.

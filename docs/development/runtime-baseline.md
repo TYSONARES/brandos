@@ -12,6 +12,7 @@ Runtime baseline defines the first executable shape of BrandOS.
 - Required secrets: none.
 - Persistence: in-memory examples only.
 - Initial state: deterministic Product Core example objects.
+- Initial use cases: Brand Profile overview and Context Pack readiness.
 
 ## Rules
 
@@ -19,6 +20,7 @@ Runtime baseline defines the first executable shape of BrandOS.
 - Smoke commands must not require network access.
 - Runtime modules must expose named functions for future tests.
 - In-memory stores must remain replaceable by future persistence adapters.
+- Use cases must consume store interfaces instead of hard-coding fixture data.
 - Console output should be concise and suitable for CI logs.
 
 ## Upgrade Path
