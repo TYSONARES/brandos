@@ -7,9 +7,9 @@ architecture decisions, and delivery workflow.
 ## Current Release
 
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: Design System v0.3
-- Active workstream: AI Agents v0.4
-- Status: ai agent definition
+- Latest completed workstream: AI Agents v0.4
+- Next workstream: Architecture v0.5
+- Status: ai agents complete
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -41,7 +41,7 @@ that map directly to Product Core objects and workflows.
 
 ## Active Workstream
 
-AI Agents v0.4 defines agent roles, prompt contracts, context loading, memory policy, evaluations,
+AI Agents v0.4 defined agent roles, prompt contracts, context loading, memory policy, evaluations,
 handoff behavior, and safety rules for repository-grounded AI work.
 
 ## Repository Contract

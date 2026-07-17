@@ -5,24 +5,26 @@ AI Agents v0.4 defines how BrandOS agents use repository truth safely and consis
 ## Status
 
 - Released baseline: Design System v0.3
-- Active workstream: AI Agents v0.4
-- Current goal: define agent roles, prompt contracts, context loading, memory, evaluations, and handoffs
+- Latest completed workstream: AI Agents v0.4
+- Next workstream: Architecture v0.5
+- Current goal: support later releases from stable AI agent contracts
 
 ## Read Order
 
 1. `v0.4-scope.md`
-2. `agent-principles.md`
-3. `agent-roles.md`
-4. `agent-set.md`
-5. `prompt-contracts.md`
-6. `prompt-contract-set.md`
-7. `context-loading.md`
-8. `memory-policy.md`
-9. `evaluation.md`
-10. `output-formats.md`
-11. `safety.md`
-12. `handoff.md`
-13. `tool-use.md`
+2. `release-v0.4.0.md`
+3. `agent-principles.md`
+4. `agent-roles.md`
+5. `agent-set.md`
+6. `prompt-contracts.md`
+7. `prompt-contract-set.md`
+8. `context-loading.md`
+9. `memory-policy.md`
+10. `evaluation.md`
+11. `output-formats.md`
+12. `safety.md`
+13. `handoff.md`
+14. `tool-use.md`
 
 ## Dependency
 
