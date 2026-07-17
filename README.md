@@ -8,8 +8,8 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Product Core v0.2
-- Next workstream: Design System v0.3
-- Status: product core complete
+- Active workstream: Design System v0.3
+- Status: design system definition
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -35,6 +35,11 @@ Every AI tool and human contributor must read these files before making changes:
 
 Product Core v0.2 defined the first durable product model for BrandOS: workspace structure,
 brand profiles, source evidence, strategic decisions, workflows, approvals, and AI-ready context packs.
+
+## Active Workstream
+
+Design System v0.3 defines design tokens, component specs, accessibility rules, and review standards
+that map directly to Product Core objects and workflows.
 
 ## Repository Contract
 

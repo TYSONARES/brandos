@@ -1,9 +1,26 @@
 # Components
 
-## Design System Placeholder
+## Purpose
 
-This file prepares the Design System v0.3 workstream for components.
+Component specs define reusable interface units before implementation.
 
-## Foundation Rule
+## Component Requirements
 
-Design decisions must support clarity, accessibility, repeatable product workflows, and brand consistency.
+- Name and purpose
+- Product Core object or workflow mapping
+- Supported states
+- Accessibility requirements
+- Required tokens
+- Review criteria
+
+## Schema
+
+The draft contract is defined in `schemas/component-spec.schema.json`.
+
+## Fixture
+
+See `fixtures/component-spec.example.json`.
+
+## Rule
+
+Do not add a component spec unless it supports a named Product Core object or workflow.

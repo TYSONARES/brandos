@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/design-token.schema.json",
+  "title": "Design Token",
+  "type": "object",
+  "required": ["id", "name", "category", "value", "usage", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "category": { "enum": ["color", "typography", "spacing", "radius", "shadow", "motion"] },
+    "value": { "type": "string" },
+    "usage": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] }
+  },
+  "additionalProperties": false
+}

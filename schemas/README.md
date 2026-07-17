@@ -19,3 +19,5 @@ Examples and future implementation code should conform to these schemas unless a
 - `review.schema.json`
 - `source.schema.json`
 - `workflow-run.schema.json`
+- `design-token.schema.json`
+- `component-spec.schema.json`

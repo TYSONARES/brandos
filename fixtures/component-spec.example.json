@@ -1,0 +1,26 @@
+{
+  "id": "component_context_pack_card",
+  "name": "Context Pack Card",
+  "status": "draft",
+  "purpose": "Summarizes a Context Pack with status, task type, owner, expiry, and review readiness.",
+  "productObjects": [
+    "context-pack",
+    "review"
+  ],
+  "states": [
+    "draft",
+    "approved",
+    "expired",
+    "changes-needed"
+  ],
+  "accessibility": [
+    "Expose status as text, not color alone.",
+    "Keep action targets keyboard reachable.",
+    "Use visible focus indicators."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "space.3",
+    "radius.2"
+  ]
+}

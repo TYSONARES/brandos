@@ -1,10 +1,27 @@
 # Design Index
 
-Design system primitives, accessibility, layout, tokens, and component planning.
+Design System v0.3 defines the visual and interaction standards BrandOS needs before implementation.
 
 ## Status
 
-Foundation v0.1.0: structure established, detailed implementation deferred to the relevant roadmap release.
+- Released baseline: Product Core v0.2
+- Active workstream: Design System v0.3
+- Current goal: define tokens, components, accessibility, and design review standards
+
+## Read Order
+
+1. `v0.3-scope.md`
+2. `principles.md`
+3. `tokens.md`
+4. `components.md`
+5. `accessibility.md`
+6. `layout.md`
+7. `interaction.md`
+8. `design-review.md`
+
+## Product Core Dependency
+
+Design System v0.3 must support the Product Core objects and workflows documented under `docs/product/`.
 
 ## Maintenance Rule
 

@@ -1,9 +1,15 @@
 # Design Review
 
-## Design System Placeholder
+## Purpose
 
-This file prepares the Design System v0.3 workstream for design review.
+Design review confirms that a proposed interface pattern supports BrandOS product work safely and clearly.
 
-## Foundation Rule
+## Checklist
 
-Design decisions must support clarity, accessibility, repeatable product workflows, and brand consistency.
+- The design maps to a Product Core object or workflow.
+- Required object statuses are visible.
+- Primary actions are clear and predictable.
+- Empty, loading, error, and blocked states are defined.
+- Accessibility requirements are satisfied.
+- Copy avoids unsupported product claims.
+- Design tokens are used consistently.

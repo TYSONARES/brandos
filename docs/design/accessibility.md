@@ -1,9 +1,17 @@
 # Accessibility
 
-## Design System Placeholder
+## Baseline
 
-This file prepares the Design System v0.3 workstream for accessibility.
+BrandOS interfaces must be usable with keyboard navigation, visible focus, readable contrast, and text-based status.
 
-## Foundation Rule
+## Requirements
 
-Design decisions must support clarity, accessibility, repeatable product workflows, and brand consistency.
+- Status cannot be communicated by color alone.
+- Controls must have accessible names.
+- Focus states must be visible.
+- Forms and reviews must identify errors in text.
+- Tables and dense lists must preserve readable hierarchy.
+
+## Product Core Implication
+
+Reviews, claims, decisions, and context packs all have status. Status presentation must remain accessible in every component.

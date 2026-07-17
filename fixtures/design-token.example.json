@@ -1,0 +1,8 @@
+{
+  "id": "token_color_surface_default",
+  "name": "color.surface.default",
+  "category": "color",
+  "value": "#ffffff",
+  "usage": "Default application surface for product workflows and review screens.",
+  "status": "draft"
+}

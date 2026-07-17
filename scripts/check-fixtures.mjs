@@ -28,6 +28,14 @@ const checks = [
   {
     schema: 'schemas/workflow-run.schema.json',
     fixture: 'fixtures/workflow-run.example.json'
+  },
+  {
+    schema: 'schemas/design-token.schema.json',
+    fixture: 'fixtures/design-token.example.json'
+  },
+  {
+    schema: 'schemas/component-spec.schema.json',
+    fixture: 'fixtures/component-spec.example.json'
   }
 ];
 
