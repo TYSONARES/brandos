@@ -1,0 +1,18 @@
+[
+  {
+    "id": "token_radius_1",
+    "name": "radius.1",
+    "category": "radius",
+    "value": "4px",
+    "usage": "Small controls, inputs, tags, and compact status indicators.",
+    "status": "draft"
+  },
+  {
+    "id": "token_radius_2",
+    "name": "radius.2",
+    "category": "radius",
+    "value": "8px",
+    "usage": "Cards, panels, dialogs, and reusable component containers.",
+    "status": "draft"
+  }
+]

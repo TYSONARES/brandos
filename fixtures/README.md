@@ -21,3 +21,12 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `workflow-run.example.json`
 - `design-token.example.json`
 - `component-spec.example.json`
+
+## Token Set Fixtures
+
+- `tokens/color.json`
+- `tokens/typography.json`
+- `tokens/spacing.json`
+- `tokens/radius.json`
+- `tokens/shadow.json`
+- `tokens/motion.json`

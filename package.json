@@ -4,12 +4,13 @@
   "private": true,
   "description": "Repository-first foundation for BrandOS.",
   "scripts": {
-    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design",
+    "check:all": "npm run check:docs && npm run check:fixtures && npm run check:tokens && npm run check:repo && npm run check:workflows && npm run check:release && npm run check:design",
     "check:design": "node scripts/check-design.mjs",
     "check:docs": "node scripts/check-docs.mjs",
     "check:fixtures": "node scripts/check-fixtures.mjs",
     "check:release": "node scripts/check-release.mjs",
     "check:repo": "node scripts/check-repo.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs",
     "check:workflows": "node scripts/check-workflows.mjs"
   },
   "keywords": ["brandos", "brand", "ai", "repository-foundation"],

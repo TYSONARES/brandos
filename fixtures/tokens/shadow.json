@@ -1,0 +1,18 @@
+[
+  {
+    "id": "token_shadow_raised",
+    "name": "shadow.raised",
+    "category": "shadow",
+    "value": "0 1px 2px rgba(24, 32, 43, 0.08)",
+    "usage": "Subtle elevation for floating menus and temporary overlays.",
+    "status": "draft"
+  },
+  {
+    "id": "token_shadow_focus",
+    "name": "shadow.focus",
+    "category": "shadow",
+    "value": "0 0 0 3px rgba(31, 111, 235, 0.28)",
+    "usage": "Visible focus indicator for keyboard navigation.",
+    "status": "draft"
+  }
+]

@@ -4,6 +4,7 @@ const required = [
   'docs/design/v0.3-scope.md',
   'docs/design/principles.md',
   'docs/design/tokens.md',
+  'docs/design/token-set.md',
   'docs/design/components.md',
   'docs/design/accessibility.md',
   'docs/design/design-review.md',
@@ -11,6 +12,12 @@ const required = [
   'schemas/component-spec.schema.json',
   'fixtures/design-token.example.json',
   'fixtures/component-spec.example.json',
+  'fixtures/tokens/color.json',
+  'fixtures/tokens/typography.json',
+  'fixtures/tokens/spacing.json',
+  'fixtures/tokens/radius.json',
+  'fixtures/tokens/shadow.json',
+  'fixtures/tokens/motion.json',
   'docs/decisions/0013-design-system-start.md'
 ];
 

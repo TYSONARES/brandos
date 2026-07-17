@@ -1,0 +1,18 @@
+[
+  {
+    "id": "token_motion_fast",
+    "name": "motion.fast",
+    "category": "motion",
+    "value": "120ms ease-out",
+    "usage": "Small hover, focus, and pressed feedback transitions.",
+    "status": "draft"
+  },
+  {
+    "id": "token_motion_standard",
+    "name": "motion.standard",
+    "category": "motion",
+    "value": "180ms ease-in-out",
+    "usage": "Default menu, disclosure, and state-change transitions.",
+    "status": "draft"
+  }
+]

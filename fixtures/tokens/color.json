@@ -1,0 +1,66 @@
+[
+  {
+    "id": "token_color_surface_default",
+    "name": "color.surface.default",
+    "category": "color",
+    "value": "#ffffff",
+    "usage": "Default application surface for product workflows and review screens.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_surface_muted",
+    "name": "color.surface.muted",
+    "category": "color",
+    "value": "#f6f7f9",
+    "usage": "Subtle background for secondary panels, metadata rows, and quiet grouping.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_text_primary",
+    "name": "color.text.primary",
+    "category": "color",
+    "value": "#18202b",
+    "usage": "Primary body text and dense operational labels.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_text_secondary",
+    "name": "color.text.secondary",
+    "category": "color",
+    "value": "#5b6472",
+    "usage": "Secondary metadata, helper text, and timestamps.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_action_primary",
+    "name": "color.action.primary",
+    "category": "color",
+    "value": "#1f6feb",
+    "usage": "Primary actions that advance a workflow.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_status_success",
+    "name": "color.status.success",
+    "category": "color",
+    "value": "#237a57",
+    "usage": "Approved, verified, and complete status indicators with text labels.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_status_warning",
+    "name": "color.status.warning",
+    "category": "color",
+    "value": "#9a5b00",
+    "usage": "Draft, expiring, or changes-needed status indicators with text labels.",
+    "status": "draft"
+  },
+  {
+    "id": "token_color_status_danger",
+    "name": "color.status.danger",
+    "category": "color",
+    "value": "#b42318",
+    "usage": "Rejected, disputed, expired, or destructive status indicators with text labels.",
+    "status": "draft"
+  }
+]

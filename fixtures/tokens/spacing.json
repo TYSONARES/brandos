@@ -1,0 +1,34 @@
+[
+  {
+    "id": "token_space_1",
+    "name": "space.1",
+    "category": "spacing",
+    "value": "4px",
+    "usage": "Tight spacing between related inline elements.",
+    "status": "draft"
+  },
+  {
+    "id": "token_space_2",
+    "name": "space.2",
+    "category": "spacing",
+    "value": "8px",
+    "usage": "Default spacing inside compact controls and metadata rows.",
+    "status": "draft"
+  },
+  {
+    "id": "token_space_3",
+    "name": "space.3",
+    "category": "spacing",
+    "value": "12px",
+    "usage": "Standard gap between fields, controls, and card content.",
+    "status": "draft"
+  },
+  {
+    "id": "token_space_4",
+    "name": "space.4",
+    "category": "spacing",
+    "value": "16px",
+    "usage": "Section spacing inside dense product layouts.",
+    "status": "draft"
+  }
+]
