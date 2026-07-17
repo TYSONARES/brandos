@@ -4,9 +4,9 @@ Infrastructure v0.6 defines BrandOS environment, deployment, observability, secr
 
 ## Status
 
-- Released baseline: Architecture v0.5
-- Active workstream: Infrastructure v0.6
-- Current goal: define environments, deployment gates, observability, secrets, backups, incidents, and release operations
+- Released baseline: Infrastructure v0.6
+- Active workstream: v1.0 Development Ready
+- Current goal: connect implementation readiness to environment, deployment, observability, secrets, backups, incidents, and release operations
 
 ## Read Order
 
@@ -23,6 +23,7 @@ Infrastructure v0.6 defines BrandOS environment, deployment, observability, secr
 11. `incident-response.md`
 12. `release-management.md`
 13. `cost-management.md`
+14. `release-v0.6.0.md`
 
 ## Dependency
 

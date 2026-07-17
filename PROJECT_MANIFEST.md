@@ -4,8 +4,8 @@
 
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: Architecture v0.5
-- Active workstream: Infrastructure v0.6
+- Latest completed workstream: Infrastructure v0.6
+- Active workstream: v1.0 Development Ready
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -72,6 +72,11 @@ and `docs/decisions/0018-architecture-v0.5-complete.md`.
 
 Infrastructure v0.6 defines repository-level environment, deployment, CI/CD, observability, secret, backup,
 incident, cost, and release operations standards.
+
+## v0.6 Completion
+
+Infrastructure v0.6 is complete at repository definition level. See `docs/infrastructure/release-v0.6.0.md`
+and `docs/decisions/0020-infrastructure-v0.6-complete.md`.
 
 ## Definition of Done
 

@@ -1,12 +1,14 @@
 # Changelog
 
-## Unreleased - Infrastructure v0.6
+## 0.6.0 - Infrastructure
 
 - Started Infrastructure workstream.
 - Added draft schemas and fixtures for Environment, Deployment Target, Observability Signal, and Secret Policy.
 - Added draft environment, deployment target, and observability signal sets.
 - Added backup, incident response, release operation, cost control, and CI/CD contracts.
 - Added ADR 0019 for Infrastructure v0.6 start.
+- Added ADR 0020 and release checklist for Infrastructure completion.
+- Added infrastructure release requirement validation.
 
 ## 0.5.0 - Architecture
 

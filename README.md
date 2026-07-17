@@ -7,9 +7,9 @@ architecture decisions, and delivery workflow.
 ## Current Release
 
 - Released baseline: Foundation v0.1.0
-- Latest completed workstream: Architecture v0.5
-- Active workstream: Infrastructure v0.6
-- Status: infrastructure definition
+- Latest completed workstream: Infrastructure v0.6
+- Active workstream: v1.0 Development Ready
+- Status: development readiness preparation
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -39,19 +39,13 @@ brand profiles, source evidence, strategic decisions, workflows, approvals, and 
 Design System v0.3 defined design tokens, component specs, accessibility rules, and review standards
 that map directly to Product Core objects and workflows.
 
-## Active Workstream
-
 AI Agents v0.4 defined agent roles, prompt contracts, context loading, memory policy, evaluations,
 handoff behavior, and safety rules for repository-grounded AI work.
-
-## Active Workstream
 
 Architecture v0.5 defined service boundaries, API boundaries, data entities, events, auth, permissions,
 testing, and integration rules before runtime implementation begins.
 
-## Active Workstream
-
-Infrastructure v0.6 defines environments, deployment gates, CI/CD expectations, observability, secrets,
+Infrastructure v0.6 defined environments, deployment gates, CI/CD expectations, observability, secrets,
 backups, incidents, and release operations before development readiness.
 
 ## Repository Contract
