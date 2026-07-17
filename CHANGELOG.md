@@ -13,6 +13,7 @@
 - Added Node test coverage for Product Core state and readiness behavior.
 - Added deterministic Studio HTML renderer and render tests.
 - Added static Studio build and build-output validation.
+- Added dependency-free local Studio preview server.
 
 ## 0.6.0 - Infrastructure
 

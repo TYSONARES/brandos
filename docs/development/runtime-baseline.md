@@ -16,6 +16,7 @@ Runtime baseline defines the first executable shape of BrandOS.
 - Initial use cases: Brand Profile overview and Context Pack readiness.
 - Initial render target: deterministic HTML string.
 - Static build output: generated HTML under `dist/studio/index.html`.
+- Local preview: Node.js static server for generated Studio output.
 
 ## Rules
 

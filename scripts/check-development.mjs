@@ -24,6 +24,7 @@ const required = [
   'apps/studio/src/render-html.mjs',
   'scripts/build-studio.mjs',
   'scripts/check-studio-build.mjs',
+  'scripts/serve-studio.mjs',
   'packages/domain/README.md',
   'packages/domain/src/example-state.mjs',
   'packages/domain/src/in-memory-store.mjs',

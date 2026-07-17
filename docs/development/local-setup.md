@@ -16,6 +16,7 @@ Local setup defines how contributors start working on BrandOS without relying on
 - `npm run check:all` validates the repository contract.
 - `npm run smoke:app` runs the first app shell smoke test.
 - `npm run build:studio` generates the local Studio HTML build.
+- `npm run serve:studio` serves the generated Studio build at `http://localhost:4173`.
 
 ## Environment
 
@@ -24,3 +25,7 @@ The baseline implementation must run without required environment variables. Opt
 ## Build Output
 
 Studio build output is generated under `dist/studio/index.html`. The `dist/` directory is local build output and is not committed.
+
+## Local Preview
+
+Run `npm run build:studio` before `npm run serve:studio`. Set `PORT` to use another local port.
