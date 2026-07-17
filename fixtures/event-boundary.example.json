@@ -1,0 +1,21 @@
+{
+  "id": "event_context_pack_approved",
+  "name": "Context Pack Approved",
+  "status": "draft",
+  "producerService": "service_review",
+  "consumers": [
+    "service_agent_context",
+    "service_workflow"
+  ],
+  "payload": [
+    "contextPackId",
+    "workspaceId",
+    "reviewId",
+    "approvedAt"
+  ],
+  "constraints": [
+    "Do not emit for rejected or changes-needed reviews.",
+    "Payload must include review traceability.",
+    "Consumers must verify context pack status before reuse."
+  ]
+}

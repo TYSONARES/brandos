@@ -1,11 +1,12 @@
 # Backend
 
-## Architecture Baseline
+## Purpose
 
-This document reserves the official architecture location for backend.
+Backend architecture defines service responsibilities and contracts without selecting runtime infrastructure.
 
-## Foundation Constraints
+## Responsibilities
 
-- Do not introduce runtime architecture without a decision record.
-- Keep domain language aligned with product and brand documents.
-- Capture tradeoffs in `docs/decisions/`.
+- Enforce service ownership boundaries.
+- Preserve Product Core object status and traceability.
+- Expose APIs only through documented boundaries.
+- Keep database and deployment choices out of scope for v0.5.

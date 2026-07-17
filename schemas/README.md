@@ -27,3 +27,7 @@ Examples and future implementation code should conform to these schemas unless a
 - `service-boundary.schema.json`
 - `api-boundary.schema.json`
 - `data-entity.schema.json`
+- `event-boundary.schema.json`
+- `auth-boundary.schema.json`
+- `integration-boundary.schema.json`
+- `test-strategy.schema.json`

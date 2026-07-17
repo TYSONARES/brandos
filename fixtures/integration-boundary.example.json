@@ -1,0 +1,18 @@
+{
+  "id": "integration_source_import",
+  "name": "Source Import Integration",
+  "status": "draft",
+  "direction": "inbound",
+  "ownedBy": "service_brand_knowledge",
+  "dataShared": [
+    "Source title",
+    "Source summary",
+    "Source URI",
+    "Captured date"
+  ],
+  "constraints": [
+    "Imported sources start as draft unless verified.",
+    "Sensitive data classification must be evaluated before approval.",
+    "External source availability must not be required for repository truth."
+  ]
+}

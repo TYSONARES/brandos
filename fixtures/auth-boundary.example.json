@@ -1,0 +1,31 @@
+{
+  "id": "auth_workspace_object_access",
+  "name": "Workspace Object Access",
+  "status": "draft",
+  "subjects": [
+    "Owner",
+    "Strategist",
+    "Designer",
+    "Operator",
+    "Viewer",
+    "AI Agent"
+  ],
+  "protectedObjects": [
+    "Brand Profile",
+    "Claim",
+    "Decision",
+    "Context Pack",
+    "Review",
+    "Workflow Run"
+  ],
+  "decisions": [
+    "AI Agents can only access explicitly granted context.",
+    "Approval actions require authorized human roles.",
+    "Review records must preserve reviewer identity."
+  ],
+  "constraints": [
+    "Do not give AI Agents admin authority.",
+    "Do not expose cross-workspace objects without explicit grant.",
+    "Do not allow unaudited approval status transitions."
+  ]
+}

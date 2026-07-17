@@ -12,6 +12,10 @@ const requiredFiles = [
   'schemas/service-boundary.schema.json',
   'schemas/api-boundary.schema.json',
   'schemas/data-entity.schema.json',
+  'schemas/event-boundary.schema.json',
+  'schemas/auth-boundary.schema.json',
+  'schemas/integration-boundary.schema.json',
+  'schemas/test-strategy.schema.json',
   'fixtures/service-boundary.example.json',
   'fixtures/services/brand-knowledge-service.json',
   'fixtures/services/workflow-service.json',
@@ -25,6 +29,10 @@ const requiredFiles = [
   'fixtures/apis/workflow-run-api.json',
   'fixtures/apis/design-reference-api.json',
   'fixtures/data-entity.example.json',
+  'fixtures/event-boundary.example.json',
+  'fixtures/auth-boundary.example.json',
+  'fixtures/integration-boundary.example.json',
+  'fixtures/test-strategy.example.json',
   'fixtures/entities/brand-profile.json',
   'fixtures/entities/claim.json',
   'fixtures/entities/context-pack.json',
@@ -51,6 +59,22 @@ const checks = [
   {
     schema: 'schemas/data-entity.schema.json',
     fixture: 'fixtures/data-entity.example.json'
+  },
+  {
+    schema: 'schemas/event-boundary.schema.json',
+    fixture: 'fixtures/event-boundary.example.json'
+  },
+  {
+    schema: 'schemas/auth-boundary.schema.json',
+    fixture: 'fixtures/auth-boundary.example.json'
+  },
+  {
+    schema: 'schemas/integration-boundary.schema.json',
+    fixture: 'fixtures/integration-boundary.example.json'
+  },
+  {
+    schema: 'schemas/test-strategy.schema.json',
+    fixture: 'fixtures/test-strategy.example.json'
   }
 ];
 const serviceFiles = [
@@ -102,6 +126,8 @@ for (const check of checks) {
 const serviceSchema = readJson('schemas/service-boundary.schema.json');
 const apiSchema = readJson('schemas/api-boundary.schema.json');
 const entitySchema = readJson('schemas/data-entity.schema.json');
+const eventSchema = readJson('schemas/event-boundary.schema.json');
+const integrationSchema = readJson('schemas/integration-boundary.schema.json');
 const serviceIds = new Set();
 
 for (const file of serviceFiles) {
@@ -142,6 +168,26 @@ for (const file of entityFiles) {
     process.exit(1);
   }
   entityIds.add(fixture.id);
+}
+
+const eventFixture = readJson('fixtures/event-boundary.example.json');
+validateFixture(eventSchema, eventFixture, 'fixtures/event-boundary.example.json');
+if (!serviceIds.has(eventFixture.producerService)) {
+  console.error(`fixtures/event-boundary.example.json references unknown producerService: ${eventFixture.producerService}`);
+  process.exit(1);
+}
+for (const consumer of eventFixture.consumers) {
+  if (!serviceIds.has(consumer)) {
+    console.error(`fixtures/event-boundary.example.json references unknown consumer service: ${consumer}`);
+    process.exit(1);
+  }
+}
+
+const integrationFixture = readJson('fixtures/integration-boundary.example.json');
+validateFixture(integrationSchema, integrationFixture, 'fixtures/integration-boundary.example.json');
+if (!serviceIds.has(integrationFixture.ownedBy)) {
+  console.error(`fixtures/integration-boundary.example.json references unknown ownedBy service: ${integrationFixture.ownedBy}`);
+  process.exit(1);
 }
 
 console.log('Architecture requirements passed.');

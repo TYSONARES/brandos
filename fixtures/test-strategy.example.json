@@ -1,0 +1,16 @@
+{
+  "id": "test_architecture_contracts",
+  "name": "Architecture Contract Validation",
+  "status": "draft",
+  "scope": "Repository-level architecture schemas, fixtures, and relationship checks.",
+  "requiredChecks": [
+    "Service boundary fixtures match schema.",
+    "API boundaries reference valid service ids.",
+    "Data entities reference valid owner services.",
+    "Release checks pass through check:all."
+  ],
+  "evidence": [
+    "npm run check:architecture",
+    "npm run check:all"
+  ]
+}

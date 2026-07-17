@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/event-boundary.schema.json",
+  "title": "Event Boundary",
+  "type": "object",
+  "required": ["id", "name", "status", "producerService", "consumers", "payload", "constraints"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "deprecated"] },
+    "producerService": { "type": "string" },
+    "consumers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "payload": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

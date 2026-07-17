@@ -23,7 +23,8 @@ Architecture v0.5 defines BrandOS system boundaries before implementation.
 11. `events.md`
 12. `auth.md`
 13. `permissions.md`
-14. `testing.md`
+14. `integrations.md`
+15. `testing.md`
 
 ## Dependencies
 

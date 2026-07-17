@@ -1,11 +1,20 @@
 # Events
 
-## Architecture Baseline
+## Purpose
 
-This document reserves the official architecture location for events.
+Event boundaries define cross-service state notifications before runtime event infrastructure is selected.
 
-## Foundation Constraints
+## Rules
 
-- Do not introduce runtime architecture without a decision record.
-- Keep domain language aligned with product and brand documents.
-- Capture tradeoffs in `docs/decisions/`.
+- Events must name producer service and consumers.
+- Event payloads must preserve traceability.
+- Events must not replace source-of-truth records.
+- Event infrastructure selection is out of scope for v0.5.
+
+## Schema
+
+The draft contract is defined in `schemas/event-boundary.schema.json`.
+
+## Fixture
+
+See `fixtures/event-boundary.example.json`.

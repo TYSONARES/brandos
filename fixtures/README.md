@@ -27,6 +27,10 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `service-boundary.example.json`
 - `api-boundary.example.json`
 - `data-entity.example.json`
+- `event-boundary.example.json`
+- `auth-boundary.example.json`
+- `integration-boundary.example.json`
+- `test-strategy.example.json`
 
 ## Service Boundary Fixtures
 

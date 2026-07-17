@@ -1,11 +1,17 @@
 # Permissions
 
-## Architecture Baseline
+## Purpose
 
-This document reserves the official architecture location for permissions.
+Permission architecture maps Product Core roles to protected objects and status transitions.
 
-## Foundation Constraints
+## Baseline
 
-- Do not introduce runtime architecture without a decision record.
-- Keep domain language aligned with product and brand documents.
-- Capture tradeoffs in `docs/decisions/`.
+- Owners can administer workspace settings and approve strategic decisions.
+- Strategists can draft and propose product knowledge.
+- Designers can read approved context and draft design references.
+- Operators can coordinate workflows and reviews.
+- AI Agents have scoped read/write access defined by Context Packs and Prompt Contracts.
+
+## Rule
+
+Permission checks must protect approval, deprecation, rejection, and cross-workspace access.
