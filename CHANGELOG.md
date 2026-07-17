@@ -12,6 +12,7 @@
 - Added first Product Core use cases for Brand Profile overview and Context Pack readiness.
 - Added Node test coverage for Product Core state and readiness behavior.
 - Added deterministic Studio HTML renderer and render tests.
+- Added static Studio build and build-output validation.
 
 ## 0.6.0 - Infrastructure
 

@@ -15,6 +15,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - Product Core object count from deterministic example state
 - Context Pack readiness from the first domain use-case layer
 - HTML rendering for the initial Studio overview
+- static HTML build output under `dist/studio/index.html`
 - smoke output for CI
 
 ## Rules
