@@ -1,11 +1,20 @@
 import assert from 'node:assert/strict';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 
+import { createBrandOSStudioShell, createStudioShellOptionsFromArgs } from '../../apps/studio/src/app.mjs';
 import {
   createBrowserWorkflowStateAdapterScript,
   DEFAULT_WORKFLOW_ACTION_STATE_KEY
 } from '../../apps/studio/src/browser-state-adapter.mjs';
-import { createBrandOSStudioShell, createStudioShellOptionsFromArgs } from '../../apps/studio/src/app.mjs';
+import {
+  createStudioShellOptionsFromRepositoryState,
+  createWorkflowActionState,
+  readWorkflowActionState,
+  writeWorkflowActionState
+} from '../../apps/studio/src/repository-state-adapter.mjs';
 import { renderStudioHtml } from '../../apps/studio/src/render-html.mjs';
 
 test('Studio HTML render includes shell identity and Product Core summary', () => {
@@ -85,4 +94,25 @@ test('Browser Workflow Action state adapter script exposes storage contract', ()
   assert.match(script, /window.localStorage.setItem/);
   assert.match(script, /data-local-completed-action/);
   assert.match(script, /data-clear-workflow-state/);
+});
+
+test('Repository Workflow Action state adapter stores shell options', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-state-')), 'workflow-state.json');
+  const state = createWorkflowActionState({
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-19'
+  });
+
+  writeWorkflowActionState(statePath, state);
+
+  assert.deepEqual(readWorkflowActionState(statePath), {
+    version: 1,
+    source: 'studio-local',
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-19'
+  });
+  assert.deepEqual(createStudioShellOptionsFromRepositoryState(statePath), {
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-19'
+  });
 });

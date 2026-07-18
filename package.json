@@ -27,6 +27,7 @@
     "check:studio-render": "node scripts/check-studio-render.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:workflows": "node scripts/check-workflows.mjs",
+    "persist:studio-action": "node scripts/persist-studio-action.mjs",
     "render:studio": "node apps/studio/src/app.mjs --html",
     "serve:studio": "node scripts/serve-studio.mjs",
     "smoke:app": "node apps/studio/src/app.mjs --smoke",
