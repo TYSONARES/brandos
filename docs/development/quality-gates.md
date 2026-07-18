@@ -8,6 +8,7 @@ Quality gates define what must pass before development changes are considered re
 
 - `npm run check:all`
 - `npm run check:development`
+- `npm run check:post-v1`
 - `npm test`
 - `npm run render:studio`
 - `npm run check:studio-render`
