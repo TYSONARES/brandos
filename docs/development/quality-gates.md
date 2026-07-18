@@ -10,6 +10,7 @@ Quality gates define what must pass before development changes are considered re
 - `npm run check:development`
 - `npm test`
 - `npm run render:studio`
+- `npm run check:studio-render`
 - `npm run build:studio`
 - `npm run check:studio-build`
 - `npm run smoke:app`
@@ -19,6 +20,7 @@ Quality gates define what must pass before development changes are considered re
 - New runtime areas must add or update a check.
 - Use-case behavior must be covered by Node tests before UI rendering is added.
 - Render output must be deterministic and test-covered before a browser app framework is introduced.
+- Render output must preserve required landmarks and component semantics.
 - Static build output must be generated from source and remain outside committed files.
 - Local preview servers must serve generated output without adding external dependencies.
 - Smoke commands must be fast and deterministic.
