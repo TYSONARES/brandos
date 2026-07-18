@@ -31,6 +31,7 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Render command integration for repository-backed Workflow Action state
 - Inspect and reset commands for repository-backed Workflow Action state
 - Command-output validation for repository-backed Workflow Action state
+- Studio state source panel for browser and repository Workflow Action state
 
 ## Validation
 
@@ -57,9 +58,10 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Studio render commands can load completed Workflow Action state from the local repository state file.
 - Local Workflow Action state can be inspected and reset through package scripts.
 - Local Workflow Action state commands are validated through `check:studio-action-state`.
+- Studio distinguishes example, command, browser, and repository Workflow Action state sources in rendered output.
 - Render checks protect Studio landmarks and component semantics.
 - All repository checks pass.
 
 ## Next Step
 
-Add a Studio state panel that distinguishes browser state from repository state.
+Add visual polish for the Studio Workflow Action state panel.

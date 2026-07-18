@@ -205,6 +205,11 @@ export function renderStudioHtml(shell, options = {}) {
     .local-state {
       margin-top: 12px;
     }
+    .state-source-list {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -291,6 +296,12 @@ export function renderStudioHtml(shell, options = {}) {
         <p class="meta">Owner: ${escapeHtml(shell.contextPackWorkflow.owner)}</p>
         <p class="meta local-state">Saved action: <span data-local-completed-action>${escapeHtml(shell.contextPackWorkflow.completedActionId || 'none')}</span></p>
         <p class="local-state"><button type="button" data-clear-workflow-state>Reset action</button></p>
+        <div class="state-source-list" aria-label="State sources">
+          <p class="meta">Workflow state source: ${escapeHtml(shell.contextPackWorkflow.stateSource)}</p>
+          <p class="meta">Browser state key: ${escapeHtml(shell.contextPackWorkflow.browserStateKey)}</p>
+          <p class="meta">Repository state file: ${escapeHtml(shell.contextPackWorkflow.repositoryStateFile)}</p>
+          <p class="meta">Repository state status: ${escapeHtml(shell.contextPackWorkflow.repositoryStateStatus)}</p>
+        </div>
         <div class="actions">
           <h2>Next action</h2>
           <ul>${actionItems}</ul>

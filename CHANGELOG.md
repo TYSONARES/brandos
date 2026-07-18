@@ -23,6 +23,7 @@
 - Added Studio render command integration for repository-backed Workflow Action state.
 - Added inspect and reset commands for local Studio Workflow Action state.
 - Added command-output validation for local Studio Workflow Action state.
+- Added Studio Workflow Action state source panel.
 
 ## 1.0.0 - Development Ready
 

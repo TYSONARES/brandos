@@ -11,6 +11,7 @@ import { createContractSummary } from '../../../packages/contracts/src/index.mjs
 import { createDesignSystemSummary } from '../../../packages/design-system/src/index.mjs';
 import {
   createStudioShellOptionsFromRepositoryState,
+  describeWorkflowActionState,
   DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH
 } from './repository-state-adapter.mjs';
 import { renderStudioHtml } from './render-html.mjs';
@@ -19,6 +20,7 @@ export function createBrandOSStudioShell(options = {}) {
   const store = createInMemoryProductCoreStore(createExampleProductCoreState());
   const completedWorkflowActionId = options.completedWorkflowActionId || (options.completeWorkflowAction ? 'workflow_action_example_001' : null);
   const completedAt = options.completedAt || '2026-07-18';
+  const workflowStateSource = options.workflowStateSource || (completedWorkflowActionId ? 'command' : 'example');
 
   if (completedWorkflowActionId) {
     completeWorkflowAction(store, completedWorkflowActionId, completedAt);
@@ -31,6 +33,10 @@ export function createBrandOSStudioShell(options = {}) {
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
     actionStatus: contextPackReadiness.nextActions[0]?.status || 'ready',
     completedActionId: completedWorkflowActionId,
+    stateSource: workflowStateSource,
+    browserStateKey: 'brandos.workflow.completedActionId',
+    repositoryStateFile: options.repositoryStateFile || DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH,
+    repositoryStateStatus: options.repositoryStateStatus || 'not-loaded',
     owner: 'operator@example.local',
     nextActions: contextPackReadiness.nextActions
   };
@@ -54,14 +60,18 @@ export function createStudioShellOptionsFromArgs(args) {
   const completedWorkflowActionId = readArgValue(args, '--complete-workflow-action');
   const completedAt = readArgValue(args, '--completed-at');
   const stateFile = readArgValue(args, '--state-file') ?? DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH;
-  const repositoryOptions = args.includes('--ignore-repository-state')
-    ? {}
-    : createStudioShellOptionsFromRepositoryState(stateFile);
+  const repositoryStateIgnored = args.includes('--ignore-repository-state');
+  const repositoryState = repositoryStateIgnored ? { exists: false } : describeWorkflowActionState(stateFile);
+  const repositoryOptions = repositoryState.exists ? createStudioShellOptionsFromRepositoryState(stateFile) : {};
+  const workflowStateSource = completedWorkflowActionId ? 'command' : repositoryState.exists ? 'repository' : 'example';
 
   return {
     ...repositoryOptions,
     ...(completedWorkflowActionId ? { completedWorkflowActionId } : {}),
-    ...(completedAt ? { completedAt } : {})
+    ...(completedAt ? { completedAt } : {}),
+    workflowStateSource,
+    repositoryStateFile: stateFile,
+    repositoryStateStatus: repositoryStateIgnored ? 'ignored' : repositoryState.exists ? 'loaded' : 'not-found'
   };
 }
 

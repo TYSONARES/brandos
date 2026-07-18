@@ -55,3 +55,4 @@ developer previews.
 Studio render commands can load that local state automatically unless an explicit Workflow Action command is provided.
 Developer commands can inspect or reset that local state without touching committed product fixtures.
 The local state command output is validated as part of the Studio quality gate.
+Studio renders the active Workflow Action state source, browser state key, repository state file, and repository state status.

@@ -43,6 +43,11 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /workflow-action-row/);
   assert.match(html, /Owner: operator@example.local - Target: review_example_001/);
   assert.match(html, /Saved action: <span data-local-completed-action>none<\/span>/);
+  assert.match(html, /aria-label="State sources"/);
+  assert.match(html, /Workflow state source: example/);
+  assert.match(html, /Browser state key: brandos.workflow.completedActionId/);
+  assert.match(html, /Repository state file: .tmp\/studio-workflow-state.json/);
+  assert.match(html, /Repository state status: not-loaded/);
   assert.match(html, /data-clear-workflow-state/);
   assert.match(html, /brandos.workflow.completedActionId/);
   assert.match(html, /action="ready.html"/);
@@ -65,6 +70,7 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Current step: ready-for-use/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /Completed action: workflow_action_example_001/);
+  assert.match(html, /Workflow state source: command/);
   assert.match(html, /Saved action: <span data-local-completed-action>workflow_action_example_001<\/span>/);
   assert.match(html, /action-status-badge action-status-ready/);
   assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);
@@ -73,16 +79,23 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-command-')), 'missing-state.json');
+
   assert.deepEqual(
     createStudioShellOptionsFromArgs([
       '--html',
+      '--state-file',
+      statePath,
       '--complete-workflow-action=workflow_action_example_001',
       '--completed-at',
       '2026-07-19'
     ]),
     {
       completedWorkflowActionId: 'workflow_action_example_001',
-      completedAt: '2026-07-19'
+      completedAt: '2026-07-19',
+      workflowStateSource: 'command',
+      repositoryStateFile: statePath,
+      repositoryStateStatus: 'not-found'
     }
   );
 });
@@ -99,7 +112,10 @@ test('Studio shell options load completed Workflow Action from repository state'
 
   assert.deepEqual(createStudioShellOptionsFromArgs(['--html', '--state-file', statePath]), {
     completedWorkflowActionId: 'workflow_action_example_001',
-    completedAt: '2026-07-20'
+    completedAt: '2026-07-20',
+    workflowStateSource: 'repository',
+    repositoryStateFile: statePath,
+    repositoryStateStatus: 'loaded'
   });
 });
 
@@ -125,9 +141,29 @@ test('Explicit Studio shell command args override repository state', () => {
     ]),
     {
       completedWorkflowActionId: 'workflow_action_example_001',
-      completedAt: '2026-07-21'
+      completedAt: '2026-07-21',
+      workflowStateSource: 'command',
+      repositoryStateFile: statePath,
+      repositoryStateStatus: 'loaded'
     }
   );
+});
+
+test('Studio shell options can ignore repository state', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-ignore-')), 'workflow-state.json');
+  writeWorkflowActionState(
+    statePath,
+    createWorkflowActionState({
+      completedWorkflowActionId: 'workflow_action_example_001',
+      completedAt: '2026-07-20'
+    })
+  );
+
+  assert.deepEqual(createStudioShellOptionsFromArgs(['--html', '--state-file', statePath, '--ignore-repository-state']), {
+    workflowStateSource: 'example',
+    repositoryStateFile: statePath,
+    repositoryStateStatus: 'ignored'
+  });
 });
 
 test('Browser Workflow Action state adapter script exposes storage contract', () => {
