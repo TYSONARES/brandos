@@ -26,6 +26,7 @@
 - Added Studio Workflow Action state source panel.
 - Added compact visual treatment for Studio Workflow Action state sources.
 - Added Workflow Action State Panel component fixture.
+- Added post-v1 Workflow Actions release notes.
 
 ## 1.0.0 - Development Ready
 

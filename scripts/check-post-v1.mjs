@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 
 const required = [
   'docs/development/iteration-post-v1-workflow-actions.md',
+  'docs/development/release-post-v1-workflow-actions.md',
   'docs/product/workflow-action.md',
   'schemas/workflow-action.schema.json',
   'fixtures/workflow-action.example.json',

@@ -19,6 +19,7 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 7. `quality-gates.md`
 8. `release-v1.0.0.md`
 9. `iteration-post-v1-workflow-actions.md`
+10. `release-post-v1-workflow-actions.md`
 
 ## Dependency
 
