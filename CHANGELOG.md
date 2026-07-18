@@ -4,6 +4,7 @@
 
 - Added Context Pack readiness next actions to domain and Studio render output.
 - Split Studio output into Brand overview and Context Pack workflow panels.
+- Added action status to Context Pack workflow next actions.
 
 ## 1.0.0 - Development Ready
 

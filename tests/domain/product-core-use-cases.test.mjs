@@ -45,6 +45,7 @@ test('Context Pack readiness reports blocking review state', () => {
   assert.deepEqual(readiness.nextActions, [
     {
       type: 'review-resolution',
+      status: 'pending',
       targetId: 'review_example_001',
       label: 'Resolve review feedback for context_pack_example_001'
     }
@@ -64,5 +65,12 @@ test('Context Pack readiness passes when claims, decisions, and reviews are clea
 
   assert.equal(readiness.ready, true);
   assert.deepEqual(readiness.blockingReasons, []);
-  assert.deepEqual(readiness.nextActions, []);
+  assert.deepEqual(readiness.nextActions, [
+    {
+      type: 'context-pack-release',
+      status: 'ready',
+      targetId: 'context_pack_example_001',
+      label: 'Use context pack context_pack_example_001'
+    }
+  ]);
 });

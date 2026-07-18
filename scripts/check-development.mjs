@@ -99,5 +99,9 @@ if (readiness.ready !== false || readiness.blockingReasons.length !== 1 || readi
   console.error('Context Pack readiness did not detect the expected blocking review.');
   process.exit(1);
 }
+if (readiness.nextActions[0].status !== 'pending') {
+  console.error('Context Pack readiness did not expose the expected pending action status.');
+  process.exit(1);
+}
 
 console.log('Development readiness requirements passed.');

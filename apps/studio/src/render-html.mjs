@@ -4,7 +4,7 @@ export function renderStudioHtml(shell) {
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
     .join('');
   const actionItems = shell.contextPackWorkflow.nextActions
-    .map((action) => `<li>${escapeHtml(action.label)}</li>`)
+    .map((action) => `<li><strong>${escapeHtml(action.status)}</strong>: ${escapeHtml(action.label)}</li>`)
     .join('');
 
   return `<!doctype html>
@@ -167,6 +167,7 @@ export function renderStudioHtml(shell) {
       <article class="panel">
         <h2>${escapeHtml(shell.contextPackWorkflow.title)}</h2>
         <p class="meta">Current step: ${escapeHtml(shell.contextPackWorkflow.currentStep)}</p>
+        <p class="meta">Action status: ${escapeHtml(shell.contextPackWorkflow.actionStatus)}</p>
         <p class="meta">Owner: ${escapeHtml(shell.contextPackWorkflow.owner)}</p>
         <div class="actions">
           <h2>Next action</h2>

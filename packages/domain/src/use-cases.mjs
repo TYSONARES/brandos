@@ -37,11 +37,12 @@ export function evaluateContextPackReadiness(store, contextPackId) {
       .filter((review) => review.status === 'changes-needed' || review.status === 'rejected')
       .map((review) => `Review is blocking release: ${review.id}`)
   ];
-  const nextActions = [
+  const blockingActions = [
     ...claims
       .filter((claim) => claim.status !== 'supported' && claim.status !== 'approved')
       .map((claim) => ({
         type: 'claim-review',
+        status: 'blocked',
         targetId: claim.id,
         label: `Verify or remove claim ${claim.id}`
       })),
@@ -49,6 +50,7 @@ export function evaluateContextPackReadiness(store, contextPackId) {
       .filter((decision) => decision.status !== 'accepted')
       .map((decision) => ({
         type: 'decision-approval',
+        status: 'blocked',
         targetId: decision.id,
         label: `Accept or remove decision ${decision.id}`
       })),
@@ -56,10 +58,21 @@ export function evaluateContextPackReadiness(store, contextPackId) {
       .filter((review) => review.status === 'changes-needed' || review.status === 'rejected')
       .map((review) => ({
         type: 'review-resolution',
+        status: 'pending',
         targetId: review.id,
         label: `Resolve review feedback for ${review.targetObjectId}`
       }))
   ];
+  const nextActions = blockingActions.length
+    ? blockingActions
+    : [
+        {
+          type: 'context-pack-release',
+          status: 'ready',
+          targetId: contextPack.id,
+          label: `Use context pack ${contextPack.id}`
+        }
+      ];
 
   return {
     id: contextPack.id,

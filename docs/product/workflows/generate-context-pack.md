@@ -47,3 +47,4 @@ Draft or approved Context Pack.
 ## Runtime Behavior
 
 The Studio readiness flow reports blocking reasons and next actions for claims, decisions, and reviews.
+Next actions expose a status so workflow panels can distinguish pending, blocked, and ready states.

@@ -18,6 +18,7 @@ export function createBrandOSStudioShell() {
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
+    actionStatus: contextPackReadiness.nextActions[0]?.status || 'ready',
     owner: 'operator@example.local',
     nextActions: contextPackReadiness.nextActions
   };
