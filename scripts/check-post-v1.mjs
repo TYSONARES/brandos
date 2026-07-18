@@ -9,7 +9,9 @@ const required = [
   'fixtures/components/workflow-action-row.json',
   'apps/studio/src/browser-state-adapter.mjs',
   'apps/studio/src/repository-state-adapter.mjs',
+  'scripts/inspect-studio-action.mjs',
   'scripts/persist-studio-action.mjs',
+  'scripts/reset-studio-action.mjs',
   'scripts/check-studio-render.mjs'
 ];
 

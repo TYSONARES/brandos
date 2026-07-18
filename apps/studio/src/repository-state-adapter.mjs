@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 export const DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH = '.tmp/studio-workflow-state.json';
@@ -25,6 +25,34 @@ export function readWorkflowActionState(filePath) {
   }
 
   return JSON.parse(readFileSync(filePath, 'utf8'));
+}
+
+export function describeWorkflowActionState(filePath) {
+  const state = readWorkflowActionState(filePath);
+  if (!state) {
+    return {
+      exists: false,
+      filePath,
+      completedWorkflowActionId: null,
+      completedAt: null
+    };
+  }
+
+  return {
+    exists: true,
+    filePath,
+    completedWorkflowActionId: state.completedWorkflowActionId ?? null,
+    completedAt: state.completedAt ?? null
+  };
+}
+
+export function resetWorkflowActionState(filePath) {
+  if (!existsSync(filePath)) {
+    return false;
+  }
+
+  unlinkSync(filePath);
+  return true;
 }
 
 export function createStudioShellOptionsFromRepositoryState(filePath) {

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync } from 'node:fs';
+import { existsSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -12,7 +12,9 @@ import {
 import {
   createStudioShellOptionsFromRepositoryState,
   createWorkflowActionState,
+  describeWorkflowActionState,
   readWorkflowActionState,
+  resetWorkflowActionState,
   writeWorkflowActionState
 } from '../../apps/studio/src/repository-state-adapter.mjs';
 import { renderStudioHtml } from '../../apps/studio/src/render-html.mjs';
@@ -157,5 +159,32 @@ test('Repository Workflow Action state adapter stores shell options', () => {
   assert.deepEqual(createStudioShellOptionsFromRepositoryState(statePath), {
     completedWorkflowActionId: 'workflow_action_example_001',
     completedAt: '2026-07-19'
+  });
+});
+
+test('Repository Workflow Action state adapter describes and resets state', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-reset-')), 'workflow-state.json');
+  writeWorkflowActionState(
+    statePath,
+    createWorkflowActionState({
+      completedWorkflowActionId: 'workflow_action_example_001',
+      completedAt: '2026-07-22'
+    })
+  );
+
+  assert.deepEqual(describeWorkflowActionState(statePath), {
+    exists: true,
+    filePath: statePath,
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-22'
+  });
+  assert.equal(resetWorkflowActionState(statePath), true);
+  assert.equal(existsSync(statePath), false);
+  assert.equal(resetWorkflowActionState(statePath), false);
+  assert.deepEqual(describeWorkflowActionState(statePath), {
+    exists: false,
+    filePath: statePath,
+    completedWorkflowActionId: null,
+    completedAt: null
   });
 });
