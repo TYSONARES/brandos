@@ -1,68 +1,35 @@
-import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import {
+  createStudioShellOptionsFromStudioState,
+  createStudioState,
+  DEFAULT_STUDIO_STATE_PATH,
+  describeStudioState,
+  readStudioState,
+  resetStudioState,
+  writeStudioState
+} from './studio-state-adapter.mjs';
 
-export const DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH = '.tmp/studio-workflow-state.json';
+export const DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH = DEFAULT_STUDIO_STATE_PATH;
 
 export function createWorkflowActionState(options) {
-  return {
-    version: 1,
-    source: 'studio-local',
-    completedWorkflowActionId: options.completedWorkflowActionId,
-    completedAt: options.completedAt ?? '2026-07-18'
-  };
+  return createStudioState(options);
 }
 
 export function writeWorkflowActionState(filePath, state) {
-  mkdirSync(dirname(filePath), { recursive: true });
-  writeFileSync(filePath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
-
-  return state;
+  return writeStudioState(filePath, state);
 }
 
 export function readWorkflowActionState(filePath) {
-  if (!existsSync(filePath)) {
-    return null;
-  }
-
-  return JSON.parse(readFileSync(filePath, 'utf8'));
+  return readStudioState(filePath);
 }
 
 export function describeWorkflowActionState(filePath) {
-  const state = readWorkflowActionState(filePath);
-  if (!state) {
-    return {
-      exists: false,
-      filePath,
-      completedWorkflowActionId: null,
-      completedAt: null
-    };
-  }
-
-  return {
-    exists: true,
-    filePath,
-    completedWorkflowActionId: state.completedWorkflowActionId ?? null,
-    completedAt: state.completedAt ?? null
-  };
+  return describeStudioState(filePath);
 }
 
 export function resetWorkflowActionState(filePath) {
-  if (!existsSync(filePath)) {
-    return false;
-  }
-
-  unlinkSync(filePath);
-  return true;
+  return resetStudioState(filePath);
 }
 
 export function createStudioShellOptionsFromRepositoryState(filePath) {
-  const state = readWorkflowActionState(filePath);
-  if (!state?.completedWorkflowActionId) {
-    return {};
-  }
-
-  return {
-    completedWorkflowActionId: state.completedWorkflowActionId,
-    completedAt: state.completedAt
-  };
+  return createStudioShellOptionsFromStudioState(filePath);
 }

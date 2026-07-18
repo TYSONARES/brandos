@@ -28,6 +28,7 @@
 - Added Workflow Action State Panel component fixture.
 - Added post-v1 Workflow Actions release notes.
 - Added post-v1 Workflow Actions closure checklist.
+- Added durable Studio state adapter package start.
 
 ## 1.0.0 - Development Ready
 

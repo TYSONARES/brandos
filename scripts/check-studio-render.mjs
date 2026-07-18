@@ -22,7 +22,7 @@ const requiredSnippets = [
   'class="state-source-badge state-source-example"',
   'Workflow state source: <span class="state-source-badge state-source-example">example</span>',
   'Browser state key: brandos.workflow.completedActionId',
-  'Repository state file: .tmp/studio-workflow-state.json',
+  'Repository state file: .tmp/studio-state.json',
   'Repository state status: not-loaded',
   'data-clear-workflow-state',
   'brandos.workflow.completedActionId',

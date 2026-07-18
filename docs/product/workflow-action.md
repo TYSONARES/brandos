@@ -50,8 +50,8 @@ Static Studio preview stores the completed action id in browser state so the com
 across local navigation without adding a backend.
 The browser state behavior is isolated in a Studio adapter so future repository-backed persistence can replace it
 without changing the Workflow Action product contract.
-The local repository adapter can serialize completed Workflow Action state under ignored `.tmp/` output for
-developer previews.
+The local repository adapter can serialize completed Workflow Action state inside durable `.tmp/studio-state.json`
+output for developer previews.
 Studio render commands can load that local state automatically unless an explicit Workflow Action command is provided.
 Developer commands can inspect or reset that local state without touching committed product fixtures.
 The local state command output is validated as part of the Studio quality gate.

@@ -15,13 +15,14 @@ Local setup defines how contributors start working on BrandOS without relying on
 
 - `npm run check:all` validates the repository contract.
 - `npm run check:studio-action-state` validates local Workflow Action state command output.
+- `npm run check:studio-state` validates the durable Studio state adapter.
 - `npm run smoke:app` runs the first app shell smoke test.
 - `npm run build:studio` generates blocked and ready local Studio HTML builds.
 - `npm run render:studio -- --complete-workflow-action=workflow_action_example_001` renders the ready shell from a Workflow Action command.
 - `npm run persist:studio-action -- --complete-workflow-action=workflow_action_example_001` stores local Studio Workflow Action state under `.tmp/`.
 - `npm run inspect:studio-action` prints the local Studio Workflow Action state.
 - `npm run reset:studio-action` clears the local Studio Workflow Action state.
-- `npm run render:studio` reads `.tmp/studio-workflow-state.json` when present; pass `-- --ignore-repository-state` for the default blocked shell.
+- `npm run render:studio` reads `.tmp/studio-state.json` when present; pass `-- --ignore-repository-state` for the default blocked shell.
 - `npm run serve:studio` serves the generated Studio build at `http://localhost:4173`.
 
 ## Environment
@@ -32,7 +33,7 @@ The baseline implementation must run without required environment variables. Opt
 
 Studio build output is generated under `dist/studio/index.html` and `dist/studio/ready.html`. The generated pages include workflow scenario navigation so blocked and ready states can be compared during local QA. The `dist/` directory is local build output and is not committed.
 The generated preview stores completed Workflow Action ids in browser state only; it does not write repository files.
-Repository-backed local Workflow Action state is written under `.tmp/studio-workflow-state.json`, which is ignored by git.
+Repository-backed local Workflow Action state is written under `.tmp/studio-state.json`, which is ignored by git.
 Explicit `--complete-workflow-action` render arguments override repository-backed local state.
 
 ## Local Preview

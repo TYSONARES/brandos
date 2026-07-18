@@ -23,6 +23,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - browser-backed saved action state for static Studio preview
 - isolated browser state adapter for Workflow Action preview state
 - repository-backed local Workflow Action state adapter
+- versioned durable Studio state adapter
 - render command integration for repository-backed Workflow Action state
 - inspect and reset commands for local Workflow Action state
 - command-output validation for local Workflow Action state

@@ -4,6 +4,7 @@ const required = [
   'docs/development/iteration-post-v1-workflow-actions.md',
   'docs/development/release-post-v1-workflow-actions.md',
   'docs/development/closure-post-v1-workflow-actions.md',
+  'docs/development/iteration-post-v1-durable-studio-state.md',
   'docs/product/workflow-action.md',
   'schemas/workflow-action.schema.json',
   'fixtures/workflow-action.example.json',
@@ -12,10 +13,12 @@ const required = [
   'fixtures/components/workflow-action-state-panel.json',
   'apps/studio/src/browser-state-adapter.mjs',
   'apps/studio/src/repository-state-adapter.mjs',
+  'apps/studio/src/studio-state-adapter.mjs',
   'scripts/inspect-studio-action.mjs',
   'scripts/persist-studio-action.mjs',
   'scripts/reset-studio-action.mjs',
   'scripts/check-studio-action-state.mjs',
+  'scripts/check-studio-state.mjs',
   'scripts/check-studio-render.mjs'
 ];
 

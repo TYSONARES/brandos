@@ -17,6 +17,14 @@ import {
   resetWorkflowActionState,
   writeWorkflowActionState
 } from '../../apps/studio/src/repository-state-adapter.mjs';
+import {
+  completeStudioWorkflowAction,
+  createEmptyStudioState,
+  createStudioShellOptionsFromStudioState,
+  createStudioState,
+  DEFAULT_STUDIO_STATE_PATH,
+  STUDIO_STATE_VERSION
+} from '../../apps/studio/src/studio-state-adapter.mjs';
 import { renderStudioHtml } from '../../apps/studio/src/render-html.mjs';
 
 test('Studio HTML render includes shell identity and Product Core summary', () => {
@@ -48,7 +56,7 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /state-source-badge state-source-example/);
   assert.match(html, /Workflow state source: <span class="state-source-badge state-source-example">example<\/span>/);
   assert.match(html, /Browser state key: brandos.workflow.completedActionId/);
-  assert.match(html, /Repository state file: .tmp\/studio-workflow-state.json/);
+  assert.match(html, /Repository state file: .tmp\/studio-state.json/);
   assert.match(html, /Repository state status: not-loaded/);
   assert.match(html, /data-clear-workflow-state/);
   assert.match(html, /brandos.workflow.completedActionId/);
@@ -189,10 +197,17 @@ test('Repository Workflow Action state adapter stores shell options', () => {
   writeWorkflowActionState(statePath, state);
 
   assert.deepEqual(readWorkflowActionState(statePath), {
-    version: 1,
+    version: STUDIO_STATE_VERSION,
     source: 'studio-local',
-    completedWorkflowActionId: 'workflow_action_example_001',
-    completedAt: '2026-07-19'
+    updatedAt: '2026-07-19',
+    workflows: {
+      completedActionIds: ['workflow_action_example_001'],
+      completedActions: {
+        workflow_action_example_001: {
+          completedAt: '2026-07-19'
+        }
+      }
+    }
   });
   assert.deepEqual(createStudioShellOptionsFromRepositoryState(statePath), {
     completedWorkflowActionId: 'workflow_action_example_001',
@@ -213,8 +228,10 @@ test('Repository Workflow Action state adapter describes and resets state', () =
   assert.deepEqual(describeWorkflowActionState(statePath), {
     exists: true,
     filePath: statePath,
+    version: STUDIO_STATE_VERSION,
     completedWorkflowActionId: 'workflow_action_example_001',
-    completedAt: '2026-07-22'
+    completedAt: '2026-07-22',
+    completedWorkflowActionIds: ['workflow_action_example_001']
   });
   assert.equal(resetWorkflowActionState(statePath), true);
   assert.equal(existsSync(statePath), false);
@@ -222,7 +239,48 @@ test('Repository Workflow Action state adapter describes and resets state', () =
   assert.deepEqual(describeWorkflowActionState(statePath), {
     exists: false,
     filePath: statePath,
+    version: null,
     completedWorkflowActionId: null,
-    completedAt: null
+    completedAt: null,
+    completedWorkflowActionIds: []
   });
+});
+
+test('Studio state adapter tracks multiple completed Workflow Actions durably', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-durable-')), 'studio-state.json');
+  const state = completeStudioWorkflowAction(createStudioState({
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-19'
+  }), {
+    actionId: 'workflow_action_example_002',
+    completedAt: '2026-07-20'
+  });
+
+  writeWorkflowActionState(statePath, state);
+
+  assert.deepEqual(describeWorkflowActionState(statePath), {
+    exists: true,
+    filePath: statePath,
+    version: STUDIO_STATE_VERSION,
+    completedWorkflowActionId: 'workflow_action_example_002',
+    completedAt: '2026-07-20',
+    completedWorkflowActionIds: ['workflow_action_example_001', 'workflow_action_example_002']
+  });
+  assert.deepEqual(createStudioShellOptionsFromStudioState(statePath), {
+    completedWorkflowActionId: 'workflow_action_example_002',
+    completedAt: '2026-07-20'
+  });
+});
+
+test('Studio state adapter exposes an empty durable state contract', () => {
+  assert.deepEqual(createEmptyStudioState(), {
+    version: STUDIO_STATE_VERSION,
+    source: 'studio-local',
+    updatedAt: '2026-07-18',
+    workflows: {
+      completedActionIds: [],
+      completedActions: {}
+    }
+  });
+  assert.equal(DEFAULT_STUDIO_STATE_PATH, '.tmp/studio-state.json');
 });
