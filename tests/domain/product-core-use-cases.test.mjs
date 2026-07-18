@@ -18,12 +18,13 @@ test('example Product Core state contains one object for each runtime model', ()
   const summary = summarizeProductCoreState(store);
 
   assert.equal(summary.workspaceCount, 1);
-  assert.equal(summary.objectCount, 6);
+  assert.equal(summary.objectCount, 7);
   assert.equal(summary.modelCounts['brand-profile'], 1);
   assert.equal(summary.modelCounts.claim, 1);
   assert.equal(summary.modelCounts.decision, 1);
   assert.equal(summary.modelCounts.review, 1);
   assert.equal(summary.modelCounts['workflow-run'], 1);
+  assert.equal(summary.modelCounts['workflow-action'], 1);
   assert.equal(summary.modelCounts['context-pack'], 1);
 });
 
@@ -41,6 +42,7 @@ test('Context Pack readiness reports blocking review state', () => {
   const readiness = evaluateContextPackReadiness(createExampleStore(), 'context_pack_example_001');
 
   assert.equal(readiness.ready, false);
+  assert.equal(readiness.actionCount, 1);
   assert.deepEqual(readiness.blockingReasons, ['Review is blocking release: review_example_001']);
   assert.deepEqual(readiness.nextActions, [
     {

@@ -106,12 +106,25 @@ export function createExampleProductCoreState() {
     reviewedAt: '2026-07-17'
   };
 
+  const workflowAction = {
+    id: 'workflow_action_example_001',
+    workspaceId,
+    workflowRunId: 'workflow_run_example_001',
+    type: 'review-resolution',
+    status: 'pending',
+    targetObjectId: 'review_example_001',
+    label: 'Resolve review feedback for context_pack_example_001',
+    owner: 'operator@example.local',
+    createdAt: '2026-07-18'
+  };
+
   return {
     'brand-profile': [brandProfile],
     claim: [claim],
     decision: [decision],
     review: [review],
     'workflow-run': [workflowRun],
+    'workflow-action': [workflowAction],
     'context-pack': [contextPack]
   };
 }

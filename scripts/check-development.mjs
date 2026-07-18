@@ -47,7 +47,7 @@ if (missing.length) {
   process.exit(1);
 }
 
-const expectedProductCoreModels = ['brand-profile', 'claim', 'decision', 'review', 'workflow-run', 'context-pack'];
+const expectedProductCoreModels = ['brand-profile', 'claim', 'decision', 'review', 'workflow-run', 'workflow-action', 'context-pack'];
 const models = listProductCoreModels();
 const modelIds = models.map((model) => model.id);
 

@@ -64,6 +64,14 @@ export const productCoreModels = [
     statuses: ['queued', 'active', 'blocked', 'complete']
   },
   {
+    id: 'workflow-action',
+    name: 'Workflow Action',
+    schema: 'schemas/workflow-action.schema.json',
+    fixture: 'fixtures/workflow-action.example.json',
+    requiredFields: ['id', 'workspaceId', 'workflowRunId', 'type', 'status', 'targetObjectId', 'label', 'owner', 'createdAt'],
+    statuses: ['pending', 'blocked', 'ready', 'complete']
+  },
+  {
     id: 'context-pack',
     name: 'Context Pack',
     schema: 'schemas/context-pack.schema.json',

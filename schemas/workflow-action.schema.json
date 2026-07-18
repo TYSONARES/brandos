@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/workflow-action.schema.json",
+  "title": "Workflow Action",
+  "type": "object",
+  "required": ["id", "workspaceId", "workflowRunId", "type", "status", "targetObjectId", "label", "owner", "createdAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "workflowRunId": { "type": "string" },
+    "type": { "enum": ["claim-review", "decision-approval", "review-resolution", "context-pack-release"] },
+    "status": { "enum": ["pending", "blocked", "ready", "complete"] },
+    "targetObjectId": { "type": "string" },
+    "label": { "type": "string" },
+    "owner": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "completedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

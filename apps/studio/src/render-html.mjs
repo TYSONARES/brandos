@@ -162,6 +162,7 @@ export function renderStudioHtml(shell) {
         <p class="meta">Included claims: ${shell.contextPackReadiness.supportedClaimCount}/${shell.contextPackReadiness.includedClaimCount} supported</p>
         <p class="meta">Accepted decisions: ${shell.contextPackReadiness.acceptedDecisionCount}</p>
         <p class="meta">Reviews: ${shell.contextPackReadiness.reviewCount}</p>
+        <p class="meta">Actions: ${shell.contextPackReadiness.actionCount}</p>
         <ul>${blockingItems}</ul>
       </article>
       <article class="panel">

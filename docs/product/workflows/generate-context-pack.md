@@ -48,3 +48,4 @@ Draft or approved Context Pack.
 
 The Studio readiness flow reports blocking reasons and next actions for claims, decisions, and reviews.
 Next actions expose a status so workflow panels can distinguish pending, blocked, and ready states.
+Workflow actions are represented by `schemas/workflow-action.schema.json`.

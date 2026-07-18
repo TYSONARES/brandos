@@ -25,6 +25,9 @@ export function evaluateContextPackReadiness(store, contextPackId) {
   const reviews = store
     .list('review')
     .filter((review) => review.targetObjectType === 'context-pack' && review.targetObjectId === contextPack.id);
+  const workflowActions = store
+    .list('workflow-action')
+    .filter((action) => action.targetObjectId === contextPack.id || reviews.some((review) => review.id === action.targetObjectId));
 
   const blockingReasons = [
     ...claims
@@ -56,12 +59,15 @@ export function evaluateContextPackReadiness(store, contextPackId) {
       })),
     ...reviews
       .filter((review) => review.status === 'changes-needed' || review.status === 'rejected')
-      .map((review) => ({
-        type: 'review-resolution',
-        status: 'pending',
-        targetId: review.id,
-        label: `Resolve review feedback for ${review.targetObjectId}`
-      }))
+      .map((review) => {
+        const action = workflowActions.find((item) => item.targetObjectId === review.id);
+        return {
+          type: action?.type || 'review-resolution',
+          status: action?.status || 'pending',
+          targetId: review.id,
+          label: action?.label || `Resolve review feedback for ${review.targetObjectId}`
+        };
+      })
   ];
   const nextActions = blockingActions.length
     ? blockingActions
@@ -82,6 +88,7 @@ export function evaluateContextPackReadiness(store, contextPackId) {
     supportedClaimCount: claims.filter((claim) => claim.status === 'supported' || claim.status === 'approved').length,
     acceptedDecisionCount: decisions.filter((decision) => decision.status === 'accepted').length,
     reviewCount: reviews.length,
+    actionCount: workflowActions.length,
     ready: blockingReasons.length === 0,
     blockingReasons,
     nextActions
