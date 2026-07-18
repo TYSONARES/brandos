@@ -23,6 +23,7 @@ named domains, object contracts, fixtures, workflow specs, permissions, status r
 - Context Pack model
 - Review model
 - Workflow Run model
+- Workflow Action model
 - Detailed workflow specs
 - JSON Schema drafts
 - Example fixtures
@@ -32,7 +33,7 @@ named domains, object contracts, fixtures, workflow specs, permissions, status r
 
 - [x] Core domains are named and bounded.
 - [x] Product objects have responsibilities and relationship rules.
-- [x] Brand Profile, Claim, Source, Decision, Context Pack, Review, and Workflow Run have schemas.
+- [x] Brand Profile, Claim, Source, Decision, Context Pack, Review, Workflow Run, and Workflow Action have schemas.
 - [x] Fixtures exist for core product objects.
 - [x] Workflow specs define trigger, inputs, steps, outputs, acceptance criteria, and failure states.
 - [x] Product docs no longer depend on chat-only context.
