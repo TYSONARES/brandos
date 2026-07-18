@@ -25,6 +25,7 @@
 - Added command-output validation for local Studio Workflow Action state.
 - Added Studio Workflow Action state source panel.
 - Added compact visual treatment for Studio Workflow Action state sources.
+- Added Workflow Action State Panel component fixture.
 
 ## 1.0.0 - Development Ready
 

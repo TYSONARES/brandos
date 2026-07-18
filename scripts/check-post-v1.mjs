@@ -7,6 +7,7 @@ const required = [
   'fixtures/workflow-action.example.json',
   'fixtures/components/action-status-badge.json',
   'fixtures/components/workflow-action-row.json',
+  'fixtures/components/workflow-action-state-panel.json',
   'apps/studio/src/browser-state-adapter.mjs',
   'apps/studio/src/repository-state-adapter.mjs',
   'scripts/inspect-studio-action.mjs',

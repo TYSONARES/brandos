@@ -57,3 +57,4 @@ Developer commands can inspect or reset that local state without touching commit
 The local state command output is validated as part of the Studio quality gate.
 Studio renders the active Workflow Action state source, browser state key, repository state file, and repository state status.
 The active source is shown as compact visible text so users can distinguish generated, command, and repository state.
+The state panel is represented as a design component fixture for reuse in later Studio UI work.

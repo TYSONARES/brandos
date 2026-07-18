@@ -1,0 +1,30 @@
+{
+  "id": "component_workflow_action_state_panel",
+  "name": "Workflow Action State Panel",
+  "status": "draft",
+  "purpose": "Shows the active Workflow Action state source, browser state key, repository state file, and repository state status.",
+  "productObjects": [
+    "workflow-action",
+    "workflow-run"
+  ],
+  "states": [
+    "example",
+    "command",
+    "repository",
+    "ignored"
+  ],
+  "accessibility": [
+    "Expose the active state source as visible text.",
+    "Keep browser and repository state details readable without relying on color.",
+    "Allow long repository state paths to wrap without clipping."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

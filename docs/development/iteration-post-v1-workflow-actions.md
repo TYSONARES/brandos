@@ -33,12 +33,14 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Command-output validation for repository-backed Workflow Action state
 - Studio state source panel for browser and repository Workflow Action state
 - Compact state source rows and source badge in Studio
+- Workflow Action State Panel component fixture
 
 ## Validation
 
 - `npm run check:release`
 - `npm run check:fixtures`
 - `npm run check:components`
+- `npm run check:post-v1`
 - `npm run check:studio-render`
 - `npm test`
 - `npm run check:all`
@@ -61,9 +63,10 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Local Workflow Action state commands are validated through `check:studio-action-state`.
 - Studio distinguishes example, command, browser, and repository Workflow Action state sources in rendered output.
 - State source details are rendered as compact rows with a visible source badge.
+- Workflow Action State Panel is represented in design component fixtures.
 - Render checks protect Studio landmarks and component semantics.
 - All repository checks pass.
 
 ## Next Step
 
-Add component fixture coverage for the Studio Workflow Action state panel.
+Add release notes for the post-v1 Workflow Actions package.

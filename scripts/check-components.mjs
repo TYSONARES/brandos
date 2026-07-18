@@ -9,7 +9,8 @@ const componentFiles = [
   'fixtures/components/review-panel.json',
   'fixtures/components/workflow-stepper.json',
   'fixtures/components/action-status-badge.json',
-  'fixtures/components/workflow-action-row.json'
+  'fixtures/components/workflow-action-row.json',
+  'fixtures/components/workflow-action-state-panel.json'
 ];
 const tokenFiles = [
   'fixtures/tokens/color.json',

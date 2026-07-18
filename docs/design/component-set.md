@@ -14,6 +14,7 @@ The v0.3 component set defines the first reusable interface units for Product Co
 - `fixtures/components/workflow-stepper.json`
 - `fixtures/components/action-status-badge.json`
 - `fixtures/components/workflow-action-row.json`
+- `fixtures/components/workflow-action-state-panel.json`
 
 ## Rules
 
@@ -32,3 +33,4 @@ The v0.3 component set defines the first reusable interface units for Product Co
 - Workflow Stepper
 - Action Status Badge
 - Workflow Action Row
+- Workflow Action State Panel
