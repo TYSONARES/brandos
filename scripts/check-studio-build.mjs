@@ -12,6 +12,8 @@ const checks = [
       'Product Core objects',
       'Context readiness',
       'Action status: pending',
+      'name="actionId" value="workflow_action_example_001"',
+      'Complete action',
       'Review is blocking release: review_example_001'
     ]
   },
@@ -26,6 +28,8 @@ const checks = [
       'Context readiness',
       'Current step: ready-for-use',
       'Action status: ready',
+      'Owner: operator@example.local - Target: context_pack_example_001',
+      'Use context pack',
       'Use context pack context_pack_example_001'
     ]
   }

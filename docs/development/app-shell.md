@@ -18,6 +18,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - separated Brand overview and Context Pack workflow panels
 - action status for Context Pack workflow next actions
 - Action Status Badge and Workflow Action Row render semantics
+- owner, target, and completion control for pending Workflow Actions
 - render quality checks for landmarks and component classes
 - blocked and ready Context Pack workflow render scenarios
 - blocked and ready Studio static build outputs

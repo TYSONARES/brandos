@@ -44,41 +44,49 @@ export function evaluateContextPackReadiness(store, contextPackId) {
     ...claims
       .filter((claim) => claim.status !== 'supported' && claim.status !== 'approved')
       .map((claim) => ({
+        id: null,
         type: 'claim-review',
         status: 'blocked',
         targetId: claim.id,
-        label: `Verify or remove claim ${claim.id}`
+        label: `Verify or remove claim ${claim.id}`,
+        owner: claim.owner
       })),
     ...decisions
       .filter((decision) => decision.status !== 'accepted')
       .map((decision) => ({
+        id: null,
         type: 'decision-approval',
         status: 'blocked',
         targetId: decision.id,
-        label: `Accept or remove decision ${decision.id}`
+        label: `Accept or remove decision ${decision.id}`,
+        owner: decision.owner
       })),
     ...reviews
       .filter((review) => review.status === 'changes-needed' || review.status === 'rejected')
       .map((review) => {
         const action = workflowActions.find((item) => item.targetObjectId === review.id);
         return {
+          id: action?.id || null,
           type: action?.type || 'review-resolution',
           status: action?.status || 'pending',
           targetId: review.id,
-          label: action?.label || `Resolve review feedback for ${review.targetObjectId}`
+          label: action?.label || `Resolve review feedback for ${review.targetObjectId}`,
+          owner: action?.owner || review.reviewer
         };
       })
   ];
   const nextActions = blockingActions.length
     ? blockingActions
     : [
-        {
-          type: 'context-pack-release',
-          status: 'ready',
-          targetId: contextPack.id,
-          label: `Use context pack ${contextPack.id}`
-        }
-      ];
+      {
+        id: null,
+        type: 'context-pack-release',
+        status: 'ready',
+        targetId: contextPack.id,
+        label: `Use context pack ${contextPack.id}`,
+        owner: contextPack.owner
+      }
+    ];
 
   return {
     id: contextPack.id,

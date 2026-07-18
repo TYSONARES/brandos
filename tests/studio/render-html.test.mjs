@@ -26,6 +26,10 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Action status: pending/);
   assert.match(html, /action-status-badge action-status-pending/);
   assert.match(html, /workflow-action-row/);
+  assert.match(html, /Owner: operator@example.local - Target: review_example_001/);
+  assert.match(html, /action="ready.html"/);
+  assert.match(html, /name="actionId" value="workflow_action_example_001"/);
+  assert.match(html, /Complete action/);
   assert.match(html, /blocked/);
   assert.match(html, /Review is blocking release: review_example_001/);
   assert.match(html, /Resolve review feedback for context_pack_example_001/);
@@ -43,5 +47,7 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Current step: ready-for-use/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /action-status-badge action-status-ready/);
+  assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);
+  assert.match(html, /Use context pack/);
   assert.match(html, /Use context pack context_pack_example_001/);
 });

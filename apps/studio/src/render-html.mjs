@@ -17,8 +17,12 @@ export function renderStudioHtml(shell, options = {}) {
   const actionItems = shell.contextPackWorkflow.nextActions
     .map(
       (action) => `<li class="workflow-action-row">
-            <span class="action-status-badge action-status-${escapeHtml(action.status)}">${escapeHtml(action.status)}</span>
-            <span>${escapeHtml(action.label)}</span>
+            <div class="workflow-action-copy">
+              <span class="action-status-badge action-status-${escapeHtml(action.status)}">${escapeHtml(action.status)}</span>
+              <span>${escapeHtml(action.label)}</span>
+              <span class="meta">Owner: ${escapeHtml(action.owner)} - Target: ${escapeHtml(action.targetId)}</span>
+            </div>
+            ${renderActionCommand(action)}
           </li>`
     )
     .join('');
@@ -141,17 +145,23 @@ export function renderStudioHtml(shell, options = {}) {
       padding-top: 12px;
     }
     .workflow-action-row {
-      align-items: center;
+      align-items: flex-start;
       background: var(--muted);
       border: 1px solid #d7dce3;
       border-radius: 8px;
       display: flex;
       gap: 8px;
+      justify-content: space-between;
       list-style: none;
       margin-top: 8px;
       padding: 8px;
     }
+    .workflow-action-copy {
+      display: grid;
+      gap: 4px;
+    }
     .action-status-badge {
+      width: fit-content;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
@@ -166,11 +176,37 @@ export function renderStudioHtml(shell, options = {}) {
     .action-status-complete {
       color: var(--success);
     }
+    .workflow-command {
+      display: flex;
+      margin: 0;
+    }
+    .workflow-command input {
+      display: none;
+    }
+    .workflow-command button,
+    .workflow-command a {
+      appearance: none;
+      background: var(--action);
+      border: 1px solid var(--action);
+      border-radius: 8px;
+      color: var(--surface);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 112px;
+      padding: 7px 10px;
+      text-align: center;
+      text-decoration: none;
+    }
     @media (max-width: 760px) {
       header, .workflow-grid { display: block; }
       .status { margin-top: 16px; }
       .grid { grid-template-columns: 1fr; }
       .panel { margin-bottom: 12px; }
+      .workflow-action-row { display: grid; }
+      .workflow-command button,
+      .workflow-command a { width: 100%; }
     }
   </style>
 </head>
@@ -244,6 +280,22 @@ export function renderStudioHtml(shell, options = {}) {
   </main>
 </body>
 </html>`;
+}
+
+function renderActionCommand(action) {
+  if (action.id && action.status === 'pending') {
+    return `<form class="workflow-command" method="get" action="ready.html">
+              <input type="hidden" name="actionId" value="${escapeHtml(action.id)}">
+              <input type="hidden" name="actionType" value="${escapeHtml(action.type)}">
+              <button type="submit">Complete action</button>
+            </form>`;
+  }
+
+  if (action.status === 'ready') {
+    return `<div class="workflow-command"><a href="ready.html">Use context pack</a></div>`;
+  }
+
+  return '';
 }
 
 function escapeHtml(value) {

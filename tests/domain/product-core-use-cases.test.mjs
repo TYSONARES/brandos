@@ -42,10 +42,12 @@ test('completing a review-resolution Workflow Action clears Context Pack readine
   assert.deepEqual(readiness.blockingReasons, []);
   assert.deepEqual(readiness.nextActions, [
     {
+      id: null,
       type: 'context-pack-release',
       status: 'ready',
       targetId: 'context_pack_example_001',
-      label: 'Use context pack context_pack_example_001'
+      label: 'Use context pack context_pack_example_001',
+      owner: 'operator@example.local'
     }
   ]);
 });
@@ -68,10 +70,12 @@ test('Context Pack readiness reports blocking review state', () => {
   assert.deepEqual(readiness.blockingReasons, ['Review is blocking release: review_example_001']);
   assert.deepEqual(readiness.nextActions, [
     {
+      id: 'workflow_action_example_001',
       type: 'review-resolution',
       status: 'pending',
       targetId: 'review_example_001',
-      label: 'Resolve review feedback for context_pack_example_001'
+      label: 'Resolve review feedback for context_pack_example_001',
+      owner: 'operator@example.local'
     }
   ]);
 });
@@ -91,10 +95,12 @@ test('Context Pack readiness passes when claims, decisions, and reviews are clea
   assert.deepEqual(readiness.blockingReasons, []);
   assert.deepEqual(readiness.nextActions, [
     {
+      id: null,
       type: 'context-pack-release',
       status: 'ready',
       targetId: 'context_pack_example_001',
-      label: 'Use context pack context_pack_example_001'
+      label: 'Use context pack context_pack_example_001',
+      owner: 'operator@example.local'
     }
   ]);
 });

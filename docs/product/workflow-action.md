@@ -39,3 +39,8 @@ The contract is defined in `schemas/workflow-action.schema.json`.
 
 Completing a `review-resolution` action approves the related Review in the in-memory baseline and allows
 Context Pack readiness to move to ready when no other blockers remain.
+
+## Studio Command Surface
+
+Studio renders pending Workflow Actions with their owner, target object, status, and a completion control.
+In the static baseline, completing the example review-resolution action navigates to the ready scenario build.

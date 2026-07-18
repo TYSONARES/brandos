@@ -15,6 +15,10 @@ const requiredSnippets = [
   'aria-label="Context Pack workflow"',
   'class="workflow-action-row"',
   'class="action-status-badge action-status-pending"',
+  'Owner: operator@example.local - Target: review_example_001',
+  'action="ready.html"',
+  'name="actionId" value="workflow_action_example_001"',
+  'Complete action',
   'Action status: pending',
   'Product Core objects',
   'Review is blocking release: review_example_001'
@@ -25,6 +29,8 @@ const requiredReadySnippets = [
   'Current step: ready-for-use',
   'Action status: ready',
   'class="action-status-badge action-status-ready"',
+  'Owner: operator@example.local - Target: context_pack_example_001',
+  'Use context pack',
   'Use context pack context_pack_example_001'
 ];
 
