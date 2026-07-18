@@ -44,7 +44,9 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Owner: operator@example.local - Target: review_example_001/);
   assert.match(html, /Saved action: <span data-local-completed-action>none<\/span>/);
   assert.match(html, /aria-label="State sources"/);
-  assert.match(html, /Workflow state source: example/);
+  assert.match(html, /state-source-row/);
+  assert.match(html, /state-source-badge state-source-example/);
+  assert.match(html, /Workflow state source: <span class="state-source-badge state-source-example">example<\/span>/);
   assert.match(html, /Browser state key: brandos.workflow.completedActionId/);
   assert.match(html, /Repository state file: .tmp\/studio-workflow-state.json/);
   assert.match(html, /Repository state status: not-loaded/);
@@ -70,7 +72,7 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Current step: ready-for-use/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /Completed action: workflow_action_example_001/);
-  assert.match(html, /Workflow state source: command/);
+  assert.match(html, /Workflow state source: <span class="state-source-badge state-source-command">command<\/span>/);
   assert.match(html, /Saved action: <span data-local-completed-action>workflow_action_example_001<\/span>/);
   assert.match(html, /action-status-badge action-status-ready/);
   assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);

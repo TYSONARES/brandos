@@ -24,6 +24,7 @@
 - Added inspect and reset commands for local Studio Workflow Action state.
 - Added command-output validation for local Studio Workflow Action state.
 - Added Studio Workflow Action state source panel.
+- Added compact visual treatment for Studio Workflow Action state sources.
 
 ## 1.0.0 - Development Ready
 

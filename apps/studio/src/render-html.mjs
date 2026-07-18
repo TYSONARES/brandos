@@ -206,9 +206,38 @@ export function renderStudioHtml(shell, options = {}) {
       margin-top: 12px;
     }
     .state-source-list {
+      background: #fbfcfe;
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
       display: grid;
       gap: 6px;
       margin-top: 10px;
+      padding: 10px;
+    }
+    .state-source-row {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 120px minmax(0, 1fr);
+    }
+    .state-source-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .state-source-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .state-source-badge {
+      border: 1px solid #d7dce3;
+      border-radius: 999px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      text-transform: capitalize;
     }
     .local-state button {
       appearance: none;
@@ -229,6 +258,7 @@ export function renderStudioHtml(shell, options = {}) {
       .workflow-action-row { display: grid; }
       .workflow-command button,
       .workflow-command a { width: 100%; }
+      .state-source-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -297,10 +327,22 @@ export function renderStudioHtml(shell, options = {}) {
         <p class="meta local-state">Saved action: <span data-local-completed-action>${escapeHtml(shell.contextPackWorkflow.completedActionId || 'none')}</span></p>
         <p class="local-state"><button type="button" data-clear-workflow-state>Reset action</button></p>
         <div class="state-source-list" aria-label="State sources">
-          <p class="meta">Workflow state source: ${escapeHtml(shell.contextPackWorkflow.stateSource)}</p>
-          <p class="meta">Browser state key: ${escapeHtml(shell.contextPackWorkflow.browserStateKey)}</p>
-          <p class="meta">Repository state file: ${escapeHtml(shell.contextPackWorkflow.repositoryStateFile)}</p>
-          <p class="meta">Repository state status: ${escapeHtml(shell.contextPackWorkflow.repositoryStateStatus)}</p>
+          <div class="state-source-row">
+            <span class="state-source-label">Source</span>
+            <span class="state-source-value">Workflow state source: <span class="state-source-badge state-source-${escapeHtml(shell.contextPackWorkflow.stateSource)}">${escapeHtml(shell.contextPackWorkflow.stateSource)}</span></span>
+          </div>
+          <div class="state-source-row">
+            <span class="state-source-label">Browser</span>
+            <span class="state-source-value">Browser state key: ${escapeHtml(shell.contextPackWorkflow.browserStateKey)}</span>
+          </div>
+          <div class="state-source-row">
+            <span class="state-source-label">Repository</span>
+            <span class="state-source-value">Repository state file: ${escapeHtml(shell.contextPackWorkflow.repositoryStateFile)}</span>
+          </div>
+          <div class="state-source-row">
+            <span class="state-source-label">Status</span>
+            <span class="state-source-value">Repository state status: ${escapeHtml(shell.contextPackWorkflow.repositoryStateStatus)}</span>
+          </div>
         </div>
         <div class="actions">
           <h2>Next action</h2>
