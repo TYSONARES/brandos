@@ -21,6 +21,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - owner, target, and completion control for pending Workflow Actions
 - completed Workflow Action command options for ready-state rendering
 - browser-backed saved action state for static Studio preview
+- isolated browser state adapter for Workflow Action preview state
 - render quality checks for landmarks and component classes
 - blocked and ready Context Pack workflow render scenarios
 - blocked and ready Studio static build outputs

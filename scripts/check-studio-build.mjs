@@ -14,6 +14,7 @@ const checks = [
       'Action status: pending',
       'Saved action: <span data-local-completed-action>none</span>',
       'brandos.workflow.completedActionId',
+      'window.localStorage.setItem',
       'name="actionId" value="workflow_action_example_001"',
       'Complete action',
       'Review is blocking release: review_example_001'

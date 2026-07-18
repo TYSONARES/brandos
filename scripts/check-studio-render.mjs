@@ -19,6 +19,7 @@ const requiredSnippets = [
   'Saved action: <span data-local-completed-action>none</span>',
   'data-clear-workflow-state',
   'brandos.workflow.completedActionId',
+  'window.localStorage.setItem',
   'action="ready.html"',
   'name="actionId" value="workflow_action_example_001"',
   'Complete action',

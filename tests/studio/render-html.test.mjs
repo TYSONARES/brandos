@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import {
+  createBrowserWorkflowStateAdapterScript,
+  DEFAULT_WORKFLOW_ACTION_STATE_KEY
+} from '../../apps/studio/src/browser-state-adapter.mjs';
 import { createBrandOSStudioShell, createStudioShellOptionsFromArgs } from '../../apps/studio/src/app.mjs';
 import { renderStudioHtml } from '../../apps/studio/src/render-html.mjs';
 
@@ -70,4 +74,15 @@ test('Studio shell options parse completed Workflow Action command args', () => 
       completedAt: '2026-07-19'
     }
   );
+});
+
+test('Browser Workflow Action state adapter script exposes storage contract', () => {
+  const script = createBrowserWorkflowStateAdapterScript();
+
+  assert.match(script, new RegExp(DEFAULT_WORKFLOW_ACTION_STATE_KEY));
+  assert.match(script, /URLSearchParams/);
+  assert.match(script, /params.get\('actionId'\)/);
+  assert.match(script, /window.localStorage.setItem/);
+  assert.match(script, /data-local-completed-action/);
+  assert.match(script, /data-clear-workflow-state/);
 });

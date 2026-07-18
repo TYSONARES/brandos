@@ -48,3 +48,5 @@ The app shell also accepts an explicit completed Workflow Action command so rend
 from a named action instead of a generic ready-state flag.
 Static Studio preview stores the completed action id in browser state so the command result can be visible
 across local navigation without adding a backend.
+The browser state behavior is isolated in a Studio adapter so future repository-backed persistence can replace it
+without changing the Workflow Action product contract.

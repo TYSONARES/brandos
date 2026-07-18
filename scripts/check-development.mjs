@@ -23,6 +23,7 @@ const required = [
   'docs/decisions/0021-development-ready-start.md',
   'apps/studio/README.md',
   'apps/studio/src/app.mjs',
+  'apps/studio/src/browser-state-adapter.mjs',
   'apps/studio/src/render-html.mjs',
   'scripts/build-studio.mjs',
   'scripts/check-studio-build.mjs',

@@ -1,6 +1,8 @@
+import { createBrowserWorkflowStateAdapterScript, DEFAULT_WORKFLOW_ACTION_STATE_KEY } from './browser-state-adapter.mjs';
+
 export function renderStudioHtml(shell, options = {}) {
   const activeScenario = options.activeScenario ?? 'blocked';
-  const browserStateKey = options.browserStateKey ?? 'brandos.workflow.completedActionId';
+  const browserStateKey = options.browserStateKey ?? DEFAULT_WORKFLOW_ACTION_STATE_KEY;
   const readinessTone = shell.contextPackReadiness.ready ? 'ready' : 'blocked';
   const blockingItems = shell.contextPackReadiness.blockingReasons
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
@@ -326,29 +328,7 @@ function renderCompletedActionMeta(completedActionId) {
 }
 
 function renderBrowserStateScript(browserStateKey) {
-  return `<script>
-    (() => {
-      const storageKey = ${JSON.stringify(browserStateKey)};
-      const params = new URLSearchParams(window.location.search);
-      const completedActionId = params.get('actionId') || params.get('completedWorkflowActionId');
-
-      if (completedActionId) {
-        window.localStorage.setItem(storageKey, completedActionId);
-      }
-
-      const storedActionId = window.localStorage.getItem(storageKey);
-      document.querySelectorAll('[data-local-completed-action]').forEach((node) => {
-        node.textContent = storedActionId || node.textContent;
-      });
-
-      document.querySelectorAll('[data-clear-workflow-state]').forEach((control) => {
-        control.addEventListener('click', () => {
-          window.localStorage.removeItem(storageKey);
-          window.location.href = 'index.html';
-        });
-      });
-    })();
-  </script>`;
+  return createBrowserWorkflowStateAdapterScript({ storageKey: browserStateKey });
 }
 
 function escapeHtml(value) {
