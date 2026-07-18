@@ -13,6 +13,7 @@
 - Added post-v1 Workflow Actions iteration package and validation.
 - Added Workflow Action completion behavior for readiness resolution.
 - Added ready-state Studio render scenario for completed Workflow Actions.
+- Added blocked and ready static Studio build outputs.
 
 ## 1.0.0 - Development Ready
 

@@ -1,13 +1,23 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
 
 import { createBrandOSStudioShell } from '../apps/studio/src/app.mjs';
 import { renderStudioHtml } from '../apps/studio/src/render-html.mjs';
 
-const outputPath = 'dist/studio/index.html';
-const html = renderStudioHtml(createBrandOSStudioShell());
+const outputDir = 'dist/studio';
+const builds = [
+  {
+    path: `${outputDir}/index.html`,
+    shell: createBrandOSStudioShell()
+  },
+  {
+    path: `${outputDir}/ready.html`,
+    shell: createBrandOSStudioShell({ completeWorkflowAction: true })
+  }
+];
 
-mkdirSync(dirname(outputPath), { recursive: true });
-writeFileSync(outputPath, `${html}\n`, 'utf8');
+mkdirSync(outputDir, { recursive: true });
 
-console.log(`Built ${outputPath}`);
+for (const build of builds) {
+  writeFileSync(build.path, `${renderStudioHtml(build.shell)}\n`, 'utf8');
+  console.log(`Built ${build.path}`);
+}
