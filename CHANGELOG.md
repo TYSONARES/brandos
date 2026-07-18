@@ -20,6 +20,7 @@
 - Added browser-backed saved Workflow Action state for static Studio preview.
 - Added isolated Studio browser state adapter for Workflow Action preview state.
 - Added repository-backed local Workflow Action state adapter for Studio.
+- Added Studio render command integration for repository-backed Workflow Action state.
 
 ## 1.0.0 - Development Ready
 

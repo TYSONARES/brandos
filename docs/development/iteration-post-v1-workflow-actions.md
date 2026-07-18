@@ -28,6 +28,7 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Browser-backed saved Workflow Action state
 - Browser state adapter module for static preview
 - Repository-backed local Workflow Action state adapter
+- Render command integration for repository-backed Workflow Action state
 
 ## Validation
 
@@ -51,9 +52,10 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Static Studio preview stores the completed Workflow Action id in browser state.
 - Browser state behavior is isolated behind a Studio adapter module.
 - Repository-backed local state can persist completed Workflow Action ids under ignored `.tmp/` output.
+- Studio render commands can load completed Workflow Action state from the local repository state file.
 - Render checks protect Studio landmarks and component semantics.
 - All repository checks pass.
 
 ## Next Step
 
-Connect repository-backed Workflow Action state to Studio render commands.
+Add reset and inspection commands for repository-backed Workflow Action state.

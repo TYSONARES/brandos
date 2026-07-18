@@ -9,6 +9,10 @@ import {
 } from '../../../packages/domain/src/index.mjs';
 import { createContractSummary } from '../../../packages/contracts/src/index.mjs';
 import { createDesignSystemSummary } from '../../../packages/design-system/src/index.mjs';
+import {
+  createStudioShellOptionsFromRepositoryState,
+  DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH
+} from './repository-state-adapter.mjs';
 import { renderStudioHtml } from './render-html.mjs';
 
 export function createBrandOSStudioShell(options = {}) {
@@ -49,8 +53,13 @@ export function createBrandOSStudioShell(options = {}) {
 export function createStudioShellOptionsFromArgs(args) {
   const completedWorkflowActionId = readArgValue(args, '--complete-workflow-action');
   const completedAt = readArgValue(args, '--completed-at');
+  const stateFile = readArgValue(args, '--state-file') ?? DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH;
+  const repositoryOptions = args.includes('--ignore-repository-state')
+    ? {}
+    : createStudioShellOptionsFromRepositoryState(stateFile);
 
   return {
+    ...repositoryOptions,
     ...(completedWorkflowActionId ? { completedWorkflowActionId } : {}),
     ...(completedAt ? { completedAt } : {})
   };

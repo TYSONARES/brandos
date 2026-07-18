@@ -52,3 +52,4 @@ The browser state behavior is isolated in a Studio adapter so future repository-
 without changing the Workflow Action product contract.
 The local repository adapter can serialize completed Workflow Action state under ignored `.tmp/` output for
 developer previews.
+Studio render commands can load that local state automatically unless an explicit Workflow Action command is provided.

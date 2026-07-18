@@ -85,6 +85,49 @@ test('Studio shell options parse completed Workflow Action command args', () => 
   );
 });
 
+test('Studio shell options load completed Workflow Action from repository state', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-args-')), 'workflow-state.json');
+  writeWorkflowActionState(
+    statePath,
+    createWorkflowActionState({
+      completedWorkflowActionId: 'workflow_action_example_001',
+      completedAt: '2026-07-20'
+    })
+  );
+
+  assert.deepEqual(createStudioShellOptionsFromArgs(['--html', '--state-file', statePath]), {
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-20'
+  });
+});
+
+test('Explicit Studio shell command args override repository state', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-override-')), 'workflow-state.json');
+  writeWorkflowActionState(
+    statePath,
+    createWorkflowActionState({
+      completedWorkflowActionId: 'workflow_action_from_state',
+      completedAt: '2026-07-20'
+    })
+  );
+
+  assert.deepEqual(
+    createStudioShellOptionsFromArgs([
+      '--html',
+      '--state-file',
+      statePath,
+      '--complete-workflow-action',
+      'workflow_action_example_001',
+      '--completed-at',
+      '2026-07-21'
+    ]),
+    {
+      completedWorkflowActionId: 'workflow_action_example_001',
+      completedAt: '2026-07-21'
+    }
+  );
+});
+
 test('Browser Workflow Action state adapter script exposes storage contract', () => {
   const script = createBrowserWorkflowStateAdapterScript();
 
