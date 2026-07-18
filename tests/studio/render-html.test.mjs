@@ -27,3 +27,14 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Review is blocking release: review_example_001/);
   assert.match(html, /Resolve review feedback for context_pack_example_001/);
 });
+
+test('Studio HTML render includes ready Context Pack workflow state', () => {
+  const html = renderStudioHtml(createBrandOSStudioShell({ completeWorkflowAction: true }));
+
+  assert.match(html, /Context readiness/);
+  assert.match(html, /ready/);
+  assert.match(html, /Current step: ready-for-use/);
+  assert.match(html, /Action status: ready/);
+  assert.match(html, /action-status-badge action-status-ready/);
+  assert.match(html, /Use context pack context_pack_example_001/);
+});

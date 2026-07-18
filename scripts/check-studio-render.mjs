@@ -1,7 +1,8 @@
 import { createBrandOSStudioShell } from '../apps/studio/src/app.mjs';
 import { renderStudioHtml } from '../apps/studio/src/render-html.mjs';
 
-const html = renderStudioHtml(createBrandOSStudioShell());
+const blockedHtml = renderStudioHtml(createBrandOSStudioShell());
+const readyHtml = renderStudioHtml(createBrandOSStudioShell({ completeWorkflowAction: true }));
 const requiredSnippets = [
   '<main>',
   'aria-label="Studio metrics"',
@@ -13,8 +14,17 @@ const requiredSnippets = [
   'Product Core objects',
   'Review is blocking release: review_example_001'
 ];
+const requiredReadySnippets = [
+  'Current step: ready-for-use',
+  'Action status: ready',
+  'class="action-status-badge action-status-ready"',
+  'Use context pack context_pack_example_001'
+];
 
-const missing = requiredSnippets.filter((snippet) => !html.includes(snippet));
+const missing = [
+  ...requiredSnippets.filter((snippet) => !blockedHtml.includes(snippet)),
+  ...requiredReadySnippets.filter((snippet) => !readyHtml.includes(snippet))
+];
 
 if (missing.length) {
   console.error(`Studio render output is missing required content: ${missing.join(', ')}`);

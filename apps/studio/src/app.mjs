@@ -3,6 +3,7 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
+  completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../../packages/domain/src/index.mjs';
@@ -10,8 +11,11 @@ import { createContractSummary } from '../../../packages/contracts/src/index.mjs
 import { createDesignSystemSummary } from '../../../packages/design-system/src/index.mjs';
 import { renderStudioHtml } from './render-html.mjs';
 
-export function createBrandOSStudioShell() {
+export function createBrandOSStudioShell(options = {}) {
   const store = createInMemoryProductCoreStore(createExampleProductCoreState());
+  if (options.completeWorkflowAction) {
+    completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  }
   const state = summarizeProductCoreState(store);
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');

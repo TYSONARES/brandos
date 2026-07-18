@@ -12,6 +12,7 @@
 - Added Studio render quality check for landmarks and component semantics.
 - Added post-v1 Workflow Actions iteration package and validation.
 - Added Workflow Action completion behavior for readiness resolution.
+- Added ready-state Studio render scenario for completed Workflow Actions.
 
 ## 1.0.0 - Development Ready
 
