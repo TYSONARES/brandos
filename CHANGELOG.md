@@ -17,6 +17,7 @@
 - Added static Studio workflow scenario navigation.
 - Added Studio Workflow Action completion control.
 - Added completed Workflow Action command rendering for Studio.
+- Added browser-backed saved Workflow Action state for static Studio preview.
 
 ## 1.0.0 - Development Ready
 

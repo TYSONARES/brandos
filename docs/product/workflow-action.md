@@ -46,3 +46,5 @@ Studio renders pending Workflow Actions with their owner, target object, status,
 In the static baseline, completing the example review-resolution action navigates to the ready scenario build.
 The app shell also accepts an explicit completed Workflow Action command so rendered output can be generated
 from a named action instead of a generic ready-state flag.
+Static Studio preview stores the completed action id in browser state so the command result can be visible
+across local navigation without adding a backend.

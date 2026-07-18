@@ -25,6 +25,7 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Static Studio workflow scenario navigation
 - Studio Workflow Action completion control
 - Completed Workflow Action shell command contract
+- Browser-backed saved Workflow Action state
 
 ## Validation
 
@@ -45,9 +46,10 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Static Studio pages link between blocked and ready workflow scenarios.
 - Pending Workflow Actions expose owner, target, and a completion control in Studio.
 - Studio can render a ready state from an explicit completed Workflow Action command.
+- Static Studio preview stores the completed Workflow Action id in browser state.
 - Render checks protect Studio landmarks and component semantics.
 - All repository checks pass.
 
 ## Next Step
 
-Persist completed Workflow Actions in a repository-backed or browser-backed local state adapter.
+Persist completed Workflow Actions in a repository-backed state adapter.

@@ -26,6 +26,7 @@ The baseline implementation must run without required environment variables. Opt
 ## Build Output
 
 Studio build output is generated under `dist/studio/index.html` and `dist/studio/ready.html`. The generated pages include workflow scenario navigation so blocked and ready states can be compared during local QA. The `dist/` directory is local build output and is not committed.
+The generated preview stores completed Workflow Action ids in browser state only; it does not write repository files.
 
 ## Local Preview
 

@@ -1,5 +1,6 @@
 export function renderStudioHtml(shell, options = {}) {
   const activeScenario = options.activeScenario ?? 'blocked';
+  const browserStateKey = options.browserStateKey ?? 'brandos.workflow.completedActionId';
   const readinessTone = shell.contextPackReadiness.ready ? 'ready' : 'blocked';
   const blockingItems = shell.contextPackReadiness.blockingReasons
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
@@ -199,6 +200,20 @@ export function renderStudioHtml(shell, options = {}) {
       text-align: center;
       text-decoration: none;
     }
+    .local-state {
+      margin-top: 12px;
+    }
+    .local-state button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      color: var(--secondary);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      padding: 0;
+      text-decoration: underline;
+    }
     @media (max-width: 760px) {
       header, .workflow-grid { display: block; }
       .status { margin-top: 16px; }
@@ -272,6 +287,8 @@ export function renderStudioHtml(shell, options = {}) {
         <p class="meta">Action status: ${escapeHtml(shell.contextPackWorkflow.actionStatus)}</p>
         ${renderCompletedActionMeta(shell.contextPackWorkflow.completedActionId)}
         <p class="meta">Owner: ${escapeHtml(shell.contextPackWorkflow.owner)}</p>
+        <p class="meta local-state">Saved action: <span data-local-completed-action>${escapeHtml(shell.contextPackWorkflow.completedActionId || 'none')}</span></p>
+        <p class="local-state"><button type="button" data-clear-workflow-state>Reset action</button></p>
         <div class="actions">
           <h2>Next action</h2>
           <ul>${actionItems}</ul>
@@ -279,6 +296,7 @@ export function renderStudioHtml(shell, options = {}) {
       </article>
     </section>
   </main>
+  ${renderBrowserStateScript(browserStateKey)}
 </body>
 </html>`;
 }
@@ -305,6 +323,32 @@ function renderCompletedActionMeta(completedActionId) {
   }
 
   return `<p class="meta">Completed action: ${escapeHtml(completedActionId)}</p>`;
+}
+
+function renderBrowserStateScript(browserStateKey) {
+  return `<script>
+    (() => {
+      const storageKey = ${JSON.stringify(browserStateKey)};
+      const params = new URLSearchParams(window.location.search);
+      const completedActionId = params.get('actionId') || params.get('completedWorkflowActionId');
+
+      if (completedActionId) {
+        window.localStorage.setItem(storageKey, completedActionId);
+      }
+
+      const storedActionId = window.localStorage.getItem(storageKey);
+      document.querySelectorAll('[data-local-completed-action]').forEach((node) => {
+        node.textContent = storedActionId || node.textContent;
+      });
+
+      document.querySelectorAll('[data-clear-workflow-state]').forEach((control) => {
+        control.addEventListener('click', () => {
+          window.localStorage.removeItem(storageKey);
+          window.location.href = 'index.html';
+        });
+      });
+    })();
+  </script>`;
 }
 
 function escapeHtml(value) {

@@ -12,6 +12,8 @@ const checks = [
       'Product Core objects',
       'Context readiness',
       'Action status: pending',
+      'Saved action: <span data-local-completed-action>none</span>',
+      'brandos.workflow.completedActionId',
       'name="actionId" value="workflow_action_example_001"',
       'Complete action',
       'Review is blocking release: review_example_001'
@@ -29,6 +31,7 @@ const checks = [
       'Current step: ready-for-use',
       'Action status: ready',
       'Completed action: workflow_action_example_001',
+      'Saved action: <span data-local-completed-action>workflow_action_example_001</span>',
       'Owner: operator@example.local - Target: context_pack_example_001',
       'Use context pack',
       'Use context pack context_pack_example_001'
