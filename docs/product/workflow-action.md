@@ -54,3 +54,4 @@ The local repository adapter can serialize completed Workflow Action state under
 developer previews.
 Studio render commands can load that local state automatically unless an explicit Workflow Action command is provided.
 Developer commands can inspect or reset that local state without touching committed product fixtures.
+The local state command output is validated as part of the Studio quality gate.

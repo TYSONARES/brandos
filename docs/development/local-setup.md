@@ -14,6 +14,7 @@ Local setup defines how contributors start working on BrandOS without relying on
 ## Commands
 
 - `npm run check:all` validates the repository contract.
+- `npm run check:studio-action-state` validates local Workflow Action state command output.
 - `npm run smoke:app` runs the first app shell smoke test.
 - `npm run build:studio` generates blocked and ready local Studio HTML builds.
 - `npm run render:studio -- --complete-workflow-action=workflow_action_example_001` renders the ready shell from a Workflow Action command.

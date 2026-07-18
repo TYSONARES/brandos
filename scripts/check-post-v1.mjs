@@ -12,6 +12,7 @@ const required = [
   'scripts/inspect-studio-action.mjs',
   'scripts/persist-studio-action.mjs',
   'scripts/reset-studio-action.mjs',
+  'scripts/check-studio-action-state.mjs',
   'scripts/check-studio-render.mjs'
 ];
 

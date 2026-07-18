@@ -27,6 +27,7 @@ const required = [
   'apps/studio/src/repository-state-adapter.mjs',
   'apps/studio/src/render-html.mjs',
   'scripts/build-studio.mjs',
+  'scripts/check-studio-action-state.mjs',
   'scripts/check-studio-build.mjs',
   'scripts/check-studio-render.mjs',
   'scripts/check-post-v1.mjs',
