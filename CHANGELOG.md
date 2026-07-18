@@ -8,6 +8,7 @@
 - Added Workflow Action schema, fixture, runtime model, and readiness integration.
 - Added Workflow Action product documentation and release validation.
 - Added Action Status Badge and Workflow Action Row component specs.
+- Updated Studio HTML to render workflow actions with badge and row semantics.
 
 ## 1.0.0 - Development Ready
 

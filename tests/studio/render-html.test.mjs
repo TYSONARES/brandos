@@ -21,6 +21,8 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Context Pack workflow/);
   assert.match(html, /Current step: resolve-review/);
   assert.match(html, /Action status: pending/);
+  assert.match(html, /action-status-badge action-status-pending/);
+  assert.match(html, /workflow-action-row/);
   assert.match(html, /blocked/);
   assert.match(html, /Review is blocking release: review_example_001/);
   assert.match(html, /Resolve review feedback for context_pack_example_001/);

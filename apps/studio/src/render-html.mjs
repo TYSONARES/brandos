@@ -4,7 +4,12 @@ export function renderStudioHtml(shell) {
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
     .join('');
   const actionItems = shell.contextPackWorkflow.nextActions
-    .map((action) => `<li><strong>${escapeHtml(action.status)}</strong>: ${escapeHtml(action.label)}</li>`)
+    .map(
+      (action) => `<li class="workflow-action-row">
+            <span class="action-status-badge action-status-${escapeHtml(action.status)}">${escapeHtml(action.status)}</span>
+            <span>${escapeHtml(action.label)}</span>
+          </li>`
+    )
     .join('');
 
   return `<!doctype html>
@@ -102,6 +107,32 @@ export function renderStudioHtml(shell) {
       margin-top: 14px;
       border-top: 1px solid #d7dce3;
       padding-top: 12px;
+    }
+    .workflow-action-row {
+      align-items: center;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: flex;
+      gap: 8px;
+      list-style: none;
+      margin-top: 8px;
+      padding: 8px;
+    }
+    .action-status-badge {
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      text-transform: capitalize;
+    }
+    .action-status-pending,
+    .action-status-blocked {
+      color: var(--warning);
+    }
+    .action-status-ready,
+    .action-status-complete {
+      color: var(--success);
     }
     @media (max-width: 760px) {
       header, .workflow-grid { display: block; }
