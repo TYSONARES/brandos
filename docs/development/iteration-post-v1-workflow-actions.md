@@ -35,10 +35,12 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Compact state source rows and source badge in Studio
 - Workflow Action State Panel component fixture
 - Post-v1 Workflow Actions release notes
+- Post-v1 Workflow Actions closure checklist
 
 ## Validation
 
 - `docs/development/release-post-v1-workflow-actions.md`
+- `docs/development/closure-post-v1-workflow-actions.md`
 - `npm run check:release`
 - `npm run check:fixtures`
 - `npm run check:components`
@@ -67,9 +69,10 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - State source details are rendered as compact rows with a visible source badge.
 - Workflow Action State Panel is represented in design component fixtures.
 - Post-v1 Workflow Actions release notes summarize scope, commands, and acceptance status.
+- Post-v1 Workflow Actions closure checklist summarizes final scope lock and validation evidence.
 - Render checks protect Studio landmarks and component semantics.
 - All repository checks pass.
 
 ## Next Step
 
-Prepare the post-v1 Workflow Actions package for closure.
+Begin durable Studio state work as a separate post-v1 package.

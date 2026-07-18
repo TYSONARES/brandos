@@ -46,3 +46,4 @@ This release package turns Context Pack readiness into an actionable Studio work
 ## Follow-Up
 
 The next package should move from static/local Workflow Action state into a durable Studio state layer.
+Closure status is tracked in `docs/development/closure-post-v1-workflow-actions.md`.

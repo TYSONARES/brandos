@@ -30,6 +30,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - compact visual treatment for Workflow Action state source rows
 - component fixture coverage for the Workflow Action state panel
 - post-v1 Workflow Actions release notes
+- post-v1 Workflow Actions closure checklist
 - render quality checks for landmarks and component classes
 - blocked and ready Context Pack workflow render scenarios
 - blocked and ready Studio static build outputs
