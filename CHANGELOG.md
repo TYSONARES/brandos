@@ -14,6 +14,7 @@
 - Added Workflow Action completion behavior for readiness resolution.
 - Added ready-state Studio render scenario for completed Workflow Actions.
 - Added blocked and ready static Studio build outputs.
+- Added static Studio workflow scenario navigation.
 
 ## 1.0.0 - Development Ready
 

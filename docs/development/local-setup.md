@@ -24,7 +24,7 @@ The baseline implementation must run without required environment variables. Opt
 
 ## Build Output
 
-Studio build output is generated under `dist/studio/index.html` and `dist/studio/ready.html`. The `dist/` directory is local build output and is not committed.
+Studio build output is generated under `dist/studio/index.html` and `dist/studio/ready.html`. The generated pages include workflow scenario navigation so blocked and ready states can be compared during local QA. The `dist/` directory is local build output and is not committed.
 
 ## Local Preview
 

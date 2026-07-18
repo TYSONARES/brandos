@@ -1,7 +1,18 @@
-export function renderStudioHtml(shell) {
+export function renderStudioHtml(shell, options = {}) {
+  const activeScenario = options.activeScenario ?? 'blocked';
   const readinessTone = shell.contextPackReadiness.ready ? 'ready' : 'blocked';
   const blockingItems = shell.contextPackReadiness.blockingReasons
     .map((reason) => `<li>${escapeHtml(reason)}</li>`)
+    .join('');
+  const scenarioLinks = [
+    { id: 'blocked', label: 'Blocked', href: 'index.html' },
+    { id: 'ready', label: 'Ready', href: 'ready.html' }
+  ]
+    .map((scenario) => {
+      const current = scenario.id === activeScenario ? ' aria-current="page"' : '';
+
+      return `<a${current} href="${scenario.href}">${scenario.label}</a>`;
+    })
     .join('');
   const actionItems = shell.contextPackWorkflow.nextActions
     .map(
@@ -61,6 +72,27 @@ export function renderStudioHtml(shell) {
       padding: 10px 12px;
       min-width: 210px;
       font-size: 14px;
+    }
+    .scenario-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .scenario-nav a {
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 650;
+      min-width: 86px;
+      padding: 7px 10px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .scenario-nav a[aria-current="page"] {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--surface);
     }
     .grid {
       display: grid;
@@ -154,6 +186,8 @@ export function renderStudioHtml(shell) {
         <p class="readiness">${readinessTone}</p>
       </aside>
     </header>
+
+    <nav class="scenario-nav" aria-label="Workflow scenarios">${scenarioLinks}</nav>
 
     <section class="grid" aria-label="Studio metrics">
       <article class="panel">

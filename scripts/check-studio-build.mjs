@@ -6,6 +6,9 @@ const checks = [
     snippets: [
       '<!doctype html>',
       'BrandOS Studio',
+      'aria-label="Workflow scenarios"',
+      'aria-current="page" href="index.html"',
+      'href="ready.html"',
       'Product Core objects',
       'Context readiness',
       'Action status: pending',
@@ -17,6 +20,9 @@ const checks = [
     snippets: [
       '<!doctype html>',
       'BrandOS Studio',
+      'aria-label="Workflow scenarios"',
+      'href="index.html"',
+      'aria-current="page" href="ready.html"',
       'Context readiness',
       'Current step: ready-for-use',
       'Action status: ready',

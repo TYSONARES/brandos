@@ -9,6 +9,9 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
 
   assert.match(html, /<!doctype html>/);
   assert.match(html, /BrandOS Studio/);
+  assert.match(html, /Workflow scenarios/);
+  assert.match(html, /aria-current="page" href="index.html"/);
+  assert.match(html, /href="ready.html"/);
   assert.match(html, /Brand overview/);
   assert.match(html, /Product Core objects/);
   assert.match(html, /Readiness blockers/);
@@ -29,9 +32,13 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
-  const html = renderStudioHtml(createBrandOSStudioShell({ completeWorkflowAction: true }));
+  const html = renderStudioHtml(createBrandOSStudioShell({ completeWorkflowAction: true }), {
+    activeScenario: 'ready'
+  });
 
   assert.match(html, /Context readiness/);
+  assert.match(html, /aria-current="page" href="ready.html"/);
+  assert.match(html, /href="index.html"/);
   assert.match(html, /ready/);
   assert.match(html, /Current step: ready-for-use/);
   assert.match(html, /Action status: ready/);
