@@ -34,3 +34,8 @@ The contract is defined in `schemas/workflow-action.schema.json`.
 - The action status is explicit.
 - The action label is human-readable enough for Studio panels.
 - Completed actions keep their completion timestamp.
+
+## Runtime Behavior
+
+Completing a `review-resolution` action approves the related Review in the in-memory baseline and allows
+Context Pack readiness to move to ready when no other blockers remain.

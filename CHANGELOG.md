@@ -11,6 +11,7 @@
 - Updated Studio HTML to render workflow actions with badge and row semantics.
 - Added Studio render quality check for landmarks and component semantics.
 - Added post-v1 Workflow Actions iteration package and validation.
+- Added Workflow Action completion behavior for readiness resolution.
 
 ## 1.0.0 - Development Ready
 

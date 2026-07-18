@@ -95,6 +95,26 @@ export function evaluateContextPackReadiness(store, contextPackId) {
   };
 }
 
+export function completeWorkflowAction(store, actionId, completedAt) {
+  const action = requireRecord(store, 'workflow-action', actionId);
+  const completedAction = store.save('workflow-action', {
+    ...action,
+    status: 'complete',
+    completedAt
+  });
+
+  if (action.type === 'review-resolution') {
+    const review = requireRecord(store, 'review', action.targetObjectId);
+    store.save('review', {
+      ...review,
+      status: 'approved',
+      notes: `${review.notes} Resolution completed by ${action.id}.`
+    });
+  }
+
+  return completedAction;
+}
+
 function requireRecord(store, modelId, id) {
   const record = store.get(modelId, id);
   if (!record) {

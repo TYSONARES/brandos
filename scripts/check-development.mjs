@@ -3,6 +3,7 @@ import { listProductCoreContracts } from '../packages/contracts/src/index.mjs';
 import {
   createExampleProductCoreState,
   createBrandProfileOverview,
+  completeWorkflowAction,
   createInMemoryProductCoreStore,
   evaluateContextPackReadiness,
   listProductCoreModels,
@@ -104,6 +105,13 @@ if (readiness.ready !== false || readiness.blockingReasons.length !== 1 || readi
 }
 if (readiness.nextActions[0].status !== 'pending') {
   console.error('Context Pack readiness did not expose the expected pending action status.');
+  process.exit(1);
+}
+
+completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+const completedReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+if (completedReadiness.ready !== true || completedReadiness.nextActions[0].status !== 'ready') {
+  console.error('Completing Workflow Action did not clear Context Pack readiness.');
   process.exit(1);
 }
 

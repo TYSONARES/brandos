@@ -19,6 +19,7 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 - Studio Context Pack workflow panel
 - Studio workflow action row and status badge rendering
 - Studio render quality check
+- Workflow Action completion behavior
 
 ## Validation
 
@@ -33,9 +34,10 @@ This iteration turns Context Pack readiness into a more actionable Studio workfl
 
 - Workflow Action is represented in product docs, schema, fixture, runtime model, and design specs.
 - Studio shows a Context Pack workflow panel with current step, owner, next action, and action status.
+- Completing a review-resolution action clears the blocking review and makes the Context Pack ready.
 - Render checks protect Studio landmarks and component semantics.
 - All repository checks pass.
 
 ## Next Step
 
-Add interaction semantics for completing or resolving Workflow Actions.
+Add UI controls for completing or resolving Workflow Actions.

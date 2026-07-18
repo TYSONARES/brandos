@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
+  completeWorkflowAction,
   createBrandProfileOverview,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
@@ -26,6 +27,27 @@ test('example Product Core state contains one object for each runtime model', ()
   assert.equal(summary.modelCounts['workflow-run'], 1);
   assert.equal(summary.modelCounts['workflow-action'], 1);
   assert.equal(summary.modelCounts['context-pack'], 1);
+});
+
+test('completing a review-resolution Workflow Action clears Context Pack readiness', () => {
+  const store = createExampleStore();
+  const completedAction = completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const readiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+  const review = store.get('review', 'review_example_001');
+
+  assert.equal(completedAction.status, 'complete');
+  assert.equal(completedAction.completedAt, '2026-07-18');
+  assert.equal(review.status, 'approved');
+  assert.equal(readiness.ready, true);
+  assert.deepEqual(readiness.blockingReasons, []);
+  assert.deepEqual(readiness.nextActions, [
+    {
+      type: 'context-pack-release',
+      status: 'ready',
+      targetId: 'context_pack_example_001',
+      label: 'Use context pack context_pack_example_001'
+    }
+  ]);
 });
 
 test('Brand Profile overview resolves linked claims and decisions', () => {
