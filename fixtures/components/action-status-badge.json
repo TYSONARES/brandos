@@ -1,0 +1,27 @@
+{
+  "id": "component_action_status_badge",
+  "name": "Action Status Badge",
+  "status": "draft",
+  "purpose": "Shows Workflow Action status as compact text for pending, blocked, ready, and complete actions.",
+  "productObjects": [
+    "workflow-action"
+  ],
+  "states": [
+    "pending",
+    "blocked",
+    "ready",
+    "complete"
+  ],
+  "accessibility": [
+    "Always render the status word as visible text.",
+    "Do not rely on color alone for action status.",
+    "Keep contrast sufficient for compact workflow panels."
+  ],
+  "tokens": [
+    "color.status.success",
+    "color.status.warning",
+    "color.status.danger",
+    "type.body.strong",
+    "space.1"
+  ]
+}

@@ -7,6 +7,7 @@
 - Added action status to Context Pack workflow next actions.
 - Added Workflow Action schema, fixture, runtime model, and readiness integration.
 - Added Workflow Action product documentation and release validation.
+- Added Action Status Badge and Workflow Action Row component specs.
 
 ## 1.0.0 - Development Ready
 

@@ -12,6 +12,8 @@ The v0.3 component set defines the first reusable interface units for Product Co
 - `fixtures/components/context-pack-card.json`
 - `fixtures/components/review-panel.json`
 - `fixtures/components/workflow-stepper.json`
+- `fixtures/components/action-status-badge.json`
+- `fixtures/components/workflow-action-row.json`
 
 ## Rules
 
@@ -28,3 +30,5 @@ The v0.3 component set defines the first reusable interface units for Product Co
 - Context Pack Card
 - Review Panel
 - Workflow Stepper
+- Action Status Badge
+- Workflow Action Row

@@ -124,3 +124,5 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `components/context-pack-card.json`
 - `components/review-panel.json`
 - `components/workflow-stepper.json`
+- `components/action-status-badge.json`
+- `components/workflow-action-row.json`

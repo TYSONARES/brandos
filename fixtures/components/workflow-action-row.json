@@ -1,0 +1,33 @@
+{
+  "id": "component_workflow_action_row",
+  "name": "Workflow Action Row",
+  "status": "draft",
+  "purpose": "Displays a Workflow Action with status, label, owner, target object, and completion affordance.",
+  "productObjects": [
+    "workflow-action",
+    "workflow-run",
+    "review"
+  ],
+  "states": [
+    "pending",
+    "blocked",
+    "ready",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose action label, status, and owner in text.",
+    "Keep completion controls keyboard reachable.",
+    "Announce blocked status with the related target object."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "color.status.success",
+    "color.status.warning",
+    "color.status.danger",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3"
+  ]
+}
