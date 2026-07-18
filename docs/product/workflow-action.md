@@ -44,3 +44,5 @@ Context Pack readiness to move to ready when no other blockers remain.
 
 Studio renders pending Workflow Actions with their owner, target object, status, and a completion control.
 In the static baseline, completing the example review-resolution action navigates to the ready scenario build.
+The app shell also accepts an explicit completed Workflow Action command so rendered output can be generated
+from a named action instead of a generic ready-state flag.

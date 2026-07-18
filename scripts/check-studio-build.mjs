@@ -28,6 +28,7 @@ const checks = [
       'Context readiness',
       'Current step: ready-for-use',
       'Action status: ready',
+      'Completed action: workflow_action_example_001',
       'Owner: operator@example.local - Target: context_pack_example_001',
       'Use context pack',
       'Use context pack context_pack_example_001'

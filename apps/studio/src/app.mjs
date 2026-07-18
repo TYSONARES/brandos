@@ -13,8 +13,11 @@ import { renderStudioHtml } from './render-html.mjs';
 
 export function createBrandOSStudioShell(options = {}) {
   const store = createInMemoryProductCoreStore(createExampleProductCoreState());
-  if (options.completeWorkflowAction) {
-    completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const completedWorkflowActionId = options.completedWorkflowActionId || (options.completeWorkflowAction ? 'workflow_action_example_001' : null);
+  const completedAt = options.completedAt || '2026-07-18';
+
+  if (completedWorkflowActionId) {
+    completeWorkflowAction(store, completedWorkflowActionId, completedAt);
   }
   const state = summarizeProductCoreState(store);
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
@@ -23,6 +26,7 @@ export function createBrandOSStudioShell(options = {}) {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
     actionStatus: contextPackReadiness.nextActions[0]?.status || 'ready',
+    completedActionId: completedWorkflowActionId,
     owner: 'operator@example.local',
     nextActions: contextPackReadiness.nextActions
   };
@@ -42,6 +46,16 @@ export function createBrandOSStudioShell(options = {}) {
   };
 }
 
+export function createStudioShellOptionsFromArgs(args) {
+  const completedWorkflowActionId = readArgValue(args, '--complete-workflow-action');
+  const completedAt = readArgValue(args, '--completed-at');
+
+  return {
+    ...(completedWorkflowActionId ? { completedWorkflowActionId } : {}),
+    ...(completedAt ? { completedAt } : {})
+  };
+}
+
 export function renderSmokeSummary(shell = createBrandOSStudioShell()) {
   const packageNames = shell.packages.map((pkg) => pkg.name).join(', ');
   const domain = shell.packages.find((pkg) => pkg.name === 'domain');
@@ -53,5 +67,22 @@ if (process.argv.includes('--smoke')) {
 }
 
 if (process.argv.includes('--html')) {
-  console.log(renderStudioHtml(createBrandOSStudioShell()));
+  const options = createStudioShellOptionsFromArgs(process.argv.slice(2));
+  const activeScenario = options.completedWorkflowActionId ? 'ready' : 'blocked';
+
+  console.log(renderStudioHtml(createBrandOSStudioShell(options), { activeScenario }));
+}
+
+function readArgValue(args, name) {
+  const inline = args.find((arg) => arg.startsWith(`${name}=`));
+  if (inline) {
+    return inline.slice(name.length + 1);
+  }
+
+  const index = args.indexOf(name);
+  if (index >= 0) {
+    return args[index + 1];
+  }
+
+  return null;
 }

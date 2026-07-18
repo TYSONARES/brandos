@@ -270,6 +270,7 @@ export function renderStudioHtml(shell, options = {}) {
         <h2>${escapeHtml(shell.contextPackWorkflow.title)}</h2>
         <p class="meta">Current step: ${escapeHtml(shell.contextPackWorkflow.currentStep)}</p>
         <p class="meta">Action status: ${escapeHtml(shell.contextPackWorkflow.actionStatus)}</p>
+        ${renderCompletedActionMeta(shell.contextPackWorkflow.completedActionId)}
         <p class="meta">Owner: ${escapeHtml(shell.contextPackWorkflow.owner)}</p>
         <div class="actions">
           <h2>Next action</h2>
@@ -296,6 +297,14 @@ function renderActionCommand(action) {
   }
 
   return '';
+}
+
+function renderCompletedActionMeta(completedActionId) {
+  if (!completedActionId) {
+    return '';
+  }
+
+  return `<p class="meta">Completed action: ${escapeHtml(completedActionId)}</p>`;
 }
 
 function escapeHtml(value) {

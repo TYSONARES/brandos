@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { createBrandOSStudioShell } from '../../apps/studio/src/app.mjs';
+import { createBrandOSStudioShell, createStudioShellOptionsFromArgs } from '../../apps/studio/src/app.mjs';
 import { renderStudioHtml } from '../../apps/studio/src/render-html.mjs';
 
 test('Studio HTML render includes shell identity and Product Core summary', () => {
@@ -36,7 +36,7 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
-  const html = renderStudioHtml(createBrandOSStudioShell({ completeWorkflowAction: true }), {
+  const html = renderStudioHtml(createBrandOSStudioShell({ completedWorkflowActionId: 'workflow_action_example_001' }), {
     activeScenario: 'ready'
   });
 
@@ -46,8 +46,24 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /ready/);
   assert.match(html, /Current step: ready-for-use/);
   assert.match(html, /Action status: ready/);
+  assert.match(html, /Completed action: workflow_action_example_001/);
   assert.match(html, /action-status-badge action-status-ready/);
   assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);
   assert.match(html, /Use context pack/);
   assert.match(html, /Use context pack context_pack_example_001/);
+});
+
+test('Studio shell options parse completed Workflow Action command args', () => {
+  assert.deepEqual(
+    createStudioShellOptionsFromArgs([
+      '--html',
+      '--complete-workflow-action=workflow_action_example_001',
+      '--completed-at',
+      '2026-07-19'
+    ]),
+    {
+      completedWorkflowActionId: 'workflow_action_example_001',
+      completedAt: '2026-07-19'
+    }
+  );
 });

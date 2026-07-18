@@ -12,7 +12,7 @@ const builds = [
   },
   {
     path: `${outputDir}/ready.html`,
-    shell: createBrandOSStudioShell({ completeWorkflowAction: true }),
+    shell: createBrandOSStudioShell({ completedWorkflowActionId: 'workflow_action_example_001' }),
     activeScenario: 'ready'
   }
 ];

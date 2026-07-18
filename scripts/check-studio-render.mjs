@@ -2,7 +2,7 @@ import { createBrandOSStudioShell } from '../apps/studio/src/app.mjs';
 import { renderStudioHtml } from '../apps/studio/src/render-html.mjs';
 
 const blockedHtml = renderStudioHtml(createBrandOSStudioShell());
-const readyHtml = renderStudioHtml(createBrandOSStudioShell({ completeWorkflowAction: true }), {
+const readyHtml = renderStudioHtml(createBrandOSStudioShell({ completedWorkflowActionId: 'workflow_action_example_001' }), {
   activeScenario: 'ready'
 });
 const requiredSnippets = [
@@ -28,6 +28,7 @@ const requiredReadySnippets = [
   'href="index.html"',
   'Current step: ready-for-use',
   'Action status: ready',
+  'Completed action: workflow_action_example_001',
   'class="action-status-badge action-status-ready"',
   'Owner: operator@example.local - Target: context_pack_example_001',
   'Use context pack',
