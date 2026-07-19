@@ -58,6 +58,8 @@ const required = [
   'docs/development/quality-gates.md',
   'docs/development/v1.1-scope.md',
   'docs/development/iteration-v1.1-operator-run-model.md',
+  'docs/development/release-v1.1-operator-run-model.md',
+  'docs/development/closure-v1.1-operator-run-model.md',
   'docs/product/operator-run.md',
   'docs/decisions/0021-development-ready-start.md',
   'apps/studio/README.md',

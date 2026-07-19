@@ -4,6 +4,7 @@
 
 - Started Operator Runtime v1.1 scope and decision record.
 - Added Operator Run model, schema, fixture, runtime summary, and validation.
+- Added Operator Run Model release notes and closure checklist.
 
 ## Unreleased - Post-v1 Feature Implementation
 
