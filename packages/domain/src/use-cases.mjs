@@ -185,6 +185,37 @@ export function createOperatorRunSummary(store, operatorRunId) {
   };
 }
 
+export function createOperatorRunQueue(store) {
+  const priorityRank = { high: 0, normal: 1, low: 2 };
+  const statusRank = { active: 0, blocked: 1, queued: 2, ready: 3, complete: 4 };
+
+  const items = store
+    .list('operator-run')
+    .map((operatorRun) => createOperatorRunSummary(store, operatorRun.id))
+    .sort((a, b) => {
+      const statusOrder = (statusRank[a.status] ?? 99) - (statusRank[b.status] ?? 99);
+      if (statusOrder !== 0) {
+        return statusOrder;
+      }
+
+      const priorityOrder = (priorityRank[a.priority] ?? 99) - (priorityRank[b.priority] ?? 99);
+      if (priorityOrder !== 0) {
+        return priorityOrder;
+      }
+
+      return a.updatedAt.localeCompare(b.updatedAt);
+    });
+
+  return {
+    title: 'Operator Run Queue',
+    runCount: items.length,
+    blockedCount: items.filter((item) => item.status === 'blocked').length,
+    readyCount: items.filter((item) => item.status === 'ready').length,
+    activeRunId: items.find((item) => item.status !== 'complete')?.id ?? null,
+    items
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

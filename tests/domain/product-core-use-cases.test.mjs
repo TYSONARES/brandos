@@ -7,6 +7,7 @@ import {
   createContextPackUsageFlow,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createOperatorRunQueue,
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   evaluateContextPackReadiness,
@@ -165,4 +166,16 @@ test('Operator Run summary resolves workflow and current action state', () => {
   assert.equal(summary.nextActionLabel, 'Resolve review feedback for context_pack_example_001');
   assert.equal(summary.handoffId, 'operator_handoff_example_001');
   assert.equal(summary.auditEventCount, 1);
+});
+
+test('Operator Run Queue summarizes active operator work', () => {
+  const queue = createOperatorRunQueue(createExampleStore());
+
+  assert.equal(queue.title, 'Operator Run Queue');
+  assert.equal(queue.runCount, 1);
+  assert.equal(queue.blockedCount, 1);
+  assert.equal(queue.readyCount, 0);
+  assert.equal(queue.activeRunId, 'operator_run_example_001');
+  assert.deepEqual(queue.items.map((item) => item.id), ['operator_run_example_001']);
+  assert.equal(queue.items[0].currentActionStatus, 'pending');
 });

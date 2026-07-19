@@ -1,0 +1,32 @@
+{
+  "id": "component_operator_run_queue_panel",
+  "name": "Operator Run Queue Panel",
+  "status": "draft",
+  "purpose": "Shows queued operator work with status, priority, owner, current action, and handoff context.",
+  "productObjects": [
+    "operator-run",
+    "workflow-run",
+    "workflow-action"
+  ],
+  "states": [
+    "queued",
+    "active",
+    "blocked",
+    "ready",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose status, priority, owner, and current action as visible text.",
+    "Do not rely on color alone to communicate queue order or blocked state.",
+    "Keep handoff and audit context readable for AI and human operators."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

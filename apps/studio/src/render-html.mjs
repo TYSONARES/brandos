@@ -397,6 +397,33 @@ export function renderStudioHtml(shell, options = {}) {
       text-align: center;
       text-decoration: none;
     }
+    .operator-run-queue-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-run-queue-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-run-queue-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-run-queue-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -607,6 +634,7 @@ export function renderStudioHtml(shell, options = {}) {
       .review-resolution-row,
       .audit-row,
       .handoff-row,
+      .operator-run-queue-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -681,6 +709,20 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
       <div class="operator-control-list" aria-label="Operator execution controls">
         ${shell.operatorWorkflow.executionControls.map(renderOperatorExecutionControl).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Run Queue</p>
+    <section class="panel" aria-label="Operator Run Queue">
+      <h2>${escapeHtml(shell.operatorRunQueue.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Run count', `Operator run queue count: ${shell.operatorRunQueue.runCount}`)}
+        ${renderGuidanceRow('Blocked', `Operator run blocked count: ${shell.operatorRunQueue.blockedCount}`)}
+        ${renderGuidanceRow('Ready', `Operator run ready count: ${shell.operatorRunQueue.readyCount}`)}
+        ${renderGuidanceRow('Active run', `Operator run active id: ${shell.operatorRunQueue.activeRunId || 'none'}`)}
+      </div>
+      <div class="operator-run-queue-list">
+        ${shell.operatorRunQueue.items.map(renderOperatorRunQueueItem).join('')}
       </div>
     </section>
 
@@ -930,6 +972,24 @@ function renderOperatorControlAction(control) {
   }
 
   return `<div class="operator-control-action"><a href="${escapeHtml(control.target)}">${escapeHtml(control.label)}</a></div>`;
+}
+
+function renderOperatorRunQueueItem(item) {
+  return `<div class="operator-run-queue-row">
+          <span class="operator-run-queue-label">${escapeHtml(item.id)}</span>
+          <span class="operator-run-queue-value">
+            <span>Operator run status: ${escapeHtml(item.status)}</span>
+            <span>Operator run priority: ${escapeHtml(item.priority)}</span>
+            <span>Operator run owner: ${escapeHtml(item.owner)}</span>
+            <span>Operator run workflow: ${escapeHtml(item.workflow)}</span>
+            <span>Operator run objective: ${escapeHtml(item.objective)}</span>
+            <span>Operator run current action: ${escapeHtml(item.currentActionId)}</span>
+            <span>Operator run current action status: ${escapeHtml(item.currentActionStatus)}</span>
+            <span>Operator run next action: ${escapeHtml(item.nextActionLabel)}</span>
+            <span>Operator run handoff: ${escapeHtml(item.handoffId)}</span>
+            <span>Operator run audit events: ${escapeHtml(item.auditEventCount)}</span>
+          </span>
+        </div>`;
 }
 
 function renderUsageRow(label, value) {

@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createOperatorRunQueue,
   createOperatorRunSummary,
   listProductCoreModels,
   summarizeProductCoreState
@@ -12,10 +13,12 @@ const required = [
   'docs/development/iteration-v1.1-operator-run-model.md',
   'docs/development/release-v1.1-operator-run-model.md',
   'docs/development/closure-v1.1-operator-run-model.md',
+  'docs/development/iteration-v1.1-operator-run-queue.md',
   'docs/decisions/0023-operator-runtime-start.md',
   'docs/product/operator-run.md',
   'schemas/operator-run.schema.json',
-  'fixtures/operator-run.example.json'
+  'fixtures/operator-run.example.json',
+  'fixtures/components/operator-run-queue-panel.json'
 ];
 
 const missing = required.filter((file) => !existsSync(file));
@@ -45,6 +48,12 @@ if (operatorRun.currentActionId !== 'workflow_action_example_001') {
 }
 if (operatorRun.currentActionStatus !== 'pending' || operatorRun.pendingActionCount !== 1) {
   console.error('Operator Run summary did not expose expected pending action state.');
+  process.exit(1);
+}
+
+const queue = createOperatorRunQueue(store);
+if (queue.runCount !== 1 || queue.blockedCount !== 1 || queue.activeRunId !== 'operator_run_example_001') {
+  console.error('Operator Run Queue did not expose expected queue counts.');
   process.exit(1);
 }
 

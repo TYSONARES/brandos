@@ -44,6 +44,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Operator guidance/);
   assert.match(html, /aria-label="Operator workflow"/);
   assert.match(html, /Operator workflow/);
+  assert.match(html, /aria-label="Operator Run Queue"/);
+  assert.match(html, /Operator Run Queue/);
   assert.match(html, /aria-label="Context Pack usage flow"/);
   assert.match(html, /Context Pack usage flow/);
   assert.match(html, /aria-label="Review resolution workflow"/);
@@ -125,6 +127,19 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Operator control result: Preview ready scenario/);
   assert.match(html, /class="operator-control-action" method="get" action="ready.html"/);
   assert.match(html, /<button type="submit">Complete Workflow Action<\/button>/);
+  assert.match(html, /Operator run queue count: 1/);
+  assert.match(html, /Operator run blocked count: 1/);
+  assert.match(html, /Operator run ready count: 0/);
+  assert.match(html, /Operator run active id: operator_run_example_001/);
+  assert.match(html, /Operator run status: blocked/);
+  assert.match(html, /Operator run priority: normal/);
+  assert.match(html, /Operator run owner: operator@example.local/);
+  assert.match(html, /Operator run workflow: generate-context-pack/);
+  assert.match(html, /Operator run current action: workflow_action_example_001/);
+  assert.match(html, /Operator run current action status: pending/);
+  assert.match(html, /Operator run next action: Resolve review feedback for context_pack_example_001/);
+  assert.match(html, /Operator run handoff: operator_handoff_example_001/);
+  assert.match(html, /Operator run audit events: 1/);
   assert.match(html, /Context Pack usage status: draft/);
   assert.match(html, /Context Pack task type: brand-writing/);
   assert.match(html, /Context Pack audience: AI agents drafting product and brand copy/);
