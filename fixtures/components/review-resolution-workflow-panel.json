@@ -1,0 +1,32 @@
+{
+  "id": "component_review_resolution_workflow_panel",
+  "name": "Review Resolution Workflow Panel",
+  "status": "draft",
+  "purpose": "Shows review resolution status, target, reviewer, action status, owner, recommendation, result, and resolution steps.",
+  "productObjects": [
+    "review",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "needs-resolution",
+    "resolved",
+    "active",
+    "blocked",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose review status, action status, recommendation, and result as visible text.",
+    "Expose every resolution step as readable text.",
+    "Do not rely on color to communicate blocked or resolved state."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

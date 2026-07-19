@@ -128,6 +128,35 @@ export function createContextPackUsageFlow(store, contextPackId) {
   };
 }
 
+export function createReviewResolutionWorkflow(store, reviewId) {
+  const review = requireRecord(store, 'review', reviewId);
+  const action = store
+    .list('workflow-action')
+    .find((item) => item.targetObjectId === review.id && item.type === 'review-resolution');
+  const resolved = review.status === 'approved';
+
+  return {
+    id: review.id,
+    title: 'Review resolution workflow',
+    status: resolved ? 'resolved' : 'needs-resolution',
+    targetObjectId: review.targetObjectId,
+    targetObjectType: review.targetObjectType,
+    reviewer: review.reviewer,
+    notes: review.notes,
+    actionId: action?.id ?? null,
+    actionStatus: action?.status ?? 'missing',
+    owner: action?.owner ?? review.reviewer,
+    recommendedAction: resolved ? 'Use resolved review' : 'Resolve review feedback',
+    resolutionResult: resolved ? 'Review approved' : 'Review blocks Context Pack readiness',
+    steps: [
+      { label: 'Confirm review target', status: 'complete', detail: `${review.targetObjectType} ${review.targetObjectId}` },
+      { label: 'Read requested changes', status: 'complete', detail: review.notes },
+      { label: 'Complete resolution action', status: resolved ? 'complete' : 'active', detail: action?.label ?? 'No resolution action found' },
+      { label: 'Recheck readiness', status: resolved ? 'active' : 'blocked', detail: resolved ? 'Context Pack can be rechecked.' : 'Readiness waits for review resolution.' }
+    ]
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

@@ -4,6 +4,7 @@ import {
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
   createContextPackUsageFlow,
+  createReviewResolutionWorkflow,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -30,6 +31,7 @@ export function createBrandOSStudioShell(options = {}) {
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
   const contextPackUsageFlow = createContextPackUsageFlow(store, 'context_pack_example_001');
+  const reviewResolutionWorkflow = createReviewResolutionWorkflow(store, 'review_example_001');
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
@@ -147,6 +149,7 @@ export function createBrandOSStudioShell(options = {}) {
     brandProfileOverview,
     contextPackReadiness,
     contextPackUsageFlow,
+    reviewResolutionWorkflow,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

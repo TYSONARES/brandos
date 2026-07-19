@@ -474,6 +474,56 @@ export function renderStudioHtml(shell, options = {}) {
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .review-resolution-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .review-resolution-row {
+      align-items: start;
+      border-top: 1px solid #e7ebf0;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding-top: 8px;
+    }
+    .review-resolution-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .review-resolution-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .review-resolution-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .review-resolution-step-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .review-resolution-step {
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 4px;
+      padding: 8px;
+    }
+    .review-resolution-step-label {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .review-resolution-step-detail {
+      color: var(--secondary);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -500,6 +550,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-workflow-stage,
       .usage-row,
       .multi-action-row,
+      .review-resolution-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -662,6 +713,24 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Review resolution workflow</p>
+    <section class="panel" aria-label="Review resolution workflow">
+      <h2>${escapeHtml(shell.reviewResolutionWorkflow.title)}</h2>
+      <div class="review-resolution-list">
+        ${renderReviewResolutionRow('Status', `Review resolution status: ${shell.reviewResolutionWorkflow.status}`)}
+        ${renderReviewResolutionRow('Target', `Review resolution target: ${shell.reviewResolutionWorkflow.targetObjectType} ${shell.reviewResolutionWorkflow.targetObjectId}`)}
+        ${renderReviewResolutionRow('Reviewer', `Review resolution reviewer: ${shell.reviewResolutionWorkflow.reviewer}`)}
+        ${renderReviewResolutionRow('Action', `Review resolution action: ${shell.reviewResolutionWorkflow.actionId || 'none'}`)}
+        ${renderReviewResolutionRow('Action status', `Review resolution action status: ${shell.reviewResolutionWorkflow.actionStatus}`)}
+        ${renderReviewResolutionRow('Owner', `Review resolution owner: ${shell.reviewResolutionWorkflow.owner}`)}
+        ${renderReviewResolutionRow('Recommended action', `Review resolution recommendation: ${shell.reviewResolutionWorkflow.recommendedAction}`)}
+        ${renderReviewResolutionRow('Result', `Review resolution result: ${shell.reviewResolutionWorkflow.resolutionResult}`)}
+      </div>
+      <div class="review-resolution-step-list">
+        ${shell.reviewResolutionWorkflow.steps.map(renderReviewResolutionStep).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Studio state inspection</p>
     <section class="panel" aria-label="Studio state inspection">
       <h2>${escapeHtml(shell.studioStateInspection.title)}</h2>
@@ -796,6 +865,20 @@ function renderMultiActionRow(label, value) {
   return `<div class="multi-action-row">
           <span class="multi-action-label">${escapeHtml(label)}</span>
           <span class="multi-action-value">${escapeHtml(value)}</span>
+        </div>`;
+}
+
+function renderReviewResolutionRow(label, value) {
+  return `<div class="review-resolution-row">
+          <span class="review-resolution-label">${escapeHtml(label)}</span>
+          <span class="review-resolution-value">${escapeHtml(value)}</span>
+        </div>`;
+}
+
+function renderReviewResolutionStep(step) {
+  return `<div class="review-resolution-step">
+          <span class="review-resolution-step-label">Review resolution step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)}</span>
+          <span class="review-resolution-step-detail">Review resolution detail: ${escapeHtml(step.detail)}</span>
         </div>`;
 }
 

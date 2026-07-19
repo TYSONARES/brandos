@@ -7,6 +7,7 @@ export {
   completeWorkflowAction,
   createBrandProfileOverview,
   createContextPackUsageFlow,
+  createReviewResolutionWorkflow,
   evaluateContextPackReadiness
 } from './use-cases.mjs';
 

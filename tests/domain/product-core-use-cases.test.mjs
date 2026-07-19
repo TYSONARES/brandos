@@ -7,6 +7,7 @@ import {
   createContextPackUsageFlow,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createReviewResolutionWorkflow,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -122,4 +123,26 @@ test('Context Pack usage flow summarizes task boundary and source scope', () => 
     'Respect exclusions',
     'Follow agent instructions'
   ]);
+});
+
+test('Review resolution workflow summarizes pending and resolved review state', () => {
+  const store = createExampleStore();
+  const pending = createReviewResolutionWorkflow(store, 'review_example_001');
+
+  assert.equal(pending.status, 'needs-resolution');
+  assert.equal(pending.targetObjectId, 'context_pack_example_001');
+  assert.equal(pending.actionId, 'workflow_action_example_001');
+  assert.equal(pending.actionStatus, 'pending');
+  assert.equal(pending.recommendedAction, 'Resolve review feedback');
+  assert.equal(pending.resolutionResult, 'Review blocks Context Pack readiness');
+  assert.deepEqual(pending.steps.map((step) => step.status), ['complete', 'complete', 'active', 'blocked']);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const resolved = createReviewResolutionWorkflow(store, 'review_example_001');
+
+  assert.equal(resolved.status, 'resolved');
+  assert.equal(resolved.actionStatus, 'complete');
+  assert.equal(resolved.recommendedAction, 'Use resolved review');
+  assert.equal(resolved.resolutionResult, 'Review approved');
+  assert.deepEqual(resolved.steps.map((step) => step.status), ['complete', 'complete', 'complete', 'active']);
 });

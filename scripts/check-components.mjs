@@ -8,6 +8,7 @@ const componentFiles = [
   'fixtures/components/context-pack-card.json',
   'fixtures/components/context-pack-usage-flow.json',
   'fixtures/components/review-panel.json',
+  'fixtures/components/review-resolution-workflow-panel.json',
   'fixtures/components/workflow-stepper.json',
   'fixtures/components/action-status-badge.json',
   'fixtures/components/workflow-action-row.json',
