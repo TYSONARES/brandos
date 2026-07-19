@@ -54,6 +54,8 @@
 - Added post-v1 Multi-Action Workflow State release notes and closure checklist.
 - Added Review Resolution Workflow package start.
 - Added post-v1 Review Resolution Workflow release notes and closure checklist.
+- Added Studio Workflow Audit Trail package start.
+- Added post-v1 Studio Workflow Audit Trail release notes and closure checklist.
 
 ## 1.0.0 - Development Ready
 

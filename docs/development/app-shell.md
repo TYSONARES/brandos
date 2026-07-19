@@ -57,6 +57,9 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Review Resolution Workflow panel
 - post-v1 Review Resolution Workflow release notes
 - post-v1 Review Resolution Workflow closure checklist
+- dedicated Studio Workflow Audit Trail panel
+- post-v1 Studio Workflow Audit Trail release notes
+- post-v1 Studio Workflow Audit Trail closure checklist
 - compact visual treatment for Workflow Action state source rows
 - component fixture coverage for the Workflow Action state panel
 - post-v1 Workflow Actions release notes
