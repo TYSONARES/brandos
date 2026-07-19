@@ -40,6 +40,7 @@
 - Added post-v1 Studio State Inspection closure checklist.
 - Added Studio diagnostics panel package start.
 - Added Studio diagnostics check rows.
+- Added post-v1 Studio Diagnostics release notes.
 
 ## 1.0.0 - Development Ready
 

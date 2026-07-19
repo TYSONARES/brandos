@@ -11,6 +11,7 @@ const required = [
   'docs/development/release-post-v1-studio-state-inspection.md',
   'docs/development/closure-post-v1-studio-state-inspection.md',
   'docs/development/iteration-post-v1-studio-diagnostics.md',
+  'docs/development/release-post-v1-studio-diagnostics.md',
   'docs/product/workflow-action.md',
   'schemas/workflow-action.schema.json',
   'fixtures/workflow-action.example.json',

@@ -24,6 +24,7 @@ product, readiness, and state signals without changing Product Core behavior or 
 - `tests/studio/render-html.test.mjs`
 - `scripts/check-studio-render.mjs`
 - `scripts/check-studio-build.mjs`
+- `docs/development/release-post-v1-studio-diagnostics.md`
 - `npm run check:components`
 
 ## Acceptance Criteria
@@ -33,7 +34,8 @@ product, readiness, and state signals without changing Product Core behavior or 
 - Diagnostics work for blocked and ready Studio scenarios.
 - The design component fixture captures the diagnostics panel contract.
 - Quality gates cover rendered Studio diagnostics fields.
+- Studio Diagnostics release notes summarize user-facing changes, repository changes, commands, and acceptance status.
 
 ## Next Step
 
-Add release notes after the diagnostics panel is stable.
+Add closure evidence after the diagnostics release notes are stable.
