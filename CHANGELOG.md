@@ -48,6 +48,8 @@
 - Added post-v1 Operator Workflow release notes and closure checklist.
 - Added Operator Workflow Execution Controls package start.
 - Added post-v1 Operator Workflow Execution Controls release notes and closure checklist.
+- Added Context Pack Usage Flow package start.
+- Added post-v1 Context Pack Usage Flow release notes and closure checklist.
 
 ## 1.0.0 - Development Ready
 
