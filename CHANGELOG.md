@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Agent Handoff Runtime v1.2
+
+- Started Agent Handoff Runtime v1.2 scope and decision record.
+
 ## Unreleased - Operator Runtime v1.1
 
 - Started Operator Runtime v1.1 scope and decision record.

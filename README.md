@@ -8,9 +8,9 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: post-v1.0 feature implementation
-- Active workstream: Operator Runtime v1.1
-- Status: operator runtime scope started
+- Latest completed implementation cycle: Operator Runtime v1.1
+- Active workstream: Agent Handoff Runtime v1.2
+- Status: agent handoff runtime scope started
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,8 +54,8 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Operator Runtime v1.1 turns the completed post-v1 Studio workflow surface into a traceable operator
-execution baseline.
+Agent Handoff Runtime v1.2 turns accepted Operator Runtime handoff context into deterministic,
+repository-backed agent work context.
 
 ## Repository Contract
 

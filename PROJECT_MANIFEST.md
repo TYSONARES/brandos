@@ -5,8 +5,8 @@
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: post-v1.0 feature implementation
-- Active workstream: Operator Runtime v1.1
+- Latest completed implementation cycle: Operator Runtime v1.1
+- Active workstream: Agent Handoff Runtime v1.2
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -96,6 +96,17 @@ Operator Runtime v1.1 turns the completed post-v1 Studio workflow surface into a
 execution baseline. It defines operator run state, queue behavior, runbook execution, and handoff
 acceptance without adding production deployment, database, authentication, external integrations, or
 AI model execution.
+
+## v1.1 Completion
+
+Operator Runtime v1.1 is complete at implementation cycle level. See
+`docs/development/release-v1.1-final-closure.md` and `docs/development/closure-v1.1-final-closure.md`.
+
+## v1.2 Scope
+
+Agent Handoff Runtime v1.2 turns accepted Operator Runtime handoff context into deterministic,
+repository-backed agent work context. It defines agent handoff context, agent task packets, inspection,
+and traceability checks without adding live AI model execution or external agent orchestration.
 
 ## Definition of Done
 
