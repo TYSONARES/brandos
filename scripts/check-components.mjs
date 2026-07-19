@@ -13,7 +13,8 @@ const componentFiles = [
   'fixtures/components/workflow-action-state-panel.json',
   'fixtures/components/studio-state-inspection-panel.json',
   'fixtures/components/studio-diagnostics-panel.json',
-  'fixtures/components/operator-guidance-panel.json'
+  'fixtures/components/operator-guidance-panel.json',
+  'fixtures/components/operator-workflow-panel.json'
 ];
 const tokenFiles = [
   'fixtures/tokens/color.json',

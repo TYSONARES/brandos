@@ -15,6 +15,7 @@ const requiredSnippets = [
   'aria-label="Context Pack workflow"',
   'aria-label="Studio diagnostics"',
   'aria-label="Operator guidance"',
+  'aria-label="Operator workflow"',
   'aria-label="Studio state inspection"',
   'class="workflow-action-row"',
   'class="action-status-badge action-status-pending"',
@@ -60,7 +61,13 @@ const requiredSnippets = [
   'Guidance status: attention',
   'Recommended action: Resolve readiness blocker',
   'Guidance reason: Review is blocking release: review_example_001',
-  'Guidance command: Complete pending Workflow Action'
+  'Guidance command: Complete pending Workflow Action',
+  'Operator workflow status: attention',
+  'Operator active stage: Resolve action',
+  'Operator next action: Complete workflow_action_example_001',
+  'Operator stage detail: Context Pack readiness was evaluated.',
+  'Operator stage detail: Review is blocking release: review_example_001',
+  'Operator stage detail: Context Pack use waits for the pending Workflow Action.'
 ];
 const requiredReadySnippets = [
   'aria-current="page" href="ready.html"',
@@ -87,7 +94,13 @@ const requiredReadySnippets = [
   'Guidance status: ready',
   'Recommended action: Use Context Pack',
   'Guidance reason: Context Pack has no readiness blockers.',
-  'Guidance command: Open ready scenario'
+  'Guidance command: Open ready scenario',
+  'Operator workflow status: ready',
+  'Operator active stage: Use Context Pack',
+  'Operator next action: Use context pack context_pack_example_001',
+  'Operator stage detail: Context Pack readiness has no blockers.',
+  'Operator stage detail: Required Workflow Action is complete.',
+  'Operator stage detail: Context Pack is ready for operator use.'
 ];
 
 const missing = [

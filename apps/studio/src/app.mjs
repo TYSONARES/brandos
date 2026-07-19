@@ -87,6 +87,27 @@ export function createBrandOSStudioShell(options = {}) {
     reason: contextPackReadiness.blockingReasons[0] ?? 'Context Pack is not ready.',
     command: 'Complete pending Workflow Action'
   };
+  const operatorWorkflow = contextPackReadiness.ready ? {
+    title: 'Operator workflow',
+    status: 'ready',
+    activeStage: 'Use Context Pack',
+    nextAction: 'Use context pack context_pack_example_001',
+    stages: [
+      { label: 'Review readiness', status: 'complete', detail: 'Context Pack readiness has no blockers.' },
+      { label: 'Resolve action', status: 'complete', detail: 'Required Workflow Action is complete.' },
+      { label: 'Use Context Pack', status: 'active', detail: 'Context Pack is ready for operator use.' }
+    ]
+  } : {
+    title: 'Operator workflow',
+    status: 'attention',
+    activeStage: 'Resolve action',
+    nextAction: 'Complete workflow_action_example_001',
+    stages: [
+      { label: 'Review readiness', status: 'complete', detail: 'Context Pack readiness was evaluated.' },
+      { label: 'Resolve action', status: 'active', detail: contextPackReadiness.blockingReasons[0] ?? 'Resolve the current readiness blocker.' },
+      { label: 'Use Context Pack', status: 'blocked', detail: 'Context Pack use waits for the pending Workflow Action.' }
+    ]
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -98,6 +119,7 @@ export function createBrandOSStudioShell(options = {}) {
     studioStateInspection,
     diagnostics,
     operatorGuidance,
+    operatorWorkflow,
     packages: [
       createDomainSummary(),
       createContractSummary(),

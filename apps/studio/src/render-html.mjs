@@ -318,6 +318,37 @@ export function renderStudioHtml(shell, options = {}) {
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .operator-workflow-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-workflow-stage {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 130px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-workflow-stage-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-workflow-stage-copy {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-workflow-status {
+      font-weight: 700;
+      text-transform: capitalize;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -340,7 +371,8 @@ export function renderStudioHtml(shell, options = {}) {
       .state-source-row,
       .inspection-row,
       .diagnostic-row,
-      .guidance-row { grid-template-columns: 1fr; }
+      .guidance-row,
+      .operator-workflow-stage { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -396,6 +428,19 @@ export function renderStudioHtml(shell, options = {}) {
         ${renderGuidanceRow('Recommendation', `Recommended action: ${shell.operatorGuidance.recommendation}`)}
         ${renderGuidanceRow('Reason', `Guidance reason: ${shell.operatorGuidance.reason}`)}
         ${renderGuidanceRow('Command', `Guidance command: ${shell.operatorGuidance.command}`)}
+      </div>
+    </section>
+
+    <p class="section-title">Operator workflow</p>
+    <section class="panel" aria-label="Operator workflow">
+      <h2>${escapeHtml(shell.operatorWorkflow.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator workflow status: ${shell.operatorWorkflow.status}`)}
+        ${renderGuidanceRow('Active stage', `Operator active stage: ${shell.operatorWorkflow.activeStage}`)}
+        ${renderGuidanceRow('Next action', `Operator next action: ${shell.operatorWorkflow.nextAction}`)}
+      </div>
+      <div class="operator-workflow-list">
+        ${shell.operatorWorkflow.stages.map(renderOperatorWorkflowStage).join('')}
       </div>
     </section>
 
@@ -532,6 +577,16 @@ function renderGuidanceRow(label, value) {
   return `<div class="guidance-row">
           <span class="guidance-label">${escapeHtml(label)}</span>
           <span class="guidance-value">${escapeHtml(value)}</span>
+        </div>`;
+}
+
+function renderOperatorWorkflowStage(stage) {
+  return `<div class="operator-workflow-stage">
+          <span class="operator-workflow-stage-label">${escapeHtml(stage.label)}</span>
+          <span class="operator-workflow-stage-copy">
+            <span class="operator-workflow-status">Operator stage status: ${escapeHtml(stage.status)}</span>
+            <span>Operator stage detail: ${escapeHtml(stage.detail)}</span>
+          </span>
         </div>`;
 }
 

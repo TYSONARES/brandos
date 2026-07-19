@@ -42,6 +42,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Studio diagnostics/);
   assert.match(html, /aria-label="Operator guidance"/);
   assert.match(html, /Operator guidance/);
+  assert.match(html, /aria-label="Operator workflow"/);
+  assert.match(html, /Operator workflow/);
   assert.match(html, /aria-label="Studio state inspection"/);
   assert.match(html, /Studio state inspection/);
 });
@@ -97,6 +99,15 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Recommended action: Resolve readiness blocker/);
   assert.match(html, /Guidance reason: Review is blocking release: review_example_001/);
   assert.match(html, /Guidance command: Complete pending Workflow Action/);
+  assert.match(html, /Operator workflow status: attention/);
+  assert.match(html, /Operator active stage: Resolve action/);
+  assert.match(html, /Operator next action: Complete workflow_action_example_001/);
+  assert.match(html, /Operator stage status: complete/);
+  assert.match(html, /Operator stage detail: Context Pack readiness was evaluated./);
+  assert.match(html, /Operator stage status: active/);
+  assert.match(html, /Operator stage detail: Review is blocking release: review_example_001/);
+  assert.match(html, /Operator stage status: blocked/);
+  assert.match(html, /Operator stage detail: Context Pack use waits for the pending Workflow Action./);
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
@@ -131,6 +142,12 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Recommended action: Use Context Pack/);
   assert.match(html, /Guidance reason: Context Pack has no readiness blockers./);
   assert.match(html, /Guidance command: Open ready scenario/);
+  assert.match(html, /Operator workflow status: ready/);
+  assert.match(html, /Operator active stage: Use Context Pack/);
+  assert.match(html, /Operator next action: Use context pack context_pack_example_001/);
+  assert.match(html, /Operator stage detail: Context Pack readiness has no blockers./);
+  assert.match(html, /Operator stage detail: Required Workflow Action is complete./);
+  assert.match(html, /Operator stage detail: Context Pack is ready for operator use./);
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {

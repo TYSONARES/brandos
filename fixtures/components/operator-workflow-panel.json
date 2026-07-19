@@ -1,0 +1,31 @@
+{
+  "id": "component_operator_workflow_panel",
+  "name": "Operator Workflow Panel",
+  "status": "draft",
+  "purpose": "Shows the operator workflow stages, active stage, status, and next action for the current Studio scenario.",
+  "productObjects": [
+    "context-pack",
+    "workflow-action"
+  ],
+  "states": [
+    "attention",
+    "ready",
+    "blocked",
+    "active",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose every workflow stage as visible text.",
+    "Expose active stage, next action, and status as readable text.",
+    "Do not rely on color or order alone to communicate stage state."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
