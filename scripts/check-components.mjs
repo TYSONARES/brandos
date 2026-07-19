@@ -14,7 +14,8 @@ const componentFiles = [
   'fixtures/components/studio-state-inspection-panel.json',
   'fixtures/components/studio-diagnostics-panel.json',
   'fixtures/components/operator-guidance-panel.json',
-  'fixtures/components/operator-workflow-panel.json'
+  'fixtures/components/operator-workflow-panel.json',
+  'fixtures/components/operator-workflow-execution-controls.json'
 ];
 const tokenFiles = [
   'fixtures/tokens/color.json',

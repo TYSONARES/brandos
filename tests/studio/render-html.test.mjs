@@ -108,6 +108,13 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Operator stage detail: Review is blocking release: review_example_001/);
   assert.match(html, /Operator stage status: blocked/);
   assert.match(html, /Operator stage detail: Context Pack use waits for the pending Workflow Action./);
+  assert.match(html, /aria-label="Operator execution controls"/);
+  assert.match(html, /Operator control label: Complete Workflow Action/);
+  assert.match(html, /Operator control status: enabled/);
+  assert.match(html, /Operator control command: Complete workflow_action_example_001/);
+  assert.match(html, /Operator control result: Preview ready scenario/);
+  assert.match(html, /class="operator-control-action" method="get" action="ready.html"/);
+  assert.match(html, /<button type="submit">Complete Workflow Action<\/button>/);
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
@@ -148,6 +155,12 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Operator stage detail: Context Pack readiness has no blockers./);
   assert.match(html, /Operator stage detail: Required Workflow Action is complete./);
   assert.match(html, /Operator stage detail: Context Pack is ready for operator use./);
+  assert.match(html, /aria-label="Operator execution controls"/);
+  assert.match(html, /Operator control label: Use Context Pack/);
+  assert.match(html, /Operator control status: enabled/);
+  assert.match(html, /Operator control command: Open Context Pack workflow/);
+  assert.match(html, /Operator control result: Continue with ready Context Pack/);
+  assert.match(html, /<a href="ready.html">Use Context Pack<\/a>/);
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {

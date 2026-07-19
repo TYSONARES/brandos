@@ -92,6 +92,16 @@ export function createBrandOSStudioShell(options = {}) {
     status: 'ready',
     activeStage: 'Use Context Pack',
     nextAction: 'Use context pack context_pack_example_001',
+    executionControls: [
+      {
+        label: 'Use Context Pack',
+        controlType: 'link',
+        status: 'enabled',
+        command: 'Open Context Pack workflow',
+        target: 'ready.html',
+        result: 'Continue with ready Context Pack'
+      }
+    ],
     stages: [
       { label: 'Review readiness', status: 'complete', detail: 'Context Pack readiness has no blockers.' },
       { label: 'Resolve action', status: 'complete', detail: 'Required Workflow Action is complete.' },
@@ -102,6 +112,16 @@ export function createBrandOSStudioShell(options = {}) {
     status: 'attention',
     activeStage: 'Resolve action',
     nextAction: 'Complete workflow_action_example_001',
+    executionControls: [
+      {
+        label: 'Complete Workflow Action',
+        controlType: 'form',
+        status: 'enabled',
+        command: 'Complete workflow_action_example_001',
+        target: 'ready.html',
+        result: 'Preview ready scenario'
+      }
+    ],
     stages: [
       { label: 'Review readiness', status: 'complete', detail: 'Context Pack readiness was evaluated.' },
       { label: 'Resolve action', status: 'active', detail: contextPackReadiness.blockingReasons[0] ?? 'Resolve the current readiness blocker.' },

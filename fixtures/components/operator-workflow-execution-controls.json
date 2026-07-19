@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_workflow_execution_controls",
+  "name": "Operator Workflow Execution Controls",
+  "status": "draft",
+  "purpose": "Shows the available operator control for the active workflow stage, including command, result, and action affordance.",
+  "productObjects": [
+    "context-pack",
+    "workflow-action"
+  ],
+  "states": [
+    "enabled",
+    "attention",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose the control label as visible button or link text.",
+    "Expose command, result, and status as readable text.",
+    "Keep form and link controls reachable through standard keyboard navigation."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

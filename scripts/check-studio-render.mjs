@@ -67,7 +67,14 @@ const requiredSnippets = [
   'Operator next action: Complete workflow_action_example_001',
   'Operator stage detail: Context Pack readiness was evaluated.',
   'Operator stage detail: Review is blocking release: review_example_001',
-  'Operator stage detail: Context Pack use waits for the pending Workflow Action.'
+  'Operator stage detail: Context Pack use waits for the pending Workflow Action.',
+  'aria-label="Operator execution controls"',
+  'Operator control label: Complete Workflow Action',
+  'Operator control status: enabled',
+  'Operator control command: Complete workflow_action_example_001',
+  'Operator control result: Preview ready scenario',
+  'class="operator-control-action" method="get" action="ready.html"',
+  '<button type="submit">Complete Workflow Action</button>'
 ];
 const requiredReadySnippets = [
   'aria-current="page" href="ready.html"',
@@ -100,7 +107,13 @@ const requiredReadySnippets = [
   'Operator next action: Use context pack context_pack_example_001',
   'Operator stage detail: Context Pack readiness has no blockers.',
   'Operator stage detail: Required Workflow Action is complete.',
-  'Operator stage detail: Context Pack is ready for operator use.'
+  'Operator stage detail: Context Pack is ready for operator use.',
+  'aria-label="Operator execution controls"',
+  'Operator control label: Use Context Pack',
+  'Operator control status: enabled',
+  'Operator control command: Open Context Pack workflow',
+  'Operator control result: Continue with ready Context Pack',
+  '<a href="ready.html">Use Context Pack</a>'
 ];
 
 const missing = [

@@ -349,6 +349,54 @@ export function renderStudioHtml(shell, options = {}) {
       font-weight: 700;
       text-transform: capitalize;
     }
+    .operator-control-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .operator-control-row {
+      align-items: center;
+      background: #fbfcfe;
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 8px;
+    }
+    .operator-control-copy {
+      display: grid;
+      gap: 3px;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .operator-control-command {
+      color: var(--secondary);
+      font-size: 12px;
+    }
+    .operator-control-action {
+      display: flex;
+      margin: 0;
+    }
+    .operator-control-action input {
+      display: none;
+    }
+    .operator-control-action button,
+    .operator-control-action a {
+      appearance: none;
+      background: var(--action);
+      border: 1px solid var(--action);
+      border-radius: 8px;
+      color: var(--surface);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 142px;
+      padding: 7px 10px;
+      text-align: center;
+      text-decoration: none;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -372,7 +420,10 @@ export function renderStudioHtml(shell, options = {}) {
       .inspection-row,
       .diagnostic-row,
       .guidance-row,
-      .operator-workflow-stage { grid-template-columns: 1fr; }
+      .operator-workflow-stage,
+      .operator-control-row { grid-template-columns: 1fr; }
+      .operator-control-action button,
+      .operator-control-action a { width: 100%; }
     }
   </style>
 </head>
@@ -441,6 +492,9 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
       <div class="operator-workflow-list">
         ${shell.operatorWorkflow.stages.map(renderOperatorWorkflowStage).join('')}
+      </div>
+      <div class="operator-control-list" aria-label="Operator execution controls">
+        ${shell.operatorWorkflow.executionControls.map(renderOperatorExecutionControl).join('')}
       </div>
     </section>
 
@@ -588,6 +642,30 @@ function renderOperatorWorkflowStage(stage) {
             <span>Operator stage detail: ${escapeHtml(stage.detail)}</span>
           </span>
         </div>`;
+}
+
+function renderOperatorExecutionControl(control) {
+  return `<div class="operator-control-row">
+          <span class="operator-control-copy">
+            <span>Operator control label: ${escapeHtml(control.label)}</span>
+            <span>Operator control status: ${escapeHtml(control.status)}</span>
+            <span class="operator-control-command">Operator control command: ${escapeHtml(control.command)}</span>
+            <span class="operator-control-command">Operator control result: ${escapeHtml(control.result)}</span>
+          </span>
+          ${renderOperatorControlAction(control)}
+        </div>`;
+}
+
+function renderOperatorControlAction(control) {
+  if (control.controlType === 'form') {
+    return `<form class="operator-control-action" method="get" action="${escapeHtml(control.target)}">
+              <input type="hidden" name="actionId" value="workflow_action_example_001">
+              <input type="hidden" name="actionType" value="review-resolution">
+              <button type="submit">${escapeHtml(control.label)}</button>
+            </form>`;
+  }
+
+  return `<div class="operator-control-action"><a href="${escapeHtml(control.target)}">${escapeHtml(control.label)}</a></div>`;
 }
 
 function renderCompletedActionIds(actionIds) {
