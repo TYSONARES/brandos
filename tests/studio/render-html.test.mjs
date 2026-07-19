@@ -38,6 +38,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Brand overview/);
   assert.match(html, /Product Core objects/);
   assert.match(html, /Readiness blockers/);
+  assert.match(html, /aria-label="Studio diagnostics"/);
+  assert.match(html, /Studio diagnostics/);
   assert.match(html, /aria-label="Studio state inspection"/);
   assert.match(html, /Studio state inspection/);
 });
@@ -78,6 +80,12 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /blocked/);
   assert.match(html, /Review is blocking release: review_example_001/);
   assert.match(html, /Resolve review feedback for context_pack_example_001/);
+  assert.match(html, /Package count: 3/);
+  assert.match(html, /Product object count: 7/);
+  assert.match(html, /Readiness blockers: 1/);
+  assert.match(html, /Diagnostic state source: example/);
+  assert.match(html, /Diagnostic state status: not-loaded/);
+  assert.match(html, /Diagnostic result: attention/);
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
@@ -103,6 +111,9 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);
   assert.match(html, /Use context pack/);
   assert.match(html, /Use context pack context_pack_example_001/);
+  assert.match(html, /Readiness blockers: 0/);
+  assert.match(html, /Diagnostic state source: command/);
+  assert.match(html, /Diagnostic result: ready/);
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {

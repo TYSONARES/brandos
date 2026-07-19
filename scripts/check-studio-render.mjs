@@ -13,6 +13,7 @@ const requiredSnippets = [
   'aria-label="Studio metrics"',
   'aria-label="Brand overview"',
   'aria-label="Context Pack workflow"',
+  'aria-label="Studio diagnostics"',
   'aria-label="Studio state inspection"',
   'class="workflow-action-row"',
   'class="action-status-badge action-status-pending"',
@@ -43,7 +44,13 @@ const requiredSnippets = [
   'Complete action',
   'Action status: pending',
   'Product Core objects',
-  'Review is blocking release: review_example_001'
+  'Review is blocking release: review_example_001',
+  'Package count: 3',
+  'Product object count: 7',
+  'Readiness blockers: 1',
+  'Diagnostic state source: example',
+  'Diagnostic state status: not-loaded',
+  'Diagnostic result: attention'
 ];
 const requiredReadySnippets = [
   'aria-current="page" href="ready.html"',
@@ -61,7 +68,10 @@ const requiredReadySnippets = [
   'class="action-status-badge action-status-ready"',
   'Owner: operator@example.local - Target: context_pack_example_001',
   'Use context pack',
-  'Use context pack context_pack_example_001'
+  'Use context pack context_pack_example_001',
+  'Readiness blockers: 0',
+  'Diagnostic state source: command',
+  'Diagnostic result: ready'
 ];
 
 const missing = [

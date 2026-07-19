@@ -54,6 +54,15 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionCount: contextPackWorkflow.completedActionCount,
     completedActionIds: contextPackWorkflow.completedActionIds
   };
+  const diagnostics = {
+    title: 'Studio diagnostics',
+    packageCount: 3,
+    objectCount: state.objectCount,
+    readinessBlockerCount: contextPackReadiness.blockingReasons.length,
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    result: contextPackReadiness.ready ? 'ready' : 'attention'
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -63,6 +72,7 @@ export function createBrandOSStudioShell(options = {}) {
     contextPackReadiness,
     contextPackWorkflow,
     studioStateInspection,
+    diagnostics,
     packages: [
       createDomainSummary(),
       createContractSummary(),

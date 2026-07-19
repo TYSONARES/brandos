@@ -10,6 +10,7 @@ const checks = [
       'aria-current="page" href="index.html"',
       'href="ready.html"',
       'Product Core objects',
+      'aria-label="Studio diagnostics"',
       'aria-label="Studio state inspection"',
       'Context readiness',
       'Action status: pending',
@@ -31,7 +32,13 @@ const checks = [
       'window.localStorage.setItem',
       'name="actionId" value="workflow_action_example_001"',
       'Complete action',
-      'Review is blocking release: review_example_001'
+      'Review is blocking release: review_example_001',
+      'Package count: 3',
+      'Product object count: 7',
+      'Readiness blockers: 1',
+      'Diagnostic state source: example',
+      'Diagnostic state status: not-loaded',
+      'Diagnostic result: attention'
     ]
   },
   {
@@ -55,7 +62,10 @@ const checks = [
       'Completed action ids: workflow_action_example_001',
       'Owner: operator@example.local - Target: context_pack_example_001',
       'Use context pack',
-      'Use context pack context_pack_example_001'
+      'Use context pack context_pack_example_001',
+      'Readiness blockers: 0',
+      'Diagnostic state source: command',
+      'Diagnostic result: ready'
     ]
   }
 ];

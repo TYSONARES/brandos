@@ -11,7 +11,8 @@ const componentFiles = [
   'fixtures/components/action-status-badge.json',
   'fixtures/components/workflow-action-row.json',
   'fixtures/components/workflow-action-state-panel.json',
-  'fixtures/components/studio-state-inspection-panel.json'
+  'fixtures/components/studio-state-inspection-panel.json',
+  'fixtures/components/studio-diagnostics-panel.json'
 ];
 const tokenFiles = [
   'fixtures/tokens/color.json',

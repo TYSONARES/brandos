@@ -266,6 +266,31 @@ export function renderStudioHtml(shell, options = {}) {
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .diagnostics-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .diagnostic-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 160px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .diagnostic-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .diagnostic-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -286,7 +311,8 @@ export function renderStudioHtml(shell, options = {}) {
       .workflow-command button,
       .workflow-command a { width: 100%; }
       .state-source-row,
-      .inspection-row { grid-template-columns: 1fr; }
+      .inspection-row,
+      .diagnostic-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -318,6 +344,19 @@ export function renderStudioHtml(shell, options = {}) {
         <span class="metric">${shell.contextPackReadiness.blockingReasons.length}</span>
         <span class="label">Readiness blockers</span>
       </article>
+    </section>
+
+    <p class="section-title">Studio diagnostics</p>
+    <section class="panel" aria-label="Studio diagnostics">
+      <h2>${escapeHtml(shell.diagnostics.title)}</h2>
+      <div class="diagnostics-list">
+        ${renderDiagnosticRow('Packages', `Package count: ${shell.diagnostics.packageCount}`)}
+        ${renderDiagnosticRow('Objects', `Product object count: ${shell.diagnostics.objectCount}`)}
+        ${renderDiagnosticRow('Readiness', `Readiness blockers: ${shell.diagnostics.readinessBlockerCount}`)}
+        ${renderDiagnosticRow('State source', `Diagnostic state source: ${shell.diagnostics.stateSource}`)}
+        ${renderDiagnosticRow('State status', `Diagnostic state status: ${shell.diagnostics.stateStatus}`)}
+        ${renderDiagnosticRow('Result', `Diagnostic result: ${shell.diagnostics.result}`)}
+      </div>
     </section>
 
     <p class="section-title">Brand overview</p>
@@ -435,6 +474,13 @@ function renderInspectionRow(label, value) {
   return `<div class="inspection-row">
           <span class="inspection-label">${escapeHtml(label)}</span>
           <span class="inspection-value">${escapeHtml(value)}</span>
+        </div>`;
+}
+
+function renderDiagnosticRow(label, value) {
+  return `<div class="diagnostic-row">
+          <span class="diagnostic-label">${escapeHtml(label)}</span>
+          <span class="diagnostic-value">${escapeHtml(value)}</span>
         </div>`;
 }
 
