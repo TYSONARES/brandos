@@ -37,6 +37,8 @@ export function createBrandOSStudioShell(options = {}) {
     browserStateKey: 'brandos.workflow.completedActionId',
     repositoryStateFile: options.repositoryStateFile || DEFAULT_REPOSITORY_WORKFLOW_STATE_PATH,
     repositoryStateStatus: options.repositoryStateStatus || 'not-loaded',
+    repositoryStateVersion: options.repositoryStateVersion ?? null,
+    completedActionCount: options.completedActionCount ?? (completedWorkflowActionId ? 1 : 0),
     owner: 'operator@example.local',
     nextActions: contextPackReadiness.nextActions
   };
@@ -71,7 +73,9 @@ export function createStudioShellOptionsFromArgs(args) {
     ...(completedAt ? { completedAt } : {}),
     workflowStateSource,
     repositoryStateFile: stateFile,
-    repositoryStateStatus: repositoryStateIgnored ? 'ignored' : repositoryState.exists ? 'loaded' : 'not-found'
+    repositoryStateStatus: repositoryStateIgnored ? 'ignored' : repositoryState.exists ? 'loaded' : 'not-found',
+    repositoryStateVersion: repositoryState.version ?? null,
+    completedActionCount: repositoryState.completedWorkflowActionIds?.length ?? 0
   };
 }
 

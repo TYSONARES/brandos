@@ -44,6 +44,14 @@ if (
   process.exit(1);
 }
 
+if (
+  description.completedWorkflowActionIds[0] !== 'workflow_action_example_001' ||
+  description.completedWorkflowActionIds[1] !== 'workflow_action_example_002'
+) {
+  console.error('Durable Studio state did not preserve completed Workflow Action order.');
+  process.exit(1);
+}
+
 if (DEFAULT_STUDIO_STATE_PATH !== '.tmp/studio-state.json') {
   console.error('Durable Studio state default path changed unexpectedly.');
   process.exit(1);

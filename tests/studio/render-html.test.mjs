@@ -58,6 +58,8 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Browser state key: brandos.workflow.completedActionId/);
   assert.match(html, /Repository state file: .tmp\/studio-state.json/);
   assert.match(html, /Repository state status: not-loaded/);
+  assert.match(html, /Repository state version: none/);
+  assert.match(html, /Completed action history: 0/);
   assert.match(html, /data-clear-workflow-state/);
   assert.match(html, /brandos.workflow.completedActionId/);
   assert.match(html, /action="ready.html"/);
@@ -105,7 +107,9 @@ test('Studio shell options parse completed Workflow Action command args', () => 
       completedAt: '2026-07-19',
       workflowStateSource: 'command',
       repositoryStateFile: statePath,
-      repositoryStateStatus: 'not-found'
+      repositoryStateStatus: 'not-found',
+      repositoryStateVersion: null,
+      completedActionCount: 0
     }
   );
 });
@@ -125,7 +129,9 @@ test('Studio shell options load completed Workflow Action from repository state'
     completedAt: '2026-07-20',
     workflowStateSource: 'repository',
     repositoryStateFile: statePath,
-    repositoryStateStatus: 'loaded'
+    repositoryStateStatus: 'loaded',
+    repositoryStateVersion: STUDIO_STATE_VERSION,
+    completedActionCount: 1
   });
 });
 
@@ -154,7 +160,9 @@ test('Explicit Studio shell command args override repository state', () => {
       completedAt: '2026-07-21',
       workflowStateSource: 'command',
       repositoryStateFile: statePath,
-      repositoryStateStatus: 'loaded'
+      repositoryStateStatus: 'loaded',
+      repositoryStateVersion: STUDIO_STATE_VERSION,
+      completedActionCount: 1
     }
   );
 });
@@ -172,7 +180,9 @@ test('Studio shell options can ignore repository state', () => {
   assert.deepEqual(createStudioShellOptionsFromArgs(['--html', '--state-file', statePath, '--ignore-repository-state']), {
     workflowStateSource: 'example',
     repositoryStateFile: statePath,
-    repositoryStateStatus: 'ignored'
+    repositoryStateStatus: 'ignored',
+    repositoryStateVersion: null,
+    completedActionCount: 0
   });
 });
 

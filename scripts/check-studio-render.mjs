@@ -24,6 +24,8 @@ const requiredSnippets = [
   'Browser state key: brandos.workflow.completedActionId',
   'Repository state file: .tmp/studio-state.json',
   'Repository state status: not-loaded',
+  'Repository state version: none',
+  'Completed action history: 0',
   'data-clear-workflow-state',
   'brandos.workflow.completedActionId',
   'window.localStorage.setItem',

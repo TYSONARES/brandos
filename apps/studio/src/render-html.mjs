@@ -343,6 +343,14 @@ export function renderStudioHtml(shell, options = {}) {
             <span class="state-source-label">Status</span>
             <span class="state-source-value">Repository state status: ${escapeHtml(shell.contextPackWorkflow.repositoryStateStatus)}</span>
           </div>
+          <div class="state-source-row">
+            <span class="state-source-label">Version</span>
+            <span class="state-source-value">Repository state version: ${escapeHtml(shell.contextPackWorkflow.repositoryStateVersion || 'none')}</span>
+          </div>
+          <div class="state-source-row">
+            <span class="state-source-label">History</span>
+            <span class="state-source-value">Completed action history: ${escapeHtml(shell.contextPackWorkflow.completedActionCount)}</span>
+          </div>
         </div>
         <div class="actions">
           <h2>Next action</h2>

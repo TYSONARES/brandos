@@ -16,6 +16,8 @@ const checks = [
       'class="state-source-badge state-source-example"',
       'Workflow state source: <span class="state-source-badge state-source-example">example</span>',
       'Repository state file: .tmp/studio-state.json',
+      'Repository state version: none',
+      'Completed action history: 0',
       'brandos.workflow.completedActionId',
       'window.localStorage.setItem',
       'name="actionId" value="workflow_action_example_001"',
