@@ -1,0 +1,31 @@
+{
+  "id": "component_operator_runbook_execution_panel",
+  "name": "Operator Runbook Execution Panel",
+  "status": "draft",
+  "purpose": "Shows the current Operator Run as step-level execution guidance for an operator.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "complete",
+    "active",
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose every runbook step as visible text.",
+    "Expose status and detail for each step without relying on color alone.",
+    "Keep the current action and handoff target readable for operators and AI agents."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

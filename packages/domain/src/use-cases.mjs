@@ -216,6 +216,50 @@ export function createOperatorRunQueue(store) {
   };
 }
 
+export function createOperatorRunbookExecution(store, operatorRunId) {
+  const run = createOperatorRunSummary(store, operatorRunId);
+  const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';
+  const runReady = run.status === 'ready' || run.status === 'complete';
+
+  return {
+    title: 'Operator Runbook Execution',
+    runId: run.id,
+    status: runReady ? 'ready' : 'blocked',
+    objective: run.objective,
+    owner: run.owner,
+    currentActionId: run.currentActionId,
+    currentActionStatus: run.currentActionStatus,
+    handoffId: run.handoffId,
+    steps: [
+      {
+        label: 'Confirm operator objective',
+        status: 'complete',
+        detail: run.objective
+      },
+      {
+        label: 'Inspect current action',
+        status: currentActionDone ? 'complete' : 'active',
+        detail: `${run.currentActionId} is ${run.currentActionStatus}`
+      },
+      {
+        label: 'Resolve current action',
+        status: currentActionDone ? 'complete' : 'blocked',
+        detail: run.nextActionLabel
+      },
+      {
+        label: 'Verify handoff context',
+        status: runReady ? 'active' : 'blocked',
+        detail: `Handoff ${run.handoffId} waits for ${run.auditEventCount} audit events`
+      },
+      {
+        label: 'Close operator run',
+        status: run.status === 'complete' ? 'complete' : 'blocked',
+        detail: `Run status is ${run.status}`
+      }
+    ]
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

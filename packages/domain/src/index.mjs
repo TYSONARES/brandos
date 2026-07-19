@@ -8,6 +8,7 @@ export {
   createBrandProfileOverview,
   createContextPackUsageFlow,
   createOperatorRunQueue,
+  createOperatorRunbookExecution,
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   evaluateContextPackReadiness

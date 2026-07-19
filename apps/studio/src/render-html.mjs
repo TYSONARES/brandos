@@ -424,6 +424,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-runbook-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-runbook-step {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-runbook-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-runbook-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -635,6 +662,7 @@ export function renderStudioHtml(shell, options = {}) {
       .audit-row,
       .handoff-row,
       .operator-run-queue-row,
+      .operator-runbook-step,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -723,6 +751,20 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
       <div class="operator-run-queue-list">
         ${shell.operatorRunQueue.items.map(renderOperatorRunQueueItem).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Runbook Execution</p>
+    <section class="panel" aria-label="Operator Runbook Execution">
+      <h2>${escapeHtml(shell.operatorRunbookExecution.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator runbook status: ${shell.operatorRunbookExecution.status}`)}
+        ${renderGuidanceRow('Run', `Operator runbook run id: ${shell.operatorRunbookExecution.runId}`)}
+        ${renderGuidanceRow('Action', `Operator runbook current action: ${shell.operatorRunbookExecution.currentActionId}`)}
+        ${renderGuidanceRow('Handoff', `Operator runbook handoff: ${shell.operatorRunbookExecution.handoffId}`)}
+      </div>
+      <div class="operator-runbook-list">
+        ${shell.operatorRunbookExecution.steps.map(renderOperatorRunbookStep).join('')}
       </div>
     </section>
 
@@ -988,6 +1030,16 @@ function renderOperatorRunQueueItem(item) {
             <span>Operator run next action: ${escapeHtml(item.nextActionLabel)}</span>
             <span>Operator run handoff: ${escapeHtml(item.handoffId)}</span>
             <span>Operator run audit events: ${escapeHtml(item.auditEventCount)}</span>
+          </span>
+        </div>`;
+}
+
+function renderOperatorRunbookStep(step) {
+  return `<div class="operator-runbook-step">
+          <span class="operator-runbook-label">${escapeHtml(step.label)}</span>
+          <span class="operator-runbook-value">
+            <span>Operator runbook step status: ${escapeHtml(step.status)}</span>
+            <span>Operator runbook step detail: ${escapeHtml(step.detail)}</span>
           </span>
         </div>`;
 }

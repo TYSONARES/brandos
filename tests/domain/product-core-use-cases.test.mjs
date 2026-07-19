@@ -8,6 +8,7 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createOperatorRunQueue,
+  createOperatorRunbookExecution,
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   evaluateContextPackReadiness,
@@ -178,4 +179,23 @@ test('Operator Run Queue summarizes active operator work', () => {
   assert.equal(queue.activeRunId, 'operator_run_example_001');
   assert.deepEqual(queue.items.map((item) => item.id), ['operator_run_example_001']);
   assert.equal(queue.items[0].currentActionStatus, 'pending');
+});
+
+test('Operator Runbook Execution expands a run into operator steps', () => {
+  const runbook = createOperatorRunbookExecution(createExampleStore(), 'operator_run_example_001');
+
+  assert.equal(runbook.title, 'Operator Runbook Execution');
+  assert.equal(runbook.runId, 'operator_run_example_001');
+  assert.equal(runbook.status, 'blocked');
+  assert.equal(runbook.currentActionId, 'workflow_action_example_001');
+  assert.equal(runbook.currentActionStatus, 'pending');
+  assert.equal(runbook.handoffId, 'operator_handoff_example_001');
+  assert.deepEqual(runbook.steps.map((step) => step.label), [
+    'Confirm operator objective',
+    'Inspect current action',
+    'Resolve current action',
+    'Verify handoff context',
+    'Close operator run'
+  ]);
+  assert.deepEqual(runbook.steps.map((step) => step.status), ['complete', 'active', 'blocked', 'blocked', 'blocked']);
 });

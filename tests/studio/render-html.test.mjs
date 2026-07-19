@@ -46,6 +46,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Operator workflow/);
   assert.match(html, /aria-label="Operator Run Queue"/);
   assert.match(html, /Operator Run Queue/);
+  assert.match(html, /aria-label="Operator Runbook Execution"/);
+  assert.match(html, /Operator Runbook Execution/);
   assert.match(html, /aria-label="Context Pack usage flow"/);
   assert.match(html, /Context Pack usage flow/);
   assert.match(html, /aria-label="Review resolution workflow"/);
@@ -140,6 +142,18 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Operator run next action: Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Operator run handoff: operator_handoff_example_001/);
   assert.match(html, /Operator run audit events: 1/);
+  assert.match(html, /Operator runbook status: blocked/);
+  assert.match(html, /Operator runbook run id: operator_run_example_001/);
+  assert.match(html, /Operator runbook current action: workflow_action_example_001/);
+  assert.match(html, /Operator runbook handoff: operator_handoff_example_001/);
+  assert.match(html, /Operator runbook step status: complete/);
+  assert.match(html, /Operator runbook step detail: Resolve Context Pack readiness and prepare handoff./);
+  assert.match(html, /Operator runbook step status: active/);
+  assert.match(html, /Operator runbook step detail: workflow_action_example_001 is pending/);
+  assert.match(html, /Operator runbook step status: blocked/);
+  assert.match(html, /Operator runbook step detail: Resolve review feedback for context_pack_example_001/);
+  assert.match(html, /Operator runbook step detail: Handoff operator_handoff_example_001 waits for 1 audit events/);
+  assert.match(html, /Operator runbook step detail: Run status is blocked/);
   assert.match(html, /Context Pack usage status: draft/);
   assert.match(html, /Context Pack task type: brand-writing/);
   assert.match(html, /Context Pack audience: AI agents drafting product and brand copy/);
