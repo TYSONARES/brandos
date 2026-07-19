@@ -551,6 +551,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .handoff-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .handoff-row {
+      align-items: start;
+      border-top: 1px solid #e7ebf0;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 180px minmax(0, 1fr);
+      padding-top: 8px;
+    }
+    .handoff-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .handoff-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .handoff-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -579,6 +606,7 @@ export function renderStudioHtml(shell, options = {}) {
       .multi-action-row,
       .review-resolution-row,
       .audit-row,
+      .handoff-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -772,6 +800,22 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Operator handoff</p>
+    <section class="panel" aria-label="Operator handoff">
+      <h2>${escapeHtml(shell.operatorHandoff.title)}</h2>
+      <div class="handoff-list">
+        ${renderHandoffRow('Status', `Operator handoff status: ${shell.operatorHandoff.status}`)}
+        ${renderHandoffRow('Objective', `Operator handoff objective: ${shell.operatorHandoff.objective}`)}
+        ${renderHandoffRow('Sources loaded', `Operator handoff sources loaded: ${shell.operatorHandoff.sourcesLoaded.join(', ')}`)}
+        ${renderHandoffRow('Changes made', `Operator handoff changes made: ${shell.operatorHandoff.changesMade}`)}
+        ${renderHandoffRow('Assumptions', `Operator handoff assumptions: ${shell.operatorHandoff.assumptions}`)}
+        ${renderHandoffRow('Missing context', `Operator handoff missing context: ${shell.operatorHandoff.missingContext}`)}
+        ${renderHandoffRow('Verification', `Operator handoff verification performed: ${shell.operatorHandoff.verificationPerformed}`)}
+        ${renderHandoffRow('Next workflow', `Operator handoff recommended next workflow: ${shell.operatorHandoff.recommendedNextWorkflow}`)}
+        ${renderHandoffRow('Next agent', `Operator handoff next agent: ${shell.operatorHandoff.nextAgent}`)}
+      </div>
+    </section>
+
     <p class="section-title">Studio state inspection</p>
     <section class="panel" aria-label="Studio state inspection">
       <h2>${escapeHtml(shell.studioStateInspection.title)}</h2>
@@ -930,6 +974,13 @@ function renderAuditEvent(event) {
             <span>Audit event status: ${escapeHtml(event.status)}</span>
             <span>Audit event detail: ${escapeHtml(event.detail)}</span>
           </span>
+        </div>`;
+}
+
+function renderHandoffRow(label, value) {
+  return `<div class="handoff-row">
+          <span class="handoff-label">${escapeHtml(label)}</span>
+          <span class="handoff-value">${escapeHtml(value)}</span>
         </div>`;
 }
 

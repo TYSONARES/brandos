@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_handoff_panel",
+  "name": "Operator Handoff Panel",
+  "status": "draft",
+  "purpose": "Shows handoff status, objective, sources loaded, changes made, assumptions, missing context, verification, recommended next workflow, and next agent.",
+  "productObjects": [
+    "context-pack",
+    "workflow-action",
+    "review"
+  ],
+  "states": [
+    "needs-operator",
+    "ready-for-agent"
+  ],
+  "accessibility": [
+    "Expose handoff fields as visible text.",
+    "Do not rely on hidden memory for handoff context.",
+    "Keep recommended next workflow and next agent readable without hover-only content."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

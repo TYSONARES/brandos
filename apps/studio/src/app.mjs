@@ -174,6 +174,23 @@ export function createBrandOSStudioShell(options = {}) {
       }
     ]
   };
+  const operatorHandoff = {
+    title: 'Operator handoff',
+    status: contextPackReadiness.ready ? 'ready-for-agent' : 'needs-operator',
+    objective: contextPackReadiness.ready ? 'Hand off ready Context Pack usage to an AI agent.' : 'Hand off readiness blocker resolution to an operator.',
+    sourcesLoaded: [
+      'Product Core example state',
+      'Context Pack readiness',
+      'Review resolution workflow',
+      'Studio workflow audit trail'
+    ],
+    changesMade: contextPackReadiness.ready ? 'Workflow Action completed and review resolved.' : 'No repository state change in blocked preview.',
+    assumptions: contextPackReadiness.ready ? 'Context Pack is ready because readiness blockers are clear.' : 'Review feedback must be resolved before Context Pack use.',
+    missingContext: contextPackReadiness.ready ? 'No missing context for ready preview.' : 'Completed Workflow Action evidence is not present yet.',
+    verificationPerformed: `Studio audit trail status: ${studioWorkflowAuditTrail.status}`,
+    recommendedNextWorkflow: contextPackReadiness.ready ? 'Use Context Pack' : 'Review Resolution Workflow',
+    nextAgent: contextPackReadiness.ready ? 'AI writing agent' : 'Operator'
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -187,6 +204,7 @@ export function createBrandOSStudioShell(options = {}) {
     studioStateInspection,
     multiActionWorkflowState,
     studioWorkflowAuditTrail,
+    operatorHandoff,
     diagnostics,
     operatorGuidance,
     operatorWorkflow,
