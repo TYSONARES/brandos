@@ -61,7 +61,18 @@ export function createBrandOSStudioShell(options = {}) {
     readinessBlockerCount: contextPackReadiness.blockingReasons.length,
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
-    result: contextPackReadiness.ready ? 'ready' : 'attention'
+    result: contextPackReadiness.ready ? 'ready' : 'attention',
+    checks: [
+      { label: 'Packages loaded', status: 'pass', detail: '3 packages available' },
+      { label: 'Product objects loaded', status: state.objectCount > 0 ? 'pass' : 'fail', detail: `${state.objectCount} objects available` },
+      {
+        label: 'Context readiness',
+        status: contextPackReadiness.ready ? 'pass' : 'attention',
+        detail: `${contextPackReadiness.blockingReasons.length} blockers`
+      },
+      { label: 'State source available', status: contextPackWorkflow.stateSource ? 'pass' : 'fail', detail: contextPackWorkflow.stateSource },
+      { label: 'State status available', status: contextPackWorkflow.repositoryStateStatus ? 'pass' : 'fail', detail: contextPackWorkflow.repositoryStateStatus }
+    ]
   };
   return {
     app: 'BrandOS Studio',

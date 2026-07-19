@@ -356,6 +356,7 @@ export function renderStudioHtml(shell, options = {}) {
         ${renderDiagnosticRow('State source', `Diagnostic state source: ${shell.diagnostics.stateSource}`)}
         ${renderDiagnosticRow('State status', `Diagnostic state status: ${shell.diagnostics.stateStatus}`)}
         ${renderDiagnosticRow('Result', `Diagnostic result: ${shell.diagnostics.result}`)}
+        ${shell.diagnostics.checks.map(renderDiagnosticCheck).join('')}
       </div>
     </section>
 
@@ -482,6 +483,10 @@ function renderDiagnosticRow(label, value) {
           <span class="diagnostic-label">${escapeHtml(label)}</span>
           <span class="diagnostic-value">${escapeHtml(value)}</span>
         </div>`;
+}
+
+function renderDiagnosticCheck(check) {
+  return renderDiagnosticRow(`Check: ${check.label}`, `Diagnostic check ${check.label}: ${check.status} - ${check.detail}`);
 }
 
 function renderCompletedActionIds(actionIds) {

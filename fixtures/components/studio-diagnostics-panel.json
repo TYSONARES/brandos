@@ -2,7 +2,7 @@
   "id": "component_studio_diagnostics_panel",
   "name": "Studio Diagnostics Panel",
   "status": "draft",
-  "purpose": "Shows Studio runtime diagnostics across package count, product object count, readiness blockers, state source, state status, and result.",
+  "purpose": "Shows Studio runtime diagnostics across package count, product object count, readiness blockers, state source, state status, result, and diagnostic checks.",
   "productObjects": [
     "context-pack",
     "workflow-action"
@@ -13,6 +13,7 @@
   ],
   "accessibility": [
     "Expose each diagnostic field as visible text.",
+    "Expose each diagnostic check as visible text.",
     "Do not rely on color to communicate diagnostic result.",
     "Keep compact diagnostic rows readable on narrow screens."
   ],

@@ -12,7 +12,7 @@ product, readiness, and state signals without changing Product Core behavior or 
 ## Scope
 
 - Dedicated Studio diagnostics panel
-- Package, object, readiness blocker, state source, state status, and result fields
+- Package, object, readiness blocker, state source, state status, result, and diagnostic check fields
 - Component fixture for the diagnostics panel
 - Render, build, component, and test validation coverage
 
@@ -29,7 +29,7 @@ product, readiness, and state signals without changing Product Core behavior or 
 ## Acceptance Criteria
 
 - Studio renders a dedicated diagnostics section.
-- Diagnostics summarize package count, object count, readiness blockers, state source, state status, and result.
+- Diagnostics summarize package count, object count, readiness blockers, state source, state status, result, and diagnostic checks.
 - Diagnostics work for blocked and ready Studio scenarios.
 - The design component fixture captures the diagnostics panel contract.
 - Quality gates cover rendered Studio diagnostics fields.

@@ -50,7 +50,12 @@ const requiredSnippets = [
   'Readiness blockers: 1',
   'Diagnostic state source: example',
   'Diagnostic state status: not-loaded',
-  'Diagnostic result: attention'
+  'Diagnostic result: attention',
+  'Diagnostic check Packages loaded: pass - 3 packages available',
+  'Diagnostic check Product objects loaded: pass - 7 objects available',
+  'Diagnostic check Context readiness: attention - 1 blockers',
+  'Diagnostic check State source available: pass - example',
+  'Diagnostic check State status available: pass - not-loaded'
 ];
 const requiredReadySnippets = [
   'aria-current="page" href="ready.html"',
@@ -71,7 +76,9 @@ const requiredReadySnippets = [
   'Use context pack context_pack_example_001',
   'Readiness blockers: 0',
   'Diagnostic state source: command',
-  'Diagnostic result: ready'
+  'Diagnostic result: ready',
+  'Diagnostic check Context readiness: pass - 0 blockers',
+  'Diagnostic check State source available: pass - command'
 ];
 
 const missing = [

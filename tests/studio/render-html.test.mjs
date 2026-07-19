@@ -86,6 +86,11 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Diagnostic state source: example/);
   assert.match(html, /Diagnostic state status: not-loaded/);
   assert.match(html, /Diagnostic result: attention/);
+  assert.match(html, /Diagnostic check Packages loaded: pass - 3 packages available/);
+  assert.match(html, /Diagnostic check Product objects loaded: pass - 7 objects available/);
+  assert.match(html, /Diagnostic check Context readiness: attention - 1 blockers/);
+  assert.match(html, /Diagnostic check State source available: pass - example/);
+  assert.match(html, /Diagnostic check State status available: pass - not-loaded/);
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
@@ -114,6 +119,8 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Readiness blockers: 0/);
   assert.match(html, /Diagnostic state source: command/);
   assert.match(html, /Diagnostic result: ready/);
+  assert.match(html, /Diagnostic check Context readiness: pass - 0 blockers/);
+  assert.match(html, /Diagnostic check State source available: pass - command/);
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {
