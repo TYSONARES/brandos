@@ -141,6 +141,39 @@ export function createBrandOSStudioShell(options = {}) {
       { label: 'Use Context Pack', status: 'blocked', detail: 'Context Pack use waits for the pending Workflow Action.' }
     ]
   };
+  const studioWorkflowAuditTrail = {
+    title: 'Studio workflow audit trail',
+    status: contextPackReadiness.ready ? 'resolved' : 'open',
+    source: contextPackWorkflow.stateSource,
+    latestEvent: contextPackReadiness.ready ? 'ready-state-rendered' : 'readiness-blocker-detected',
+    events: [
+      {
+        label: 'Context readiness evaluated',
+        status: contextPackReadiness.ready ? 'pass' : 'attention',
+        detail: `${contextPackReadiness.blockingReasons.length} blockers`
+      },
+      {
+        label: 'Review resolution checked',
+        status: reviewResolutionWorkflow.status,
+        detail: reviewResolutionWorkflow.resolutionResult
+      },
+      {
+        label: 'Workflow state loaded',
+        status: contextPackWorkflow.repositoryStateStatus,
+        detail: `Source ${contextPackWorkflow.stateSource}`
+      },
+      {
+        label: 'Completed action history counted',
+        status: multiActionWorkflowState.status,
+        detail: `${multiActionWorkflowState.completedActionCount} completed actions`
+      },
+      {
+        label: 'Operator recommendation issued',
+        status: operatorWorkflow.status,
+        detail: operatorWorkflow.nextAction
+      }
+    ]
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -153,6 +186,7 @@ export function createBrandOSStudioShell(options = {}) {
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,
+    studioWorkflowAuditTrail,
     diagnostics,
     operatorGuidance,
     operatorWorkflow,

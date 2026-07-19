@@ -524,6 +524,33 @@ export function renderStudioHtml(shell, options = {}) {
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .audit-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .audit-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .audit-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .audit-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -551,6 +578,7 @@ export function renderStudioHtml(shell, options = {}) {
       .usage-row,
       .multi-action-row,
       .review-resolution-row,
+      .audit-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -731,6 +759,19 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Studio workflow audit trail</p>
+    <section class="panel" aria-label="Studio workflow audit trail">
+      <h2>${escapeHtml(shell.studioWorkflowAuditTrail.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Audit trail status: ${shell.studioWorkflowAuditTrail.status}`)}
+        ${renderGuidanceRow('Source', `Audit trail source: ${shell.studioWorkflowAuditTrail.source}`)}
+        ${renderGuidanceRow('Latest event', `Audit trail latest event: ${shell.studioWorkflowAuditTrail.latestEvent}`)}
+      </div>
+      <div class="audit-list">
+        ${shell.studioWorkflowAuditTrail.events.map(renderAuditEvent).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Studio state inspection</p>
     <section class="panel" aria-label="Studio state inspection">
       <h2>${escapeHtml(shell.studioStateInspection.title)}</h2>
@@ -879,6 +920,16 @@ function renderReviewResolutionStep(step) {
   return `<div class="review-resolution-step">
           <span class="review-resolution-step-label">Review resolution step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)}</span>
           <span class="review-resolution-step-detail">Review resolution detail: ${escapeHtml(step.detail)}</span>
+        </div>`;
+}
+
+function renderAuditEvent(event) {
+  return `<div class="audit-row">
+          <span class="audit-label">${escapeHtml(event.label)}</span>
+          <span class="audit-value">
+            <span>Audit event status: ${escapeHtml(event.status)}</span>
+            <span>Audit event detail: ${escapeHtml(event.detail)}</span>
+          </span>
         </div>`;
 }
 

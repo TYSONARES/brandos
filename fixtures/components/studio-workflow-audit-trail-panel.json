@@ -1,0 +1,31 @@
+{
+  "id": "component_studio_workflow_audit_trail_panel",
+  "name": "Studio Workflow Audit Trail Panel",
+  "status": "draft",
+  "purpose": "Shows workflow audit status, source, latest event, and ordered audit events for readiness, review resolution, state loading, action history, and operator recommendation.",
+  "productObjects": [
+    "workflow-action",
+    "review",
+    "context-pack"
+  ],
+  "states": [
+    "open",
+    "resolved",
+    "attention",
+    "pass"
+  ],
+  "accessibility": [
+    "Expose audit status, source, latest event, event status, and event detail as visible text.",
+    "Do not rely on color to communicate event status.",
+    "Keep audit event labels readable without hover-only content."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
