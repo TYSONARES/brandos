@@ -58,6 +58,7 @@
 - Added post-v1 Studio Workflow Audit Trail release notes and closure checklist.
 - Added Operator Handoff package start.
 - Added post-v1 Operator Handoff release notes and closure checklist.
+- Added post-v1 aggregate release summary and closure checklist.
 
 ## 1.0.0 - Development Ready
 

@@ -50,6 +50,8 @@ const required = [
   'docs/development/iteration-post-v1-operator-handoff.md',
   'docs/development/release-post-v1-operator-handoff.md',
   'docs/development/closure-post-v1-operator-handoff.md',
+  'docs/development/release-post-v1-aggregate-summary.md',
+  'docs/development/closure-post-v1-aggregate-summary.md',
   'docs/development/package-boundaries.md',
   'docs/development/quality-gates.md',
   'docs/decisions/0021-development-ready-start.md',

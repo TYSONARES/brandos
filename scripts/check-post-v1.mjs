@@ -37,6 +37,8 @@ const required = [
   'docs/development/iteration-post-v1-operator-handoff.md',
   'docs/development/release-post-v1-operator-handoff.md',
   'docs/development/closure-post-v1-operator-handoff.md',
+  'docs/development/release-post-v1-aggregate-summary.md',
+  'docs/development/closure-post-v1-aggregate-summary.md',
   'docs/product/workflow-action.md',
   'schemas/workflow-action.schema.json',
   'fixtures/workflow-action.example.json',

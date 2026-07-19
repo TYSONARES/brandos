@@ -54,6 +54,8 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 42. `iteration-post-v1-operator-handoff.md`
 43. `release-post-v1-operator-handoff.md`
 44. `closure-post-v1-operator-handoff.md`
+45. `release-post-v1-aggregate-summary.md`
+46. `closure-post-v1-aggregate-summary.md`
 
 ## Dependency
 
