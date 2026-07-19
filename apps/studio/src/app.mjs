@@ -3,6 +3,7 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
+  createContextPackUsageFlow,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -28,6 +29,7 @@ export function createBrandOSStudioShell(options = {}) {
   const state = summarizeProductCoreState(store);
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+  const contextPackUsageFlow = createContextPackUsageFlow(store, 'context_pack_example_001');
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
@@ -135,6 +137,7 @@ export function createBrandOSStudioShell(options = {}) {
     state,
     brandProfileOverview,
     contextPackReadiness,
+    contextPackUsageFlow,
     contextPackWorkflow,
     studioStateInspection,
     diagnostics,

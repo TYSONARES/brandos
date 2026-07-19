@@ -44,6 +44,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Operator guidance/);
   assert.match(html, /aria-label="Operator workflow"/);
   assert.match(html, /Operator workflow/);
+  assert.match(html, /aria-label="Context Pack usage flow"/);
+  assert.match(html, /Context Pack usage flow/);
   assert.match(html, /aria-label="Studio state inspection"/);
   assert.match(html, /Studio state inspection/);
 });
@@ -115,6 +117,20 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Operator control result: Preview ready scenario/);
   assert.match(html, /class="operator-control-action" method="get" action="ready.html"/);
   assert.match(html, /<button type="submit">Complete Workflow Action<\/button>/);
+  assert.match(html, /Context Pack usage status: draft/);
+  assert.match(html, /Context Pack task type: brand-writing/);
+  assert.match(html, /Context Pack audience: AI agents drafting product and brand copy/);
+  assert.match(html, /Context Pack owner: operator@example.local/);
+  assert.match(html, /Context Pack expires at: 2026-10-17/);
+  assert.match(html, /Context Pack sources: 1 claims, 1 decisions/);
+  assert.match(html, /Context Pack sections: positioning, audience, voice, constraints/);
+  assert.match(html, /Context Pack exclusions: pricing, legal promises, unapproved customer claims/);
+  assert.match(html, /Context Pack usage step: Load approved context/);
+  assert.match(html, /Context Pack usage detail: Use Context Pack context_pack_example_001 as the source bundle./);
+  assert.match(html, /Context Pack usage step: Apply task boundary/);
+  assert.match(html, /Context Pack usage detail: Task type: brand-writing/);
+  assert.match(html, /Context Pack usage step: Respect exclusions/);
+  assert.match(html, /Context Pack usage step: Follow agent instructions/);
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
@@ -161,6 +177,10 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Operator control command: Open Context Pack workflow/);
   assert.match(html, /Operator control result: Continue with ready Context Pack/);
   assert.match(html, /<a href="ready.html">Use Context Pack<\/a>/);
+  assert.match(html, /Context Pack usage status: draft/);
+  assert.match(html, /Context Pack task type: brand-writing/);
+  assert.match(html, /Context Pack usage step: Load approved context/);
+  assert.match(html, /Context Pack usage detail: 3 instructions available/);
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {

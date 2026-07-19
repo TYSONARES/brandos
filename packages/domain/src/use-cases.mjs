@@ -103,6 +103,31 @@ export function evaluateContextPackReadiness(store, contextPackId) {
   };
 }
 
+export function createContextPackUsageFlow(store, contextPackId) {
+  const contextPack = requireRecord(store, 'context-pack', contextPackId);
+
+  return {
+    id: contextPack.id,
+    title: 'Context Pack usage flow',
+    status: contextPack.status,
+    taskType: contextPack.taskType,
+    intendedAudience: contextPack.intendedAudience,
+    owner: contextPack.owner,
+    expiresAt: contextPack.expiresAt,
+    includedSections: contextPack.includedProfileSections,
+    includedClaimCount: contextPack.includedClaims.length,
+    includedDecisionCount: contextPack.includedDecisions.length,
+    excludedTopics: contextPack.excludedTopics,
+    agentInstructions: contextPack.agentInstructions,
+    steps: [
+      { label: 'Load approved context', detail: `Use Context Pack ${contextPack.id} as the source bundle.` },
+      { label: 'Apply task boundary', detail: `Task type: ${contextPack.taskType}` },
+      { label: 'Respect exclusions', detail: `Excluded topics: ${contextPack.excludedTopics.join(', ')}` },
+      { label: 'Follow agent instructions', detail: `${contextPack.agentInstructions.length} instructions available` }
+    ]
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

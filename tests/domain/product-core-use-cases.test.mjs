@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   completeWorkflowAction,
   createBrandProfileOverview,
+  createContextPackUsageFlow,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   evaluateContextPackReadiness,
@@ -102,5 +103,23 @@ test('Context Pack readiness passes when claims, decisions, and reviews are clea
       label: 'Use context pack context_pack_example_001',
       owner: 'operator@example.local'
     }
+  ]);
+});
+
+test('Context Pack usage flow summarizes task boundary and source scope', () => {
+  const usageFlow = createContextPackUsageFlow(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(usageFlow.title, 'Context Pack usage flow');
+  assert.equal(usageFlow.taskType, 'brand-writing');
+  assert.equal(usageFlow.intendedAudience, 'AI agents drafting product and brand copy');
+  assert.equal(usageFlow.includedClaimCount, 1);
+  assert.equal(usageFlow.includedDecisionCount, 1);
+  assert.deepEqual(usageFlow.includedSections, ['positioning', 'audience', 'voice', 'constraints']);
+  assert.deepEqual(usageFlow.excludedTopics, ['pricing', 'legal promises', 'unapproved customer claims']);
+  assert.deepEqual(usageFlow.steps.map((step) => step.label), [
+    'Load approved context',
+    'Apply task boundary',
+    'Respect exclusions',
+    'Follow agent instructions'
   ]);
 });

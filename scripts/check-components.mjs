@@ -6,6 +6,7 @@ const componentFiles = [
   'fixtures/components/claim-status-row.json',
   'fixtures/components/decision-record.json',
   'fixtures/components/context-pack-card.json',
+  'fixtures/components/context-pack-usage-flow.json',
   'fixtures/components/review-panel.json',
   'fixtures/components/workflow-stepper.json',
   'fixtures/components/action-status-badge.json',

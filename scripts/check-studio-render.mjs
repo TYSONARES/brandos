@@ -16,6 +16,7 @@ const requiredSnippets = [
   'aria-label="Studio diagnostics"',
   'aria-label="Operator guidance"',
   'aria-label="Operator workflow"',
+  'aria-label="Context Pack usage flow"',
   'aria-label="Studio state inspection"',
   'class="workflow-action-row"',
   'class="action-status-badge action-status-pending"',
@@ -74,7 +75,21 @@ const requiredSnippets = [
   'Operator control command: Complete workflow_action_example_001',
   'Operator control result: Preview ready scenario',
   'class="operator-control-action" method="get" action="ready.html"',
-  '<button type="submit">Complete Workflow Action</button>'
+  '<button type="submit">Complete Workflow Action</button>',
+  'Context Pack usage status: draft',
+  'Context Pack task type: brand-writing',
+  'Context Pack audience: AI agents drafting product and brand copy',
+  'Context Pack owner: operator@example.local',
+  'Context Pack expires at: 2026-10-17',
+  'Context Pack sources: 1 claims, 1 decisions',
+  'Context Pack sections: positioning, audience, voice, constraints',
+  'Context Pack exclusions: pricing, legal promises, unapproved customer claims',
+  'Context Pack usage step: Load approved context',
+  'Context Pack usage detail: Use Context Pack context_pack_example_001 as the source bundle.',
+  'Context Pack usage step: Apply task boundary',
+  'Context Pack usage detail: Task type: brand-writing',
+  'Context Pack usage step: Respect exclusions',
+  'Context Pack usage step: Follow agent instructions'
 ];
 const requiredReadySnippets = [
   'aria-current="page" href="ready.html"',
@@ -113,7 +128,11 @@ const requiredReadySnippets = [
   'Operator control status: enabled',
   'Operator control command: Open Context Pack workflow',
   'Operator control result: Continue with ready Context Pack',
-  '<a href="ready.html">Use Context Pack</a>'
+  '<a href="ready.html">Use Context Pack</a>',
+  'Context Pack usage status: draft',
+  'Context Pack task type: brand-writing',
+  'Context Pack usage step: Load approved context',
+  'Context Pack usage detail: 3 instructions available'
 ];
 
 const missing = [

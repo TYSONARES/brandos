@@ -1,0 +1,30 @@
+{
+  "id": "component_context_pack_usage_flow",
+  "name": "Context Pack Usage Flow",
+  "status": "draft",
+  "purpose": "Shows how a ready Context Pack should be used, including task boundary, audience, source counts, exclusions, and usage steps.",
+  "productObjects": [
+    "context-pack",
+    "claim",
+    "decision"
+  ],
+  "states": [
+    "draft",
+    "ready",
+    "blocked"
+  ],
+  "accessibility": [
+    "Expose usage steps as visible text.",
+    "Expose audience, task type, expiry, source counts, and exclusions as readable text.",
+    "Do not rely on layout order alone to communicate usage sequence."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

@@ -397,6 +397,56 @@ export function renderStudioHtml(shell, options = {}) {
       text-align: center;
       text-decoration: none;
     }
+    .usage-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .usage-row {
+      align-items: start;
+      border-top: 1px solid #e7ebf0;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding-top: 8px;
+    }
+    .usage-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .usage-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .usage-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .usage-step-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .usage-step {
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 4px;
+      padding: 8px;
+    }
+    .usage-step-label {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .usage-step-detail {
+      color: var(--secondary);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -421,6 +471,7 @@ export function renderStudioHtml(shell, options = {}) {
       .diagnostic-row,
       .guidance-row,
       .operator-workflow-stage,
+      .usage-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -565,6 +616,24 @@ export function renderStudioHtml(shell, options = {}) {
       </article>
     </section>
 
+    <p class="section-title">Context Pack usage flow</p>
+    <section class="panel" aria-label="Context Pack usage flow">
+      <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
+      <div class="usage-list">
+        ${renderUsageRow('Status', `Context Pack usage status: ${shell.contextPackUsageFlow.status}`)}
+        ${renderUsageRow('Task type', `Context Pack task type: ${shell.contextPackUsageFlow.taskType}`)}
+        ${renderUsageRow('Audience', `Context Pack audience: ${shell.contextPackUsageFlow.intendedAudience}`)}
+        ${renderUsageRow('Owner', `Context Pack owner: ${shell.contextPackUsageFlow.owner}`)}
+        ${renderUsageRow('Expiry', `Context Pack expires at: ${shell.contextPackUsageFlow.expiresAt}`)}
+        ${renderUsageRow('Source counts', `Context Pack sources: ${shell.contextPackUsageFlow.includedClaimCount} claims, ${shell.contextPackUsageFlow.includedDecisionCount} decisions`)}
+        ${renderUsageRow('Sections', `Context Pack sections: ${shell.contextPackUsageFlow.includedSections.join(', ')}`)}
+        ${renderUsageRow('Exclusions', `Context Pack exclusions: ${shell.contextPackUsageFlow.excludedTopics.join(', ')}`)}
+      </div>
+      <div class="usage-step-list">
+        ${shell.contextPackUsageFlow.steps.map(renderUsageStep).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Studio state inspection</p>
     <section class="panel" aria-label="Studio state inspection">
       <h2>${escapeHtml(shell.studioStateInspection.title)}</h2>
@@ -666,6 +735,20 @@ function renderOperatorControlAction(control) {
   }
 
   return `<div class="operator-control-action"><a href="${escapeHtml(control.target)}">${escapeHtml(control.label)}</a></div>`;
+}
+
+function renderUsageRow(label, value) {
+  return `<div class="usage-row">
+          <span class="usage-label">${escapeHtml(label)}</span>
+          <span class="usage-value">${escapeHtml(value)}</span>
+        </div>`;
+}
+
+function renderUsageStep(step) {
+  return `<div class="usage-step">
+          <span class="usage-step-label">Context Pack usage step: ${escapeHtml(step.label)}</span>
+          <span class="usage-step-detail">Context Pack usage detail: ${escapeHtml(step.detail)}</span>
+        </div>`;
 }
 
 function renderCompletedActionIds(actionIds) {
