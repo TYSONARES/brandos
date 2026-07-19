@@ -25,6 +25,7 @@ contract remains unchanged while the rendered Studio shell exposes the state sum
 - `scripts/check-studio-render.mjs`
 - `scripts/check-studio-build.mjs`
 - `docs/development/release-post-v1-studio-state-inspection.md`
+- `docs/development/closure-post-v1-studio-state-inspection.md`
 - `npm run check:components`
 
 ## Acceptance Criteria
@@ -35,7 +36,8 @@ contract remains unchanged while the rendered Studio shell exposes the state sum
 - The design component fixture captures the inspection panel contract.
 - Quality gates cover rendered Studio inspection fields.
 - Studio State Inspection release notes summarize user-facing changes, repository changes, commands, and acceptance status.
+- Studio State Inspection closure checklist summarizes final scope lock and validation evidence.
 
 ## Next Step
 
-Add closure evidence after the inspection panel release notes are stable.
+Begin broader Studio diagnostics as a separate post-v1 package.

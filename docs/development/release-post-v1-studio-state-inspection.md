@@ -45,4 +45,5 @@ The durable state file contract stays stable while users get a clearer view of s
 
 ## Follow-Up
 
-The next package should add closure evidence for Studio State Inspection before starting broader Studio diagnostics.
+The next package should start broader Studio diagnostics as a separate post-v1 package.
+Closure status is tracked in `docs/development/closure-post-v1-studio-state-inspection.md`.

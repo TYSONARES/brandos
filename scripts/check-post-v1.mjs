@@ -9,6 +9,7 @@ const required = [
   'docs/development/closure-post-v1-durable-studio-state.md',
   'docs/development/iteration-post-v1-studio-state-inspection.md',
   'docs/development/release-post-v1-studio-state-inspection.md',
+  'docs/development/closure-post-v1-studio-state-inspection.md',
   'docs/product/workflow-action.md',
   'schemas/workflow-action.schema.json',
   'fixtures/workflow-action.example.json',
