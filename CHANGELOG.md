@@ -12,6 +12,7 @@
 - Added Handoff Acceptance package start.
 - Added Handoff Acceptance release notes and closure checklist.
 - Added Operator Runtime aggregate release summary and closure checklist.
+- Added Operator Runtime final closure release notes and closure checklist.
 
 ## Unreleased - Post-v1 Feature Implementation
 

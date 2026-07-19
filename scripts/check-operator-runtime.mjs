@@ -27,6 +27,8 @@ const required = [
   'docs/development/closure-v1.1-handoff-acceptance.md',
   'docs/development/release-v1.1-aggregate-summary.md',
   'docs/development/closure-v1.1-aggregate-summary.md',
+  'docs/development/release-v1.1-final-closure.md',
+  'docs/development/closure-v1.1-final-closure.md',
   'docs/decisions/0023-operator-runtime-start.md',
   'docs/product/operator-run.md',
   'schemas/operator-run.schema.json',
