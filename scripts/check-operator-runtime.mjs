@@ -23,6 +23,8 @@ const required = [
   'docs/development/release-v1.1-operator-runbook-execution.md',
   'docs/development/closure-v1.1-operator-runbook-execution.md',
   'docs/development/iteration-v1.1-handoff-acceptance.md',
+  'docs/development/release-v1.1-handoff-acceptance.md',
+  'docs/development/closure-v1.1-handoff-acceptance.md',
   'docs/decisions/0023-operator-runtime-start.md',
   'docs/product/operator-run.md',
   'schemas/operator-run.schema.json',
