@@ -35,6 +35,7 @@
 - Added post-v1 Durable Studio State release notes.
 - Added post-v1 Durable Studio State closure checklist.
 - Added Studio state inspection panel package start.
+- Added completed action id history to Studio state inspection.
 
 ## 1.0.0 - Development Ready
 

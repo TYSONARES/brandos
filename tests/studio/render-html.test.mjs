@@ -69,6 +69,7 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Latest completed action: none/);
   assert.match(html, /Latest completed at: none/);
   assert.match(html, /Completed action count: 0/);
+  assert.match(html, /Completed action ids: none/);
   assert.match(html, /data-clear-workflow-state/);
   assert.match(html, /brandos.workflow.completedActionId/);
   assert.match(html, /action="ready.html"/);
@@ -97,6 +98,7 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Latest completed action: workflow_action_example_001/);
   assert.match(html, /Latest completed at: 2026-07-18/);
   assert.match(html, /Completed action count: 1/);
+  assert.match(html, /Completed action ids: workflow_action_example_001/);
   assert.match(html, /action-status-badge action-status-ready/);
   assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);
   assert.match(html, /Use context pack/);
@@ -122,7 +124,8 @@ test('Studio shell options parse completed Workflow Action command args', () => 
       repositoryStateFile: statePath,
       repositoryStateStatus: 'not-found',
       repositoryStateVersion: null,
-      completedActionCount: 0
+      completedActionCount: 0,
+      completedActionIds: []
     }
   );
 });
@@ -144,7 +147,8 @@ test('Studio shell options load completed Workflow Action from repository state'
     repositoryStateFile: statePath,
     repositoryStateStatus: 'loaded',
     repositoryStateVersion: STUDIO_STATE_VERSION,
-    completedActionCount: 1
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
   });
 });
 
@@ -175,7 +179,8 @@ test('Explicit Studio shell command args override repository state', () => {
       repositoryStateFile: statePath,
       repositoryStateStatus: 'loaded',
       repositoryStateVersion: STUDIO_STATE_VERSION,
-      completedActionCount: 1
+      completedActionCount: 1,
+      completedActionIds: ['workflow_action_from_state']
     }
   );
 });
@@ -195,8 +200,29 @@ test('Studio shell options can ignore repository state', () => {
     repositoryStateFile: statePath,
     repositoryStateStatus: 'ignored',
     repositoryStateVersion: null,
-    completedActionCount: 0
+    completedActionCount: 0,
+    completedActionIds: []
   });
+});
+
+test('Studio inspection panel renders repository action ids', () => {
+  const statePath = join(mkdtempSync(join(tmpdir(), 'brandos-studio-inspection-')), 'studio-state.json');
+  const state = createStudioState({
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedAt: '2026-07-19'
+  });
+
+  writeWorkflowActionState(statePath, state);
+  const shell = createBrandOSStudioShell(createStudioShellOptionsFromArgs(['--html', '--state-file', statePath]));
+  const html = renderStudioHtml(shell, { activeScenario: 'ready' });
+
+  assert.match(html, /State source: repository/);
+  assert.match(html, /State status: loaded/);
+  assert.match(html, /State version: 1/);
+  assert.match(html, /Latest completed action: workflow_action_example_001/);
+  assert.match(html, /Latest completed at: 2026-07-19/);
+  assert.match(html, /Completed action count: 1/);
+  assert.match(html, /Completed action ids: workflow_action_example_001/);
 });
 
 test('Browser Workflow Action state adapter script exposes storage contract', () => {

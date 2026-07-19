@@ -398,6 +398,7 @@ export function renderStudioHtml(shell, options = {}) {
         ${renderInspectionRow('Latest action', `Latest completed action: ${shell.studioStateInspection.latestCompletedActionId || 'none'}`)}
         ${renderInspectionRow('Latest timestamp', `Latest completed at: ${shell.studioStateInspection.latestCompletedAt || 'none'}`)}
         ${renderInspectionRow('History', `Completed action count: ${shell.studioStateInspection.completedActionCount}`)}
+        ${renderInspectionRow('Action ids', `Completed action ids: ${renderCompletedActionIds(shell.studioStateInspection.completedActionIds)}`)}
       </div>
     </section>
   </main>
@@ -435,6 +436,14 @@ function renderInspectionRow(label, value) {
           <span class="inspection-label">${escapeHtml(label)}</span>
           <span class="inspection-value">${escapeHtml(value)}</span>
         </div>`;
+}
+
+function renderCompletedActionIds(actionIds) {
+  if (!actionIds?.length) {
+    return 'none';
+  }
+
+  return actionIds.join(', ');
 }
 
 function renderBrowserStateScript(browserStateKey) {

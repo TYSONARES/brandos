@@ -39,6 +39,7 @@ export function createBrandOSStudioShell(options = {}) {
     repositoryStateStatus: options.repositoryStateStatus || 'not-loaded',
     repositoryStateVersion: options.repositoryStateVersion ?? null,
     completedActionCount: options.completedActionCount ?? (completedWorkflowActionId ? 1 : 0),
+    completedActionIds: options.completedActionIds ?? (completedWorkflowActionId ? [completedWorkflowActionId] : []),
     owner: 'operator@example.local',
     nextActions: contextPackReadiness.nextActions
   };
@@ -50,7 +51,8 @@ export function createBrandOSStudioShell(options = {}) {
     version: contextPackWorkflow.repositoryStateVersion,
     latestCompletedActionId: contextPackWorkflow.completedActionId,
     latestCompletedAt: completedWorkflowActionId ? completedAt : null,
-    completedActionCount: contextPackWorkflow.completedActionCount
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
   };
   return {
     app: 'BrandOS Studio',
@@ -86,7 +88,8 @@ export function createStudioShellOptionsFromArgs(args) {
     repositoryStateFile: stateFile,
     repositoryStateStatus: repositoryStateIgnored ? 'ignored' : repositoryState.exists ? 'loaded' : 'not-found',
     repositoryStateVersion: repositoryState.version ?? null,
-    completedActionCount: repositoryState.completedWorkflowActionIds?.length ?? 0
+    completedActionCount: repositoryState.completedWorkflowActionIds?.length ?? 0,
+    completedActionIds: repositoryState.completedWorkflowActionIds ?? []
   };
 }
 

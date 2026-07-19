@@ -12,7 +12,7 @@ contract remains unchanged while the rendered Studio shell exposes the state sum
 ## Scope
 
 - Dedicated Studio state inspection panel
-- State source, status, file, version, latest action, timestamp, and history count fields
+- State source, status, file, version, latest action, timestamp, history count, and action id fields
 - Component fixture for the inspection panel
 - Render, build, and component validation coverage
 
@@ -29,7 +29,7 @@ contract remains unchanged while the rendered Studio shell exposes the state sum
 ## Acceptance Criteria
 
 - Studio renders a dedicated state inspection section.
-- The inspection section shows durable state source, status, file, version, latest action, latest timestamp, and history count.
+- The inspection section shows durable state source, status, file, version, latest action, latest timestamp, history count, and completed action ids.
 - The inspection section works for default, command, and repository-backed state.
 - The design component fixture captures the inspection panel contract.
 - Quality gates cover rendered Studio inspection fields.

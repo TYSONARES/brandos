@@ -26,6 +26,7 @@ const checks = [
       'Latest completed action: none',
       'Latest completed at: none',
       'Completed action count: 0',
+      'Completed action ids: none',
       'brandos.workflow.completedActionId',
       'window.localStorage.setItem',
       'name="actionId" value="workflow_action_example_001"',
@@ -51,6 +52,7 @@ const checks = [
       'Latest completed action: workflow_action_example_001',
       'Latest completed at: 2026-07-18',
       'Completed action count: 1',
+      'Completed action ids: workflow_action_example_001',
       'Owner: operator@example.local - Target: context_pack_example_001',
       'Use context pack',
       'Use context pack context_pack_example_001'
