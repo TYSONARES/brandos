@@ -32,6 +32,7 @@
 - Added durable Studio state version and history inspection surface.
 - Added durable Studio state inspect command.
 - Added durable Studio state reset command.
+- Added post-v1 Durable Studio State release notes.
 
 ## 1.0.0 - Development Ready
 
