@@ -43,6 +43,7 @@
 - Added post-v1 Studio Diagnostics release notes.
 - Added post-v1 Studio Diagnostics closure checklist.
 - Added Operator Guidance panel package start.
+- Added post-v1 Operator Guidance release notes and closure checklist.
 
 ## 1.0.0 - Development Ready
 

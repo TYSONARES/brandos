@@ -40,6 +40,8 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - post-v1 Studio Diagnostics release notes
 - post-v1 Studio Diagnostics closure checklist
 - dedicated Operator Guidance panel
+- post-v1 Operator Guidance release notes
+- post-v1 Operator Guidance closure checklist
 - compact visual treatment for Workflow Action state source rows
 - component fixture coverage for the Workflow Action state panel
 - post-v1 Workflow Actions release notes

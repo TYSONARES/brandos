@@ -24,6 +24,8 @@ does not change workflow rules; it makes the current recommended action visible.
 - `tests/studio/render-html.test.mjs`
 - `scripts/check-studio-render.mjs`
 - `scripts/check-studio-build.mjs`
+- `docs/development/release-post-v1-operator-guidance.md`
+- `docs/development/closure-post-v1-operator-guidance.md`
 - `npm run check:components`
 
 ## Acceptance Criteria
@@ -34,7 +36,8 @@ does not change workflow rules; it makes the current recommended action visible.
 - Guidance exposes reason, command, and status as readable text.
 - The design component fixture captures the guidance panel contract.
 - Quality gates cover rendered guidance fields.
+- Operator Guidance release notes and closure checklist summarize final scope and validation evidence.
 
 ## Next Step
 
-Add release notes after the operator guidance panel is stable.
+Begin broader operator workflow design as a separate post-v1 package.

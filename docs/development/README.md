@@ -31,6 +31,8 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 19. `release-post-v1-studio-diagnostics.md`
 20. `closure-post-v1-studio-diagnostics.md`
 21. `iteration-post-v1-operator-guidance.md`
+22. `release-post-v1-operator-guidance.md`
+23. `closure-post-v1-operator-guidance.md`
 
 ## Dependency
 
