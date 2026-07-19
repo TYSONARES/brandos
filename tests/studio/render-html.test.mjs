@@ -48,6 +48,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Context Pack usage flow/);
   assert.match(html, /aria-label="Studio state inspection"/);
   assert.match(html, /Studio state inspection/);
+  assert.match(html, /aria-label="Multi-action workflow state"/);
+  assert.match(html, /Multi-action workflow state/);
 });
 
 test('Studio HTML render includes blocking Context Pack readiness reason', () => {
@@ -131,6 +133,12 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Context Pack usage detail: Task type: brand-writing/);
   assert.match(html, /Context Pack usage step: Respect exclusions/);
   assert.match(html, /Context Pack usage step: Follow agent instructions/);
+  assert.match(html, /Multi-action state status: empty/);
+  assert.match(html, /Multi-action state source: example/);
+  assert.match(html, /Multi-action completed count: 0/);
+  assert.match(html, /Multi-action latest completed action: none/);
+  assert.match(html, /Multi-action completed ids: none/);
+  assert.match(html, /Multi-action readiness impact: readiness blocked/);
 });
 
 test('Studio HTML render includes ready Context Pack workflow state', () => {
@@ -181,6 +189,29 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Context Pack task type: brand-writing/);
   assert.match(html, /Context Pack usage step: Load approved context/);
   assert.match(html, /Context Pack usage detail: 3 instructions available/);
+  assert.match(html, /Multi-action state status: single/);
+  assert.match(html, /Multi-action state source: command/);
+  assert.match(html, /Multi-action completed count: 1/);
+  assert.match(html, /Multi-action latest completed action: workflow_action_example_001/);
+  assert.match(html, /Multi-action completed ids: workflow_action_example_001/);
+  assert.match(html, /Multi-action readiness impact: readiness resolved/);
+});
+
+test('Studio HTML render includes multi-action workflow state history', () => {
+  const html = renderStudioHtml(createBrandOSStudioShell({
+    completedWorkflowActionId: 'workflow_action_example_001',
+    completedActionCount: 2,
+    completedActionIds: ['workflow_action_example_000', 'workflow_action_example_001'],
+    workflowStateSource: 'repository',
+    repositoryStateStatus: 'loaded'
+  }), { activeScenario: 'ready' });
+
+  assert.match(html, /Multi-action state status: multiple/);
+  assert.match(html, /Multi-action state source: repository/);
+  assert.match(html, /Multi-action completed count: 2/);
+  assert.match(html, /Multi-action latest completed action: workflow_action_example_001/);
+  assert.match(html, /Multi-action completed ids: workflow_action_example_000, workflow_action_example_001/);
+  assert.match(html, /Multi-action readiness impact: readiness resolved/);
 });
 
 test('Studio shell options parse completed Workflow Action command args', () => {

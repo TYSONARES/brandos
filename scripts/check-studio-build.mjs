@@ -15,6 +15,7 @@ const checks = [
       'aria-label="Operator workflow"',
       'aria-label="Context Pack usage flow"',
       'aria-label="Studio state inspection"',
+      'aria-label="Multi-action workflow state"',
       'Context readiness',
       'Action status: pending',
       'Saved action: <span data-local-completed-action>none</span>',
@@ -77,7 +78,13 @@ const checks = [
       'Context Pack usage step: Apply task boundary',
       'Context Pack usage detail: Task type: brand-writing',
       'Context Pack usage step: Respect exclusions',
-      'Context Pack usage step: Follow agent instructions'
+      'Context Pack usage step: Follow agent instructions',
+      'Multi-action state status: empty',
+      'Multi-action state source: example',
+      'Multi-action completed count: 0',
+      'Multi-action latest completed action: none',
+      'Multi-action completed ids: none',
+      'Multi-action readiness impact: readiness blocked'
     ]
   },
   {
@@ -126,7 +133,13 @@ const checks = [
       'Context Pack usage status: draft',
       'Context Pack task type: brand-writing',
       'Context Pack usage step: Load approved context',
-      'Context Pack usage detail: 3 instructions available'
+      'Context Pack usage detail: 3 instructions available',
+      'Multi-action state status: single',
+      'Multi-action state source: command',
+      'Multi-action completed count: 1',
+      'Multi-action latest completed action: workflow_action_example_001',
+      'Multi-action completed ids: workflow_action_example_001',
+      'Multi-action readiness impact: readiness resolved'
     ]
   }
 ];

@@ -447,6 +447,33 @@ export function renderStudioHtml(shell, options = {}) {
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .multi-action-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .multi-action-row {
+      align-items: start;
+      border-top: 1px solid #e7ebf0;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding-top: 8px;
+    }
+    .multi-action-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .multi-action-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .multi-action-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -472,6 +499,7 @@ export function renderStudioHtml(shell, options = {}) {
       .guidance-row,
       .operator-workflow-stage,
       .usage-row,
+      .multi-action-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -648,6 +676,19 @@ export function renderStudioHtml(shell, options = {}) {
         ${renderInspectionRow('Action ids', `Completed action ids: ${renderCompletedActionIds(shell.studioStateInspection.completedActionIds)}`)}
       </div>
     </section>
+
+    <p class="section-title">Multi-action workflow state</p>
+    <section class="panel" aria-label="Multi-action workflow state">
+      <h2>${escapeHtml(shell.multiActionWorkflowState.title)}</h2>
+      <div class="multi-action-list">
+        ${renderMultiActionRow('Status', `Multi-action state status: ${shell.multiActionWorkflowState.status}`)}
+        ${renderMultiActionRow('Source', `Multi-action state source: ${shell.multiActionWorkflowState.stateSource}`)}
+        ${renderMultiActionRow('Count', `Multi-action completed count: ${shell.multiActionWorkflowState.completedActionCount}`)}
+        ${renderMultiActionRow('Latest', `Multi-action latest completed action: ${shell.multiActionWorkflowState.latestCompletedActionId || 'none'}`)}
+        ${renderMultiActionRow('Action ids', `Multi-action completed ids: ${renderCompletedActionIds(shell.multiActionWorkflowState.completedActionIds)}`)}
+        ${renderMultiActionRow('Readiness impact', `Multi-action readiness impact: ${shell.multiActionWorkflowState.readinessImpact}`)}
+      </div>
+    </section>
   </main>
   ${renderBrowserStateScript(browserStateKey)}
 </body>
@@ -748,6 +789,13 @@ function renderUsageStep(step) {
   return `<div class="usage-step">
           <span class="usage-step-label">Context Pack usage step: ${escapeHtml(step.label)}</span>
           <span class="usage-step-detail">Context Pack usage detail: ${escapeHtml(step.detail)}</span>
+        </div>`;
+}
+
+function renderMultiActionRow(label, value) {
+  return `<div class="multi-action-row">
+          <span class="multi-action-label">${escapeHtml(label)}</span>
+          <span class="multi-action-value">${escapeHtml(value)}</span>
         </div>`;
 }
 

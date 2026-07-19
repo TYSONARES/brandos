@@ -13,6 +13,7 @@ const componentFiles = [
   'fixtures/components/workflow-action-row.json',
   'fixtures/components/workflow-action-state-panel.json',
   'fixtures/components/studio-state-inspection-panel.json',
+  'fixtures/components/multi-action-workflow-state-panel.json',
   'fixtures/components/studio-diagnostics-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-workflow-panel.json',

@@ -18,6 +18,7 @@ const requiredSnippets = [
   'aria-label="Operator workflow"',
   'aria-label="Context Pack usage flow"',
   'aria-label="Studio state inspection"',
+  'aria-label="Multi-action workflow state"',
   'class="workflow-action-row"',
   'class="action-status-badge action-status-pending"',
   'Owner: operator@example.local - Target: review_example_001',
@@ -89,7 +90,13 @@ const requiredSnippets = [
   'Context Pack usage step: Apply task boundary',
   'Context Pack usage detail: Task type: brand-writing',
   'Context Pack usage step: Respect exclusions',
-  'Context Pack usage step: Follow agent instructions'
+  'Context Pack usage step: Follow agent instructions',
+  'Multi-action state status: empty',
+  'Multi-action state source: example',
+  'Multi-action completed count: 0',
+  'Multi-action latest completed action: none',
+  'Multi-action completed ids: none',
+  'Multi-action readiness impact: readiness blocked'
 ];
 const requiredReadySnippets = [
   'aria-current="page" href="ready.html"',
@@ -132,7 +139,13 @@ const requiredReadySnippets = [
   'Context Pack usage status: draft',
   'Context Pack task type: brand-writing',
   'Context Pack usage step: Load approved context',
-  'Context Pack usage detail: 3 instructions available'
+  'Context Pack usage detail: 3 instructions available',
+  'Multi-action state status: single',
+  'Multi-action state source: command',
+  'Multi-action completed count: 1',
+  'Multi-action latest completed action: workflow_action_example_001',
+  'Multi-action completed ids: workflow_action_example_001',
+  'Multi-action readiness impact: readiness resolved'
 ];
 
 const missing = [

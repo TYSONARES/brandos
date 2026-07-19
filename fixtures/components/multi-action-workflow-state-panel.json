@@ -1,0 +1,29 @@
+{
+  "id": "component_multi_action_workflow_state_panel",
+  "name": "Multi-Action Workflow State Panel",
+  "status": "draft",
+  "purpose": "Shows completed Workflow Action count, latest completed action, completed action ids, state source, and readiness impact.",
+  "productObjects": [
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "empty",
+    "single",
+    "multiple"
+  ],
+  "accessibility": [
+    "Expose count, latest action, action ids, source, and readiness impact as visible text.",
+    "Do not rely on count alone to communicate state.",
+    "Use readable labels for empty, single, and multiple states."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

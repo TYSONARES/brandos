@@ -56,6 +56,15 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionCount: contextPackWorkflow.completedActionCount,
     completedActionIds: contextPackWorkflow.completedActionIds
   };
+  const multiActionWorkflowState = {
+    title: 'Multi-action workflow state',
+    status: contextPackWorkflow.completedActionCount > 1 ? 'multiple' : contextPackWorkflow.completedActionCount === 1 ? 'single' : 'empty',
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    latestCompletedActionId: contextPackWorkflow.completedActionId,
+    completedActionIds: contextPackWorkflow.completedActionIds,
+    readinessImpact: contextPackReadiness.ready ? 'readiness resolved' : 'readiness blocked',
+    stateSource: contextPackWorkflow.stateSource
+  };
   const diagnostics = {
     title: 'Studio diagnostics',
     packageCount: 3,
@@ -140,6 +149,7 @@ export function createBrandOSStudioShell(options = {}) {
     contextPackUsageFlow,
     contextPackWorkflow,
     studioStateInspection,
+    multiActionWorkflowState,
     diagnostics,
     operatorGuidance,
     operatorWorkflow,
