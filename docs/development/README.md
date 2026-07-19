@@ -42,6 +42,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 30. `iteration-post-v1-context-pack-usage-flow.md`
 31. `release-post-v1-context-pack-usage-flow.md`
 32. `closure-post-v1-context-pack-usage-flow.md`
+33. `iteration-post-v1-multi-action-workflow-state.md`
+34. `release-post-v1-multi-action-workflow-state.md`
+35. `closure-post-v1-multi-action-workflow-state.md`
 
 ## Dependency
 

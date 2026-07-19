@@ -51,6 +51,9 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Context Pack Usage Flow panel
 - post-v1 Context Pack Usage Flow release notes
 - post-v1 Context Pack Usage Flow closure checklist
+- dedicated Multi-Action Workflow State panel
+- post-v1 Multi-Action Workflow State release notes
+- post-v1 Multi-Action Workflow State closure checklist
 - compact visual treatment for Workflow Action state source rows
 - component fixture coverage for the Workflow Action state panel
 - post-v1 Workflow Actions release notes
