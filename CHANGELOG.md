@@ -31,6 +31,7 @@
 - Added durable Studio state adapter package start.
 - Added durable Studio state version and history inspection surface.
 - Added durable Studio state inspect command.
+- Added durable Studio state reset command.
 
 ## 1.0.0 - Development Ready
 

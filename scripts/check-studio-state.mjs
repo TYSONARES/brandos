@@ -72,4 +72,22 @@ if (
   process.exit(1);
 }
 
+const resetOutput = execFileSync(process.execPath, ['scripts/reset-studio-state.mjs', `--state-file=${stateFile}`], {
+  encoding: 'utf8'
+});
+
+if (!resetOutput.includes(`Reset durable Studio state at ${stateFile}`) || describeStudioState(stateFile).exists !== false) {
+  console.error('Durable Studio state reset command did not clear expected state.');
+  process.exit(1);
+}
+
+const missingResetOutput = execFileSync(process.execPath, ['scripts/reset-studio-state.mjs', `--state-file=${stateFile}`], {
+  encoding: 'utf8'
+});
+
+if (!missingResetOutput.includes(`No durable Studio state found at ${stateFile}`)) {
+  console.error('Durable Studio state reset command did not report missing state.');
+  process.exit(1);
+}
+
 console.log('Durable Studio state requirements passed.');

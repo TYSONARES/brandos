@@ -23,6 +23,7 @@ Local setup defines how contributors start working on BrandOS without relying on
 - `npm run inspect:studio-action` prints the local Studio Workflow Action state.
 - `npm run inspect:studio-state` prints the durable local Studio state summary.
 - `npm run reset:studio-action` clears the local Studio Workflow Action state.
+- `npm run reset:studio-state` clears the durable local Studio state file.
 - `npm run render:studio` reads `.tmp/studio-state.json` when present; pass `-- --ignore-repository-state` for the default blocked shell.
 - `npm run serve:studio` serves the generated Studio build at `http://localhost:4173`.
 

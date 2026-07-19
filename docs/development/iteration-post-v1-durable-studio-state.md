@@ -19,6 +19,7 @@ shared place to store local state.
 - Studio shell option loading from durable state
 - Studio state version and history inspection surface
 - Durable Studio state inspect command
+- Durable Studio state reset command
 - Dedicated durable state quality gate
 
 ## Validation
@@ -28,6 +29,7 @@ shared place to store local state.
 - `tests/studio/render-html.test.mjs`
 - `fixtures/components/workflow-action-state-panel.json`
 - `scripts/inspect-studio-state.mjs`
+- `scripts/reset-studio-state.mjs`
 - `scripts/check-studio-state.mjs`
 - `npm run check:studio-state`
 
@@ -40,6 +42,7 @@ shared place to store local state.
 - Multiple completed Workflow Actions can be represented without changing the shell command surface.
 - Studio output shows durable state version and completed action history count.
 - Durable Studio state can be inspected through a dedicated command.
+- Durable Studio state can be reset through a dedicated command.
 - The default repository-backed local state path is `.tmp/studio-state.json`.
 
 ## Next Step

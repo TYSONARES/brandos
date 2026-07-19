@@ -20,6 +20,7 @@ const required = [
   'scripts/check-studio-action-state.mjs',
   'scripts/check-studio-state.mjs',
   'scripts/inspect-studio-state.mjs',
+  'scripts/reset-studio-state.mjs',
   'scripts/check-studio-render.mjs'
 ];
 

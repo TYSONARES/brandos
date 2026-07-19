@@ -34,6 +34,7 @@
     "persist:studio-action": "node scripts/persist-studio-action.mjs",
     "render:studio": "node apps/studio/src/app.mjs --html",
     "reset:studio-action": "node scripts/reset-studio-action.mjs",
+    "reset:studio-state": "node scripts/reset-studio-state.mjs",
     "serve:studio": "node scripts/serve-studio.mjs",
     "smoke:app": "node apps/studio/src/app.mjs --smoke",
     "test": "node --test tests/**/*.test.mjs"
