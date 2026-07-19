@@ -19,6 +19,7 @@ const required = [
   'docs/development/app-shell.md',
   'docs/development/iteration-post-v1-workflow-actions.md',
   'docs/development/release-post-v1-durable-studio-state.md',
+  'docs/development/closure-post-v1-durable-studio-state.md',
   'docs/development/package-boundaries.md',
   'docs/development/quality-gates.md',
   'docs/decisions/0021-development-ready-start.md',

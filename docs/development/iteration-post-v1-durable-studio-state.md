@@ -31,6 +31,7 @@ shared place to store local state.
 - `scripts/inspect-studio-state.mjs`
 - `scripts/reset-studio-state.mjs`
 - `docs/development/release-post-v1-durable-studio-state.md`
+- `docs/development/closure-post-v1-durable-studio-state.md`
 - `scripts/check-studio-state.mjs`
 - `npm run check:studio-state`
 
@@ -46,6 +47,7 @@ shared place to store local state.
 - Durable Studio state can be reset through a dedicated command.
 - The default repository-backed local state path is `.tmp/studio-state.json`.
 - Durable Studio State release notes summarize user-facing changes, repository changes, commands, and acceptance status.
+- Durable Studio State closure checklist summarizes final scope lock and validation evidence.
 
 ## Next Step
 

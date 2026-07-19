@@ -47,3 +47,4 @@ The Workflow Action workflow remains compatible while future Studio features gai
 ## Follow-Up
 
 The next package should add richer Studio state inspection views without expanding the durable state file contract.
+Closure status is tracked in `docs/development/closure-post-v1-durable-studio-state.md`.
