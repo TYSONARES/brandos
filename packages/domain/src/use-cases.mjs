@@ -260,6 +260,31 @@ export function createOperatorRunbookExecution(store, operatorRunId) {
   };
 }
 
+export function createHandoffAcceptance(store, operatorRunId) {
+  const runbook = createOperatorRunbookExecution(store, operatorRunId);
+  const accepted = runbook.status === 'ready';
+
+  return {
+    title: 'Handoff Acceptance',
+    runId: runbook.runId,
+    handoffId: runbook.handoffId,
+    status: accepted ? 'accepted' : 'blocked',
+    decision: accepted ? 'Accept handoff context' : 'Resolve runbook blockers before acceptance',
+    accepted,
+    requiredEvidence: [
+      `Current action ${runbook.currentActionId} is ${runbook.currentActionStatus}`,
+      `Runbook status is ${runbook.status}`,
+      `Handoff ${runbook.handoffId} is linked`
+    ],
+    blockedReasons: accepted
+      ? []
+      : runbook.steps
+        .filter((step) => step.status === 'blocked')
+        .map((step) => `${step.label}: ${step.detail}`),
+    nextWorkflow: accepted ? 'Use Context Pack' : 'Operator Runbook Execution'
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {
@@ -275,6 +300,18 @@ export function completeWorkflowAction(store, actionId, completedAt) {
       status: 'approved',
       notes: `${review.notes} Resolution completed by ${action.id}.`
     });
+  }
+
+  for (const operatorRun of store.list('operator-run').filter((run) => run.actionIds.includes(actionId))) {
+    const actions = operatorRun.actionIds.map((item) => store.get('workflow-action', item));
+    const allActionsComplete = actions.every((item) => item?.status === 'complete');
+    if (allActionsComplete) {
+      store.save('operator-run', {
+        ...operatorRun,
+        status: 'ready',
+        updatedAt: completedAt
+      });
+    }
   }
 
   return completedAction;

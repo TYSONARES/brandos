@@ -19,6 +19,7 @@ const componentFiles = [
   'fixtures/components/studio-diagnostics-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
+  'fixtures/components/handoff-acceptance-panel.json',
   'fixtures/components/operator-run-queue-panel.json',
   'fixtures/components/operator-runbook-execution-panel.json',
   'fixtures/components/operator-workflow-panel.json',

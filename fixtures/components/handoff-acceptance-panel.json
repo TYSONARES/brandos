@@ -1,0 +1,29 @@
+{
+  "id": "component_handoff_acceptance_panel",
+  "name": "Handoff Acceptance Panel",
+  "status": "draft",
+  "purpose": "Shows whether repository-backed handoff context can be accepted as active operator or agent work.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "accepted"
+  ],
+  "accessibility": [
+    "Expose acceptance status, decision, evidence, and next workflow as visible text.",
+    "Do not rely on color alone to communicate acceptance readiness.",
+    "Keep blocked acceptance reasons readable for operators and AI agents."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

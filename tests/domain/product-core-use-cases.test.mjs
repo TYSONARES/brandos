@@ -6,6 +6,7 @@ import {
   createBrandProfileOverview,
   createContextPackUsageFlow,
   createExampleProductCoreState,
+  createHandoffAcceptance,
   createInMemoryProductCoreStore,
   createOperatorRunQueue,
   createOperatorRunbookExecution,
@@ -198,4 +199,27 @@ test('Operator Runbook Execution expands a run into operator steps', () => {
     'Close operator run'
   ]);
   assert.deepEqual(runbook.steps.map((step) => step.status), ['complete', 'active', 'blocked', 'blocked', 'blocked']);
+});
+
+test('Handoff Acceptance blocks until Operator Run actions are complete', () => {
+  const store = createExampleStore();
+  const blocked = createHandoffAcceptance(store, 'operator_run_example_001');
+
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.accepted, false);
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+  assert.equal(blocked.blockedReasons.length, 3);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const accepted = createHandoffAcceptance(store, 'operator_run_example_001');
+
+  assert.equal(accepted.status, 'accepted');
+  assert.equal(accepted.accepted, true);
+  assert.equal(accepted.nextWorkflow, 'Use Context Pack');
+  assert.deepEqual(accepted.blockedReasons, []);
+  assert.deepEqual(accepted.requiredEvidence, [
+    'Current action workflow_action_example_001 is complete',
+    'Runbook status is ready',
+    'Handoff operator_handoff_example_001 is linked'
+  ]);
 });

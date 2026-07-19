@@ -48,6 +48,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Operator Run Queue/);
   assert.match(html, /aria-label="Operator Runbook Execution"/);
   assert.match(html, /Operator Runbook Execution/);
+  assert.match(html, /aria-label="Handoff Acceptance"/);
+  assert.match(html, /Handoff Acceptance/);
   assert.match(html, /aria-label="Context Pack usage flow"/);
   assert.match(html, /Context Pack usage flow/);
   assert.match(html, /aria-label="Review resolution workflow"/);
@@ -154,6 +156,14 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Operator runbook step detail: Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Operator runbook step detail: Handoff operator_handoff_example_001 waits for 1 audit events/);
   assert.match(html, /Operator runbook step detail: Run status is blocked/);
+  assert.match(html, /Handoff acceptance status: blocked/);
+  assert.match(html, /Handoff acceptance decision: Resolve runbook blockers before acceptance/);
+  assert.match(html, /Handoff acceptance run id: operator_run_example_001/);
+  assert.match(html, /Handoff acceptance next workflow: Operator Runbook Execution/);
+  assert.match(html, /Handoff acceptance evidence: Current action workflow_action_example_001 is pending/);
+  assert.match(html, /Handoff acceptance evidence: Runbook status is blocked/);
+  assert.match(html, /Handoff acceptance evidence: Handoff operator_handoff_example_001 is linked/);
+  assert.match(html, /Handoff acceptance blocker: Resolve current action: Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Context Pack usage status: draft/);
   assert.match(html, /Context Pack task type: brand-writing/);
   assert.match(html, /Context Pack audience: AI agents drafting product and brand copy/);
@@ -281,6 +291,13 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Operator handoff verification performed: Studio audit trail status: resolved/);
   assert.match(html, /Operator handoff recommended next workflow: Use Context Pack/);
   assert.match(html, /Operator handoff next agent: AI writing agent/);
+  assert.match(html, /Operator runbook status: ready/);
+  assert.match(html, /Operator runbook step detail: workflow_action_example_001 is complete/);
+  assert.match(html, /Handoff acceptance status: accepted/);
+  assert.match(html, /Handoff acceptance decision: Accept handoff context/);
+  assert.match(html, /Handoff acceptance next workflow: Use Context Pack/);
+  assert.match(html, /Handoff acceptance evidence: Current action workflow_action_example_001 is complete/);
+  assert.match(html, /Handoff acceptance evidence: Runbook status is ready/);
   assert.match(html, /Multi-action state status: single/);
   assert.match(html, /Multi-action state source: command/);
   assert.match(html, /Multi-action completed count: 1/);

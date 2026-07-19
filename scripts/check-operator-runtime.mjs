@@ -1,6 +1,8 @@
 import { existsSync } from 'node:fs';
 import {
+  completeWorkflowAction,
   createExampleProductCoreState,
+  createHandoffAcceptance,
   createInMemoryProductCoreStore,
   createOperatorRunQueue,
   createOperatorRunbookExecution,
@@ -20,10 +22,12 @@ const required = [
   'docs/development/iteration-v1.1-operator-runbook-execution.md',
   'docs/development/release-v1.1-operator-runbook-execution.md',
   'docs/development/closure-v1.1-operator-runbook-execution.md',
+  'docs/development/iteration-v1.1-handoff-acceptance.md',
   'docs/decisions/0023-operator-runtime-start.md',
   'docs/product/operator-run.md',
   'schemas/operator-run.schema.json',
   'fixtures/operator-run.example.json',
+  'fixtures/components/handoff-acceptance-panel.json',
   'fixtures/components/operator-run-queue-panel.json',
   'fixtures/components/operator-runbook-execution-panel.json'
 ];
@@ -67,6 +71,19 @@ if (queue.runCount !== 1 || queue.blockedCount !== 1 || queue.activeRunId !== 'o
 const runbook = createOperatorRunbookExecution(store, 'operator_run_example_001');
 if (runbook.status !== 'blocked' || runbook.steps.length !== 5 || runbook.steps[1].status !== 'active') {
   console.error('Operator Runbook Execution did not expose expected blocked runbook state.');
+  process.exit(1);
+}
+
+const blockedAcceptance = createHandoffAcceptance(store, 'operator_run_example_001');
+if (blockedAcceptance.status !== 'blocked' || blockedAcceptance.blockedReasons.length === 0) {
+  console.error('Handoff Acceptance did not expose expected blocked state.');
+  process.exit(1);
+}
+
+completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+const acceptedHandoff = createHandoffAcceptance(store, 'operator_run_example_001');
+if (acceptedHandoff.status !== 'accepted' || acceptedHandoff.blockedReasons.length !== 0) {
+  console.error('Handoff Acceptance did not expose expected accepted state.');
   process.exit(1);
 }
 

@@ -4,6 +4,7 @@ import {
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
   createContextPackUsageFlow,
+  createHandoffAcceptance,
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createReviewResolutionWorkflow,
@@ -36,6 +37,7 @@ export function createBrandOSStudioShell(options = {}) {
   const reviewResolutionWorkflow = createReviewResolutionWorkflow(store, 'review_example_001');
   const operatorRunQueue = createOperatorRunQueue(store);
   const operatorRunbookExecution = createOperatorRunbookExecution(store, operatorRunQueue.activeRunId || 'operator_run_example_001');
+  const handoffAcceptance = createHandoffAcceptance(store, operatorRunbookExecution.runId);
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
@@ -206,6 +208,7 @@ export function createBrandOSStudioShell(options = {}) {
     reviewResolutionWorkflow,
     operatorRunQueue,
     operatorRunbookExecution,
+    handoffAcceptance,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

@@ -451,6 +451,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .handoff-acceptance-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .handoff-acceptance-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .handoff-acceptance-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .handoff-acceptance-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -663,6 +690,7 @@ export function renderStudioHtml(shell, options = {}) {
       .handoff-row,
       .operator-run-queue-row,
       .operator-runbook-step,
+      .handoff-acceptance-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -765,6 +793,21 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
       <div class="operator-runbook-list">
         ${shell.operatorRunbookExecution.steps.map(renderOperatorRunbookStep).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Handoff Acceptance</p>
+    <section class="panel" aria-label="Handoff Acceptance">
+      <h2>${escapeHtml(shell.handoffAcceptance.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Handoff acceptance status: ${shell.handoffAcceptance.status}`)}
+        ${renderGuidanceRow('Decision', `Handoff acceptance decision: ${shell.handoffAcceptance.decision}`)}
+        ${renderGuidanceRow('Run', `Handoff acceptance run id: ${shell.handoffAcceptance.runId}`)}
+        ${renderGuidanceRow('Next workflow', `Handoff acceptance next workflow: ${shell.handoffAcceptance.nextWorkflow}`)}
+      </div>
+      <div class="handoff-acceptance-list">
+        ${shell.handoffAcceptance.requiredEvidence.map(renderHandoffAcceptanceEvidence).join('')}
+        ${shell.handoffAcceptance.blockedReasons.map(renderHandoffAcceptanceBlocker).join('')}
       </div>
     </section>
 
@@ -1041,6 +1084,20 @@ function renderOperatorRunbookStep(step) {
             <span>Operator runbook step status: ${escapeHtml(step.status)}</span>
             <span>Operator runbook step detail: ${escapeHtml(step.detail)}</span>
           </span>
+        </div>`;
+}
+
+function renderHandoffAcceptanceEvidence(evidence) {
+  return `<div class="handoff-acceptance-row">
+          <span class="handoff-acceptance-label">Evidence</span>
+          <span class="handoff-acceptance-value">Handoff acceptance evidence: ${escapeHtml(evidence)}</span>
+        </div>`;
+}
+
+function renderHandoffAcceptanceBlocker(reason) {
+  return `<div class="handoff-acceptance-row">
+          <span class="handoff-acceptance-label">Blocker</span>
+          <span class="handoff-acceptance-value">Handoff acceptance blocker: ${escapeHtml(reason)}</span>
         </div>`;
 }
 
