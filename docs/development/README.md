@@ -25,6 +25,7 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 13. `release-post-v1-durable-studio-state.md`
 14. `closure-post-v1-durable-studio-state.md`
 15. `iteration-post-v1-studio-state-inspection.md`
+16. `release-post-v1-studio-state-inspection.md`
 
 ## Dependency
 

@@ -24,6 +24,7 @@ contract remains unchanged while the rendered Studio shell exposes the state sum
 - `tests/studio/render-html.test.mjs`
 - `scripts/check-studio-render.mjs`
 - `scripts/check-studio-build.mjs`
+- `docs/development/release-post-v1-studio-state-inspection.md`
 - `npm run check:components`
 
 ## Acceptance Criteria
@@ -33,7 +34,8 @@ contract remains unchanged while the rendered Studio shell exposes the state sum
 - The inspection section works for default, command, and repository-backed state.
 - The design component fixture captures the inspection panel contract.
 - Quality gates cover rendered Studio inspection fields.
+- Studio State Inspection release notes summarize user-facing changes, repository changes, commands, and acceptance status.
 
 ## Next Step
 
-Add release notes after the inspection panel is stable.
+Add closure evidence after the inspection panel release notes are stable.
