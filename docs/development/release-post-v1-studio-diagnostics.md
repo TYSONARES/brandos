@@ -44,4 +44,5 @@ and state signals. It does not change Product Core behavior or the durable Studi
 
 ## Follow-Up
 
-The next package should add closure evidence for Studio Diagnostics before starting broader operator guidance.
+The next package should start broader operator guidance as a separate post-v1 package.
+Closure status is tracked in `docs/development/closure-post-v1-studio-diagnostics.md`.

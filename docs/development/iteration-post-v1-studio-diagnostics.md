@@ -25,6 +25,7 @@ product, readiness, and state signals without changing Product Core behavior or 
 - `scripts/check-studio-render.mjs`
 - `scripts/check-studio-build.mjs`
 - `docs/development/release-post-v1-studio-diagnostics.md`
+- `docs/development/closure-post-v1-studio-diagnostics.md`
 - `npm run check:components`
 
 ## Acceptance Criteria
@@ -35,7 +36,8 @@ product, readiness, and state signals without changing Product Core behavior or 
 - The design component fixture captures the diagnostics panel contract.
 - Quality gates cover rendered Studio diagnostics fields.
 - Studio Diagnostics release notes summarize user-facing changes, repository changes, commands, and acceptance status.
+- Studio Diagnostics closure checklist summarizes final scope lock and validation evidence.
 
 ## Next Step
 
-Add closure evidence after the diagnostics release notes are stable.
+Begin broader operator guidance as a separate post-v1 package.
