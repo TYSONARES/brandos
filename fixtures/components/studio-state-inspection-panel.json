@@ -1,0 +1,30 @@
+{
+  "id": "component_studio_state_inspection_panel",
+  "name": "Studio State Inspection Panel",
+  "status": "draft",
+  "purpose": "Shows durable Studio state source, status, file, version, latest action, timestamp, and completed action history count.",
+  "productObjects": [
+    "workflow-action",
+    "workflow-run"
+  ],
+  "states": [
+    "example",
+    "command",
+    "repository",
+    "ignored"
+  ],
+  "accessibility": [
+    "Expose each state field as visible text.",
+    "Keep long state file paths readable without clipping.",
+    "Do not rely on color to distinguish state source or status."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

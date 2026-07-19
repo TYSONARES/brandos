@@ -42,6 +42,16 @@ export function createBrandOSStudioShell(options = {}) {
     owner: 'operator@example.local',
     nextActions: contextPackReadiness.nextActions
   };
+  const studioStateInspection = {
+    title: 'Studio state inspection',
+    source: contextPackWorkflow.stateSource,
+    status: contextPackWorkflow.repositoryStateStatus,
+    file: contextPackWorkflow.repositoryStateFile,
+    version: contextPackWorkflow.repositoryStateVersion,
+    latestCompletedActionId: contextPackWorkflow.completedActionId,
+    latestCompletedAt: completedWorkflowActionId ? completedAt : null,
+    completedActionCount: contextPackWorkflow.completedActionCount
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -50,6 +60,7 @@ export function createBrandOSStudioShell(options = {}) {
     brandProfileOverview,
     contextPackReadiness,
     contextPackWorkflow,
+    studioStateInspection,
     packages: [
       createDomainSummary(),
       createContractSummary(),

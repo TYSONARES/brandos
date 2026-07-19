@@ -38,6 +38,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Brand overview/);
   assert.match(html, /Product Core objects/);
   assert.match(html, /Readiness blockers/);
+  assert.match(html, /aria-label="Studio state inspection"/);
+  assert.match(html, /Studio state inspection/);
 });
 
 test('Studio HTML render includes blocking Context Pack readiness reason', () => {
@@ -60,6 +62,13 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Repository state status: not-loaded/);
   assert.match(html, /Repository state version: none/);
   assert.match(html, /Completed action history: 0/);
+  assert.match(html, /State source: example/);
+  assert.match(html, /State status: not-loaded/);
+  assert.match(html, /State file: .tmp\/studio-state.json/);
+  assert.match(html, /State version: none/);
+  assert.match(html, /Latest completed action: none/);
+  assert.match(html, /Latest completed at: none/);
+  assert.match(html, /Completed action count: 0/);
   assert.match(html, /data-clear-workflow-state/);
   assert.match(html, /brandos.workflow.completedActionId/);
   assert.match(html, /action="ready.html"/);
@@ -84,6 +93,10 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Completed action: workflow_action_example_001/);
   assert.match(html, /Workflow state source: <span class="state-source-badge state-source-command">command<\/span>/);
   assert.match(html, /Saved action: <span data-local-completed-action>workflow_action_example_001<\/span>/);
+  assert.match(html, /State source: command/);
+  assert.match(html, /Latest completed action: workflow_action_example_001/);
+  assert.match(html, /Latest completed at: 2026-07-18/);
+  assert.match(html, /Completed action count: 1/);
   assert.match(html, /action-status-badge action-status-ready/);
   assert.match(html, /Owner: operator@example.local - Target: context_pack_example_001/);
   assert.match(html, /Use context pack/);

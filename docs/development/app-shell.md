@@ -33,6 +33,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated reset command for durable Studio state
 - post-v1 Durable Studio State release notes
 - post-v1 Durable Studio State closure checklist
+- dedicated Studio state inspection panel
 - compact visual treatment for Workflow Action state source rows
 - component fixture coverage for the Workflow Action state panel
 - post-v1 Workflow Actions release notes

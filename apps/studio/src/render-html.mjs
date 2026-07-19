@@ -239,6 +239,33 @@ export function renderStudioHtml(shell, options = {}) {
       padding: 2px 8px;
       text-transform: capitalize;
     }
+    .inspection-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .inspection-row {
+      align-items: start;
+      border-top: 1px solid #e7ebf0;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 160px minmax(0, 1fr);
+      padding-top: 8px;
+    }
+    .inspection-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .inspection-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .inspection-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -258,7 +285,8 @@ export function renderStudioHtml(shell, options = {}) {
       .workflow-action-row { display: grid; }
       .workflow-command button,
       .workflow-command a { width: 100%; }
-      .state-source-row { grid-template-columns: 1fr; }
+      .state-source-row,
+      .inspection-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -358,6 +386,20 @@ export function renderStudioHtml(shell, options = {}) {
         </div>
       </article>
     </section>
+
+    <p class="section-title">Studio state inspection</p>
+    <section class="panel" aria-label="Studio state inspection">
+      <h2>${escapeHtml(shell.studioStateInspection.title)}</h2>
+      <div class="inspection-list">
+        ${renderInspectionRow('Source', `State source: ${shell.studioStateInspection.source}`)}
+        ${renderInspectionRow('Status', `State status: ${shell.studioStateInspection.status}`)}
+        ${renderInspectionRow('File', `State file: ${shell.studioStateInspection.file}`)}
+        ${renderInspectionRow('Version', `State version: ${shell.studioStateInspection.version || 'none'}`)}
+        ${renderInspectionRow('Latest action', `Latest completed action: ${shell.studioStateInspection.latestCompletedActionId || 'none'}`)}
+        ${renderInspectionRow('Latest timestamp', `Latest completed at: ${shell.studioStateInspection.latestCompletedAt || 'none'}`)}
+        ${renderInspectionRow('History', `Completed action count: ${shell.studioStateInspection.completedActionCount}`)}
+      </div>
+    </section>
   </main>
   ${renderBrowserStateScript(browserStateKey)}
 </body>
@@ -386,6 +428,13 @@ function renderCompletedActionMeta(completedActionId) {
   }
 
   return `<p class="meta">Completed action: ${escapeHtml(completedActionId)}</p>`;
+}
+
+function renderInspectionRow(label, value) {
+  return `<div class="inspection-row">
+          <span class="inspection-label">${escapeHtml(label)}</span>
+          <span class="inspection-value">${escapeHtml(value)}</span>
+        </div>`;
 }
 
 function renderBrowserStateScript(browserStateKey) {
