@@ -12,7 +12,7 @@ This directory contains the operating knowledge for BrandOS. Read it as the map 
 - `ai/`: completed v0.4 AI agents, prompts, memory, and evaluation contracts
 - `architecture/`: completed v0.5 architecture decision space
 - `infrastructure/`: completed v0.6 operational baseline
-- `development/`: completed v1.0 implementation readiness baseline
+- `development/`: completed v1.0 implementation readiness baseline and active Operator Runtime v1.1 work
 - `security/`: security, privacy, risk, and compliance baseline
 - `operations/`: release, quality, support, and planning workflow
 - `decisions/`: ADRs and decision logs

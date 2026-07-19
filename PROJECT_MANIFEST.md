@@ -5,7 +5,8 @@
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Active workstream: post-v1.0 feature implementation
+- Latest completed implementation cycle: post-v1.0 feature implementation
+- Active workstream: Operator Runtime v1.1
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -88,6 +89,13 @@ feature implementation can begin.
 
 Development Ready v1.0 is complete at implementation baseline level. See `docs/development/release-v1.0.0.md`
 and `docs/decisions/0022-development-ready-v1.0-complete.md`.
+
+## v1.1 Scope
+
+Operator Runtime v1.1 turns the completed post-v1 Studio workflow surface into a traceable operator
+execution baseline. It defines operator run state, queue behavior, runbook execution, and handoff
+acceptance without adding production deployment, database, authentication, external integrations, or
+AI model execution.
 
 ## Definition of Done
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Operator Runtime v1.1
+
+- Started Operator Runtime v1.1 scope and decision record.
+
 ## Unreleased - Post-v1 Feature Implementation
 
 - Added Context Pack readiness next actions to domain and Studio render output.

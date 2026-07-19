@@ -56,6 +56,7 @@ const required = [
   'docs/development/closure-post-v1-final-closure.md',
   'docs/development/package-boundaries.md',
   'docs/development/quality-gates.md',
+  'docs/development/v1.1-scope.md',
   'docs/decisions/0021-development-ready-start.md',
   'apps/studio/README.md',
   'apps/studio/src/app.mjs',

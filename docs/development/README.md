@@ -5,8 +5,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 ## Status
 
 - Released baseline: Development Ready v1.0
-- Active workstream: post-v1.0 feature implementation
-- Current goal: build product features on the runnable BrandOS Studio baseline
+- Latest completed implementation cycle: post-v1.0 feature implementation
+- Active workstream: Operator Runtime v1.1
+- Current goal: turn the Studio workflow surface into a traceable operator execution baseline
 
 ## Read Order
 
@@ -18,46 +19,47 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 6. `package-boundaries.md`
 7. `quality-gates.md`
 8. `release-v1.0.0.md`
-9. `iteration-post-v1-workflow-actions.md`
-10. `release-post-v1-workflow-actions.md`
-11. `closure-post-v1-workflow-actions.md`
-12. `iteration-post-v1-durable-studio-state.md`
-13. `release-post-v1-durable-studio-state.md`
-14. `closure-post-v1-durable-studio-state.md`
-15. `iteration-post-v1-studio-state-inspection.md`
-16. `release-post-v1-studio-state-inspection.md`
-17. `closure-post-v1-studio-state-inspection.md`
-18. `iteration-post-v1-studio-diagnostics.md`
-19. `release-post-v1-studio-diagnostics.md`
-20. `closure-post-v1-studio-diagnostics.md`
-21. `iteration-post-v1-operator-guidance.md`
-22. `release-post-v1-operator-guidance.md`
-23. `closure-post-v1-operator-guidance.md`
-24. `iteration-post-v1-operator-workflow.md`
-25. `release-post-v1-operator-workflow.md`
-26. `closure-post-v1-operator-workflow.md`
-27. `iteration-post-v1-operator-workflow-execution-controls.md`
-28. `release-post-v1-operator-workflow-execution-controls.md`
-29. `closure-post-v1-operator-workflow-execution-controls.md`
-30. `iteration-post-v1-context-pack-usage-flow.md`
-31. `release-post-v1-context-pack-usage-flow.md`
-32. `closure-post-v1-context-pack-usage-flow.md`
-33. `iteration-post-v1-multi-action-workflow-state.md`
-34. `release-post-v1-multi-action-workflow-state.md`
-35. `closure-post-v1-multi-action-workflow-state.md`
-36. `iteration-post-v1-review-resolution-workflow.md`
-37. `release-post-v1-review-resolution-workflow.md`
-38. `closure-post-v1-review-resolution-workflow.md`
-39. `iteration-post-v1-studio-workflow-audit-trail.md`
-40. `release-post-v1-studio-workflow-audit-trail.md`
-41. `closure-post-v1-studio-workflow-audit-trail.md`
-42. `iteration-post-v1-operator-handoff.md`
-43. `release-post-v1-operator-handoff.md`
-44. `closure-post-v1-operator-handoff.md`
-45. `release-post-v1-aggregate-summary.md`
-46. `closure-post-v1-aggregate-summary.md`
-47. `release-post-v1-final-closure.md`
-48. `closure-post-v1-final-closure.md`
+9. `v1.1-scope.md`
+10. `iteration-post-v1-workflow-actions.md`
+11. `release-post-v1-workflow-actions.md`
+12. `closure-post-v1-workflow-actions.md`
+13. `iteration-post-v1-durable-studio-state.md`
+14. `release-post-v1-durable-studio-state.md`
+15. `closure-post-v1-durable-studio-state.md`
+16. `iteration-post-v1-studio-state-inspection.md`
+17. `release-post-v1-studio-state-inspection.md`
+18. `closure-post-v1-studio-state-inspection.md`
+19. `iteration-post-v1-studio-diagnostics.md`
+20. `release-post-v1-studio-diagnostics.md`
+21. `closure-post-v1-studio-diagnostics.md`
+22. `iteration-post-v1-operator-guidance.md`
+23. `release-post-v1-operator-guidance.md`
+24. `closure-post-v1-operator-guidance.md`
+25. `iteration-post-v1-operator-workflow.md`
+26. `release-post-v1-operator-workflow.md`
+27. `closure-post-v1-operator-workflow.md`
+28. `iteration-post-v1-operator-workflow-execution-controls.md`
+29. `release-post-v1-operator-workflow-execution-controls.md`
+30. `closure-post-v1-operator-workflow-execution-controls.md`
+31. `iteration-post-v1-context-pack-usage-flow.md`
+32. `release-post-v1-context-pack-usage-flow.md`
+33. `closure-post-v1-context-pack-usage-flow.md`
+34. `iteration-post-v1-multi-action-workflow-state.md`
+35. `release-post-v1-multi-action-workflow-state.md`
+36. `closure-post-v1-multi-action-workflow-state.md`
+37. `iteration-post-v1-review-resolution-workflow.md`
+38. `release-post-v1-review-resolution-workflow.md`
+39. `closure-post-v1-review-resolution-workflow.md`
+40. `iteration-post-v1-studio-workflow-audit-trail.md`
+41. `release-post-v1-studio-workflow-audit-trail.md`
+42. `closure-post-v1-studio-workflow-audit-trail.md`
+43. `iteration-post-v1-operator-handoff.md`
+44. `release-post-v1-operator-handoff.md`
+45. `closure-post-v1-operator-handoff.md`
+46. `release-post-v1-aggregate-summary.md`
+47. `closure-post-v1-aggregate-summary.md`
+48. `release-post-v1-final-closure.md`
+49. `closure-post-v1-final-closure.md`
 
 ## Dependency
 

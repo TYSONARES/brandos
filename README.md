@@ -8,8 +8,9 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Active workstream: post-v1.0 feature implementation
-- Status: implementation baseline ready
+- Latest completed implementation cycle: post-v1.0 feature implementation
+- Active workstream: Operator Runtime v1.1
+- Status: operator runtime scope started
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -53,7 +54,8 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Post-v1.0 feature implementation builds product workflows on the runnable BrandOS Studio baseline.
+Operator Runtime v1.1 turns the completed post-v1 Studio workflow surface into a traceable operator
+execution baseline.
 
 ## Repository Contract
 

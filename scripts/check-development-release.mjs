@@ -12,6 +12,8 @@ const required = [
   'docs/development/app-shell.md',
   'docs/development/package-boundaries.md',
   'docs/development/quality-gates.md',
+  'docs/development/v1.1-scope.md',
+  'docs/decisions/0023-operator-runtime-start.md',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/product-core-models.mjs',
