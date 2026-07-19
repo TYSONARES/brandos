@@ -74,6 +74,19 @@ export function createBrandOSStudioShell(options = {}) {
       { label: 'State status available', status: contextPackWorkflow.repositoryStateStatus ? 'pass' : 'fail', detail: contextPackWorkflow.repositoryStateStatus }
     ]
   };
+  const operatorGuidance = contextPackReadiness.ready ? {
+    title: 'Operator guidance',
+    status: 'ready',
+    recommendation: 'Use Context Pack',
+    reason: 'Context Pack has no readiness blockers.',
+    command: 'Open ready scenario'
+  } : {
+    title: 'Operator guidance',
+    status: 'attention',
+    recommendation: 'Resolve readiness blocker',
+    reason: contextPackReadiness.blockingReasons[0] ?? 'Context Pack is not ready.',
+    command: 'Complete pending Workflow Action'
+  };
   return {
     app: 'BrandOS Studio',
     release: 'v1.0 Development Ready',
@@ -84,6 +97,7 @@ export function createBrandOSStudioShell(options = {}) {
     contextPackWorkflow,
     studioStateInspection,
     diagnostics,
+    operatorGuidance,
     packages: [
       createDomainSummary(),
       createContractSummary(),

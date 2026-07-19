@@ -291,6 +291,33 @@ export function renderStudioHtml(shell, options = {}) {
       font-size: 13px;
       overflow-wrap: anywhere;
     }
+    .guidance-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .guidance-row {
+      align-items: start;
+      border-top: 1px solid #e7ebf0;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 160px minmax(0, 1fr);
+      padding-top: 8px;
+    }
+    .guidance-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .guidance-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .guidance-value {
+      color: var(--text);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
     .local-state button {
       appearance: none;
       background: transparent;
@@ -312,7 +339,8 @@ export function renderStudioHtml(shell, options = {}) {
       .workflow-command a { width: 100%; }
       .state-source-row,
       .inspection-row,
-      .diagnostic-row { grid-template-columns: 1fr; }
+      .diagnostic-row,
+      .guidance-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -357,6 +385,17 @@ export function renderStudioHtml(shell, options = {}) {
         ${renderDiagnosticRow('State status', `Diagnostic state status: ${shell.diagnostics.stateStatus}`)}
         ${renderDiagnosticRow('Result', `Diagnostic result: ${shell.diagnostics.result}`)}
         ${shell.diagnostics.checks.map(renderDiagnosticCheck).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator guidance</p>
+    <section class="panel" aria-label="Operator guidance">
+      <h2>${escapeHtml(shell.operatorGuidance.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Guidance status: ${shell.operatorGuidance.status}`)}
+        ${renderGuidanceRow('Recommendation', `Recommended action: ${shell.operatorGuidance.recommendation}`)}
+        ${renderGuidanceRow('Reason', `Guidance reason: ${shell.operatorGuidance.reason}`)}
+        ${renderGuidanceRow('Command', `Guidance command: ${shell.operatorGuidance.command}`)}
       </div>
     </section>
 
@@ -487,6 +526,13 @@ function renderDiagnosticRow(label, value) {
 
 function renderDiagnosticCheck(check) {
   return renderDiagnosticRow(`Check: ${check.label}`, `Diagnostic check ${check.label}: ${check.status} - ${check.detail}`);
+}
+
+function renderGuidanceRow(label, value) {
+  return `<div class="guidance-row">
+          <span class="guidance-label">${escapeHtml(label)}</span>
+          <span class="guidance-value">${escapeHtml(value)}</span>
+        </div>`;
 }
 
 function renderCompletedActionIds(actionIds) {

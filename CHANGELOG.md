@@ -42,6 +42,7 @@
 - Added Studio diagnostics check rows.
 - Added post-v1 Studio Diagnostics release notes.
 - Added post-v1 Studio Diagnostics closure checklist.
+- Added Operator Guidance panel package start.
 
 ## 1.0.0 - Development Ready
 

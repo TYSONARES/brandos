@@ -11,6 +11,7 @@ const checks = [
       'href="ready.html"',
       'Product Core objects',
       'aria-label="Studio diagnostics"',
+      'aria-label="Operator guidance"',
       'aria-label="Studio state inspection"',
       'Context readiness',
       'Action status: pending',
@@ -43,7 +44,11 @@ const checks = [
       'Diagnostic check Product objects loaded: pass - 7 objects available',
       'Diagnostic check Context readiness: attention - 1 blockers',
       'Diagnostic check State source available: pass - example',
-      'Diagnostic check State status available: pass - not-loaded'
+      'Diagnostic check State status available: pass - not-loaded',
+      'Guidance status: attention',
+      'Recommended action: Resolve readiness blocker',
+      'Guidance reason: Review is blocking release: review_example_001',
+      'Guidance command: Complete pending Workflow Action'
     ]
   },
   {
@@ -72,7 +77,11 @@ const checks = [
       'Diagnostic state source: command',
       'Diagnostic result: ready',
       'Diagnostic check Context readiness: pass - 0 blockers',
-      'Diagnostic check State source available: pass - command'
+      'Diagnostic check State source available: pass - command',
+      'Guidance status: ready',
+      'Recommended action: Use Context Pack',
+      'Guidance reason: Context Pack has no readiness blockers.',
+      'Guidance command: Open ready scenario'
     ]
   }
 ];

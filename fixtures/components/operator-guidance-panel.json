@@ -1,0 +1,28 @@
+{
+  "id": "component_operator_guidance_panel",
+  "name": "Operator Guidance Panel",
+  "status": "draft",
+  "purpose": "Shows the current recommended operator action with reason, command, and status.",
+  "productObjects": [
+    "context-pack",
+    "workflow-action"
+  ],
+  "states": [
+    "attention",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose the recommendation as visible text.",
+    "Expose reason, command, and status as readable text.",
+    "Do not rely on color to communicate urgency."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
