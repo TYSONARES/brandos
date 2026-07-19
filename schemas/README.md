@@ -20,6 +20,7 @@ Examples and future implementation code should conform to these schemas unless a
 - `source.schema.json`
 - `workflow-run.schema.json`
 - `workflow-action.schema.json`
+- `operator-run.schema.json`
 - `design-token.schema.json`
 - `component-spec.schema.json`
 - `agent-card.schema.json`

@@ -34,6 +34,10 @@ const checks = [
     fixture: 'fixtures/workflow-action.example.json'
   },
   {
+    schema: 'schemas/operator-run.schema.json',
+    fixture: 'fixtures/operator-run.example.json'
+  },
+  {
     schema: 'schemas/design-token.schema.json',
     fixture: 'fixtures/design-token.example.json'
   },

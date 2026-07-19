@@ -157,6 +157,34 @@ export function createReviewResolutionWorkflow(store, reviewId) {
   };
 }
 
+export function createOperatorRunSummary(store, operatorRunId) {
+  const operatorRun = requireRecord(store, 'operator-run', operatorRunId);
+  const workflowRun = requireRecord(store, 'workflow-run', operatorRun.workflowRunId);
+  const actions = operatorRun.actionIds.map((actionId) => requireRecord(store, 'workflow-action', actionId));
+  const currentAction = actions.find((action) => action.id === operatorRun.currentActionId)
+    ?? requireRecord(store, 'workflow-action', operatorRun.currentActionId);
+
+  return {
+    id: operatorRun.id,
+    workspaceId: operatorRun.workspaceId,
+    objective: operatorRun.objective,
+    status: operatorRun.status,
+    priority: operatorRun.priority,
+    workflowRunId: workflowRun.id,
+    workflow: workflowRun.workflow,
+    owner: operatorRun.owner,
+    actionCount: actions.length,
+    completedActionCount: actions.filter((action) => action.status === 'complete').length,
+    pendingActionCount: actions.filter((action) => action.status === 'pending' || action.status === 'blocked').length,
+    currentActionId: currentAction.id,
+    currentActionStatus: currentAction.status,
+    nextActionLabel: currentAction.label,
+    handoffId: operatorRun.handoffId,
+    auditEventCount: operatorRun.auditEventIds.length,
+    updatedAt: operatorRun.updatedAt
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

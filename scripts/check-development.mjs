@@ -57,6 +57,8 @@ const required = [
   'docs/development/package-boundaries.md',
   'docs/development/quality-gates.md',
   'docs/development/v1.1-scope.md',
+  'docs/development/iteration-v1.1-operator-run-model.md',
+  'docs/product/operator-run.md',
   'docs/decisions/0021-development-ready-start.md',
   'apps/studio/README.md',
   'apps/studio/src/app.mjs',
@@ -72,6 +74,7 @@ const required = [
   'scripts/check-studio-build.mjs',
   'scripts/check-studio-render.mjs',
   'scripts/check-post-v1.mjs',
+  'scripts/check-operator-runtime.mjs',
   'scripts/inspect-studio-action.mjs',
   'scripts/persist-studio-action.mjs',
   'scripts/reset-studio-action.mjs',
@@ -98,7 +101,7 @@ if (missing.length) {
   process.exit(1);
 }
 
-const expectedProductCoreModels = ['brand-profile', 'claim', 'decision', 'review', 'workflow-run', 'workflow-action', 'context-pack'];
+const expectedProductCoreModels = ['brand-profile', 'claim', 'decision', 'review', 'workflow-run', 'workflow-action', 'operator-run', 'context-pack'];
 const models = listProductCoreModels();
 const modelIds = models.map((model) => model.id);
 

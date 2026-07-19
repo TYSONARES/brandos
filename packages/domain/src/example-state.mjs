@@ -118,6 +118,22 @@ export function createExampleProductCoreState() {
     createdAt: '2026-07-18'
   };
 
+  const operatorRun = {
+    id: 'operator_run_example_001',
+    workspaceId,
+    workflowRunId: 'workflow_run_example_001',
+    objective: 'Resolve Context Pack readiness and prepare handoff.',
+    status: 'blocked',
+    priority: 'normal',
+    actionIds: ['workflow_action_example_001'],
+    currentActionId: 'workflow_action_example_001',
+    handoffId: 'operator_handoff_example_001',
+    auditEventIds: ['audit_event_example_001'],
+    owner: 'operator@example.local',
+    startedAt: '2026-07-20',
+    updatedAt: '2026-07-20'
+  };
+
   return {
     'brand-profile': [brandProfile],
     claim: [claim],
@@ -125,6 +141,7 @@ export function createExampleProductCoreState() {
     review: [review],
     'workflow-run': [workflowRun],
     'workflow-action': [workflowAction],
+    'operator-run': [operatorRun],
     'context-pack': [contextPack]
   };
 }

@@ -95,13 +95,13 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Review is blocking release: review_example_001/);
   assert.match(html, /Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Package count: 3/);
-  assert.match(html, /Product object count: 7/);
+  assert.match(html, /Product object count: 8/);
   assert.match(html, /Readiness blockers: 1/);
   assert.match(html, /Diagnostic state source: example/);
   assert.match(html, /Diagnostic state status: not-loaded/);
   assert.match(html, /Diagnostic result: attention/);
   assert.match(html, /Diagnostic check Packages loaded: pass - 3 packages available/);
-  assert.match(html, /Diagnostic check Product objects loaded: pass - 7 objects available/);
+  assert.match(html, /Diagnostic check Product objects loaded: pass - 8 objects available/);
   assert.match(html, /Diagnostic check Context readiness: attention - 1 blockers/);
   assert.match(html, /Diagnostic check State source available: pass - example/);
   assert.match(html, /Diagnostic check State status available: pass - not-loaded/);

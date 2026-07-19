@@ -7,6 +7,7 @@ import {
   createContextPackUsageFlow,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createOperatorRunSummary,
   createReviewResolutionWorkflow,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -21,13 +22,14 @@ test('example Product Core state contains one object for each runtime model', ()
   const summary = summarizeProductCoreState(store);
 
   assert.equal(summary.workspaceCount, 1);
-  assert.equal(summary.objectCount, 7);
+  assert.equal(summary.objectCount, 8);
   assert.equal(summary.modelCounts['brand-profile'], 1);
   assert.equal(summary.modelCounts.claim, 1);
   assert.equal(summary.modelCounts.decision, 1);
   assert.equal(summary.modelCounts.review, 1);
   assert.equal(summary.modelCounts['workflow-run'], 1);
   assert.equal(summary.modelCounts['workflow-action'], 1);
+  assert.equal(summary.modelCounts['operator-run'], 1);
   assert.equal(summary.modelCounts['context-pack'], 1);
 });
 
@@ -145,4 +147,22 @@ test('Review resolution workflow summarizes pending and resolved review state', 
   assert.equal(resolved.recommendedAction, 'Use resolved review');
   assert.equal(resolved.resolutionResult, 'Review approved');
   assert.deepEqual(resolved.steps.map((step) => step.status), ['complete', 'complete', 'complete', 'active']);
+});
+
+test('Operator Run summary resolves workflow and current action state', () => {
+  const summary = createOperatorRunSummary(createExampleStore(), 'operator_run_example_001');
+
+  assert.equal(summary.objective, 'Resolve Context Pack readiness and prepare handoff.');
+  assert.equal(summary.status, 'blocked');
+  assert.equal(summary.priority, 'normal');
+  assert.equal(summary.workflowRunId, 'workflow_run_example_001');
+  assert.equal(summary.workflow, 'generate-context-pack');
+  assert.equal(summary.actionCount, 1);
+  assert.equal(summary.completedActionCount, 0);
+  assert.equal(summary.pendingActionCount, 1);
+  assert.equal(summary.currentActionId, 'workflow_action_example_001');
+  assert.equal(summary.currentActionStatus, 'pending');
+  assert.equal(summary.nextActionLabel, 'Resolve review feedback for context_pack_example_001');
+  assert.equal(summary.handoffId, 'operator_handoff_example_001');
+  assert.equal(summary.auditEventCount, 1);
 });

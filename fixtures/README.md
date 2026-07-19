@@ -20,6 +20,7 @@ Fixtures should be generic, safe to share, and aligned with files under `schemas
 - `source.example.json`
 - `workflow-run.example.json`
 - `workflow-action.example.json`
+- `operator-run.example.json`
 - `design-token.example.json`
 - `component-spec.example.json`
 - `agent-card.example.json`

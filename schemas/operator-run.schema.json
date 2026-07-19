@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brandos.local/schemas/operator-run.schema.json",
+  "title": "Operator Run",
+  "type": "object",
+  "required": [
+    "id",
+    "workspaceId",
+    "workflowRunId",
+    "objective",
+    "status",
+    "priority",
+    "actionIds",
+    "currentActionId",
+    "handoffId",
+    "auditEventIds",
+    "owner",
+    "startedAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "workspaceId": { "type": "string" },
+    "workflowRunId": { "type": "string" },
+    "objective": { "type": "string" },
+    "status": { "enum": ["queued", "active", "blocked", "ready", "complete"] },
+    "priority": { "enum": ["low", "normal", "high"] },
+    "actionIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "currentActionId": { "type": "string" },
+    "handoffId": { "type": "string" },
+    "auditEventIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner": { "type": "string" },
+    "startedAt": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "completedAt": { "type": "string" }
+  },
+  "additionalProperties": false
+}

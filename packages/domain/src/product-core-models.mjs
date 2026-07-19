@@ -72,6 +72,28 @@ export const productCoreModels = [
     statuses: ['pending', 'blocked', 'ready', 'complete']
   },
   {
+    id: 'operator-run',
+    name: 'Operator Run',
+    schema: 'schemas/operator-run.schema.json',
+    fixture: 'fixtures/operator-run.example.json',
+    requiredFields: [
+      'id',
+      'workspaceId',
+      'workflowRunId',
+      'objective',
+      'status',
+      'priority',
+      'actionIds',
+      'currentActionId',
+      'handoffId',
+      'auditEventIds',
+      'owner',
+      'startedAt',
+      'updatedAt'
+    ],
+    statuses: ['queued', 'active', 'blocked', 'ready', 'complete']
+  },
+  {
     id: 'context-pack',
     name: 'Context Pack',
     schema: 'schemas/context-pack.schema.json',

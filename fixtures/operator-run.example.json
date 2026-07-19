@@ -1,0 +1,19 @@
+{
+  "id": "operator_run_example_001",
+  "workspaceId": "workspace_example_001",
+  "workflowRunId": "workflow_run_example_001",
+  "objective": "Resolve Context Pack readiness and prepare handoff.",
+  "status": "blocked",
+  "priority": "normal",
+  "actionIds": [
+    "workflow_action_example_001"
+  ],
+  "currentActionId": "workflow_action_example_001",
+  "handoffId": "operator_handoff_example_001",
+  "auditEventIds": [
+    "audit_event_example_001"
+  ],
+  "owner": "operator@example.local",
+  "startedAt": "2026-07-20",
+  "updatedAt": "2026-07-20"
+}
