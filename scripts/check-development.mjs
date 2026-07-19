@@ -30,6 +30,7 @@ const required = [
   'scripts/build-studio.mjs',
   'scripts/check-studio-action-state.mjs',
   'scripts/check-studio-state.mjs',
+  'scripts/inspect-studio-state.mjs',
   'scripts/check-studio-build.mjs',
   'scripts/check-studio-render.mjs',
   'scripts/check-post-v1.mjs',

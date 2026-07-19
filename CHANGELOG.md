@@ -30,6 +30,7 @@
 - Added post-v1 Workflow Actions closure checklist.
 - Added durable Studio state adapter package start.
 - Added durable Studio state version and history inspection surface.
+- Added durable Studio state inspect command.
 
 ## 1.0.0 - Development Ready
 

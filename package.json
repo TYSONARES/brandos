@@ -30,6 +30,7 @@
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:workflows": "node scripts/check-workflows.mjs",
     "inspect:studio-action": "node scripts/inspect-studio-action.mjs",
+    "inspect:studio-state": "node scripts/inspect-studio-state.mjs",
     "persist:studio-action": "node scripts/persist-studio-action.mjs",
     "render:studio": "node apps/studio/src/app.mjs --html",
     "reset:studio-action": "node scripts/reset-studio-action.mjs",

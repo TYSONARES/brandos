@@ -1,4 +1,5 @@
 import { mkdtempSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -54,6 +55,20 @@ if (
 
 if (DEFAULT_STUDIO_STATE_PATH !== '.tmp/studio-state.json') {
   console.error('Durable Studio state default path changed unexpectedly.');
+  process.exit(1);
+}
+
+const inspectOutput = JSON.parse(
+  execFileSync(process.execPath, ['scripts/inspect-studio-state.mjs', `--state-file=${stateFile}`], {
+    encoding: 'utf8'
+  })
+);
+
+if (
+  inspectOutput.summary !== 'Studio state v1: 2 completed workflow actions.' ||
+  inspectOutput.completedWorkflowActionIds.length !== 2
+) {
+  console.error('Durable Studio state inspect command did not report expected summary.');
   process.exit(1);
 }
 

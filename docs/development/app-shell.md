@@ -29,6 +29,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - command-output validation for local Workflow Action state
 - state source panel for browser and repository Workflow Action state
 - durable state version and completed action history in the state panel
+- dedicated inspect command for durable Studio state
 - compact visual treatment for Workflow Action state source rows
 - component fixture coverage for the Workflow Action state panel
 - post-v1 Workflow Actions release notes
