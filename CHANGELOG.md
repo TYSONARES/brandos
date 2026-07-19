@@ -52,6 +52,8 @@
 - Added post-v1 Context Pack Usage Flow release notes and closure checklist.
 - Added Multi-Action Workflow State package start.
 - Added post-v1 Multi-Action Workflow State release notes and closure checklist.
+- Added Review Resolution Workflow package start.
+- Added post-v1 Review Resolution Workflow release notes and closure checklist.
 
 ## 1.0.0 - Development Ready
 

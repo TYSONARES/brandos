@@ -45,6 +45,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 33. `iteration-post-v1-multi-action-workflow-state.md`
 34. `release-post-v1-multi-action-workflow-state.md`
 35. `closure-post-v1-multi-action-workflow-state.md`
+36. `iteration-post-v1-review-resolution-workflow.md`
+37. `release-post-v1-review-resolution-workflow.md`
+38. `closure-post-v1-review-resolution-workflow.md`
 
 ## Dependency
 
