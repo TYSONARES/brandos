@@ -6,6 +6,7 @@
 - Added Operator Run model, schema, fixture, runtime summary, and validation.
 - Added Operator Run Model release notes and closure checklist.
 - Added Operator Run Queue package start.
+- Added Operator Run Queue release notes and closure checklist.
 
 ## Unreleased - Post-v1 Feature Implementation
 

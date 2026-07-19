@@ -61,6 +61,8 @@ const required = [
   'docs/development/release-v1.1-operator-run-model.md',
   'docs/development/closure-v1.1-operator-run-model.md',
   'docs/development/iteration-v1.1-operator-run-queue.md',
+  'docs/development/release-v1.1-operator-run-queue.md',
+  'docs/development/closure-v1.1-operator-run-queue.md',
   'docs/product/operator-run.md',
   'docs/decisions/0021-development-ready-start.md',
   'apps/studio/README.md',
