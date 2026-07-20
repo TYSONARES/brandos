@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   completeWorkflowAction,
   createAgentDraftExecution,
+  createAgentHandoffClosure,
   createAgentHandoffContext,
   createAgentPromptPlan,
   createBrandProfileOverview,
@@ -389,4 +390,45 @@ test('Draft Review approves only repository-cited ready drafts', () => {
   assert.deepEqual(approved.reviewChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
   assert.deepEqual(approved.blockers, []);
   assert.equal(approved.nextWorkflow, 'Agent Handoff Closure');
+});
+
+test('Agent Handoff Closure closes only approved Draft Review output', () => {
+  const store = createExampleStore();
+  const blocked = createAgentHandoffClosure(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Handoff Closure');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.closed, false);
+  assert.equal(blocked.contextPackId, 'context_pack_example_001');
+  assert.equal(blocked.closureDecision, 'Keep agent handoff open');
+  assert.equal(blocked.closureSummary, 'Agent handoff closure waits for approved Draft Review.');
+  assert.deepEqual(blocked.closedArtifacts, []);
+  assert.deepEqual(blocked.closureEvidence, [
+    'Draft body is not available.',
+    'Repository citations are missing.',
+    'Quality checks are blocked.'
+  ]);
+  assert.deepEqual(blocked.closureChecks.map((check) => check.status), ['blocked', 'pass', 'pass']);
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const closed = createAgentHandoffClosure(store, 'operator_run_example_001');
+
+  assert.equal(closed.status, 'closed');
+  assert.equal(closed.closed, true);
+  assert.equal(closed.closureDecision, 'Close agent handoff');
+  assert.equal(closed.closureSummary, 'Agent handoff is closed with approved draft review evidence.');
+  assert.deepEqual(closed.closedArtifacts, [
+    'Example Brand brand-writing draft',
+    'Draft Review evidence',
+    'Repository citation trail'
+  ]);
+  assert.deepEqual(closed.closureEvidence, [
+    'Draft review status: approved',
+    'Draft review decision: Approve draft for handoff closure',
+    'Required evidence count: 3'
+  ]);
+  assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(closed.blockers, []);
+  assert.equal(closed.nextWorkflow, 'Agent Handoff Runtime Summary');
 });

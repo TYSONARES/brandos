@@ -463,6 +463,45 @@ export function createDraftReview(store, operatorRunId, contextPackId = 'context
   };
 }
 
+export function createAgentHandoffClosure(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const draftReview = createDraftReview(store, operatorRunId, contextPackId);
+  const closed = draftReview.approved;
+
+  return {
+    title: 'Agent Handoff Closure',
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    operatorRunId: draftReview.operatorRunId,
+    handoffId: draftReview.handoffId,
+    contextPackId: draftReview.contextPackId,
+    closureDecision: closed ? 'Close agent handoff' : 'Keep agent handoff open',
+    closureSummary: closed
+      ? 'Agent handoff is closed with approved draft review evidence.'
+      : 'Agent handoff closure waits for approved Draft Review.',
+    closedArtifacts: closed
+      ? [
+        draftReview.draftTitle,
+        'Draft Review evidence',
+        'Repository citation trail'
+      ]
+      : [],
+    closureEvidence: closed
+      ? [
+        `Draft review status: ${draftReview.status}`,
+        `Draft review decision: ${draftReview.reviewDecision}`,
+        `Required evidence count: ${draftReview.requiredEvidence.length}`
+      ]
+      : draftReview.requiredEvidence,
+    closureChecks: [
+      { label: 'Draft review approved', status: draftReview.approved ? 'pass' : 'blocked' },
+      { label: 'Required evidence present', status: draftReview.requiredEvidence.length > 0 ? 'pass' : 'blocked' },
+      { label: 'Next workflow assigned', status: draftReview.nextWorkflow ? 'pass' : 'blocked' }
+    ],
+    blockers: draftReview.blockers,
+    nextWorkflow: closed ? 'Agent Handoff Runtime Summary' : draftReview.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

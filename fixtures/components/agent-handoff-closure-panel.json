@@ -1,0 +1,29 @@
+{
+  "id": "component_agent_handoff_closure_panel",
+  "name": "Agent Handoff Closure Panel",
+  "status": "draft",
+  "purpose": "Shows whether approved draft review evidence can close an agent handoff.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "closed"
+  ],
+  "accessibility": [
+    "Expose closure status, decision, summary, artifacts, evidence, checks, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate closure state.",
+    "Keep closure evidence readable so agent work can be audited from repository-backed records."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

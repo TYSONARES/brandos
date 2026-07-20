@@ -586,6 +586,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-handoff-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -803,6 +830,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-prompt-plan-row,
       .agent-draft-execution-row,
       .draft-review-row,
+      .agent-handoff-closure-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1000,6 +1028,25 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.draftReview.requiredEvidence.map(renderDraftReviewEvidence).join('')}
         ${shell.draftReview.reviewChecks.map(renderDraftReviewCheck).join('')}
         ${shell.draftReview.blockers.map(renderDraftReviewBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Closure</p>
+    <section class="panel" aria-label="Agent Handoff Closure">
+      <h2>${escapeHtml(shell.agentHandoffClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff closure status: ${shell.agentHandoffClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Agent handoff closed: ${shell.agentHandoffClosure.closed}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff closure context pack: ${shell.agentHandoffClosure.contextPackId}`)}
+        ${renderGuidanceRow('Decision', `Agent handoff closure decision: ${shell.agentHandoffClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Agent handoff closure summary: ${shell.agentHandoffClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff closure next workflow: ${shell.agentHandoffClosure.nextWorkflow}`)}
+      </div>
+      <div class="agent-handoff-closure-list">
+        ${shell.agentHandoffClosure.closedArtifacts.map(renderAgentHandoffClosureArtifact).join('')}
+        ${shell.agentHandoffClosure.closureEvidence.map(renderAgentHandoffClosureEvidence).join('')}
+        ${shell.agentHandoffClosure.closureChecks.map(renderAgentHandoffClosureCheck).join('')}
+        ${shell.agentHandoffClosure.blockers.map(renderAgentHandoffClosureBlocker).join('')}
       </div>
     </section>
 
@@ -1381,6 +1428,34 @@ function renderDraftReviewBlocker(blocker) {
   return `<div class="draft-review-row">
     <span class="draft-review-label">Blocker</span>
     <span class="draft-review-value">Draft review blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffClosureArtifact(artifact) {
+  return `<div class="agent-handoff-closure-row">
+    <span class="agent-handoff-closure-label">Artifact</span>
+    <span class="agent-handoff-closure-value">Agent handoff closure artifact: ${escapeHtml(artifact)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffClosureEvidence(evidence) {
+  return `<div class="agent-handoff-closure-row">
+    <span class="agent-handoff-closure-label">Evidence</span>
+    <span class="agent-handoff-closure-value">Agent handoff closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffClosureCheck(check) {
+  return `<div class="agent-handoff-closure-row">
+    <span class="agent-handoff-closure-label">Check</span>
+    <span class="agent-handoff-closure-value">Agent handoff closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffClosureBlocker(blocker) {
+  return `<div class="agent-handoff-closure-row">
+    <span class="agent-handoff-closure-label">Blocker</span>
+    <span class="agent-handoff-closure-value">Agent handoff closure blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

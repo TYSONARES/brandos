@@ -24,6 +24,7 @@ const componentFiles = [
   'fixtures/components/agent-prompt-plan-panel.json',
   'fixtures/components/agent-draft-execution-panel.json',
   'fixtures/components/draft-review-panel.json',
+  'fixtures/components/agent-handoff-closure-panel.json',
   'fixtures/components/operator-run-queue-panel.json',
   'fixtures/components/operator-runbook-execution-panel.json',
   'fixtures/components/operator-workflow-panel.json',

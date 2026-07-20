@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import {
   completeWorkflowAction,
   createAgentDraftExecution,
+  createAgentHandoffClosure,
   createAgentHandoffContext,
   createAgentPromptPlan,
   createDraftReview,
@@ -23,11 +24,13 @@ const required = [
   'docs/development/iteration-v1.2-draft-review.md',
   'docs/development/release-v1.2-draft-review.md',
   'docs/development/closure-v1.2-draft-review.md',
+  'docs/development/iteration-v1.2-agent-handoff-closure.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'fixtures/components/agent-prompt-plan-panel.json',
   'fixtures/components/agent-draft-execution-panel.json',
   'fixtures/components/draft-review-panel.json',
+  'fixtures/components/agent-handoff-closure-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -84,6 +87,12 @@ if (blockedDraftReview.status !== 'blocked' || blockedDraftReview.approved !== f
   process.exit(1);
 }
 
+const blockedClosure = createAgentHandoffClosure(store, 'operator_run_example_001');
+if (blockedClosure.status !== 'blocked' || blockedClosure.closed !== false) {
+  console.error('Agent Handoff Closure did not expose the expected blocked state.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const readyContext = createAgentHandoffContext(store, 'operator_run_example_001');
 
@@ -127,6 +136,16 @@ if (approvedDraftReview.status !== 'approved' || approvedDraftReview.approved !=
 }
 if (approvedDraftReview.nextWorkflow !== 'Agent Handoff Closure') {
   console.error('Approved Draft Review did not route work to Agent Handoff Closure.');
+  process.exit(1);
+}
+
+const closedHandoff = createAgentHandoffClosure(store, 'operator_run_example_001');
+if (closedHandoff.status !== 'closed' || closedHandoff.closed !== true) {
+  console.error('Agent Handoff Closure did not expose the expected closed state.');
+  process.exit(1);
+}
+if (closedHandoff.nextWorkflow !== 'Agent Handoff Runtime Summary') {
+  console.error('Closed Agent Handoff Closure did not route work to Agent Handoff Runtime Summary.');
   process.exit(1);
 }
 

@@ -11,6 +11,7 @@
 - Added Agent Draft Execution release notes and closure checklist.
 - Added Draft Review package start.
 - Added Draft Review release notes and closure checklist.
+- Added Agent Handoff Closure package start.
 
 ## Unreleased - Operator Runtime v1.1
 
