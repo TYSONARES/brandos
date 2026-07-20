@@ -585,6 +585,45 @@ export function createAgentHandoffRuntimeAggregateSummary(store, operatorRunId, 
   };
 }
 
+export function createAgentHandoffRuntimeFinalClosure(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const aggregateSummary = createAgentHandoffRuntimeAggregateSummary(store, operatorRunId, contextPackId);
+  const closed = aggregateSummary.complete;
+
+  return {
+    title: 'Agent Handoff Runtime Final Closure',
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    operatorRunId,
+    handoffId: aggregateSummary.handoffId,
+    contextPackId,
+    closureDecision: closed ? 'Close Agent Handoff Runtime v1.2' : 'Keep Agent Handoff Runtime v1.2 open',
+    closureSummary: closed
+      ? 'Agent Handoff Runtime v1.2 is closed with aggregate evidence and is ready for archive.'
+      : 'Agent Handoff Runtime v1.2 final closure waits for aggregate completion.',
+    releaseArtifacts: closed
+      ? [
+        'Agent Handoff Runtime Summary',
+        'Agent Handoff Runtime Aggregate Summary',
+        'Agent Handoff Runtime v1.2 closure evidence'
+      ]
+      : [],
+    closureEvidence: closed
+      ? [
+        `Aggregate status: ${aggregateSummary.status}`,
+        `Aggregate runtimes complete: ${aggregateSummary.completeRuntimeCount}/${aggregateSummary.runtimeCount}`,
+        `Aggregate stages complete: ${aggregateSummary.completedStageCount}/${aggregateSummary.totalStageCount}`
+      ]
+      : aggregateSummary.evidence,
+    closureChecks: [
+      { label: 'Aggregate summary complete', status: aggregateSummary.complete ? 'pass' : 'blocked' },
+      { label: 'Runtime evidence present', status: aggregateSummary.evidence.length > 0 ? 'pass' : 'blocked' },
+      { label: 'Release artifacts assigned', status: closed ? 'pass' : 'blocked' }
+    ],
+    blockers: aggregateSummary.blockers,
+    nextWorkflow: closed ? 'Agent Handoff Runtime v1.2 Closed' : aggregateSummary.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

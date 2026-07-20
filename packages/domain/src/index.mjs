@@ -9,6 +9,7 @@ export {
   createAgentHandoffClosure,
   createAgentHandoffContext,
   createAgentHandoffRuntimeAggregateSummary,
+  createAgentHandoffRuntimeFinalClosure,
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,

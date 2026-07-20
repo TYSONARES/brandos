@@ -64,6 +64,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Agent Handoff Runtime Summary/);
   assert.match(html, /aria-label="Agent Handoff Runtime Aggregate Summary"/);
   assert.match(html, /Agent Handoff Runtime Aggregate Summary/);
+  assert.match(html, /aria-label="Agent Handoff Runtime Final Closure"/);
+  assert.match(html, /Agent Handoff Runtime Final Closure/);
   assert.match(html, /aria-label="Context Pack usage flow"/);
   assert.match(html, /Context Pack usage flow/);
   assert.match(html, /aria-label="Review resolution workflow"/);
@@ -250,6 +252,14 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Agent handoff runtime aggregate item: Agent Handoff Runtime Summary - blocked - 0\/5/);
   assert.match(html, /Agent handoff runtime aggregate evidence: Draft body is not available./);
   assert.match(html, /Agent handoff runtime aggregate blocker: Resolve current action: Resolve review feedback for context_pack_example_001/);
+  assert.match(html, /Agent handoff runtime final closure status: blocked/);
+  assert.match(html, /Agent handoff runtime final closure closed: false/);
+  assert.match(html, /Agent handoff runtime final closure decision: Keep Agent Handoff Runtime v1.2 open/);
+  assert.match(html, /Agent handoff runtime final closure summary: Agent Handoff Runtime v1.2 final closure waits for aggregate completion./);
+  assert.match(html, /Agent handoff runtime final closure next workflow: Operator Runbook Execution/);
+  assert.match(html, /Agent handoff runtime final closure evidence: Draft body is not available./);
+  assert.match(html, /Agent handoff runtime final closure check: Aggregate summary complete - blocked/);
+  assert.match(html, /Agent handoff runtime final closure blocker: Resolve current action: Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Context Pack usage status: draft/);
   assert.match(html, /Context Pack task type: brand-writing/);
   assert.match(html, /Context Pack audience: AI agents drafting product and brand copy/);
@@ -449,6 +459,14 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Agent handoff runtime aggregate next workflow: Agent Handoff Runtime Final Closure/);
   assert.match(html, /Agent handoff runtime aggregate item: Agent Handoff Runtime Summary - complete - 5\/5/);
   assert.match(html, /Agent handoff runtime aggregate evidence: Runtime summary status: complete/);
+  assert.match(html, /Agent handoff runtime final closure status: closed/);
+  assert.match(html, /Agent handoff runtime final closure closed: true/);
+  assert.match(html, /Agent handoff runtime final closure decision: Close Agent Handoff Runtime v1.2/);
+  assert.match(html, /Agent handoff runtime final closure summary: Agent Handoff Runtime v1.2 is closed with aggregate evidence and is ready for archive./);
+  assert.match(html, /Agent handoff runtime final closure next workflow: Agent Handoff Runtime v1.2 Closed/);
+  assert.match(html, /Agent handoff runtime final closure artifact: Agent Handoff Runtime Summary/);
+  assert.match(html, /Agent handoff runtime final closure evidence: Aggregate status: complete/);
+  assert.match(html, /Agent handoff runtime final closure check: Aggregate summary complete - pass/);
   assert.match(html, /Multi-action state status: single/);
   assert.match(html, /Multi-action state source: command/);
   assert.match(html, /Multi-action completed count: 1/);

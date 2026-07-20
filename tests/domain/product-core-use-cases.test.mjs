@@ -7,6 +7,7 @@ import {
   createAgentHandoffClosure,
   createAgentHandoffContext,
   createAgentHandoffRuntimeAggregateSummary,
+  createAgentHandoffRuntimeFinalClosure,
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,
@@ -510,4 +511,39 @@ test('Agent Handoff Runtime Aggregate Summary closes only complete runtime summa
   ]);
   assert.deepEqual(complete.blockers, []);
   assert.equal(complete.nextWorkflow, 'Agent Handoff Runtime Final Closure');
+});
+
+test('Agent Handoff Runtime Final Closure closes only complete aggregate summaries', () => {
+  const store = createExampleStore();
+  const blocked = createAgentHandoffRuntimeFinalClosure(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Handoff Runtime Final Closure');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.closed, false);
+  assert.equal(blocked.closureDecision, 'Keep Agent Handoff Runtime v1.2 open');
+  assert.equal(blocked.closureSummary, 'Agent Handoff Runtime v1.2 final closure waits for aggregate completion.');
+  assert.deepEqual(blocked.releaseArtifacts, []);
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+  assert.deepEqual(blocked.closureChecks.map((check) => check.status), ['blocked', 'pass', 'blocked']);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const closed = createAgentHandoffRuntimeFinalClosure(store, 'operator_run_example_001');
+
+  assert.equal(closed.status, 'closed');
+  assert.equal(closed.closed, true);
+  assert.equal(closed.closureDecision, 'Close Agent Handoff Runtime v1.2');
+  assert.equal(closed.closureSummary, 'Agent Handoff Runtime v1.2 is closed with aggregate evidence and is ready for archive.');
+  assert.deepEqual(closed.releaseArtifacts, [
+    'Agent Handoff Runtime Summary',
+    'Agent Handoff Runtime Aggregate Summary',
+    'Agent Handoff Runtime v1.2 closure evidence'
+  ]);
+  assert.deepEqual(closed.closureEvidence, [
+    'Aggregate status: complete',
+    'Aggregate runtimes complete: 1/1',
+    'Aggregate stages complete: 5/5'
+  ]);
+  assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(closed.blockers, []);
+  assert.equal(closed.nextWorkflow, 'Agent Handoff Runtime v1.2 Closed');
 });

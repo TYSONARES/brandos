@@ -667,6 +667,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-handoff-runtime-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-runtime-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-runtime-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-runtime-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -887,6 +914,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-handoff-closure-row,
       .agent-handoff-runtime-summary-row,
       .agent-handoff-runtime-aggregate-row,
+      .agent-handoff-runtime-final-closure-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1144,6 +1172,25 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentHandoffRuntimeAggregateSummary.runtimeItems.map(renderAgentHandoffRuntimeAggregateItem).join('')}
         ${shell.agentHandoffRuntimeAggregateSummary.evidence.map(renderAgentHandoffRuntimeAggregateEvidence).join('')}
         ${shell.agentHandoffRuntimeAggregateSummary.blockers.map(renderAgentHandoffRuntimeAggregateBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Runtime Final Closure</p>
+    <section class="panel" aria-label="Agent Handoff Runtime Final Closure">
+      <h2>${escapeHtml(shell.agentHandoffRuntimeFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff runtime final closure status: ${shell.agentHandoffRuntimeFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Agent handoff runtime final closure closed: ${shell.agentHandoffRuntimeFinalClosure.closed}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff runtime final closure context pack: ${shell.agentHandoffRuntimeFinalClosure.contextPackId}`)}
+        ${renderGuidanceRow('Decision', `Agent handoff runtime final closure decision: ${shell.agentHandoffRuntimeFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Agent handoff runtime final closure summary: ${shell.agentHandoffRuntimeFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff runtime final closure next workflow: ${shell.agentHandoffRuntimeFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="agent-handoff-runtime-final-closure-list">
+        ${shell.agentHandoffRuntimeFinalClosure.releaseArtifacts.map(renderAgentHandoffRuntimeFinalClosureArtifact).join('')}
+        ${shell.agentHandoffRuntimeFinalClosure.closureEvidence.map(renderAgentHandoffRuntimeFinalClosureEvidence).join('')}
+        ${shell.agentHandoffRuntimeFinalClosure.closureChecks.map(renderAgentHandoffRuntimeFinalClosureCheck).join('')}
+        ${shell.agentHandoffRuntimeFinalClosure.blockers.map(renderAgentHandoffRuntimeFinalClosureBlocker).join('')}
       </div>
     </section>
 
@@ -1595,6 +1642,34 @@ function renderAgentHandoffRuntimeAggregateBlocker(blocker) {
   return `<div class="agent-handoff-runtime-aggregate-row">
     <span class="agent-handoff-runtime-aggregate-label">Blocker</span>
     <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureArtifact(artifact) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Artifact</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure artifact: ${escapeHtml(artifact)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureEvidence(evidence) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Evidence</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureCheck(check) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Check</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureBlocker(blocker) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Blocker</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 
