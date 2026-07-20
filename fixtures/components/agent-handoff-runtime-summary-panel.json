@@ -1,0 +1,29 @@
+{
+  "id": "component_agent_handoff_runtime_summary_panel",
+  "name": "Agent Handoff Runtime Summary Panel",
+  "status": "draft",
+  "purpose": "Shows aggregate status for the Agent Handoff Runtime pipeline.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose runtime status, completion, stage counts, decision, summary, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate completion.",
+    "Keep stage rows readable so users can locate the first blocked handoff step."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

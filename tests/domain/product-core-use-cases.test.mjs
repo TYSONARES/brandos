@@ -6,6 +6,7 @@ import {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,
   createContextPackUsageFlow,
@@ -431,4 +432,37 @@ test('Agent Handoff Closure closes only approved Draft Review output', () => {
   assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
   assert.deepEqual(closed.blockers, []);
   assert.equal(closed.nextWorkflow, 'Agent Handoff Runtime Summary');
+});
+
+test('Agent Handoff Runtime Summary reflects blocked and complete pipeline state', () => {
+  const store = createExampleStore();
+  const blocked = createAgentHandoffRuntimeSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Handoff Runtime Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.complete, false);
+  assert.equal(blocked.stageCount, 5);
+  assert.equal(blocked.completedStageCount, 0);
+  assert.equal(blocked.blockedStageCount, 5);
+  assert.equal(blocked.finalDecision, 'Agent handoff runtime blocked');
+  assert.equal(blocked.finalSummary, 'Agent Handoff Runtime waits for upstream handoff readiness.');
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+  assert.deepEqual(blocked.stages.map((stage) => stage.status), ['blocked', 'blocked', 'blocked', 'blocked', 'blocked']);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const complete = createAgentHandoffRuntimeSummary(store, 'operator_run_example_001');
+
+  assert.equal(complete.status, 'complete');
+  assert.equal(complete.complete, true);
+  assert.equal(complete.completedStageCount, 5);
+  assert.equal(complete.blockedStageCount, 0);
+  assert.equal(complete.finalDecision, 'Agent handoff runtime complete');
+  assert.equal(complete.finalSummary, 'All Agent Handoff Runtime stages are closed with repository-backed evidence.');
+  assert.deepEqual(complete.evidence, [
+    'Closure status: closed',
+    'Closed artifacts: 3',
+    'Closure evidence count: 3'
+  ]);
+  assert.deepEqual(complete.blockers, []);
+  assert.equal(complete.nextWorkflow, 'Agent Handoff Runtime Aggregate Summary');
 });

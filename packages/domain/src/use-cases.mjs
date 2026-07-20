@@ -502,6 +502,48 @@ export function createAgentHandoffClosure(store, operatorRunId, contextPackId = 
   };
 }
 
+export function createAgentHandoffRuntimeSummary(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const handoffContext = createAgentHandoffContext(store, operatorRunId, contextPackId);
+  const promptPlan = createAgentPromptPlan(store, operatorRunId, contextPackId);
+  const draftExecution = createAgentDraftExecution(store, operatorRunId, contextPackId);
+  const draftReview = createDraftReview(store, operatorRunId, contextPackId);
+  const handoffClosure = createAgentHandoffClosure(store, operatorRunId, contextPackId);
+  const stages = [
+    { label: 'Agent Handoff Context', status: handoffContext.status },
+    { label: 'Agent Prompt Plan', status: promptPlan.status },
+    { label: 'Agent Draft Execution', status: draftExecution.status },
+    { label: 'Draft Review', status: draftReview.status },
+    { label: 'Agent Handoff Closure', status: handoffClosure.status }
+  ];
+  const closed = handoffClosure.closed;
+
+  return {
+    title: 'Agent Handoff Runtime Summary',
+    status: closed ? 'complete' : 'blocked',
+    complete: closed,
+    operatorRunId,
+    handoffId: handoffClosure.handoffId,
+    contextPackId,
+    stageCount: stages.length,
+    completedStageCount: stages.filter((stage) => ['ready', 'approved', 'closed'].includes(stage.status)).length,
+    blockedStageCount: stages.filter((stage) => stage.status === 'blocked').length,
+    finalDecision: closed ? 'Agent handoff runtime complete' : 'Agent handoff runtime blocked',
+    finalSummary: closed
+      ? 'All Agent Handoff Runtime stages are closed with repository-backed evidence.'
+      : 'Agent Handoff Runtime waits for upstream handoff readiness.',
+    stages,
+    evidence: closed
+      ? [
+        `Closure status: ${handoffClosure.status}`,
+        `Closed artifacts: ${handoffClosure.closedArtifacts.length}`,
+        `Closure evidence count: ${handoffClosure.closureEvidence.length}`
+      ]
+      : handoffClosure.closureEvidence,
+    blockers: handoffClosure.blockers,
+    nextWorkflow: closed ? 'Agent Handoff Runtime Aggregate Summary' : handoffClosure.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

@@ -13,6 +13,7 @@
 - Added Draft Review release notes and closure checklist.
 - Added Agent Handoff Closure package start.
 - Added Agent Handoff Closure release notes and closure checklist.
+- Added Agent Handoff Runtime Summary package start.
 
 ## Unreleased - Operator Runtime v1.1
 

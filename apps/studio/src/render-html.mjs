@@ -613,6 +613,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-handoff-runtime-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-runtime-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-runtime-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-runtime-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -831,6 +858,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-draft-execution-row,
       .draft-review-row,
       .agent-handoff-closure-row,
+      .agent-handoff-runtime-summary-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1047,6 +1075,26 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentHandoffClosure.closureEvidence.map(renderAgentHandoffClosureEvidence).join('')}
         ${shell.agentHandoffClosure.closureChecks.map(renderAgentHandoffClosureCheck).join('')}
         ${shell.agentHandoffClosure.blockers.map(renderAgentHandoffClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Runtime Summary</p>
+    <section class="panel" aria-label="Agent Handoff Runtime Summary">
+      <h2>${escapeHtml(shell.agentHandoffRuntimeSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff runtime summary status: ${shell.agentHandoffRuntimeSummary.status}`)}
+        ${renderGuidanceRow('Complete', `Agent handoff runtime complete: ${shell.agentHandoffRuntimeSummary.complete}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff runtime context pack: ${shell.agentHandoffRuntimeSummary.contextPackId}`)}
+        ${renderGuidanceRow('Stages', `Agent handoff runtime stages: ${shell.agentHandoffRuntimeSummary.completedStageCount}/${shell.agentHandoffRuntimeSummary.stageCount}`)}
+        ${renderGuidanceRow('Blocked', `Agent handoff runtime blocked stages: ${shell.agentHandoffRuntimeSummary.blockedStageCount}`)}
+        ${renderGuidanceRow('Decision', `Agent handoff runtime decision: ${shell.agentHandoffRuntimeSummary.finalDecision}`)}
+        ${renderGuidanceRow('Summary', `Agent handoff runtime summary: ${shell.agentHandoffRuntimeSummary.finalSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff runtime next workflow: ${shell.agentHandoffRuntimeSummary.nextWorkflow}`)}
+      </div>
+      <div class="agent-handoff-runtime-summary-list">
+        ${shell.agentHandoffRuntimeSummary.stages.map(renderAgentHandoffRuntimeSummaryStage).join('')}
+        ${shell.agentHandoffRuntimeSummary.evidence.map(renderAgentHandoffRuntimeSummaryEvidence).join('')}
+        ${shell.agentHandoffRuntimeSummary.blockers.map(renderAgentHandoffRuntimeSummaryBlocker).join('')}
       </div>
     </section>
 
@@ -1456,6 +1504,27 @@ function renderAgentHandoffClosureBlocker(blocker) {
   return `<div class="agent-handoff-closure-row">
     <span class="agent-handoff-closure-label">Blocker</span>
     <span class="agent-handoff-closure-value">Agent handoff closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeSummaryStage(stage) {
+  return `<div class="agent-handoff-runtime-summary-row">
+    <span class="agent-handoff-runtime-summary-label">Stage</span>
+    <span class="agent-handoff-runtime-summary-value">Agent handoff runtime stage: ${escapeHtml(stage.label)} - ${escapeHtml(stage.status)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeSummaryEvidence(evidence) {
+  return `<div class="agent-handoff-runtime-summary-row">
+    <span class="agent-handoff-runtime-summary-label">Evidence</span>
+    <span class="agent-handoff-runtime-summary-value">Agent handoff runtime evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeSummaryBlocker(blocker) {
+  return `<div class="agent-handoff-runtime-summary-row">
+    <span class="agent-handoff-runtime-summary-label">Blocker</span>
+    <span class="agent-handoff-runtime-summary-value">Agent handoff runtime blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

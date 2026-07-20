@@ -4,6 +4,7 @@ import {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createDraftReview,
   createExampleProductCoreState,
@@ -27,12 +28,14 @@ const required = [
   'docs/development/iteration-v1.2-agent-handoff-closure.md',
   'docs/development/release-v1.2-agent-handoff-closure.md',
   'docs/development/closure-v1.2-agent-handoff-closure.md',
+  'docs/development/iteration-v1.2-agent-handoff-runtime-summary.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'fixtures/components/agent-prompt-plan-panel.json',
   'fixtures/components/agent-draft-execution-panel.json',
   'fixtures/components/draft-review-panel.json',
   'fixtures/components/agent-handoff-closure-panel.json',
+  'fixtures/components/agent-handoff-runtime-summary-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -95,6 +98,12 @@ if (blockedClosure.status !== 'blocked' || blockedClosure.closed !== false) {
   process.exit(1);
 }
 
+const blockedSummary = createAgentHandoffRuntimeSummary(store, 'operator_run_example_001');
+if (blockedSummary.status !== 'blocked' || blockedSummary.complete !== false || blockedSummary.blockedStageCount !== 5) {
+  console.error('Agent Handoff Runtime Summary did not expose the expected blocked state.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const readyContext = createAgentHandoffContext(store, 'operator_run_example_001');
 
@@ -148,6 +157,16 @@ if (closedHandoff.status !== 'closed' || closedHandoff.closed !== true) {
 }
 if (closedHandoff.nextWorkflow !== 'Agent Handoff Runtime Summary') {
   console.error('Closed Agent Handoff Closure did not route work to Agent Handoff Runtime Summary.');
+  process.exit(1);
+}
+
+const completeSummary = createAgentHandoffRuntimeSummary(store, 'operator_run_example_001');
+if (completeSummary.status !== 'complete' || completeSummary.complete !== true || completeSummary.completedStageCount !== 5) {
+  console.error('Agent Handoff Runtime Summary did not expose the expected complete state.');
+  process.exit(1);
+}
+if (completeSummary.nextWorkflow !== 'Agent Handoff Runtime Aggregate Summary') {
+  console.error('Complete Agent Handoff Runtime Summary did not route work to aggregate summary.');
   process.exit(1);
 }
 

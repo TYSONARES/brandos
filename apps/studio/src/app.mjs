@@ -3,6 +3,7 @@ import {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
@@ -48,6 +49,7 @@ export function createBrandOSStudioShell(options = {}) {
   const agentDraftExecution = createAgentDraftExecution(store, operatorRunbookExecution.runId);
   const draftReview = createDraftReview(store, operatorRunbookExecution.runId);
   const agentHandoffClosure = createAgentHandoffClosure(store, operatorRunbookExecution.runId);
+  const agentHandoffRuntimeSummary = createAgentHandoffRuntimeSummary(store, operatorRunbookExecution.runId);
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
@@ -224,6 +226,7 @@ export function createBrandOSStudioShell(options = {}) {
     agentDraftExecution,
     draftReview,
     agentHandoffClosure,
+    agentHandoffRuntimeSummary,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,
