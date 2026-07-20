@@ -19,6 +19,7 @@
 - Added Agent Handoff Runtime Aggregate Summary release notes and closure checklist.
 - Added Agent Handoff Runtime Final Closure package start.
 - Added Agent Handoff Runtime Final Closure release notes and closure checklist.
+- Added Agent Handoff Runtime v1.2 aggregate release summary and closure checklist.
 
 ## Unreleased - Operator Runtime v1.1
 
