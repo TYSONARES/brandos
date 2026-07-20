@@ -10,6 +10,7 @@
 - Added Runtime Validation Signals package start.
 - Added Runtime Validation Signals release notes and closure checklist.
 - Added Operator Recovery Guidance package start.
+- Added Operator Recovery Guidance release notes and closure checklist.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

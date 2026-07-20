@@ -25,6 +25,8 @@ const required = [
   'docs/development/release-v1.3-runtime-validation-signals.md',
   'docs/development/closure-v1.3-runtime-validation-signals.md',
   'docs/development/iteration-v1.3-operator-recovery-guidance.md',
+  'docs/development/release-v1.3-operator-recovery-guidance.md',
+  'docs/development/closure-v1.3-operator-recovery-guidance.md',
   'docs/development/iteration-v1.2-agent-handoff-context.md',
   'docs/development/release-v1.2-agent-handoff-context.md',
   'docs/development/closure-v1.2-agent-handoff-context.md',
