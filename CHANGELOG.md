@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Runtime Reliability v1.3
+
+- Started Runtime Reliability v1.3 scope and decision record.
+
 ## Unreleased - Agent Handoff Runtime v1.2
 
 - Started Agent Handoff Runtime v1.2 scope and decision record.
