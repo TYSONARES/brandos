@@ -759,6 +759,42 @@ export function createRuntimeValidationSignals(store, operatorRunId, options = {
   };
 }
 
+export function createOperatorRecoveryGuidance(store, operatorRunId, options = {}) {
+  const validation = createRuntimeValidationSignals(store, operatorRunId, options);
+  const guidanceReady = validation.validationReady;
+  const guidanceSteps = guidanceReady
+    ? [
+      { label: 'Keep runtime baseline', status: 'complete', detail: 'Validation signals are ready for repeated local runs.' },
+      { label: 'Prepare reliability closure', status: 'active', detail: 'Runtime Reliability v1.3 can move toward aggregate release evidence.' }
+    ]
+    : [
+      { label: 'Review validation blockers', status: 'active', detail: validation.blockers[0] ?? 'Runtime validation is blocked.' },
+      { label: 'Run recovery commands', status: 'pending', detail: validation.validationCommands.join(', ') },
+      { label: 'Recheck validation signals', status: 'pending', detail: 'Repeat validation after state recovery is complete.' }
+    ];
+
+  return {
+    title: 'Operator Recovery Guidance',
+    status: guidanceReady ? 'ready' : 'action-required',
+    guidanceReady,
+    operatorRunId,
+    contextPackId: validation.contextPackId,
+    stateSource: validation.stateSource,
+    stateStatus: validation.stateStatus,
+    completedActionCount: validation.completedActionCount,
+    guidanceDecision: guidanceReady ? 'Continue with runtime reliability closure' : 'Follow recovery guidance before closure',
+    guidanceSummary: guidanceReady
+      ? 'Operator recovery guidance confirms the local runtime baseline is reusable.'
+      : 'Operator recovery guidance explains the manual steps needed before runtime closure.',
+    guidanceSteps,
+    validationSignals: validation.validationSignals,
+    recommendedCommands: validation.validationCommands,
+    requiredEvidence: validation.requiredEvidence,
+    blockers: validation.blockers,
+    nextWorkflow: guidanceReady ? 'Runtime Reliability Aggregate Summary' : validation.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

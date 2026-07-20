@@ -19,6 +19,7 @@ import {
   createRuntimeHealthSummary,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
+  createOperatorRecoveryGuidance,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -105,6 +106,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionIds: contextPackWorkflow.completedActionIds
   });
   const runtimeValidationSignals = createRuntimeValidationSignals(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorRecoveryGuidance = createOperatorRecoveryGuidance(store, operatorRunbookExecution.runId, {
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
     completedActionCount: contextPackWorkflow.completedActionCount,
@@ -257,6 +264,7 @@ export function createBrandOSStudioShell(options = {}) {
     runtimeHealthSummary,
     studioStateRecovery,
     runtimeValidationSignals,
+    operatorRecoveryGuidance,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

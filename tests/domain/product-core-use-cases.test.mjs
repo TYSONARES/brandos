@@ -23,6 +23,7 @@ import {
   createRuntimeHealthSummary,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
+  createOperatorRecoveryGuidance,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -664,4 +665,40 @@ test('Runtime Validation Signals maps recovery into repeatable validation state'
   ]);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Runtime Reliability Closure');
+});
+
+test('Operator Recovery Guidance maps validation signals into operator steps', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorRecoveryGuidance(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Recovery Guidance');
+  assert.equal(blocked.status, 'action-required');
+  assert.equal(blocked.guidanceReady, false);
+  assert.equal(blocked.guidanceDecision, 'Follow recovery guidance before closure');
+  assert.equal(blocked.guidanceSummary, 'Operator recovery guidance explains the manual steps needed before runtime closure.');
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+  assert.deepEqual(blocked.guidanceSteps.map((step) => step.status), ['active', 'pending', 'pending']);
+  assert.ok(blocked.requiredEvidence.includes('Context readiness: attention - 1 blockers'));
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createOperatorRecoveryGuidance(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.guidanceReady, true);
+  assert.equal(ready.guidanceDecision, 'Continue with runtime reliability closure');
+  assert.equal(ready.guidanceSummary, 'Operator recovery guidance confirms the local runtime baseline is reusable.');
+  assert.deepEqual(ready.guidanceSteps.map((step) => step.status), ['complete', 'active']);
+  assert.deepEqual(ready.recommendedCommands, [
+    'npm run check:runtime-reliability',
+    'npm run check:studio-render',
+    'npm run check:studio-build',
+    'npm run check:all'
+  ]);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Runtime Reliability Aggregate Summary');
 });

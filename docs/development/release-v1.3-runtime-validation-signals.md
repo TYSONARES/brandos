@@ -46,4 +46,4 @@ that can be repeated to verify local runtime confidence.
 
 ## Follow-Up
 
-The next v1.3 package should add Runtime Reliability aggregate release notes and closure checklist.
+The next v1.3 package should add Operator Recovery Guidance.

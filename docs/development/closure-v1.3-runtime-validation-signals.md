@@ -36,4 +36,4 @@ Ready for closure.
 
 ## Next Package
 
-Add Runtime Reliability aggregate release notes and closure checklist.
+Add Operator Recovery Guidance as the next Runtime Reliability v1.3 package.

@@ -775,6 +775,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-recovery-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-recovery-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-recovery-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-recovery-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -999,6 +1026,7 @@ export function renderStudioHtml(shell, options = {}) {
       .runtime-health-row,
       .studio-state-recovery-row,
       .runtime-validation-row,
+      .operator-recovery-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1338,6 +1366,28 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.runtimeValidationSignals.validationCommands.map(renderRuntimeValidationCommand).join('')}
         ${shell.runtimeValidationSignals.requiredEvidence.map(renderRuntimeValidationEvidence).join('')}
         ${shell.runtimeValidationSignals.blockers.map(renderRuntimeValidationBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Recovery Guidance</p>
+    <section class="panel" aria-label="Operator Recovery Guidance">
+      <h2>${escapeHtml(shell.operatorRecoveryGuidance.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator recovery status: ${shell.operatorRecoveryGuidance.status}`)}
+        ${renderGuidanceRow('Ready', `Operator recovery ready: ${shell.operatorRecoveryGuidance.guidanceReady}`)}
+        ${renderGuidanceRow('State source', `Operator recovery source: ${shell.operatorRecoveryGuidance.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator recovery state status: ${shell.operatorRecoveryGuidance.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator recovery completed actions: ${shell.operatorRecoveryGuidance.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Operator recovery decision: ${shell.operatorRecoveryGuidance.guidanceDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator recovery summary: ${shell.operatorRecoveryGuidance.guidanceSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator recovery next workflow: ${shell.operatorRecoveryGuidance.nextWorkflow}`)}
+      </div>
+      <div class="operator-recovery-list">
+        ${shell.operatorRecoveryGuidance.guidanceSteps.map(renderOperatorRecoveryStep).join('')}
+        ${shell.operatorRecoveryGuidance.validationSignals.map(renderOperatorRecoverySignal).join('')}
+        ${shell.operatorRecoveryGuidance.recommendedCommands.map(renderOperatorRecoveryCommand).join('')}
+        ${shell.operatorRecoveryGuidance.requiredEvidence.map(renderOperatorRecoveryEvidence).join('')}
+        ${shell.operatorRecoveryGuidance.blockers.map(renderOperatorRecoveryBlocker).join('')}
       </div>
     </section>
 
@@ -1887,6 +1937,41 @@ function renderRuntimeValidationBlocker(blocker) {
   return `<div class="runtime-validation-row">
     <span class="runtime-validation-label">Blocker</span>
     <span class="runtime-validation-value">Runtime validation blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryStep(step) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Step</span>
+    <span class="operator-recovery-value">Operator recovery step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoverySignal(signal) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Signal</span>
+    <span class="operator-recovery-value">Operator recovery signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryCommand(command) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Command</span>
+    <span class="operator-recovery-value">Operator recovery command: ${escapeHtml(command)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryEvidence(evidence) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Evidence</span>
+    <span class="operator-recovery-value">Operator recovery evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryBlocker(blocker) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Blocker</span>
+    <span class="operator-recovery-value">Operator recovery blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

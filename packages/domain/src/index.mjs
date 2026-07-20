@@ -23,6 +23,7 @@ export {
   createRuntimeHealthSummary,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
+  createOperatorRecoveryGuidance,
   evaluateContextPackReadiness
 } from './use-cases.mjs';
 
