@@ -29,6 +29,8 @@ const required = [
   'docs/development/release-v1.2-agent-handoff-closure.md',
   'docs/development/closure-v1.2-agent-handoff-closure.md',
   'docs/development/iteration-v1.2-agent-handoff-runtime-summary.md',
+  'docs/development/release-v1.2-agent-handoff-runtime-summary.md',
+  'docs/development/closure-v1.2-agent-handoff-runtime-summary.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'fixtures/components/agent-prompt-plan-panel.json',
