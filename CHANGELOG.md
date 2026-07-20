@@ -12,6 +12,7 @@
 - Added Operator Recovery Guidance package start.
 - Added Operator Recovery Guidance release notes and closure checklist.
 - Added Runtime Reliability v1.3 aggregate release summary and closure checklist.
+- Closed Runtime Reliability v1.3 with final release notes and closure checklist.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

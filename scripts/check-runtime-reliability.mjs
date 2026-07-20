@@ -25,6 +25,8 @@ const required = [
   'docs/development/closure-v1.3-operator-recovery-guidance.md',
   'docs/development/release-v1.3-aggregate-summary.md',
   'docs/development/closure-v1.3-aggregate-summary.md',
+  'docs/development/release-v1.3-final-closure.md',
+  'docs/development/closure-v1.3-final-closure.md',
   'docs/decisions/0025-runtime-reliability-start.md',
   'fixtures/components/runtime-health-summary-panel.json',
   'fixtures/components/studio-state-recovery-panel.json',
