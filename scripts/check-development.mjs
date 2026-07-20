@@ -68,6 +68,8 @@ const required = [
   'docs/development/release-v1.2-agent-draft-execution.md',
   'docs/development/closure-v1.2-agent-draft-execution.md',
   'docs/development/iteration-v1.2-draft-review.md',
+  'docs/development/release-v1.2-draft-review.md',
+  'docs/development/closure-v1.2-draft-review.md',
   'docs/development/iteration-v1.1-operator-run-model.md',
   'docs/development/release-v1.1-operator-run-model.md',
   'docs/development/closure-v1.1-operator-run-model.md',

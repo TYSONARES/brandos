@@ -10,6 +10,7 @@
 - Added Agent Draft Execution package start.
 - Added Agent Draft Execution release notes and closure checklist.
 - Added Draft Review package start.
+- Added Draft Review release notes and closure checklist.
 
 ## Unreleased - Operator Runtime v1.1
 
