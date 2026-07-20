@@ -6,6 +6,7 @@
 - Added Agent Handoff Context package start.
 - Added Agent Handoff Context release notes and closure checklist.
 - Added Agent Prompt Plan package start.
+- Added Agent Prompt Plan release notes and closure checklist.
 
 ## Unreleased - Operator Runtime v1.1
 

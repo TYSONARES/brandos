@@ -18,6 +18,8 @@ const required = [
   'docs/development/release-v1.2-agent-handoff-context.md',
   'docs/development/closure-v1.2-agent-handoff-context.md',
   'docs/development/iteration-v1.2-agent-prompt-plan.md',
+  'docs/development/release-v1.2-agent-prompt-plan.md',
+  'docs/development/closure-v1.2-agent-prompt-plan.md',
   'docs/development/iteration-v1.1-operator-run-model.md',
   'docs/development/release-v1.1-operator-run-model.md',
   'docs/development/closure-v1.1-operator-run-model.md',
