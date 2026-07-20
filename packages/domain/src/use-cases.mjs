@@ -377,6 +377,53 @@ export function createAgentPromptPlan(store, operatorRunId, contextPackId = 'con
   };
 }
 
+export function createAgentDraftExecution(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const promptPlan = createAgentPromptPlan(store, operatorRunId, contextPackId);
+  const contextPack = requireRecord(store, 'context-pack', contextPackId);
+  const brandProfile = store.list('brand-profile').find((profile) => profile.workspaceId === contextPack.workspaceId);
+  const claims = contextPack.includedClaims.map((claimId) => requireRecord(store, 'claim', claimId));
+  const decisions = contextPack.includedDecisions.map((decisionId) => requireRecord(store, 'decision', decisionId));
+  const draftAllowed = promptPlan.promptAllowed;
+  const primaryClaim = claims[0]?.statement ?? brandProfile?.positioning.promise ?? 'No approved claim available.';
+  const primaryDecision = decisions[0]?.title ?? 'No accepted decision available.';
+
+  return {
+    title: 'Agent Draft Execution',
+    status: draftAllowed ? 'ready' : 'blocked',
+    draftAllowed,
+    agent: promptPlan.agent,
+    operatorRunId: promptPlan.operatorRunId,
+    handoffId: promptPlan.handoffId,
+    contextPackId: promptPlan.contextPackId,
+    taskType: promptPlan.taskType,
+    sourcePolicy: promptPlan.sourcePolicy,
+    draftTitle: draftAllowed ? `${brandProfile?.name ?? 'Brand'} ${promptPlan.taskType} draft` : 'Draft blocked',
+    draftBody: draftAllowed
+      ? `${brandProfile?.name ?? 'Brand'} helps ${brandProfile?.audience.primary ?? 'approved audiences'} ${brandProfile?.positioning.promise.toLowerCase() ?? primaryClaim.toLowerCase()}`
+      : '',
+    evidenceCitations: draftAllowed
+      ? [
+        `Claim ${claims[0]?.id ?? 'none'}: ${primaryClaim}`,
+        `Decision ${decisions[0]?.id ?? 'none'}: ${primaryDecision}`,
+        `Context Pack ${contextPack.id}: ${contextPack.name}`
+      ]
+      : [],
+    qualityChecks: draftAllowed
+      ? [
+        { label: 'Accepted handoff present', status: 'pass' },
+        { label: 'Prompt plan allowed', status: 'pass' },
+        { label: 'Repository citations attached', status: 'pass' }
+      ]
+      : [
+        { label: 'Accepted handoff present', status: 'blocked' },
+        { label: 'Prompt plan allowed', status: 'blocked' },
+        { label: 'Repository citations attached', status: 'blocked' }
+      ],
+    blockers: promptPlan.blockers,
+    nextWorkflow: draftAllowed ? 'Draft Review' : promptPlan.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

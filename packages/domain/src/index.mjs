@@ -5,6 +5,7 @@ export { createInMemoryProductCoreStore } from './in-memory-store.mjs';
 export { assertKnownProductCoreModel, getProductCoreModel, listProductCoreModels } from './product-core-models.mjs';
 export {
   completeWorkflowAction,
+  createAgentDraftExecution,
   createAgentHandoffContext,
   createAgentPromptPlan,
   createBrandProfileOverview,

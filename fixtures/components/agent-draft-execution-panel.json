@@ -1,0 +1,29 @@
+{
+  "id": "component_agent_draft_execution_panel",
+  "name": "Agent Draft Execution Panel",
+  "status": "draft",
+  "purpose": "Shows whether a ready prompt plan can produce a repository-cited draft output.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose draft status, permission, title, body, source policy, citations, quality checks, and blockers as visible text.",
+    "Do not rely on color alone to communicate whether draft execution is allowed.",
+    "Keep citations readable so draft output can be traced to repository-backed sources."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   completeWorkflowAction,
+  createAgentDraftExecution,
   createAgentHandoffContext,
   createAgentPromptPlan,
   createBrandProfileOverview,
@@ -314,4 +315,40 @@ test('Agent Prompt Plan only opens after Agent Handoff Context is ready', () => 
     'Respect Context Pack exclusions.'
   ]);
   assert.deepEqual(ready.blockers, []);
+});
+
+test('Agent Draft Execution only drafts from a ready prompt plan', () => {
+  const store = createExampleStore();
+  const blocked = createAgentDraftExecution(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Draft Execution');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.draftAllowed, false);
+  assert.equal(blocked.agent, 'Operator');
+  assert.equal(blocked.contextPackId, 'context_pack_example_001');
+  assert.equal(blocked.draftTitle, 'Draft blocked');
+  assert.equal(blocked.draftBody, '');
+  assert.deepEqual(blocked.evidenceCitations, []);
+  assert.deepEqual(blocked.qualityChecks.map((check) => check.status), ['blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createAgentDraftExecution(store, 'operator_run_example_001');
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.draftAllowed, true);
+  assert.equal(ready.agent, 'AI writing agent');
+  assert.equal(ready.draftTitle, 'Example Brand brand-writing draft');
+  assert.equal(
+    ready.draftBody,
+    'Example Brand helps Teams building brand-led products with AI assistance turns scattered brand knowledge into reusable operating context.'
+  );
+  assert.deepEqual(ready.evidenceCitations, [
+    'Claim claim_example_001: BrandOS turns scattered brand knowledge into reusable operating context.',
+    'Decision decision_example_001: Use repository-first brand truth',
+    'Context Pack context_pack_example_001: Example Brand Writing Context'
+  ]);
+  assert.deepEqual(ready.qualityChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Draft Review');
 });

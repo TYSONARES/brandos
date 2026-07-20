@@ -532,6 +532,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-draft-execution-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-draft-execution-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-draft-execution-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-draft-execution-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -747,6 +774,7 @@ export function renderStudioHtml(shell, options = {}) {
       .handoff-acceptance-row,
       .agent-handoff-context-row,
       .agent-prompt-plan-row,
+      .agent-draft-execution-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -904,6 +932,27 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentPromptPlan.promptSections.map(renderAgentPromptPlanSection).join('')}
         ${shell.agentPromptPlan.guardrails.map(renderAgentPromptPlanGuardrail).join('')}
         ${shell.agentPromptPlan.blockers.map(renderAgentPromptPlanBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Draft Execution</p>
+    <section class="panel" aria-label="Agent Draft Execution">
+      <h2>${escapeHtml(shell.agentDraftExecution.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent draft execution status: ${shell.agentDraftExecution.status}`)}
+        ${renderGuidanceRow('Allowed', `Agent draft allowed: ${shell.agentDraftExecution.draftAllowed}`)}
+        ${renderGuidanceRow('Agent', `Agent draft agent: ${shell.agentDraftExecution.agent}`)}
+        ${renderGuidanceRow('Context Pack', `Agent draft context pack: ${shell.agentDraftExecution.contextPackId}`)}
+        ${renderGuidanceRow('Task type', `Agent draft task type: ${shell.agentDraftExecution.taskType}`)}
+        ${renderGuidanceRow('Title', `Agent draft title: ${shell.agentDraftExecution.draftTitle}`)}
+        ${renderGuidanceRow('Body', `Agent draft body: ${shell.agentDraftExecution.draftBody || 'none'}`)}
+        ${renderGuidanceRow('Source policy', `Agent draft source policy: ${shell.agentDraftExecution.sourcePolicy}`)}
+        ${renderGuidanceRow('Next workflow', `Agent draft next workflow: ${shell.agentDraftExecution.nextWorkflow}`)}
+      </div>
+      <div class="agent-draft-execution-list">
+        ${shell.agentDraftExecution.evidenceCitations.map(renderAgentDraftExecutionCitation).join('')}
+        ${shell.agentDraftExecution.qualityChecks.map(renderAgentDraftExecutionQualityCheck).join('')}
+        ${shell.agentDraftExecution.blockers.map(renderAgentDraftExecutionBlocker).join('')}
       </div>
     </section>
 
@@ -1243,6 +1292,27 @@ function renderAgentPromptPlanBlocker(blocker) {
   return `<div class="agent-prompt-plan-row">
     <span class="agent-prompt-plan-label">Blocker</span>
     <span class="agent-prompt-plan-value">Agent prompt blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentDraftExecutionCitation(citation) {
+  return `<div class="agent-draft-execution-row">
+    <span class="agent-draft-execution-label">Citation</span>
+    <span class="agent-draft-execution-value">Agent draft citation: ${escapeHtml(citation)}</span>
+  </div>`;
+}
+
+function renderAgentDraftExecutionQualityCheck(check) {
+  return `<div class="agent-draft-execution-row">
+    <span class="agent-draft-execution-label">Quality</span>
+    <span class="agent-draft-execution-value">Agent draft quality check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderAgentDraftExecutionBlocker(blocker) {
+  return `<div class="agent-draft-execution-row">
+    <span class="agent-draft-execution-label">Blocker</span>
+    <span class="agent-draft-execution-value">Agent draft blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import {
   completeWorkflowAction,
+  createAgentDraftExecution,
   createAgentHandoffContext,
   createAgentPromptPlan,
   createExampleProductCoreState,
@@ -15,9 +16,11 @@ const required = [
   'docs/development/iteration-v1.2-agent-prompt-plan.md',
   'docs/development/release-v1.2-agent-prompt-plan.md',
   'docs/development/closure-v1.2-agent-prompt-plan.md',
+  'docs/development/iteration-v1.2-agent-draft-execution.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'fixtures/components/agent-prompt-plan-panel.json',
+  'fixtures/components/agent-draft-execution-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -58,6 +61,16 @@ if (blockedPromptPlan.nextWorkflow !== 'Operator Runbook Execution') {
   process.exit(1);
 }
 
+const blockedDraftExecution = createAgentDraftExecution(store, 'operator_run_example_001');
+if (blockedDraftExecution.status !== 'blocked' || blockedDraftExecution.draftAllowed !== false) {
+  console.error('Agent Draft Execution did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedDraftExecution.draftBody !== '' || blockedDraftExecution.nextWorkflow !== 'Operator Runbook Execution') {
+  console.error('Blocked Agent Draft Execution did not stop drafting and route back to Operator Runbook Execution.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const readyContext = createAgentHandoffContext(store, 'operator_run_example_001');
 
@@ -81,6 +94,16 @@ if (readyPromptPlan.status !== 'ready' || readyPromptPlan.promptAllowed !== true
 }
 if (readyPromptPlan.nextWorkflow !== 'Agent Draft Execution') {
   console.error('Ready Agent Prompt Plan did not route work to Agent Draft Execution.');
+  process.exit(1);
+}
+
+const readyDraftExecution = createAgentDraftExecution(store, 'operator_run_example_001');
+if (readyDraftExecution.status !== 'ready' || readyDraftExecution.draftAllowed !== true) {
+  console.error('Agent Draft Execution did not expose the expected ready state.');
+  process.exit(1);
+}
+if (readyDraftExecution.nextWorkflow !== 'Draft Review' || readyDraftExecution.evidenceCitations.length !== 3) {
+  console.error('Ready Agent Draft Execution did not expose expected review routing and citations.');
   process.exit(1);
 }
 
