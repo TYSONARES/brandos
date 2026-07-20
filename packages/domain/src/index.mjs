@@ -8,6 +8,7 @@ export {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeAggregateSummary,
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,

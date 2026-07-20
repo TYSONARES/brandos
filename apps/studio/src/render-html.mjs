@@ -640,6 +640,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-handoff-runtime-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-runtime-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-runtime-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-runtime-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -859,6 +886,7 @@ export function renderStudioHtml(shell, options = {}) {
       .draft-review-row,
       .agent-handoff-closure-row,
       .agent-handoff-runtime-summary-row,
+      .agent-handoff-runtime-aggregate-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1095,6 +1123,27 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentHandoffRuntimeSummary.stages.map(renderAgentHandoffRuntimeSummaryStage).join('')}
         ${shell.agentHandoffRuntimeSummary.evidence.map(renderAgentHandoffRuntimeSummaryEvidence).join('')}
         ${shell.agentHandoffRuntimeSummary.blockers.map(renderAgentHandoffRuntimeSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Runtime Aggregate Summary</p>
+    <section class="panel" aria-label="Agent Handoff Runtime Aggregate Summary">
+      <h2>${escapeHtml(shell.agentHandoffRuntimeAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff runtime aggregate status: ${shell.agentHandoffRuntimeAggregateSummary.status}`)}
+        ${renderGuidanceRow('Complete', `Agent handoff runtime aggregate complete: ${shell.agentHandoffRuntimeAggregateSummary.complete}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff runtime aggregate context pack: ${shell.agentHandoffRuntimeAggregateSummary.contextPackId}`)}
+        ${renderGuidanceRow('Runtimes', `Agent handoff runtime aggregate runtimes: ${shell.agentHandoffRuntimeAggregateSummary.completeRuntimeCount}/${shell.agentHandoffRuntimeAggregateSummary.runtimeCount}`)}
+        ${renderGuidanceRow('Blocked', `Agent handoff runtime aggregate blocked runtimes: ${shell.agentHandoffRuntimeAggregateSummary.blockedRuntimeCount}`)}
+        ${renderGuidanceRow('Stages', `Agent handoff runtime aggregate stages: ${shell.agentHandoffRuntimeAggregateSummary.completedStageCount}/${shell.agentHandoffRuntimeAggregateSummary.totalStageCount}`)}
+        ${renderGuidanceRow('Decision', `Agent handoff runtime aggregate decision: ${shell.agentHandoffRuntimeAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Agent handoff runtime aggregate summary: ${shell.agentHandoffRuntimeAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff runtime aggregate next workflow: ${shell.agentHandoffRuntimeAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="agent-handoff-runtime-aggregate-list">
+        ${shell.agentHandoffRuntimeAggregateSummary.runtimeItems.map(renderAgentHandoffRuntimeAggregateItem).join('')}
+        ${shell.agentHandoffRuntimeAggregateSummary.evidence.map(renderAgentHandoffRuntimeAggregateEvidence).join('')}
+        ${shell.agentHandoffRuntimeAggregateSummary.blockers.map(renderAgentHandoffRuntimeAggregateBlocker).join('')}
       </div>
     </section>
 
@@ -1525,6 +1574,27 @@ function renderAgentHandoffRuntimeSummaryBlocker(blocker) {
   return `<div class="agent-handoff-runtime-summary-row">
     <span class="agent-handoff-runtime-summary-label">Blocker</span>
     <span class="agent-handoff-runtime-summary-value">Agent handoff runtime blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeAggregateItem(item) {
+  return `<div class="agent-handoff-runtime-aggregate-row">
+    <span class="agent-handoff-runtime-aggregate-label">Runtime</span>
+    <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${item.completedStages}/${item.totalStages}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeAggregateEvidence(evidence) {
+  return `<div class="agent-handoff-runtime-aggregate-row">
+    <span class="agent-handoff-runtime-aggregate-label">Evidence</span>
+    <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeAggregateBlocker(blocker) {
+  return `<div class="agent-handoff-runtime-aggregate-row">
+    <span class="agent-handoff-runtime-aggregate-label">Blocker</span>
+    <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

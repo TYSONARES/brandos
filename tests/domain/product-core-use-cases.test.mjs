@@ -6,6 +6,7 @@ import {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeAggregateSummary,
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,
@@ -465,4 +466,48 @@ test('Agent Handoff Runtime Summary reflects blocked and complete pipeline state
   ]);
   assert.deepEqual(complete.blockers, []);
   assert.equal(complete.nextWorkflow, 'Agent Handoff Runtime Aggregate Summary');
+});
+
+test('Agent Handoff Runtime Aggregate Summary closes only complete runtime summaries', () => {
+  const store = createExampleStore();
+  const blocked = createAgentHandoffRuntimeAggregateSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Handoff Runtime Aggregate Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.complete, false);
+  assert.equal(blocked.runtimeCount, 1);
+  assert.equal(blocked.completeRuntimeCount, 0);
+  assert.equal(blocked.blockedRuntimeCount, 1);
+  assert.equal(blocked.completedStageCount, 0);
+  assert.equal(blocked.totalStageCount, 5);
+  assert.equal(blocked.aggregateDecision, 'Keep Agent Handoff Runtime v1.2 aggregate open');
+  assert.equal(blocked.aggregateSummary, 'Agent Handoff Runtime v1.2 aggregate waits for runtime summary completion.');
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+  assert.deepEqual(blocked.runtimeItems, [
+    {
+      label: 'Agent Handoff Runtime Summary',
+      status: 'blocked',
+      completedStages: 0,
+      totalStages: 5
+    }
+  ]);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const complete = createAgentHandoffRuntimeAggregateSummary(store, 'operator_run_example_001');
+
+  assert.equal(complete.status, 'complete');
+  assert.equal(complete.complete, true);
+  assert.equal(complete.completeRuntimeCount, 1);
+  assert.equal(complete.blockedRuntimeCount, 0);
+  assert.equal(complete.completedStageCount, 5);
+  assert.equal(complete.totalStageCount, 5);
+  assert.equal(complete.aggregateDecision, 'Close Agent Handoff Runtime v1.2 aggregate');
+  assert.equal(complete.aggregateSummary, 'Agent Handoff Runtime v1.2 has a complete runtime summary and is ready for final closure.');
+  assert.deepEqual(complete.evidence, [
+    'Runtime summary status: complete',
+    'Runtime stages complete: 5/5',
+    'Runtime evidence count: 3'
+  ]);
+  assert.deepEqual(complete.blockers, []);
+  assert.equal(complete.nextWorkflow, 'Agent Handoff Runtime Final Closure');
 });

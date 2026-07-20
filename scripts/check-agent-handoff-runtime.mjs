@@ -4,6 +4,7 @@ import {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeAggregateSummary,
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createDraftReview,
@@ -31,6 +32,7 @@ const required = [
   'docs/development/iteration-v1.2-agent-handoff-runtime-summary.md',
   'docs/development/release-v1.2-agent-handoff-runtime-summary.md',
   'docs/development/closure-v1.2-agent-handoff-runtime-summary.md',
+  'docs/development/iteration-v1.2-agent-handoff-runtime-aggregate-summary.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'fixtures/components/agent-prompt-plan-panel.json',
@@ -38,6 +40,7 @@ const required = [
   'fixtures/components/draft-review-panel.json',
   'fixtures/components/agent-handoff-closure-panel.json',
   'fixtures/components/agent-handoff-runtime-summary-panel.json',
+  'fixtures/components/agent-handoff-runtime-aggregate-summary-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -106,6 +109,16 @@ if (blockedSummary.status !== 'blocked' || blockedSummary.complete !== false || 
   process.exit(1);
 }
 
+const blockedAggregate = createAgentHandoffRuntimeAggregateSummary(store, 'operator_run_example_001');
+if (blockedAggregate.status !== 'blocked' || blockedAggregate.complete !== false || blockedAggregate.blockedRuntimeCount !== 1) {
+  console.error('Agent Handoff Runtime Aggregate Summary did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedAggregate.nextWorkflow !== 'Operator Runbook Execution') {
+  console.error('Blocked Agent Handoff Runtime Aggregate Summary did not route work back to Operator Runbook Execution.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const readyContext = createAgentHandoffContext(store, 'operator_run_example_001');
 
@@ -169,6 +182,16 @@ if (completeSummary.status !== 'complete' || completeSummary.complete !== true |
 }
 if (completeSummary.nextWorkflow !== 'Agent Handoff Runtime Aggregate Summary') {
   console.error('Complete Agent Handoff Runtime Summary did not route work to aggregate summary.');
+  process.exit(1);
+}
+
+const completeAggregate = createAgentHandoffRuntimeAggregateSummary(store, 'operator_run_example_001');
+if (completeAggregate.status !== 'complete' || completeAggregate.complete !== true || completeAggregate.completeRuntimeCount !== 1) {
+  console.error('Agent Handoff Runtime Aggregate Summary did not expose the expected complete state.');
+  process.exit(1);
+}
+if (completeAggregate.nextWorkflow !== 'Agent Handoff Runtime Final Closure') {
+  console.error('Complete Agent Handoff Runtime Aggregate Summary did not route work to final closure.');
   process.exit(1);
 }
 
