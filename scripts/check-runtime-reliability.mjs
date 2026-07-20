@@ -4,7 +4,8 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createRuntimeHealthSummary,
-  createStudioStateRecovery
+  createStudioStateRecovery,
+  createRuntimeValidationSignals
 } from '../packages/domain/src/index.mjs';
 
 const required = [
@@ -15,9 +16,11 @@ const required = [
   'docs/development/iteration-v1.3-studio-state-recovery.md',
   'docs/development/release-v1.3-studio-state-recovery.md',
   'docs/development/closure-v1.3-studio-state-recovery.md',
+  'docs/development/iteration-v1.3-runtime-validation-signals.md',
   'docs/decisions/0025-runtime-reliability-start.md',
   'fixtures/components/runtime-health-summary-panel.json',
   'fixtures/components/studio-state-recovery-panel.json',
+  'fixtures/components/runtime-validation-signals-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -54,6 +57,16 @@ if (recovery.nextWorkflow !== 'Review Resolution Workflow') {
   process.exit(1);
 }
 
+const validation = createRuntimeValidationSignals(store, 'operator_run_example_001');
+if (validation.status !== 'blocked' || validation.validationReady !== false) {
+  console.error('Runtime Validation Signals did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (validation.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Blocked Runtime Validation Signals did not route work to Review Resolution Workflow.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const healthy = createRuntimeHealthSummary(store, 'operator_run_example_001', {
   stateSource: 'command',
@@ -83,6 +96,21 @@ if (readyRecovery.status !== 'ready' || readyRecovery.recoveryReady !== true) {
 }
 if (readyRecovery.nextWorkflow !== 'Runtime Validation Signals') {
   console.error('Ready Studio State Recovery did not route work to Runtime Validation Signals.');
+  process.exit(1);
+}
+
+const readyValidation = createRuntimeValidationSignals(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+if (readyValidation.status !== 'ready' || readyValidation.validationReady !== true) {
+  console.error('Runtime Validation Signals did not expose the expected ready state.');
+  process.exit(1);
+}
+if (readyValidation.nextWorkflow !== 'Runtime Reliability Closure') {
+  console.error('Ready Runtime Validation Signals did not route work to Runtime Reliability Closure.');
   process.exit(1);
 }
 

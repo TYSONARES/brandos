@@ -748,6 +748,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .runtime-validation-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .runtime-validation-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .runtime-validation-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .runtime-validation-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -971,6 +998,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-handoff-runtime-final-closure-row,
       .runtime-health-row,
       .studio-state-recovery-row,
+      .runtime-validation-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1289,6 +1317,27 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.studioStateRecovery.recoverySteps.map(renderStudioStateRecoveryStep).join('')}
         ${shell.studioStateRecovery.requiredEvidence.map(renderStudioStateRecoveryEvidence).join('')}
         ${shell.studioStateRecovery.blockers.map(renderStudioStateRecoveryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Runtime Validation Signals</p>
+    <section class="panel" aria-label="Runtime Validation Signals">
+      <h2>${escapeHtml(shell.runtimeValidationSignals.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Runtime validation status: ${shell.runtimeValidationSignals.status}`)}
+        ${renderGuidanceRow('Ready', `Runtime validation ready: ${shell.runtimeValidationSignals.validationReady}`)}
+        ${renderGuidanceRow('State source', `Runtime validation source: ${shell.runtimeValidationSignals.stateSource}`)}
+        ${renderGuidanceRow('State status', `Runtime validation state status: ${shell.runtimeValidationSignals.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Runtime validation completed actions: ${shell.runtimeValidationSignals.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Runtime validation decision: ${shell.runtimeValidationSignals.validationDecision}`)}
+        ${renderGuidanceRow('Summary', `Runtime validation summary: ${shell.runtimeValidationSignals.validationSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Runtime validation next workflow: ${shell.runtimeValidationSignals.nextWorkflow}`)}
+      </div>
+      <div class="runtime-validation-list">
+        ${shell.runtimeValidationSignals.validationSignals.map(renderRuntimeValidationSignal).join('')}
+        ${shell.runtimeValidationSignals.validationCommands.map(renderRuntimeValidationCommand).join('')}
+        ${shell.runtimeValidationSignals.requiredEvidence.map(renderRuntimeValidationEvidence).join('')}
+        ${shell.runtimeValidationSignals.blockers.map(renderRuntimeValidationBlocker).join('')}
       </div>
     </section>
 
@@ -1810,6 +1859,34 @@ function renderStudioStateRecoveryBlocker(blocker) {
   return `<div class="studio-state-recovery-row">
     <span class="studio-state-recovery-label">Blocker</span>
     <span class="studio-state-recovery-value">Studio state recovery blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationSignal(signal) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Signal</span>
+    <span class="runtime-validation-value">Runtime validation signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationCommand(command) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Command</span>
+    <span class="runtime-validation-value">Runtime validation command: ${escapeHtml(command)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationEvidence(evidence) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Evidence</span>
+    <span class="runtime-validation-value">Runtime validation evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationBlocker(blocker) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Blocker</span>
+    <span class="runtime-validation-value">Runtime validation blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

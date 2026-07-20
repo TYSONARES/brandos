@@ -1,0 +1,29 @@
+{
+  "id": "component_runtime_validation_signals_panel",
+  "name": "Runtime Validation Signals Panel",
+  "status": "draft",
+  "purpose": "Shows repeatable validation signals for local Studio runtime confidence.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose validation status, source, completed action count, decision, summary, signals, commands, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate validation readiness.",
+    "Keep validation commands readable so operators can repeat the same local checks."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

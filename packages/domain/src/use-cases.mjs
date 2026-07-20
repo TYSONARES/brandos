@@ -718,6 +718,47 @@ export function createStudioStateRecovery(store, operatorRunId, options = {}) {
   };
 }
 
+export function createRuntimeValidationSignals(store, operatorRunId, options = {}) {
+  const recovery = createStudioStateRecovery(store, operatorRunId, options);
+  const validationReady = recovery.recoveryReady;
+  const validationSignals = validationReady
+    ? [
+      { label: 'Studio state recovery', status: 'pass', detail: recovery.status },
+      { label: 'Reusable state baseline', status: 'pass', detail: recovery.recoveryDecision },
+      { label: 'Validation evidence', status: 'pass', detail: `${recovery.requiredEvidence.length} evidence items` }
+    ]
+    : [
+      { label: 'Studio state recovery', status: 'attention', detail: recovery.status },
+      { label: 'Reusable state baseline', status: 'blocked', detail: recovery.recoveryDecision },
+      { label: 'Validation evidence', status: 'attention', detail: `${recovery.requiredEvidence.length} evidence items` }
+    ];
+
+  return {
+    title: 'Runtime Validation Signals',
+    status: validationReady ? 'ready' : 'blocked',
+    validationReady,
+    operatorRunId,
+    contextPackId: recovery.contextPackId,
+    stateSource: recovery.stateSource,
+    stateStatus: recovery.stateStatus,
+    completedActionCount: recovery.completedActionCount,
+    validationDecision: validationReady ? 'Runtime validation signals are ready' : 'Runtime validation waits for Studio state recovery',
+    validationSummary: validationReady
+      ? 'Studio can use repeatable validation signals for local runtime confidence.'
+      : 'Runtime validation signals are blocked until recovery evidence is ready.',
+    validationSignals,
+    validationCommands: [
+      'npm run check:runtime-reliability',
+      'npm run check:studio-render',
+      'npm run check:studio-build',
+      'npm run check:all'
+    ],
+    requiredEvidence: recovery.requiredEvidence,
+    blockers: recovery.blockers,
+    nextWorkflow: validationReady ? 'Runtime Reliability Closure' : recovery.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

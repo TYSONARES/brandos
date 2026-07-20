@@ -22,6 +22,7 @@ import {
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioStateRecovery,
+  createRuntimeValidationSignals,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -622,4 +623,45 @@ test('Studio State Recovery maps runtime health into recovery steps', () => {
   ]);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Runtime Validation Signals');
+});
+
+test('Runtime Validation Signals maps recovery into repeatable validation state', () => {
+  const store = createExampleStore();
+  const blocked = createRuntimeValidationSignals(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Runtime Validation Signals');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.validationReady, false);
+  assert.equal(blocked.validationDecision, 'Runtime validation waits for Studio state recovery');
+  assert.equal(blocked.validationSummary, 'Runtime validation signals are blocked until recovery evidence is ready.');
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+  assert.deepEqual(blocked.validationSignals.map((signal) => signal.status), ['attention', 'blocked', 'attention']);
+  assert.deepEqual(blocked.validationCommands, [
+    'npm run check:runtime-reliability',
+    'npm run check:studio-render',
+    'npm run check:studio-build',
+    'npm run check:all'
+  ]);
+  assert.ok(blocked.requiredEvidence.includes('Context readiness: attention - 1 blockers'));
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createRuntimeValidationSignals(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.validationReady, true);
+  assert.equal(ready.validationDecision, 'Runtime validation signals are ready');
+  assert.equal(ready.validationSummary, 'Studio can use repeatable validation signals for local runtime confidence.');
+  assert.deepEqual(ready.validationSignals.map((signal) => signal.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(ready.requiredEvidence, [
+    'Runtime health status: healthy',
+    'Completed actions: 1',
+    'Runtime closure: closed'
+  ]);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Runtime Reliability Closure');
 });
