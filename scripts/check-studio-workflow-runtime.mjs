@@ -9,6 +9,8 @@ import {
 const required = [
   'docs/development/v1.4-scope.md',
   'docs/development/iteration-v1.4-workflow-session-summary.md',
+  'docs/development/release-v1.4-workflow-session-summary.md',
+  'docs/development/closure-v1.4-workflow-session-summary.md',
   'docs/decisions/0026-studio-workflow-runtime-start.md',
   'fixtures/components/workflow-session-summary-panel.json',
   'docs/development/README.md',
