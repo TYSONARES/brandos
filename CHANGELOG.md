@@ -14,6 +14,10 @@
 - Added Runtime Reliability v1.3 aggregate release summary and closure checklist.
 - Closed Runtime Reliability v1.3 with final release notes and closure checklist.
 
+## Unreleased - Studio Workflow Runtime v1.4
+
+- Started Studio Workflow Runtime v1.4 scope and decision record.
+
 ## Unreleased - Agent Handoff Runtime v1.2
 
 - Started Agent Handoff Runtime v1.2 scope and decision record.
