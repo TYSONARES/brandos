@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   completeWorkflowAction,
   createAgentHandoffContext,
+  createAgentPromptPlan,
   createBrandProfileOverview,
   createContextPackUsageFlow,
   createExampleProductCoreState,
@@ -264,4 +265,53 @@ test('Agent Handoff Context waits for accepted handoff before agent work', () =>
     'Load Context Pack context_pack_example_001 before drafting.',
     'Respect exclusions: pricing, legal promises, unapproved customer claims.'
   ]);
+});
+
+test('Agent Prompt Plan only opens after Agent Handoff Context is ready', () => {
+  const store = createExampleStore();
+  const blocked = createAgentPromptPlan(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Prompt Plan');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.promptAllowed, false);
+  assert.equal(blocked.agent, 'Operator');
+  assert.equal(blocked.contextPackId, 'context_pack_example_001');
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+  assert.equal(blocked.objective, 'Resolve accepted handoff before prompt planning.');
+  assert.equal(blocked.sourcePolicy, 'Prompt plan is blocked; do not use chat history as fallback context.');
+  assert.deepEqual(blocked.promptSections, [
+    'Blocked state',
+    'Required operator resolution',
+    'Missing accepted handoff evidence'
+  ]);
+  assert.deepEqual(blocked.guardrails, [
+    'Do not draft.',
+    'Return blockers to Operator Runbook Execution.',
+    'Wait for ready Agent Handoff Context.'
+  ]);
+  assert.equal(blocked.blockers.length, 3);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createAgentPromptPlan(store, 'operator_run_example_001');
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.promptAllowed, true);
+  assert.equal(ready.agent, 'AI writing agent');
+  assert.equal(ready.nextWorkflow, 'Agent Draft Execution');
+  assert.equal(ready.objective, 'Draft brand-writing output using context_pack_example_001.');
+  assert.equal(ready.sourcePolicy, 'Repository context only: accepted handoff and Context Pack sources.');
+  assert.deepEqual(ready.promptSections, [
+    'Objective',
+    'Accepted source context',
+    'Task boundary',
+    'Required evidence',
+    'Agent instructions',
+    'Output constraints'
+  ]);
+  assert.deepEqual(ready.guardrails, [
+    'Use accepted handoff context only.',
+    'Cite repository-backed claims and decisions when drafting.',
+    'Respect Context Pack exclusions.'
+  ]);
+  assert.deepEqual(ready.blockers, []);
 });

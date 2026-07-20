@@ -328,6 +328,55 @@ export function createAgentHandoffContext(store, operatorRunId, contextPackId = 
   };
 }
 
+export function createAgentPromptPlan(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const context = createAgentHandoffContext(store, operatorRunId, contextPackId);
+  const promptAllowed = context.readyForAgent;
+
+  return {
+    title: 'Agent Prompt Plan',
+    status: promptAllowed ? 'ready' : 'blocked',
+    promptAllowed,
+    operatorRunId: context.operatorRunId,
+    handoffId: context.handoffId,
+    contextPackId: context.contextPackId,
+    agent: context.nextAgent,
+    taskType: context.taskType,
+    objective: promptAllowed
+      ? `Draft ${context.taskType} output using ${context.contextPackId}.`
+      : 'Resolve accepted handoff before prompt planning.',
+    sourcePolicy: promptAllowed
+      ? 'Repository context only: accepted handoff and Context Pack sources.'
+      : 'Prompt plan is blocked; do not use chat history as fallback context.',
+    promptSections: promptAllowed
+      ? [
+        'Objective',
+        'Accepted source context',
+        'Task boundary',
+        'Required evidence',
+        'Agent instructions',
+        'Output constraints'
+      ]
+      : [
+        'Blocked state',
+        'Required operator resolution',
+        'Missing accepted handoff evidence'
+      ],
+    guardrails: promptAllowed
+      ? [
+        'Use accepted handoff context only.',
+        'Cite repository-backed claims and decisions when drafting.',
+        'Respect Context Pack exclusions.'
+      ]
+      : [
+        'Do not draft.',
+        'Return blockers to Operator Runbook Execution.',
+        'Wait for ready Agent Handoff Context.'
+      ],
+    blockers: context.blockedReasons,
+    nextWorkflow: promptAllowed ? 'Agent Draft Execution' : context.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

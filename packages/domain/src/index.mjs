@@ -6,6 +6,7 @@ export { assertKnownProductCoreModel, getProductCoreModel, listProductCoreModels
 export {
   completeWorkflowAction,
   createAgentHandoffContext,
+  createAgentPromptPlan,
   createBrandProfileOverview,
   createContextPackUsageFlow,
   createHandoffAcceptance,

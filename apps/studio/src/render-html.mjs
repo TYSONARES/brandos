@@ -505,6 +505,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-prompt-plan-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-prompt-plan-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-prompt-plan-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-prompt-plan-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -719,6 +746,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-runbook-step,
       .handoff-acceptance-row,
       .agent-handoff-context-row,
+      .agent-prompt-plan-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -856,6 +884,26 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentHandoffContext.requiredEvidence.map(renderAgentHandoffContextEvidence).join('')}
         ${shell.agentHandoffContext.blockedReasons.map(renderAgentHandoffContextBlocker).join('')}
         ${shell.agentHandoffContext.agentInstructions.map(renderAgentHandoffContextInstruction).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Prompt Plan</p>
+    <section class="panel" aria-label="Agent Prompt Plan">
+      <h2>${escapeHtml(shell.agentPromptPlan.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent prompt plan status: ${shell.agentPromptPlan.status}`)}
+        ${renderGuidanceRow('Allowed', `Agent prompt allowed: ${shell.agentPromptPlan.promptAllowed}`)}
+        ${renderGuidanceRow('Agent', `Agent prompt agent: ${shell.agentPromptPlan.agent}`)}
+        ${renderGuidanceRow('Context Pack', `Agent prompt context pack: ${shell.agentPromptPlan.contextPackId}`)}
+        ${renderGuidanceRow('Task type', `Agent prompt task type: ${shell.agentPromptPlan.taskType}`)}
+        ${renderGuidanceRow('Objective', `Agent prompt objective: ${shell.agentPromptPlan.objective}`)}
+        ${renderGuidanceRow('Source policy', `Agent prompt source policy: ${shell.agentPromptPlan.sourcePolicy}`)}
+        ${renderGuidanceRow('Next workflow', `Agent prompt next workflow: ${shell.agentPromptPlan.nextWorkflow}`)}
+      </div>
+      <div class="agent-prompt-plan-list">
+        ${shell.agentPromptPlan.promptSections.map(renderAgentPromptPlanSection).join('')}
+        ${shell.agentPromptPlan.guardrails.map(renderAgentPromptPlanGuardrail).join('')}
+        ${shell.agentPromptPlan.blockers.map(renderAgentPromptPlanBlocker).join('')}
       </div>
     </section>
 
@@ -1174,6 +1222,27 @@ function renderAgentHandoffContextInstruction(instruction) {
   return `<div class="agent-handoff-context-row">
     <span class="agent-handoff-context-label">Instruction</span>
     <span class="agent-handoff-context-value">Agent handoff instruction: ${escapeHtml(instruction)}</span>
+  </div>`;
+}
+
+function renderAgentPromptPlanSection(section) {
+  return `<div class="agent-prompt-plan-row">
+    <span class="agent-prompt-plan-label">Section</span>
+    <span class="agent-prompt-plan-value">Agent prompt section: ${escapeHtml(section)}</span>
+  </div>`;
+}
+
+function renderAgentPromptPlanGuardrail(guardrail) {
+  return `<div class="agent-prompt-plan-row">
+    <span class="agent-prompt-plan-label">Guardrail</span>
+    <span class="agent-prompt-plan-value">Agent prompt guardrail: ${escapeHtml(guardrail)}</span>
+  </div>`;
+}
+
+function renderAgentPromptPlanBlocker(blocker) {
+  return `<div class="agent-prompt-plan-row">
+    <span class="agent-prompt-plan-label">Blocker</span>
+    <span class="agent-prompt-plan-value">Agent prompt blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

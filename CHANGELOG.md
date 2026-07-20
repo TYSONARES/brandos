@@ -5,6 +5,7 @@
 - Started Agent Handoff Runtime v1.2 scope and decision record.
 - Added Agent Handoff Context package start.
 - Added Agent Handoff Context release notes and closure checklist.
+- Added Agent Prompt Plan package start.
 
 ## Unreleased - Operator Runtime v1.1
 

@@ -1,0 +1,29 @@
+{
+  "id": "component_agent_prompt_plan_panel",
+  "name": "Agent Prompt Plan Panel",
+  "status": "draft",
+  "purpose": "Shows whether accepted agent handoff context can become a prompt plan for agent work.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose prompt status, prompt permission, objective, source policy, sections, guardrails, and blockers as visible text.",
+    "Do not rely on color alone to communicate whether prompt execution is allowed.",
+    "Keep blocked state explicit so agents do not draft without accepted handoff context."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import {
   completeWorkflowAction,
   createAgentHandoffContext,
+  createAgentPromptPlan,
   createExampleProductCoreState,
   createInMemoryProductCoreStore
 } from '../packages/domain/src/index.mjs';
@@ -11,8 +12,10 @@ const required = [
   'docs/development/iteration-v1.2-agent-handoff-context.md',
   'docs/development/release-v1.2-agent-handoff-context.md',
   'docs/development/closure-v1.2-agent-handoff-context.md',
+  'docs/development/iteration-v1.2-agent-prompt-plan.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
+  'fixtures/components/agent-prompt-plan-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -43,6 +46,16 @@ if (!blockedContext.agentInstructions.includes('Wait for accepted handoff before
   process.exit(1);
 }
 
+const blockedPromptPlan = createAgentPromptPlan(store, 'operator_run_example_001');
+if (blockedPromptPlan.status !== 'blocked' || blockedPromptPlan.promptAllowed !== false) {
+  console.error('Agent Prompt Plan did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedPromptPlan.nextWorkflow !== 'Operator Runbook Execution') {
+  console.error('Blocked Agent Prompt Plan did not route work back to Operator Runbook Execution.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const readyContext = createAgentHandoffContext(store, 'operator_run_example_001');
 
@@ -56,6 +69,16 @@ if (readyContext.nextWorkflow !== 'Use Context Pack' || readyContext.nextAgent !
 }
 if (!readyContext.agentInstructions.includes('Use accepted handoff context only.')) {
   console.error('Ready Agent Handoff Context did not expose the expected source-of-truth instruction.');
+  process.exit(1);
+}
+
+const readyPromptPlan = createAgentPromptPlan(store, 'operator_run_example_001');
+if (readyPromptPlan.status !== 'ready' || readyPromptPlan.promptAllowed !== true) {
+  console.error('Agent Prompt Plan did not expose the expected ready state.');
+  process.exit(1);
+}
+if (readyPromptPlan.nextWorkflow !== 'Agent Draft Execution') {
+  console.error('Ready Agent Prompt Plan did not route work to Agent Draft Execution.');
   process.exit(1);
 }
 
