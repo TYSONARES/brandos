@@ -559,6 +559,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .draft-review-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .draft-review-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .draft-review-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .draft-review-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -775,6 +802,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-handoff-context-row,
       .agent-prompt-plan-row,
       .agent-draft-execution-row,
+      .draft-review-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -953,6 +981,25 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentDraftExecution.evidenceCitations.map(renderAgentDraftExecutionCitation).join('')}
         ${shell.agentDraftExecution.qualityChecks.map(renderAgentDraftExecutionQualityCheck).join('')}
         ${shell.agentDraftExecution.blockers.map(renderAgentDraftExecutionBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Draft Review</p>
+    <section class="panel" aria-label="Draft Review">
+      <h2>${escapeHtml(shell.draftReview.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Draft review status: ${shell.draftReview.status}`)}
+        ${renderGuidanceRow('Approved', `Draft review approved: ${shell.draftReview.approved}`)}
+        ${renderGuidanceRow('Context Pack', `Draft review context pack: ${shell.draftReview.contextPackId}`)}
+        ${renderGuidanceRow('Draft', `Draft review title: ${shell.draftReview.draftTitle}`)}
+        ${renderGuidanceRow('Decision', `Draft review decision: ${shell.draftReview.reviewDecision}`)}
+        ${renderGuidanceRow('Summary', `Draft review summary: ${shell.draftReview.reviewSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Draft review next workflow: ${shell.draftReview.nextWorkflow}`)}
+      </div>
+      <div class="draft-review-list">
+        ${shell.draftReview.requiredEvidence.map(renderDraftReviewEvidence).join('')}
+        ${shell.draftReview.reviewChecks.map(renderDraftReviewCheck).join('')}
+        ${shell.draftReview.blockers.map(renderDraftReviewBlocker).join('')}
       </div>
     </section>
 
@@ -1313,6 +1360,27 @@ function renderAgentDraftExecutionBlocker(blocker) {
   return `<div class="agent-draft-execution-row">
     <span class="agent-draft-execution-label">Blocker</span>
     <span class="agent-draft-execution-value">Agent draft blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderDraftReviewEvidence(evidence) {
+  return `<div class="draft-review-row">
+    <span class="draft-review-label">Evidence</span>
+    <span class="draft-review-value">Draft review evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderDraftReviewCheck(check) {
+  return `<div class="draft-review-row">
+    <span class="draft-review-label">Check</span>
+    <span class="draft-review-value">Draft review check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderDraftReviewBlocker(blocker) {
+  return `<div class="draft-review-row">
+    <span class="draft-review-label">Blocker</span>
+    <span class="draft-review-value">Draft review blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

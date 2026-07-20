@@ -1,0 +1,29 @@
+{
+  "id": "component_draft_review_panel",
+  "name": "Draft Review Panel",
+  "status": "draft",
+  "purpose": "Shows whether repository-cited draft output passes review and can move to handoff closure.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "approved"
+  ],
+  "accessibility": [
+    "Expose review status, approval, decision, summary, evidence, checks, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate review approval.",
+    "Keep blocked review reasons readable so draft work can return to the correct workflow."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

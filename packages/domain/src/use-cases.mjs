@@ -424,6 +424,45 @@ export function createAgentDraftExecution(store, operatorRunId, contextPackId = 
   };
 }
 
+export function createDraftReview(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const draftExecution = createAgentDraftExecution(store, operatorRunId, contextPackId);
+  const citationChecksPassed = draftExecution.evidenceCitations.length >= 3;
+  const qualityChecksPassed = draftExecution.qualityChecks.every((check) => check.status === 'pass');
+  const approved = draftExecution.draftAllowed && citationChecksPassed && qualityChecksPassed;
+
+  return {
+    title: 'Draft Review',
+    status: approved ? 'approved' : 'blocked',
+    approved,
+    operatorRunId: draftExecution.operatorRunId,
+    handoffId: draftExecution.handoffId,
+    contextPackId: draftExecution.contextPackId,
+    draftTitle: draftExecution.draftTitle,
+    reviewDecision: approved ? 'Approve draft for handoff closure' : 'Block draft until execution is ready',
+    reviewSummary: approved
+      ? 'Draft includes repository citations and passes required quality checks.'
+      : 'Draft review waits for allowed draft execution.',
+    requiredEvidence: approved
+      ? [
+        `Draft title: ${draftExecution.draftTitle}`,
+        `Citation count: ${draftExecution.evidenceCitations.length}`,
+        `Quality checks passed: ${draftExecution.qualityChecks.length}`
+      ]
+      : [
+        'Draft body is not available.',
+        'Repository citations are missing.',
+        'Quality checks are blocked.'
+      ],
+    reviewChecks: [
+      { label: 'Draft body present', status: draftExecution.draftBody ? 'pass' : 'blocked' },
+      { label: 'Repository citations present', status: citationChecksPassed ? 'pass' : 'blocked' },
+      { label: 'Quality checks passed', status: qualityChecksPassed ? 'pass' : 'blocked' }
+    ],
+    blockers: draftExecution.blockers,
+    nextWorkflow: approved ? 'Agent Handoff Closure' : draftExecution.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

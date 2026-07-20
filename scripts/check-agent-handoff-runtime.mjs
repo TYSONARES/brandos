@@ -4,6 +4,7 @@ import {
   createAgentDraftExecution,
   createAgentHandoffContext,
   createAgentPromptPlan,
+  createDraftReview,
   createExampleProductCoreState,
   createInMemoryProductCoreStore
 } from '../packages/domain/src/index.mjs';
@@ -19,10 +20,12 @@ const required = [
   'docs/development/iteration-v1.2-agent-draft-execution.md',
   'docs/development/release-v1.2-agent-draft-execution.md',
   'docs/development/closure-v1.2-agent-draft-execution.md',
+  'docs/development/iteration-v1.2-draft-review.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'fixtures/components/agent-prompt-plan-panel.json',
   'fixtures/components/agent-draft-execution-panel.json',
+  'fixtures/components/draft-review-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -73,6 +76,12 @@ if (blockedDraftExecution.draftBody !== '' || blockedDraftExecution.nextWorkflow
   process.exit(1);
 }
 
+const blockedDraftReview = createDraftReview(store, 'operator_run_example_001');
+if (blockedDraftReview.status !== 'blocked' || blockedDraftReview.approved !== false) {
+  console.error('Draft Review did not expose the expected blocked state.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const readyContext = createAgentHandoffContext(store, 'operator_run_example_001');
 
@@ -106,6 +115,16 @@ if (readyDraftExecution.status !== 'ready' || readyDraftExecution.draftAllowed !
 }
 if (readyDraftExecution.nextWorkflow !== 'Draft Review' || readyDraftExecution.evidenceCitations.length !== 3) {
   console.error('Ready Agent Draft Execution did not expose expected review routing and citations.');
+  process.exit(1);
+}
+
+const approvedDraftReview = createDraftReview(store, 'operator_run_example_001');
+if (approvedDraftReview.status !== 'approved' || approvedDraftReview.approved !== true) {
+  console.error('Draft Review did not expose the expected approved state.');
+  process.exit(1);
+}
+if (approvedDraftReview.nextWorkflow !== 'Agent Handoff Closure') {
+  console.error('Approved Draft Review did not route work to Agent Handoff Closure.');
   process.exit(1);
 }
 

@@ -8,6 +8,7 @@ import {
   createAgentPromptPlan,
   createBrandProfileOverview,
   createContextPackUsageFlow,
+  createDraftReview,
   createExampleProductCoreState,
   createHandoffAcceptance,
   createInMemoryProductCoreStore,
@@ -351,4 +352,41 @@ test('Agent Draft Execution only drafts from a ready prompt plan', () => {
   assert.deepEqual(ready.qualityChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Draft Review');
+});
+
+test('Draft Review approves only repository-cited ready drafts', () => {
+  const store = createExampleStore();
+  const blocked = createDraftReview(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Draft Review');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.approved, false);
+  assert.equal(blocked.contextPackId, 'context_pack_example_001');
+  assert.equal(blocked.draftTitle, 'Draft blocked');
+  assert.equal(blocked.reviewDecision, 'Block draft until execution is ready');
+  assert.equal(blocked.reviewSummary, 'Draft review waits for allowed draft execution.');
+  assert.deepEqual(blocked.requiredEvidence, [
+    'Draft body is not available.',
+    'Repository citations are missing.',
+    'Quality checks are blocked.'
+  ]);
+  assert.deepEqual(blocked.reviewChecks.map((check) => check.status), ['blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const approved = createDraftReview(store, 'operator_run_example_001');
+
+  assert.equal(approved.status, 'approved');
+  assert.equal(approved.approved, true);
+  assert.equal(approved.draftTitle, 'Example Brand brand-writing draft');
+  assert.equal(approved.reviewDecision, 'Approve draft for handoff closure');
+  assert.equal(approved.reviewSummary, 'Draft includes repository citations and passes required quality checks.');
+  assert.deepEqual(approved.requiredEvidence, [
+    'Draft title: Example Brand brand-writing draft',
+    'Citation count: 3',
+    'Quality checks passed: 3'
+  ]);
+  assert.deepEqual(approved.reviewChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(approved.blockers, []);
+  assert.equal(approved.nextWorkflow, 'Agent Handoff Closure');
 });
