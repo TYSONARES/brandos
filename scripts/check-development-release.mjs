@@ -16,6 +16,7 @@ const required = [
   'docs/development/v1.2-scope.md',
   'docs/development/v1.3-scope.md',
   'docs/development/v1.4-scope.md',
+  'docs/development/iteration-v1.4-workflow-session-summary.md',
   'docs/development/iteration-v1.3-runtime-health-summary.md',
   'docs/development/release-v1.3-runtime-health-summary.md',
   'docs/development/closure-v1.3-runtime-health-summary.md',

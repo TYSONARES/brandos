@@ -79,6 +79,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Studio State Recovery panel
 - dedicated Runtime Validation Signals panel
 - dedicated Operator Recovery Guidance panel
+- dedicated Workflow Session Summary panel
 - post-v1 aggregate release summary
 - post-v1 aggregate closure checklist
 - post-v1 final closure release notes

@@ -24,6 +24,7 @@ import {
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
+  createWorkflowSessionSummary,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -701,4 +702,43 @@ test('Operator Recovery Guidance maps validation signals into operator steps', (
   ]);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Runtime Reliability Aggregate Summary');
+});
+
+test('Workflow Session Summary maps Studio state into session route', () => {
+  const store = createExampleStore();
+  const blocked = createWorkflowSessionSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Workflow Session Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.sessionReady, false);
+  assert.equal(blocked.workflowName, 'Context Pack workflow');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.currentStep, 'resolve-review');
+  assert.equal(blocked.actionStatus, 'pending');
+  assert.equal(blocked.sessionDecision, 'Resolve workflow session blockers');
+  assert.equal(blocked.sessionSummary, 'Workflow session is blocked until readiness and recovery guidance are resolved.');
+  assert.equal(blocked.nextRoute, 'index.html');
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+  assert.deepEqual(blocked.sessionSignals.map((signal) => signal.status), ['blocked', 'attention', 'pass']);
+  assert.ok(blocked.requiredEvidence.includes('Scenario: blocked'));
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createWorkflowSessionSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.sessionReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.currentStep, 'ready-for-use');
+  assert.equal(ready.actionStatus, 'ready');
+  assert.equal(ready.sessionDecision, 'Continue workflow session');
+  assert.equal(ready.sessionSummary, 'Workflow session is ready with reusable state and clear next route.');
+  assert.equal(ready.nextRoute, 'ready.html');
+  assert.equal(ready.nextWorkflow, 'Workflow Transition Plan');
+  assert.deepEqual(ready.sessionSignals.map((signal) => signal.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(ready.blockers, []);
 });

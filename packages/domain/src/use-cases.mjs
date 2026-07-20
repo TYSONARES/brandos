@@ -795,6 +795,51 @@ export function createOperatorRecoveryGuidance(store, operatorRunId, options = {
   };
 }
 
+export function createWorkflowSessionSummary(store, operatorRunId, options = {}) {
+  const contextPackId = options.contextPackId ?? 'context_pack_example_001';
+  const readiness = evaluateContextPackReadiness(store, contextPackId);
+  const guidance = createOperatorRecoveryGuidance(store, operatorRunId, options);
+  const scenario = readiness.ready ? 'ready' : 'blocked';
+  const currentStep = readiness.ready ? 'ready-for-use' : 'resolve-review';
+  const nextRoute = readiness.ready ? 'ready.html' : 'index.html';
+  const sessionReady = readiness.ready && guidance.guidanceReady;
+
+  return {
+    title: 'Workflow Session Summary',
+    status: sessionReady ? 'ready' : 'blocked',
+    sessionReady,
+    operatorRunId,
+    contextPackId,
+    workflowName: 'Context Pack workflow',
+    scenario,
+    currentStep,
+    actionStatus: readiness.nextActions[0]?.status ?? 'ready',
+    stateSource: guidance.stateSource,
+    stateStatus: guidance.stateStatus,
+    completedActionCount: guidance.completedActionCount,
+    sessionDecision: sessionReady ? 'Continue workflow session' : 'Resolve workflow session blockers',
+    sessionSummary: sessionReady
+      ? 'Workflow session is ready with reusable state and clear next route.'
+      : 'Workflow session is blocked until readiness and recovery guidance are resolved.',
+    nextRoute,
+    nextWorkflow: sessionReady ? 'Workflow Transition Plan' : guidance.nextWorkflow,
+    sessionSignals: [
+      { label: 'Context readiness', status: readiness.ready ? 'pass' : 'blocked', detail: `${readiness.blockingReasons.length} blockers` },
+      { label: 'Operator recovery guidance', status: guidance.guidanceReady ? 'pass' : 'attention', detail: guidance.status },
+      { label: 'Workflow route', status: nextRoute ? 'pass' : 'blocked', detail: nextRoute }
+    ],
+    requiredEvidence: [
+      `Scenario: ${scenario}`,
+      `State source: ${guidance.stateSource}`,
+      `Completed actions: ${guidance.completedActionCount}`
+    ],
+    blockers: [
+      ...readiness.blockingReasons,
+      ...guidance.blockers
+    ]
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

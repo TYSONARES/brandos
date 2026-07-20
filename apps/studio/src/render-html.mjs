@@ -802,6 +802,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .workflow-session-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .workflow-session-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .workflow-session-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .workflow-session-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1027,6 +1054,7 @@ export function renderStudioHtml(shell, options = {}) {
       .studio-state-recovery-row,
       .runtime-validation-row,
       .operator-recovery-row,
+      .workflow-session-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1388,6 +1416,31 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.operatorRecoveryGuidance.recommendedCommands.map(renderOperatorRecoveryCommand).join('')}
         ${shell.operatorRecoveryGuidance.requiredEvidence.map(renderOperatorRecoveryEvidence).join('')}
         ${shell.operatorRecoveryGuidance.blockers.map(renderOperatorRecoveryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Workflow Session Summary</p>
+    <section class="panel" aria-label="Workflow Session Summary">
+      <h2>${escapeHtml(shell.workflowSessionSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Workflow session status: ${shell.workflowSessionSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Workflow session ready: ${shell.workflowSessionSummary.sessionReady}`)}
+        ${renderGuidanceRow('Workflow', `Workflow session workflow: ${shell.workflowSessionSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Workflow session scenario: ${shell.workflowSessionSummary.scenario}`)}
+        ${renderGuidanceRow('Current step', `Workflow session current step: ${shell.workflowSessionSummary.currentStep}`)}
+        ${renderGuidanceRow('Action status', `Workflow session action status: ${shell.workflowSessionSummary.actionStatus}`)}
+        ${renderGuidanceRow('State source', `Workflow session source: ${shell.workflowSessionSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Workflow session state status: ${shell.workflowSessionSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Workflow session completed actions: ${shell.workflowSessionSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Workflow session decision: ${shell.workflowSessionSummary.sessionDecision}`)}
+        ${renderGuidanceRow('Summary', `Workflow session summary: ${shell.workflowSessionSummary.sessionSummary}`)}
+        ${renderGuidanceRow('Next route', `Workflow session next route: ${shell.workflowSessionSummary.nextRoute}`)}
+        ${renderGuidanceRow('Next workflow', `Workflow session next workflow: ${shell.workflowSessionSummary.nextWorkflow}`)}
+      </div>
+      <div class="workflow-session-list">
+        ${shell.workflowSessionSummary.sessionSignals.map(renderWorkflowSessionSignal).join('')}
+        ${shell.workflowSessionSummary.requiredEvidence.map(renderWorkflowSessionEvidence).join('')}
+        ${shell.workflowSessionSummary.blockers.map(renderWorkflowSessionBlocker).join('')}
       </div>
     </section>
 
@@ -1972,6 +2025,27 @@ function renderOperatorRecoveryBlocker(blocker) {
   return `<div class="operator-recovery-row">
     <span class="operator-recovery-label">Blocker</span>
     <span class="operator-recovery-value">Operator recovery blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderWorkflowSessionSignal(signal) {
+  return `<div class="workflow-session-row">
+    <span class="workflow-session-label">Signal</span>
+    <span class="workflow-session-value">Workflow session signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderWorkflowSessionEvidence(evidence) {
+  return `<div class="workflow-session-row">
+    <span class="workflow-session-label">Evidence</span>
+    <span class="workflow-session-value">Workflow session evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderWorkflowSessionBlocker(blocker) {
+  return `<div class="workflow-session-row">
+    <span class="workflow-session-label">Blocker</span>
+    <span class="workflow-session-value">Workflow session blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

@@ -17,6 +17,7 @@
 ## Unreleased - Studio Workflow Runtime v1.4
 
 - Started Studio Workflow Runtime v1.4 scope and decision record.
+- Added Workflow Session Summary package start.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

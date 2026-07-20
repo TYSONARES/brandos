@@ -1,0 +1,29 @@
+{
+  "id": "component_workflow_session_summary_panel",
+  "name": "Workflow Session Summary Panel",
+  "status": "draft",
+  "purpose": "Shows the current Studio workflow session, scenario, state source, and next route.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose session status, workflow, scenario, current step, state source, decision, summary, next route, and next workflow as visible text.",
+    "Do not rely on color alone to communicate session readiness.",
+    "Keep session signals and evidence readable so operators can resume the correct workflow route."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

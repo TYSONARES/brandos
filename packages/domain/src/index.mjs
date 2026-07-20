@@ -24,6 +24,7 @@ export {
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
+  createWorkflowSessionSummary,
   evaluateContextPackReadiness
 } from './use-cases.mjs';
 
