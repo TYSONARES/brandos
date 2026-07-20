@@ -721,6 +721,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .studio-state-recovery-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-state-recovery-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .studio-state-recovery-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .studio-state-recovery-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -943,6 +970,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-handoff-runtime-aggregate-row,
       .agent-handoff-runtime-final-closure-row,
       .runtime-health-row,
+      .studio-state-recovery-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1241,6 +1269,26 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.runtimeHealthSummary.signals.map(renderRuntimeHealthSignal).join('')}
         ${shell.runtimeHealthSummary.recoveryActions.map(renderRuntimeHealthRecoveryAction).join('')}
         ${shell.runtimeHealthSummary.blockers.map(renderRuntimeHealthBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Studio State Recovery</p>
+    <section class="panel" aria-label="Studio State Recovery">
+      <h2>${escapeHtml(shell.studioStateRecovery.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio state recovery status: ${shell.studioStateRecovery.status}`)}
+        ${renderGuidanceRow('Ready', `Studio state recovery ready: ${shell.studioStateRecovery.recoveryReady}`)}
+        ${renderGuidanceRow('State source', `Studio state recovery source: ${shell.studioStateRecovery.stateSource}`)}
+        ${renderGuidanceRow('State status', `Studio state recovery state status: ${shell.studioStateRecovery.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Studio state recovery completed actions: ${shell.studioStateRecovery.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Studio state recovery decision: ${shell.studioStateRecovery.recoveryDecision}`)}
+        ${renderGuidanceRow('Summary', `Studio state recovery summary: ${shell.studioStateRecovery.recoverySummary}`)}
+        ${renderGuidanceRow('Next workflow', `Studio state recovery next workflow: ${shell.studioStateRecovery.nextWorkflow}`)}
+      </div>
+      <div class="studio-state-recovery-list">
+        ${shell.studioStateRecovery.recoverySteps.map(renderStudioStateRecoveryStep).join('')}
+        ${shell.studioStateRecovery.requiredEvidence.map(renderStudioStateRecoveryEvidence).join('')}
+        ${shell.studioStateRecovery.blockers.map(renderStudioStateRecoveryBlocker).join('')}
       </div>
     </section>
 
@@ -1741,6 +1789,27 @@ function renderRuntimeHealthBlocker(blocker) {
   return `<div class="runtime-health-row">
     <span class="runtime-health-label">Blocker</span>
     <span class="runtime-health-value">Runtime health blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderStudioStateRecoveryStep(step) {
+  return `<div class="studio-state-recovery-row">
+    <span class="studio-state-recovery-label">Step</span>
+    <span class="studio-state-recovery-value">Studio state recovery step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderStudioStateRecoveryEvidence(evidence) {
+  return `<div class="studio-state-recovery-row">
+    <span class="studio-state-recovery-label">Evidence</span>
+    <span class="studio-state-recovery-value">Studio state recovery evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderStudioStateRecoveryBlocker(blocker) {
+  return `<div class="studio-state-recovery-row">
+    <span class="studio-state-recovery-label">Blocker</span>
+    <span class="studio-state-recovery-value">Studio state recovery blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

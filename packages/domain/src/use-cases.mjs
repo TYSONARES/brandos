@@ -678,6 +678,46 @@ export function createRuntimeHealthSummary(store, operatorRunId, options = {}) {
   };
 }
 
+export function createStudioStateRecovery(store, operatorRunId, options = {}) {
+  const runtimeHealth = createRuntimeHealthSummary(store, operatorRunId, options);
+  const recoveryReady = runtimeHealth.healthy;
+  const recoverySteps = recoveryReady
+    ? [
+      { label: 'Preserve current Studio state', status: 'complete', detail: 'Current state is reliable for repeated local runs.' },
+      { label: 'Use ready scenario baseline', status: 'active', detail: 'Ready scenario can remain the local reliability baseline.' }
+    ]
+    : runtimeHealth.recoveryActions.map((action, index) => ({
+      label: `Recovery action ${index + 1}`,
+      status: index === 0 ? 'active' : 'pending',
+      detail: action
+    }));
+
+  return {
+    title: 'Studio State Recovery',
+    status: recoveryReady ? 'ready' : 'needs-recovery',
+    recoveryReady,
+    operatorRunId,
+    contextPackId: runtimeHealth.contextPackId,
+    stateSource: runtimeHealth.stateSource,
+    stateStatus: runtimeHealth.stateStatus,
+    completedActionCount: runtimeHealth.completedActionCount,
+    recoveryDecision: recoveryReady ? 'Keep current Studio state' : 'Recover Studio state before repeated local use',
+    recoverySummary: recoveryReady
+      ? 'Studio state is reliable and can be reused as the local ready baseline.'
+      : 'Studio state recovery must resolve runtime health attention signals.',
+    recoverySteps,
+    requiredEvidence: recoveryReady
+      ? [
+        `Runtime health status: ${runtimeHealth.status}`,
+        `Completed actions: ${runtimeHealth.completedActionCount}`,
+        `Runtime closure: ${runtimeHealth.runtimeClosureStatus}`
+      ]
+      : runtimeHealth.signals.map((signal) => `${signal.label}: ${signal.status} - ${signal.detail}`),
+    blockers: runtimeHealth.blockers,
+    nextWorkflow: recoveryReady ? 'Runtime Validation Signals' : runtimeHealth.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

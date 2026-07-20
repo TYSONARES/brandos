@@ -21,6 +21,7 @@ import {
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioStateRecovery,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -586,4 +587,39 @@ test('Runtime Health Summary reports attention and healthy local runtime state',
   ]);
   assert.deepEqual(healthy.blockers, []);
   assert.equal(healthy.nextWorkflow, 'Studio State Recovery');
+});
+
+test('Studio State Recovery maps runtime health into recovery steps', () => {
+  const store = createExampleStore();
+  const recovery = createStudioStateRecovery(store, 'operator_run_example_001');
+
+  assert.equal(recovery.title, 'Studio State Recovery');
+  assert.equal(recovery.status, 'needs-recovery');
+  assert.equal(recovery.recoveryReady, false);
+  assert.equal(recovery.recoveryDecision, 'Recover Studio state before repeated local use');
+  assert.equal(recovery.recoverySummary, 'Studio state recovery must resolve runtime health attention signals.');
+  assert.equal(recovery.nextWorkflow, 'Review Resolution Workflow');
+  assert.deepEqual(recovery.recoverySteps.map((step) => step.status), ['active', 'pending', 'pending']);
+  assert.ok(recovery.requiredEvidence.includes('Context readiness: attention - 1 blockers'));
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createStudioStateRecovery(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.recoveryReady, true);
+  assert.equal(ready.recoveryDecision, 'Keep current Studio state');
+  assert.equal(ready.recoverySummary, 'Studio state is reliable and can be reused as the local ready baseline.');
+  assert.deepEqual(ready.recoverySteps.map((step) => step.status), ['complete', 'active']);
+  assert.deepEqual(ready.requiredEvidence, [
+    'Runtime health status: healthy',
+    'Completed actions: 1',
+    'Runtime closure: closed'
+  ]);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Runtime Validation Signals');
 });

@@ -21,6 +21,7 @@ export {
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioStateRecovery,
   evaluateContextPackReadiness
 } from './use-cases.mjs';
 

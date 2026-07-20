@@ -1,0 +1,29 @@
+{
+  "id": "component_studio_state_recovery_panel",
+  "name": "Studio State Recovery Panel",
+  "status": "draft",
+  "purpose": "Shows recovery steps for local Studio runtime state reliability.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "needs-recovery",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose recovery status, source, completed action count, decision, summary, steps, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate recovery readiness.",
+    "Keep recovery steps readable so operators can perform the next local recovery action."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

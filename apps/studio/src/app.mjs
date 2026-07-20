@@ -17,6 +17,7 @@ import {
   createOperatorRunbookExecution,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioStateRecovery,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -91,6 +92,12 @@ export function createBrandOSStudioShell(options = {}) {
     stateSource: contextPackWorkflow.stateSource
   };
   const runtimeHealthSummary = createRuntimeHealthSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const studioStateRecovery = createStudioStateRecovery(store, operatorRunbookExecution.runId, {
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
     completedActionCount: contextPackWorkflow.completedActionCount,
@@ -241,6 +248,7 @@ export function createBrandOSStudioShell(options = {}) {
     agentHandoffRuntimeAggregateSummary,
     agentHandoffRuntimeFinalClosure,
     runtimeHealthSummary,
+    studioStateRecovery,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,
