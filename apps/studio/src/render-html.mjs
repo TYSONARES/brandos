@@ -478,6 +478,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-handoff-context-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-context-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-context-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-context-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -691,6 +718,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-run-queue-row,
       .operator-runbook-step,
       .handoff-acceptance-row,
+      .agent-handoff-context-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -808,6 +836,26 @@ export function renderStudioHtml(shell, options = {}) {
       <div class="handoff-acceptance-list">
         ${shell.handoffAcceptance.requiredEvidence.map(renderHandoffAcceptanceEvidence).join('')}
         ${shell.handoffAcceptance.blockedReasons.map(renderHandoffAcceptanceBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Context</p>
+    <section class="panel" aria-label="Agent Handoff Context">
+      <h2>${escapeHtml(shell.agentHandoffContext.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff context status: ${shell.agentHandoffContext.status}`)}
+        ${renderGuidanceRow('Ready', `Agent handoff ready: ${shell.agentHandoffContext.readyForAgent}`)}
+        ${renderGuidanceRow('Operator run', `Agent handoff operator run: ${shell.agentHandoffContext.operatorRunId}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff context pack: ${shell.agentHandoffContext.contextPackId}`)}
+        ${renderGuidanceRow('Task type', `Agent handoff task type: ${shell.agentHandoffContext.taskType}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff next workflow: ${shell.agentHandoffContext.nextWorkflow}`)}
+        ${renderGuidanceRow('Next agent', `Agent handoff next agent: ${shell.agentHandoffContext.nextAgent}`)}
+      </div>
+      <div class="agent-handoff-context-list">
+        ${shell.agentHandoffContext.contextSources.map(renderAgentHandoffContextSource).join('')}
+        ${shell.agentHandoffContext.requiredEvidence.map(renderAgentHandoffContextEvidence).join('')}
+        ${shell.agentHandoffContext.blockedReasons.map(renderAgentHandoffContextBlocker).join('')}
+        ${shell.agentHandoffContext.agentInstructions.map(renderAgentHandoffContextInstruction).join('')}
       </div>
     </section>
 
@@ -1096,9 +1144,37 @@ function renderHandoffAcceptanceEvidence(evidence) {
 
 function renderHandoffAcceptanceBlocker(reason) {
   return `<div class="handoff-acceptance-row">
-          <span class="handoff-acceptance-label">Blocker</span>
-          <span class="handoff-acceptance-value">Handoff acceptance blocker: ${escapeHtml(reason)}</span>
-        </div>`;
+    <span class="handoff-acceptance-label">Blocker</span>
+    <span class="handoff-acceptance-value">Handoff acceptance blocker: ${escapeHtml(reason)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffContextSource(source) {
+  return `<div class="agent-handoff-context-row">
+    <span class="agent-handoff-context-label">Source</span>
+    <span class="agent-handoff-context-value">Agent handoff source: ${escapeHtml(source)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffContextEvidence(evidence) {
+  return `<div class="agent-handoff-context-row">
+    <span class="agent-handoff-context-label">Evidence</span>
+    <span class="agent-handoff-context-value">Agent handoff evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffContextBlocker(reason) {
+  return `<div class="agent-handoff-context-row">
+    <span class="agent-handoff-context-label">Blocker</span>
+    <span class="agent-handoff-context-value">Agent handoff blocker: ${escapeHtml(reason)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffContextInstruction(instruction) {
+  return `<div class="agent-handoff-context-row">
+    <span class="agent-handoff-context-label">Instruction</span>
+    <span class="agent-handoff-context-value">Agent handoff instruction: ${escapeHtml(instruction)}</span>
+  </div>`;
 }
 
 function renderUsageRow(label, value) {

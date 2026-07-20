@@ -3,6 +3,7 @@
 ## Unreleased - Agent Handoff Runtime v1.2
 
 - Started Agent Handoff Runtime v1.2 scope and decision record.
+- Added Agent Handoff Context package start.
 
 ## Unreleased - Operator Runtime v1.1
 

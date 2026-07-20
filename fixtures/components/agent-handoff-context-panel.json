@@ -1,0 +1,29 @@
+{
+  "id": "component_agent_handoff_context_panel",
+  "name": "Agent Handoff Context Panel",
+  "status": "draft",
+  "purpose": "Shows whether accepted handoff context is ready to become an AI agent work context.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose readiness, next workflow, next agent, evidence, blockers, and instructions as visible text.",
+    "Do not rely on color alone to communicate whether agent work may begin.",
+    "Keep blocked instructions explicit so agents do not infer missing context from chat history."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

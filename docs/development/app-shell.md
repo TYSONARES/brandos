@@ -67,6 +67,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Operator Run Queue panel
 - dedicated Operator Runbook Execution panel
 - dedicated Handoff Acceptance panel
+- dedicated Agent Handoff Context panel
 - post-v1 aggregate release summary
 - post-v1 aggregate closure checklist
 - post-v1 final closure release notes

@@ -285,6 +285,49 @@ export function createHandoffAcceptance(store, operatorRunId) {
   };
 }
 
+export function createAgentHandoffContext(store, operatorRunId, contextPackId = 'context_pack_example_001') {
+  const handoff = createHandoffAcceptance(store, operatorRunId);
+  const contextPack = createContextPackUsageFlow(store, contextPackId);
+  const readyForAgent = handoff.accepted;
+
+  return {
+    title: 'Agent Handoff Context',
+    operatorRunId: handoff.runId,
+    handoffId: handoff.handoffId,
+    status: readyForAgent ? 'ready' : 'blocked',
+    readyForAgent,
+    accepted: handoff.accepted,
+    contextPackId: contextPack.id,
+    contextPackStatus: contextPack.status,
+    taskType: contextPack.taskType,
+    intendedAudience: contextPack.intendedAudience,
+    sourceCount: contextPack.includedClaimCount + contextPack.includedDecisionCount,
+    contextSources: [
+      'Handoff Acceptance',
+      'Operator Runbook Execution',
+      'Context Pack usage flow'
+    ],
+    taskBoundary: readyForAgent
+      ? `Use ${contextPack.id} for ${contextPack.taskType}.`
+      : 'Do not start agent work until handoff acceptance is ready.',
+    requiredEvidence: handoff.requiredEvidence,
+    blockedReasons: handoff.blockedReasons,
+    agentInstructions: readyForAgent
+      ? [
+        'Use accepted handoff context only.',
+        `Load Context Pack ${contextPack.id} before drafting.`,
+        `Respect exclusions: ${contextPack.excludedTopics.join(', ')}.`
+      ]
+      : [
+        'Wait for accepted handoff before agent work.',
+        'Route blockers back to Operator Runbook Execution.',
+        'Do not infer missing source context from chat history.'
+      ],
+    nextWorkflow: handoff.nextWorkflow,
+    nextAgent: readyForAgent ? 'AI writing agent' : 'Operator'
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

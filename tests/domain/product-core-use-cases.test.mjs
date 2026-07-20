@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   completeWorkflowAction,
+  createAgentHandoffContext,
   createBrandProfileOverview,
   createContextPackUsageFlow,
   createExampleProductCoreState,
@@ -221,5 +222,46 @@ test('Handoff Acceptance blocks until Operator Run actions are complete', () => 
     'Current action workflow_action_example_001 is complete',
     'Runbook status is ready',
     'Handoff operator_handoff_example_001 is linked'
+  ]);
+});
+
+test('Agent Handoff Context waits for accepted handoff before agent work', () => {
+  const store = createExampleStore();
+  const blocked = createAgentHandoffContext(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Agent Handoff Context');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.readyForAgent, false);
+  assert.equal(blocked.accepted, false);
+  assert.equal(blocked.contextPackId, 'context_pack_example_001');
+  assert.equal(blocked.taskType, 'brand-writing');
+  assert.equal(blocked.sourceCount, 2);
+  assert.equal(blocked.nextWorkflow, 'Operator Runbook Execution');
+  assert.equal(blocked.nextAgent, 'Operator');
+  assert.deepEqual(blocked.contextSources, [
+    'Handoff Acceptance',
+    'Operator Runbook Execution',
+    'Context Pack usage flow'
+  ]);
+  assert.equal(blocked.blockedReasons.length, 3);
+  assert.deepEqual(blocked.agentInstructions, [
+    'Wait for accepted handoff before agent work.',
+    'Route blockers back to Operator Runbook Execution.',
+    'Do not infer missing source context from chat history.'
+  ]);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createAgentHandoffContext(store, 'operator_run_example_001');
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.readyForAgent, true);
+  assert.equal(ready.accepted, true);
+  assert.equal(ready.nextWorkflow, 'Use Context Pack');
+  assert.equal(ready.nextAgent, 'AI writing agent');
+  assert.deepEqual(ready.blockedReasons, []);
+  assert.deepEqual(ready.agentInstructions, [
+    'Use accepted handoff context only.',
+    'Load Context Pack context_pack_example_001 before drafting.',
+    'Respect exclusions: pricing, legal promises, unapproved customer claims.'
   ]);
 });

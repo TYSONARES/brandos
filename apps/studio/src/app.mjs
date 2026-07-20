@@ -1,5 +1,6 @@
 import {
   createDomainSummary,
+  createAgentHandoffContext,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
@@ -38,6 +39,7 @@ export function createBrandOSStudioShell(options = {}) {
   const operatorRunQueue = createOperatorRunQueue(store);
   const operatorRunbookExecution = createOperatorRunbookExecution(store, operatorRunQueue.activeRunId || 'operator_run_example_001');
   const handoffAcceptance = createHandoffAcceptance(store, operatorRunbookExecution.runId);
+  const agentHandoffContext = createAgentHandoffContext(store, operatorRunbookExecution.runId);
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
@@ -209,6 +211,7 @@ export function createBrandOSStudioShell(options = {}) {
     operatorRunQueue,
     operatorRunbookExecution,
     handoffAcceptance,
+    agentHandoffContext,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,
