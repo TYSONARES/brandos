@@ -8,6 +8,7 @@
 - Added Agent Prompt Plan package start.
 - Added Agent Prompt Plan release notes and closure checklist.
 - Added Agent Draft Execution package start.
+- Added Agent Draft Execution release notes and closure checklist.
 
 ## Unreleased - Operator Runtime v1.1
 
