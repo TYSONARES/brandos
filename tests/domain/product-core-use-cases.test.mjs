@@ -20,6 +20,7 @@ import {
   createOperatorRunbookExecution,
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
+  createRuntimeHealthSummary,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -546,4 +547,43 @@ test('Agent Handoff Runtime Final Closure closes only complete aggregate summari
   assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
   assert.deepEqual(closed.blockers, []);
   assert.equal(closed.nextWorkflow, 'Agent Handoff Runtime v1.2 Closed');
+});
+
+test('Runtime Health Summary reports attention and healthy local runtime state', () => {
+  const store = createExampleStore();
+  const attention = createRuntimeHealthSummary(store, 'operator_run_example_001');
+
+  assert.equal(attention.title, 'Runtime Health Summary');
+  assert.equal(attention.status, 'attention');
+  assert.equal(attention.healthy, false);
+  assert.equal(attention.stateSource, 'example');
+  assert.equal(attention.completedActionCount, 0);
+  assert.equal(attention.readinessStatus, 'blocked');
+  assert.equal(attention.runtimeClosureStatus, 'blocked');
+  assert.equal(attention.healthDecision, 'Runtime needs operator attention before repeated local use');
+  assert.equal(attention.nextWorkflow, 'Review Resolution Workflow');
+  assert.ok(attention.blockers.includes('Workflow Action state is not durable for repeated local use.'));
+  assert.deepEqual(attention.signals.map((signal) => signal.status), ['attention', 'attention', 'attention']);
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const healthy = createRuntimeHealthSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(healthy.status, 'healthy');
+  assert.equal(healthy.healthy, true);
+  assert.equal(healthy.readinessStatus, 'ready');
+  assert.equal(healthy.runtimeClosureStatus, 'closed');
+  assert.equal(healthy.healthDecision, 'Runtime is reliable for repeated local use');
+  assert.equal(healthy.healthSummary, 'Studio state, workflow action history, and runtime closure are aligned.');
+  assert.deepEqual(healthy.signals.map((signal) => signal.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(healthy.recoveryActions, [
+    'Keep current Studio state for repeated local runs.',
+    'Use ready scenario as the reliability baseline.'
+  ]);
+  assert.deepEqual(healthy.blockers, []);
+  assert.equal(healthy.nextWorkflow, 'Studio State Recovery');
 });

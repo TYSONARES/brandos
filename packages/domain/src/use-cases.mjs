@@ -624,6 +624,60 @@ export function createAgentHandoffRuntimeFinalClosure(store, operatorRunId, cont
   };
 }
 
+export function createRuntimeHealthSummary(store, operatorRunId, options = {}) {
+  const contextPackId = options.contextPackId ?? 'context_pack_example_001';
+  const readiness = evaluateContextPackReadiness(store, contextPackId);
+  const finalClosure = createAgentHandoffRuntimeFinalClosure(store, operatorRunId, contextPackId);
+  const stateSource = options.stateSource ?? 'example';
+  const stateStatus = options.stateStatus ?? 'not-loaded';
+  const completedActionCount = options.completedActionCount ?? 0;
+  const completedActionIds = options.completedActionIds ?? [];
+  const stateReliable = stateSource !== 'example' && completedActionCount > 0;
+  const runtimeClosed = finalClosure.closed;
+  const healthy = readiness.ready && runtimeClosed && stateReliable;
+
+  return {
+    title: 'Runtime Health Summary',
+    status: healthy ? 'healthy' : 'attention',
+    healthy,
+    operatorRunId,
+    contextPackId,
+    stateSource,
+    stateStatus,
+    completedActionCount,
+    completedActionIds,
+    readinessStatus: readiness.ready ? 'ready' : 'blocked',
+    readinessBlockerCount: readiness.blockingReasons.length,
+    runtimeClosureStatus: finalClosure.status,
+    runtimeClosed,
+    healthDecision: healthy ? 'Runtime is reliable for repeated local use' : 'Runtime needs operator attention before repeated local use',
+    healthSummary: healthy
+      ? 'Studio state, workflow action history, and runtime closure are aligned.'
+      : 'Runtime health waits for ready context, closed runtime evidence, or durable workflow action state.',
+    signals: [
+      { label: 'Context readiness', status: readiness.ready ? 'pass' : 'attention', detail: `${readiness.blockingReasons.length} blockers` },
+      { label: 'Runtime final closure', status: runtimeClosed ? 'pass' : 'attention', detail: finalClosure.status },
+      { label: 'Workflow action state', status: stateReliable ? 'pass' : 'attention', detail: `${stateSource} with ${completedActionCount} completed actions` }
+    ],
+    recoveryActions: healthy
+      ? [
+        'Keep current Studio state for repeated local runs.',
+        'Use ready scenario as the reliability baseline.'
+      ]
+      : [
+        'Resolve readiness blockers before relying on runtime output.',
+        'Complete or reload Workflow Action state.',
+        'Re-run full validation after state changes.'
+      ],
+    blockers: [
+      ...readiness.blockingReasons,
+      ...finalClosure.blockers,
+      ...(stateReliable ? [] : ['Workflow Action state is not durable for repeated local use.'])
+    ],
+    nextWorkflow: healthy ? 'Studio State Recovery' : readiness.ready ? finalClosure.nextWorkflow : 'Review Resolution Workflow'
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

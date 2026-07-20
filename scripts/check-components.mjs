@@ -17,6 +17,7 @@ const componentFiles = [
   'fixtures/components/multi-action-workflow-state-panel.json',
   'fixtures/components/studio-workflow-audit-trail-panel.json',
   'fixtures/components/studio-diagnostics-panel.json',
+  'fixtures/components/runtime-health-summary-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',

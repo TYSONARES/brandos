@@ -694,6 +694,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .runtime-health-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .runtime-health-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .runtime-health-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .runtime-health-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -915,6 +942,7 @@ export function renderStudioHtml(shell, options = {}) {
       .agent-handoff-runtime-summary-row,
       .agent-handoff-runtime-aggregate-row,
       .agent-handoff-runtime-final-closure-row,
+      .runtime-health-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1191,6 +1219,28 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentHandoffRuntimeFinalClosure.closureEvidence.map(renderAgentHandoffRuntimeFinalClosureEvidence).join('')}
         ${shell.agentHandoffRuntimeFinalClosure.closureChecks.map(renderAgentHandoffRuntimeFinalClosureCheck).join('')}
         ${shell.agentHandoffRuntimeFinalClosure.blockers.map(renderAgentHandoffRuntimeFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Runtime Health Summary</p>
+    <section class="panel" aria-label="Runtime Health Summary">
+      <h2>${escapeHtml(shell.runtimeHealthSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Runtime health status: ${shell.runtimeHealthSummary.status}`)}
+        ${renderGuidanceRow('Healthy', `Runtime health healthy: ${shell.runtimeHealthSummary.healthy}`)}
+        ${renderGuidanceRow('State source', `Runtime health state source: ${shell.runtimeHealthSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Runtime health state status: ${shell.runtimeHealthSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Runtime health completed actions: ${shell.runtimeHealthSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Readiness', `Runtime health readiness: ${shell.runtimeHealthSummary.readinessStatus}`)}
+        ${renderGuidanceRow('Runtime closure', `Runtime health closure: ${shell.runtimeHealthSummary.runtimeClosureStatus}`)}
+        ${renderGuidanceRow('Decision', `Runtime health decision: ${shell.runtimeHealthSummary.healthDecision}`)}
+        ${renderGuidanceRow('Summary', `Runtime health summary: ${shell.runtimeHealthSummary.healthSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Runtime health next workflow: ${shell.runtimeHealthSummary.nextWorkflow}`)}
+      </div>
+      <div class="runtime-health-list">
+        ${shell.runtimeHealthSummary.signals.map(renderRuntimeHealthSignal).join('')}
+        ${shell.runtimeHealthSummary.recoveryActions.map(renderRuntimeHealthRecoveryAction).join('')}
+        ${shell.runtimeHealthSummary.blockers.map(renderRuntimeHealthBlocker).join('')}
       </div>
     </section>
 
@@ -1670,6 +1720,27 @@ function renderAgentHandoffRuntimeFinalClosureBlocker(blocker) {
   return `<div class="agent-handoff-runtime-final-closure-row">
     <span class="agent-handoff-runtime-final-closure-label">Blocker</span>
     <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRuntimeHealthSignal(signal) {
+  return `<div class="runtime-health-row">
+    <span class="runtime-health-label">Signal</span>
+    <span class="runtime-health-value">Runtime health signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderRuntimeHealthRecoveryAction(action) {
+  return `<div class="runtime-health-row">
+    <span class="runtime-health-label">Recovery</span>
+    <span class="runtime-health-value">Runtime health recovery: ${escapeHtml(action)}</span>
+  </div>`;
+}
+
+function renderRuntimeHealthBlocker(blocker) {
+  return `<div class="runtime-health-row">
+    <span class="runtime-health-label">Blocker</span>
+    <span class="runtime-health-value">Runtime health blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

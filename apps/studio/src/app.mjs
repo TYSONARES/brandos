@@ -16,6 +16,7 @@ import {
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createReviewResolutionWorkflow,
+  createRuntimeHealthSummary,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -89,6 +90,12 @@ export function createBrandOSStudioShell(options = {}) {
     readinessImpact: contextPackReadiness.ready ? 'readiness resolved' : 'readiness blocked',
     stateSource: contextPackWorkflow.stateSource
   };
+  const runtimeHealthSummary = createRuntimeHealthSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
   const diagnostics = {
     title: 'Studio diagnostics',
     packageCount: 3,
@@ -233,6 +240,7 @@ export function createBrandOSStudioShell(options = {}) {
     agentHandoffRuntimeSummary,
     agentHandoffRuntimeAggregateSummary,
     agentHandoffRuntimeFinalClosure,
+    runtimeHealthSummary,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

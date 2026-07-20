@@ -20,6 +20,7 @@ export {
   createOperatorRunbookExecution,
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
+  createRuntimeHealthSummary,
   evaluateContextPackReadiness
 } from './use-cases.mjs';
 
