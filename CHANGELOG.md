@@ -4,6 +4,7 @@
 
 - Started Runtime Reliability v1.3 scope and decision record.
 - Added Runtime Health Summary package start.
+- Added Runtime Health Summary release notes and closure checklist.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

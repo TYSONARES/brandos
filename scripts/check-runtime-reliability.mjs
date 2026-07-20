@@ -9,6 +9,8 @@ import {
 const required = [
   'docs/development/v1.3-scope.md',
   'docs/development/iteration-v1.3-runtime-health-summary.md',
+  'docs/development/release-v1.3-runtime-health-summary.md',
+  'docs/development/closure-v1.3-runtime-health-summary.md',
   'docs/decisions/0025-runtime-reliability-start.md',
   'fixtures/components/runtime-health-summary-panel.json',
   'apps/studio/src/app.mjs',
