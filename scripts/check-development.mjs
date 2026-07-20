@@ -63,6 +63,8 @@ const required = [
   'docs/development/release-v1.3-runtime-health-summary.md',
   'docs/development/closure-v1.3-runtime-health-summary.md',
   'docs/development/iteration-v1.3-studio-state-recovery.md',
+  'docs/development/release-v1.3-studio-state-recovery.md',
+  'docs/development/closure-v1.3-studio-state-recovery.md',
   'docs/development/iteration-v1.2-agent-handoff-context.md',
   'docs/development/release-v1.2-agent-handoff-context.md',
   'docs/development/closure-v1.2-agent-handoff-context.md',

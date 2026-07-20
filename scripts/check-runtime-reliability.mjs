@@ -13,6 +13,8 @@ const required = [
   'docs/development/release-v1.3-runtime-health-summary.md',
   'docs/development/closure-v1.3-runtime-health-summary.md',
   'docs/development/iteration-v1.3-studio-state-recovery.md',
+  'docs/development/release-v1.3-studio-state-recovery.md',
+  'docs/development/closure-v1.3-studio-state-recovery.md',
   'docs/decisions/0025-runtime-reliability-start.md',
   'fixtures/components/runtime-health-summary-panel.json',
   'fixtures/components/studio-state-recovery-panel.json',

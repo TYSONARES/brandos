@@ -6,6 +6,7 @@
 - Added Runtime Health Summary package start.
 - Added Runtime Health Summary release notes and closure checklist.
 - Added Studio State Recovery package start.
+- Added Studio State Recovery release notes and closure checklist.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 
