@@ -9,6 +9,8 @@ import {
 const required = [
   'docs/development/v1.2-scope.md',
   'docs/development/iteration-v1.2-agent-handoff-context.md',
+  'docs/development/release-v1.2-agent-handoff-context.md',
+  'docs/development/closure-v1.2-agent-handoff-context.md',
   'docs/decisions/0024-agent-handoff-runtime-start.md',
   'fixtures/components/agent-handoff-context-panel.json',
   'apps/studio/src/app.mjs',
