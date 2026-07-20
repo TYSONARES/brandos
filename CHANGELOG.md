@@ -8,6 +8,7 @@
 - Added Studio State Recovery package start.
 - Added Studio State Recovery release notes and closure checklist.
 - Added Runtime Validation Signals package start.
+- Added Runtime Validation Signals release notes and closure checklist.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 
