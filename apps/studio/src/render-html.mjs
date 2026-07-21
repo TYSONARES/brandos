@@ -883,6 +883,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .studio-workflow-runtime-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-workflow-runtime-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .studio-workflow-runtime-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .studio-workflow-runtime-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1550,6 +1577,30 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Studio Workflow Runtime Aggregate Summary</p>
+    <section class="panel" aria-label="Studio Workflow Runtime Aggregate Summary">
+      <h2>${escapeHtml(shell.studioWorkflowRuntimeAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio workflow runtime aggregate status: ${shell.studioWorkflowRuntimeAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Studio workflow runtime aggregate ready: ${shell.studioWorkflowRuntimeAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Studio workflow runtime aggregate workflow: ${shell.studioWorkflowRuntimeAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Studio workflow runtime aggregate scenario: ${shell.studioWorkflowRuntimeAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Studio workflow runtime aggregate source: ${shell.studioWorkflowRuntimeAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Studio workflow runtime aggregate state status: ${shell.studioWorkflowRuntimeAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Studio workflow runtime aggregate completed actions: ${shell.studioWorkflowRuntimeAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Commands', `Studio workflow runtime aggregate commands: ${shell.studioWorkflowRuntimeAggregateSummary.completeCommandCount}/${shell.studioWorkflowRuntimeAggregateSummary.commandCount}`)}
+        ${renderGuidanceRow('Blocked commands', `Studio workflow runtime aggregate blocked commands: ${shell.studioWorkflowRuntimeAggregateSummary.blockedCommandCount}`)}
+        ${renderGuidanceRow('Decision', `Studio workflow runtime aggregate decision: ${shell.studioWorkflowRuntimeAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Studio workflow runtime aggregate summary: ${shell.studioWorkflowRuntimeAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Studio workflow runtime aggregate next workflow: ${shell.studioWorkflowRuntimeAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="studio-workflow-runtime-aggregate-list">
+        ${shell.studioWorkflowRuntimeAggregateSummary.commandItems.map(renderStudioWorkflowRuntimeAggregateItem).join('')}
+        ${shell.studioWorkflowRuntimeAggregateSummary.requiredEvidence.map(renderStudioWorkflowRuntimeAggregateEvidence).join('')}
+        ${shell.studioWorkflowRuntimeAggregateSummary.blockers.map(renderStudioWorkflowRuntimeAggregateBlocker).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Brand overview</p>
     <section class="workflow-grid" aria-label="Brand overview">
       <article class="panel">
@@ -2208,6 +2259,27 @@ function renderCommandResultBlocker(blocker) {
   return `<div class="command-result-row">
     <span class="command-result-label">Blocker</span>
     <span class="command-result-value">Command result blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeAggregateItem(item) {
+  return `<div class="studio-workflow-runtime-aggregate-row">
+    <span class="studio-workflow-runtime-aggregate-label">Command</span>
+    <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.scenario)} - ${escapeHtml(item.route)} - ${item.resultCount} results</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeAggregateEvidence(evidence) {
+  return `<div class="studio-workflow-runtime-aggregate-row">
+    <span class="studio-workflow-runtime-aggregate-label">Evidence</span>
+    <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeAggregateBlocker(blocker) {
+  return `<div class="studio-workflow-runtime-aggregate-row">
+    <span class="studio-workflow-runtime-aggregate-label">Blocker</span>
+    <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

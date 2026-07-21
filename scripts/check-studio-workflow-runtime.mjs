@@ -4,6 +4,7 @@ import {
   createCommandResultSummary,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createStudioWorkflowRuntimeAggregateSummary,
   createWorkflowSessionSummary,
   createWorkflowTransitionPlan
 } from '../packages/domain/src/index.mjs';
@@ -19,10 +20,12 @@ const required = [
   'docs/development/iteration-v1.4-command-result-summary.md',
   'docs/development/release-v1.4-command-result-summary.md',
   'docs/development/closure-v1.4-command-result-summary.md',
+  'docs/development/iteration-v1.4-studio-workflow-runtime-aggregate-summary.md',
   'docs/decisions/0026-studio-workflow-runtime-start.md',
   'fixtures/components/workflow-session-summary-panel.json',
   'fixtures/components/workflow-transition-plan-panel.json',
   'fixtures/components/command-result-summary-panel.json',
+  'fixtures/components/studio-workflow-runtime-aggregate-summary-panel.json',
   'docs/development/README.md',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
@@ -66,6 +69,15 @@ if (blockedCommandResult.status !== 'blocked' || blockedCommandResult.commandCom
 }
 if (blockedCommandResult.nextWorkflow !== 'Review Resolution Workflow') {
   console.error('Blocked Command Result Summary did not route work to Review Resolution Workflow.');
+  process.exit(1);
+}
+const blockedAggregate = createStudioWorkflowRuntimeAggregateSummary(store, 'operator_run_example_001');
+if (blockedAggregate.status !== 'blocked' || blockedAggregate.aggregateReady !== false) {
+  console.error('Studio Workflow Runtime Aggregate Summary did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedAggregate.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Blocked Studio Workflow Runtime Aggregate Summary did not route work to Review Resolution Workflow.');
   process.exit(1);
 }
 
@@ -112,6 +124,20 @@ if (readyCommandResult.status !== 'complete' || readyCommandResult.commandComple
 }
 if (readyCommandResult.nextWorkflow !== 'Studio Workflow Runtime Aggregate Summary') {
   console.error('Complete Command Result Summary did not route work to Studio Workflow Runtime Aggregate Summary.');
+  process.exit(1);
+}
+const readyAggregate = createStudioWorkflowRuntimeAggregateSummary(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+if (readyAggregate.status !== 'ready' || readyAggregate.aggregateReady !== true) {
+  console.error('Studio Workflow Runtime Aggregate Summary did not expose the expected ready state.');
+  process.exit(1);
+}
+if (readyAggregate.nextWorkflow !== 'Studio Workflow Runtime Final Closure') {
+  console.error('Ready Studio Workflow Runtime Aggregate Summary did not route work to Studio Workflow Runtime Final Closure.');
   process.exit(1);
 }
 

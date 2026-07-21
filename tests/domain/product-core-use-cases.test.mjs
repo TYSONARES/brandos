@@ -22,6 +22,7 @@ import {
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioWorkflowRuntimeAggregateSummary,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
@@ -814,4 +815,42 @@ test('Command Result Summary maps transition readiness into command outcome', ()
   assert.ok(ready.requiredEvidence.includes('Transition route: index.html -> ready.html'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Studio Workflow Runtime Aggregate Summary');
+});
+
+test('Studio Workflow Runtime Aggregate Summary rolls command results into release evidence', () => {
+  const store = createExampleStore();
+  const blocked = createStudioWorkflowRuntimeAggregateSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Studio Workflow Runtime Aggregate Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.aggregateReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.commandCount, 1);
+  assert.equal(blocked.completeCommandCount, 0);
+  assert.equal(blocked.blockedCommandCount, 1);
+  assert.equal(blocked.aggregateDecision, 'Keep Studio workflow runtime aggregate blocked');
+  assert.equal(blocked.aggregateSummary, 'Studio Workflow Runtime v1.4 aggregate waits for command result completion.');
+  assert.deepEqual(blocked.commandItems.map((item) => item.status), ['blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createStudioWorkflowRuntimeAggregateSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.aggregateReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.commandCount, 1);
+  assert.equal(ready.completeCommandCount, 1);
+  assert.equal(ready.blockedCommandCount, 0);
+  assert.equal(ready.aggregateDecision, 'Aggregate Studio workflow runtime evidence');
+  assert.equal(ready.aggregateSummary, 'Studio Workflow Runtime v1.4 has complete command result evidence and can move toward final closure.');
+  assert.deepEqual(ready.commandItems.map((item) => item.status), ['complete']);
+  assert.ok(ready.requiredEvidence.includes('Command route: index.html -> ready.html'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Studio Workflow Runtime Final Closure');
 });

@@ -1,0 +1,29 @@
+{
+  "id": "component_studio_workflow_runtime_aggregate_summary_panel",
+  "name": "Studio Workflow Runtime Aggregate Summary Panel",
+  "status": "draft",
+  "purpose": "Summarizes Studio Workflow Runtime command results into aggregate release evidence.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose aggregate status, command counts, decision, summary, command items, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate aggregate readiness.",
+    "Keep aggregate command evidence readable so operators can decide whether runtime closure can proceed."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

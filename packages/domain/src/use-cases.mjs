@@ -924,6 +924,50 @@ export function createCommandResultSummary(store, operatorRunId, options = {}) {
   };
 }
 
+export function createStudioWorkflowRuntimeAggregateSummary(store, operatorRunId, options = {}) {
+  const commandResult = createCommandResultSummary(store, operatorRunId, options);
+  const aggregateReady = commandResult.commandComplete;
+  const commandItems = [
+    {
+      label: commandResult.title,
+      status: commandResult.status,
+      scenario: commandResult.scenario,
+      route: `${commandResult.fromRoute} -> ${commandResult.toRoute}`,
+      resultCount: commandResult.commandResults.length
+    }
+  ];
+
+  return {
+    title: 'Studio Workflow Runtime Aggregate Summary',
+    status: aggregateReady ? 'ready' : 'blocked',
+    aggregateReady,
+    operatorRunId,
+    contextPackId: commandResult.contextPackId,
+    workflowName: commandResult.workflowName,
+    scenario: commandResult.scenario,
+    stateSource: commandResult.stateSource,
+    stateStatus: commandResult.stateStatus,
+    completedActionCount: commandResult.completedActionCount,
+    commandCount: commandItems.length,
+    completeCommandCount: commandItems.filter((item) => item.status === 'complete').length,
+    blockedCommandCount: commandItems.filter((item) => item.status === 'blocked').length,
+    aggregateDecision: aggregateReady ? 'Aggregate Studio workflow runtime evidence' : 'Keep Studio workflow runtime aggregate blocked',
+    aggregateSummary: aggregateReady
+      ? 'Studio Workflow Runtime v1.4 has complete command result evidence and can move toward final closure.'
+      : 'Studio Workflow Runtime v1.4 aggregate waits for command result completion.',
+    commandItems,
+    requiredEvidence: aggregateReady
+      ? [
+        `Command result status: ${commandResult.status}`,
+        `Command route: ${commandResult.fromRoute} -> ${commandResult.toRoute}`,
+        `Command evidence count: ${commandResult.requiredEvidence.length}`
+      ]
+      : commandResult.requiredEvidence,
+    blockers: commandResult.blockers,
+    nextWorkflow: aggregateReady ? 'Studio Workflow Runtime Final Closure' : commandResult.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

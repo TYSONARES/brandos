@@ -22,6 +22,7 @@ export {
   createOperatorRunSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioWorkflowRuntimeAggregateSummary,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,

@@ -24,6 +24,7 @@ const componentFiles = [
   'fixtures/components/workflow-session-summary-panel.json',
   'fixtures/components/workflow-transition-plan-panel.json',
   'fixtures/components/command-result-summary-panel.json',
+  'fixtures/components/studio-workflow-runtime-aggregate-summary-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',
