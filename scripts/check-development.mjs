@@ -64,6 +64,8 @@ const required = [
   'docs/development/release-v1.4-workflow-session-summary.md',
   'docs/development/closure-v1.4-workflow-session-summary.md',
   'docs/development/iteration-v1.4-workflow-transition-plan.md',
+  'docs/development/release-v1.4-workflow-transition-plan.md',
+  'docs/development/closure-v1.4-workflow-transition-plan.md',
   'docs/development/iteration-v1.3-runtime-health-summary.md',
   'docs/development/release-v1.3-runtime-health-summary.md',
   'docs/development/closure-v1.3-runtime-health-summary.md',
