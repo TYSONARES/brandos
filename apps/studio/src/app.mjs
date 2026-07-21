@@ -21,6 +21,7 @@ import {
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
   createWorkflowSessionSummary,
+  createWorkflowTransitionPlan,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -119,6 +120,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionIds: contextPackWorkflow.completedActionIds
   });
   const workflowSessionSummary = createWorkflowSessionSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const workflowTransitionPlan = createWorkflowTransitionPlan(store, operatorRunbookExecution.runId, {
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
     completedActionCount: contextPackWorkflow.completedActionCount,
@@ -273,6 +280,7 @@ export function createBrandOSStudioShell(options = {}) {
     runtimeValidationSignals,
     operatorRecoveryGuidance,
     workflowSessionSummary,
+    workflowTransitionPlan,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

@@ -25,6 +25,7 @@ export {
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
   createWorkflowSessionSummary,
+  createWorkflowTransitionPlan,
   evaluateContextPackReadiness
 } from './use-cases.mjs';
 

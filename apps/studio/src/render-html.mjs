@@ -829,6 +829,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .workflow-transition-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .workflow-transition-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .workflow-transition-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .workflow-transition-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1055,6 +1082,7 @@ export function renderStudioHtml(shell, options = {}) {
       .runtime-validation-row,
       .operator-recovery-row,
       .workflow-session-row,
+      .workflow-transition-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1441,6 +1469,32 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.workflowSessionSummary.sessionSignals.map(renderWorkflowSessionSignal).join('')}
         ${shell.workflowSessionSummary.requiredEvidence.map(renderWorkflowSessionEvidence).join('')}
         ${shell.workflowSessionSummary.blockers.map(renderWorkflowSessionBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Workflow Transition Plan</p>
+    <section class="panel" aria-label="Workflow Transition Plan">
+      <h2>${escapeHtml(shell.workflowTransitionPlan.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Workflow transition status: ${shell.workflowTransitionPlan.status}`)}
+        ${renderGuidanceRow('Ready', `Workflow transition ready: ${shell.workflowTransitionPlan.transitionReady}`)}
+        ${renderGuidanceRow('Workflow', `Workflow transition workflow: ${shell.workflowTransitionPlan.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Workflow transition scenario: ${shell.workflowTransitionPlan.scenario}`)}
+        ${renderGuidanceRow('Current step', `Workflow transition current step: ${shell.workflowTransitionPlan.currentStep}`)}
+        ${renderGuidanceRow('From route', `Workflow transition from route: ${shell.workflowTransitionPlan.fromRoute}`)}
+        ${renderGuidanceRow('To route', `Workflow transition to route: ${shell.workflowTransitionPlan.toRoute}`)}
+        ${renderGuidanceRow('State source', `Workflow transition source: ${shell.workflowTransitionPlan.stateSource}`)}
+        ${renderGuidanceRow('State status', `Workflow transition state status: ${shell.workflowTransitionPlan.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Workflow transition completed actions: ${shell.workflowTransitionPlan.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Workflow transition decision: ${shell.workflowTransitionPlan.transitionDecision}`)}
+        ${renderGuidanceRow('Summary', `Workflow transition summary: ${shell.workflowTransitionPlan.transitionSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Workflow transition next workflow: ${shell.workflowTransitionPlan.nextWorkflow}`)}
+      </div>
+      <div class="workflow-transition-list">
+        ${shell.workflowTransitionPlan.transitionSteps.map(renderWorkflowTransitionStep).join('')}
+        ${shell.workflowTransitionPlan.transitionSignals.map(renderWorkflowTransitionSignal).join('')}
+        ${shell.workflowTransitionPlan.requiredEvidence.map(renderWorkflowTransitionEvidence).join('')}
+        ${shell.workflowTransitionPlan.blockers.map(renderWorkflowTransitionBlocker).join('')}
       </div>
     </section>
 
@@ -2046,6 +2100,34 @@ function renderWorkflowSessionBlocker(blocker) {
   return `<div class="workflow-session-row">
     <span class="workflow-session-label">Blocker</span>
     <span class="workflow-session-value">Workflow session blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionStep(step) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Step</span>
+    <span class="workflow-transition-value">Workflow transition step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionSignal(signal) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Signal</span>
+    <span class="workflow-transition-value">Workflow transition signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionEvidence(evidence) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Evidence</span>
+    <span class="workflow-transition-value">Workflow transition evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionBlocker(blocker) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Blocker</span>
+    <span class="workflow-transition-value">Workflow transition blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

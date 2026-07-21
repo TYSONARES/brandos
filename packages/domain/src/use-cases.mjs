@@ -840,6 +840,46 @@ export function createWorkflowSessionSummary(store, operatorRunId, options = {})
   };
 }
 
+export function createWorkflowTransitionPlan(store, operatorRunId, options = {}) {
+  const session = createWorkflowSessionSummary(store, operatorRunId, options);
+  const transitionReady = session.sessionReady;
+  const transitionSteps = transitionReady
+    ? [
+      { label: 'Confirm ready route', status: 'complete', detail: `Route ${session.nextRoute} is ready.` },
+      { label: 'Open next workflow', status: 'active', detail: 'Workflow Transition Plan can move to Command Result Summary.' }
+    ]
+    : [
+      { label: 'Hold blocked route', status: 'active', detail: `Stay on ${session.nextRoute} until blockers are resolved.` },
+      { label: 'Resolve session blockers', status: 'pending', detail: session.blockers[0] ?? 'Workflow session is blocked.' },
+      { label: 'Rebuild transition plan', status: 'pending', detail: 'Repeat transition planning after session readiness changes.' }
+    ];
+
+  return {
+    title: 'Workflow Transition Plan',
+    status: transitionReady ? 'ready' : 'blocked',
+    transitionReady,
+    operatorRunId,
+    contextPackId: session.contextPackId,
+    workflowName: session.workflowName,
+    scenario: session.scenario,
+    currentStep: session.currentStep,
+    fromRoute: session.scenario === 'ready' ? 'index.html' : session.nextRoute,
+    toRoute: session.nextRoute,
+    stateSource: session.stateSource,
+    stateStatus: session.stateStatus,
+    completedActionCount: session.completedActionCount,
+    transitionDecision: transitionReady ? 'Proceed to ready workflow route' : 'Stay on blocked workflow route',
+    transitionSummary: transitionReady
+      ? 'Workflow transition can continue because the session is ready.'
+      : 'Workflow transition waits for session blockers to clear.',
+    transitionSteps,
+    transitionSignals: session.sessionSignals,
+    requiredEvidence: session.requiredEvidence,
+    blockers: session.blockers,
+    nextWorkflow: transitionReady ? 'Command Result Summary' : session.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

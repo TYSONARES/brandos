@@ -22,6 +22,7 @@ const componentFiles = [
   'fixtures/components/runtime-validation-signals-panel.json',
   'fixtures/components/operator-recovery-guidance-panel.json',
   'fixtures/components/workflow-session-summary-panel.json',
+  'fixtures/components/workflow-transition-plan-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',

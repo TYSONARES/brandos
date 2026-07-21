@@ -3,7 +3,8 @@ import {
   completeWorkflowAction,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
-  createWorkflowSessionSummary
+  createWorkflowSessionSummary,
+  createWorkflowTransitionPlan
 } from '../packages/domain/src/index.mjs';
 
 const required = [
@@ -11,8 +12,10 @@ const required = [
   'docs/development/iteration-v1.4-workflow-session-summary.md',
   'docs/development/release-v1.4-workflow-session-summary.md',
   'docs/development/closure-v1.4-workflow-session-summary.md',
+  'docs/development/iteration-v1.4-workflow-transition-plan.md',
   'docs/decisions/0026-studio-workflow-runtime-start.md',
   'fixtures/components/workflow-session-summary-panel.json',
+  'fixtures/components/workflow-transition-plan-panel.json',
   'docs/development/README.md',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
@@ -40,6 +43,16 @@ if (blocked.nextWorkflow !== 'Review Resolution Workflow') {
   process.exit(1);
 }
 
+const blockedTransition = createWorkflowTransitionPlan(store, 'operator_run_example_001');
+if (blockedTransition.status !== 'blocked' || blockedTransition.transitionReady !== false) {
+  console.error('Workflow Transition Plan did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedTransition.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Blocked Workflow Transition Plan did not route work to Review Resolution Workflow.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const ready = createWorkflowSessionSummary(store, 'operator_run_example_001', {
   stateSource: 'command',
@@ -54,6 +67,21 @@ if (ready.status !== 'ready' || ready.sessionReady !== true) {
 }
 if (ready.nextWorkflow !== 'Workflow Transition Plan') {
   console.error('Ready Workflow Session Summary did not route work to Workflow Transition Plan.');
+  process.exit(1);
+}
+
+const readyTransition = createWorkflowTransitionPlan(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+if (readyTransition.status !== 'ready' || readyTransition.transitionReady !== true) {
+  console.error('Workflow Transition Plan did not expose the expected ready state.');
+  process.exit(1);
+}
+if (readyTransition.nextWorkflow !== 'Command Result Summary') {
+  console.error('Ready Workflow Transition Plan did not route work to Command Result Summary.');
   process.exit(1);
 }
 

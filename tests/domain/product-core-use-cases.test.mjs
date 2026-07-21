@@ -25,6 +25,7 @@ import {
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
   createWorkflowSessionSummary,
+  createWorkflowTransitionPlan,
   evaluateContextPackReadiness,
   summarizeProductCoreState
 } from '../../packages/domain/src/index.mjs';
@@ -741,4 +742,39 @@ test('Workflow Session Summary maps Studio state into session route', () => {
   assert.equal(ready.nextWorkflow, 'Workflow Transition Plan');
   assert.deepEqual(ready.sessionSignals.map((signal) => signal.status), ['pass', 'pass', 'pass']);
   assert.deepEqual(ready.blockers, []);
+});
+
+test('Workflow Transition Plan maps session route into transition steps', () => {
+  const store = createExampleStore();
+  const blocked = createWorkflowTransitionPlan(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Workflow Transition Plan');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.transitionReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.fromRoute, 'index.html');
+  assert.equal(blocked.toRoute, 'index.html');
+  assert.equal(blocked.transitionDecision, 'Stay on blocked workflow route');
+  assert.equal(blocked.transitionSummary, 'Workflow transition waits for session blockers to clear.');
+  assert.deepEqual(blocked.transitionSteps.map((step) => step.status), ['active', 'pending', 'pending']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createWorkflowTransitionPlan(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.transitionReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.fromRoute, 'index.html');
+  assert.equal(ready.toRoute, 'ready.html');
+  assert.equal(ready.transitionDecision, 'Proceed to ready workflow route');
+  assert.equal(ready.transitionSummary, 'Workflow transition can continue because the session is ready.');
+  assert.deepEqual(ready.transitionSteps.map((step) => step.status), ['complete', 'active']);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Command Result Summary');
 });

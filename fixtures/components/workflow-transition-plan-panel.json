@@ -1,0 +1,29 @@
+{
+  "id": "component_workflow_transition_plan_panel",
+  "name": "Workflow Transition Plan Panel",
+  "status": "draft",
+  "purpose": "Shows the route and steps for moving between Studio workflow session states.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose transition status, from route, to route, decision, summary, steps, signals, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate transition readiness.",
+    "Keep transition steps readable so operators can follow or hold the correct route."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
