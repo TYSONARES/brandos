@@ -1,0 +1,29 @@
+{
+  "id": "component_command_result_summary_panel",
+  "name": "Command Result Summary Panel",
+  "status": "draft",
+  "purpose": "Shows the result of the Studio workflow command after transition planning.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "complete"
+  ],
+  "accessibility": [
+    "Expose command result status, scenario, routes, decision, summary, result items, signals, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate command completion.",
+    "Keep command result evidence readable so operators can accept or retry the workflow command."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

@@ -10,6 +10,7 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
+  createCommandResultSummary,
   createContextPackUsageFlow,
   createDraftReview,
   createHandoffAcceptance,
@@ -126,6 +127,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionIds: contextPackWorkflow.completedActionIds
   });
   const workflowTransitionPlan = createWorkflowTransitionPlan(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const commandResultSummary = createCommandResultSummary(store, operatorRunbookExecution.runId, {
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
     completedActionCount: contextPackWorkflow.completedActionCount,
@@ -281,6 +288,7 @@ export function createBrandOSStudioShell(options = {}) {
     operatorRecoveryGuidance,
     workflowSessionSummary,
     workflowTransitionPlan,
+    commandResultSummary,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import {
   completeWorkflowAction,
+  createCommandResultSummary,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createWorkflowSessionSummary,
@@ -15,9 +16,11 @@ const required = [
   'docs/development/iteration-v1.4-workflow-transition-plan.md',
   'docs/development/release-v1.4-workflow-transition-plan.md',
   'docs/development/closure-v1.4-workflow-transition-plan.md',
+  'docs/development/iteration-v1.4-command-result-summary.md',
   'docs/decisions/0026-studio-workflow-runtime-start.md',
   'fixtures/components/workflow-session-summary-panel.json',
   'fixtures/components/workflow-transition-plan-panel.json',
+  'fixtures/components/command-result-summary-panel.json',
   'docs/development/README.md',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
@@ -54,6 +57,15 @@ if (blockedTransition.nextWorkflow !== 'Review Resolution Workflow') {
   console.error('Blocked Workflow Transition Plan did not route work to Review Resolution Workflow.');
   process.exit(1);
 }
+const blockedCommandResult = createCommandResultSummary(store, 'operator_run_example_001');
+if (blockedCommandResult.status !== 'blocked' || blockedCommandResult.commandComplete !== false) {
+  console.error('Command Result Summary did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedCommandResult.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Blocked Command Result Summary did not route work to Review Resolution Workflow.');
+  process.exit(1);
+}
 
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const ready = createWorkflowSessionSummary(store, 'operator_run_example_001', {
@@ -84,6 +96,20 @@ if (readyTransition.status !== 'ready' || readyTransition.transitionReady !== tr
 }
 if (readyTransition.nextWorkflow !== 'Command Result Summary') {
   console.error('Ready Workflow Transition Plan did not route work to Command Result Summary.');
+  process.exit(1);
+}
+const readyCommandResult = createCommandResultSummary(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+if (readyCommandResult.status !== 'complete' || readyCommandResult.commandComplete !== true) {
+  console.error('Command Result Summary did not expose the expected complete state.');
+  process.exit(1);
+}
+if (readyCommandResult.nextWorkflow !== 'Studio Workflow Runtime Aggregate Summary') {
+  console.error('Complete Command Result Summary did not route work to Studio Workflow Runtime Aggregate Summary.');
   process.exit(1);
 }
 

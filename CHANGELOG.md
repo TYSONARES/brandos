@@ -21,6 +21,7 @@
 - Added Workflow Session Summary release notes and closure checklist.
 - Added Workflow Transition Plan package start.
 - Added Workflow Transition Plan release notes and closure checklist.
+- Added Command Result Summary package start.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

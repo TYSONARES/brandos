@@ -880,6 +880,50 @@ export function createWorkflowTransitionPlan(store, operatorRunId, options = {})
   };
 }
 
+export function createCommandResultSummary(store, operatorRunId, options = {}) {
+  const transition = createWorkflowTransitionPlan(store, operatorRunId, options);
+  const commandComplete = transition.transitionReady;
+  const commandResults = commandComplete
+    ? [
+      { label: 'Workflow route command', status: 'complete', detail: `${transition.fromRoute} -> ${transition.toRoute}` },
+      { label: 'Reusable state command', status: 'complete', detail: `${transition.stateSource} state is ${transition.stateStatus}.` },
+      { label: 'Operator next command', status: 'active', detail: 'Open Command Result Summary closure evidence.' }
+    ]
+    : [
+      { label: 'Workflow route command', status: 'blocked', detail: `Route remains ${transition.toRoute}.` },
+      { label: 'Session blocker command', status: 'active', detail: transition.blockers[0] ?? 'Workflow transition is blocked.' },
+      { label: 'Retry command result', status: 'pending', detail: 'Repeat the command after transition blockers are resolved.' }
+    ];
+
+  return {
+    title: 'Command Result Summary',
+    status: commandComplete ? 'complete' : 'blocked',
+    commandComplete,
+    operatorRunId,
+    contextPackId: transition.contextPackId,
+    workflowName: transition.workflowName,
+    scenario: transition.scenario,
+    fromRoute: transition.fromRoute,
+    toRoute: transition.toRoute,
+    stateSource: transition.stateSource,
+    stateStatus: transition.stateStatus,
+    completedActionCount: transition.completedActionCount,
+    commandDecision: commandComplete ? 'Command result can be accepted' : 'Command result waits for transition readiness',
+    commandSummary: commandComplete
+      ? 'Command result confirms the ready workflow route and reusable state evidence.'
+      : 'Command result remains blocked until the workflow transition can proceed.',
+    commandResults,
+    transitionSignals: transition.transitionSignals,
+    requiredEvidence: [
+      ...transition.requiredEvidence,
+      `Transition decision: ${transition.transitionDecision}`,
+      `Transition route: ${transition.fromRoute} -> ${transition.toRoute}`
+    ],
+    blockers: transition.blockers,
+    nextWorkflow: commandComplete ? 'Studio Workflow Runtime Aggregate Summary' : transition.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

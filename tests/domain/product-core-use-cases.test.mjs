@@ -11,6 +11,7 @@ import {
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,
+  createCommandResultSummary,
   createContextPackUsageFlow,
   createDraftReview,
   createExampleProductCoreState,
@@ -777,4 +778,40 @@ test('Workflow Transition Plan maps session route into transition steps', () => 
   assert.deepEqual(ready.transitionSteps.map((step) => step.status), ['complete', 'active']);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Command Result Summary');
+});
+
+test('Command Result Summary maps transition readiness into command outcome', () => {
+  const store = createExampleStore();
+  const blocked = createCommandResultSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Command Result Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.commandComplete, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.fromRoute, 'index.html');
+  assert.equal(blocked.toRoute, 'index.html');
+  assert.equal(blocked.commandDecision, 'Command result waits for transition readiness');
+  assert.equal(blocked.commandSummary, 'Command result remains blocked until the workflow transition can proceed.');
+  assert.deepEqual(blocked.commandResults.map((result) => result.status), ['blocked', 'active', 'pending']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createCommandResultSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'complete');
+  assert.equal(ready.commandComplete, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.fromRoute, 'index.html');
+  assert.equal(ready.toRoute, 'ready.html');
+  assert.equal(ready.commandDecision, 'Command result can be accepted');
+  assert.equal(ready.commandSummary, 'Command result confirms the ready workflow route and reusable state evidence.');
+  assert.deepEqual(ready.commandResults.map((result) => result.status), ['complete', 'complete', 'active']);
+  assert.ok(ready.requiredEvidence.includes('Transition route: index.html -> ready.html'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Studio Workflow Runtime Aggregate Summary');
 });

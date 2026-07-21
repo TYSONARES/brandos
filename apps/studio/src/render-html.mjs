@@ -856,6 +856,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .command-result-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .command-result-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .command-result-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .command-result-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1498,6 +1525,31 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Command Result Summary</p>
+    <section class="panel" aria-label="Command Result Summary">
+      <h2>${escapeHtml(shell.commandResultSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Command result status: ${shell.commandResultSummary.status}`)}
+        ${renderGuidanceRow('Complete', `Command result complete: ${shell.commandResultSummary.commandComplete}`)}
+        ${renderGuidanceRow('Workflow', `Command result workflow: ${shell.commandResultSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Command result scenario: ${shell.commandResultSummary.scenario}`)}
+        ${renderGuidanceRow('From route', `Command result from route: ${shell.commandResultSummary.fromRoute}`)}
+        ${renderGuidanceRow('To route', `Command result to route: ${shell.commandResultSummary.toRoute}`)}
+        ${renderGuidanceRow('State source', `Command result source: ${shell.commandResultSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Command result state status: ${shell.commandResultSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Command result completed actions: ${shell.commandResultSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Command result decision: ${shell.commandResultSummary.commandDecision}`)}
+        ${renderGuidanceRow('Summary', `Command result summary: ${shell.commandResultSummary.commandSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Command result next workflow: ${shell.commandResultSummary.nextWorkflow}`)}
+      </div>
+      <div class="command-result-list">
+        ${shell.commandResultSummary.commandResults.map(renderCommandResultItem).join('')}
+        ${shell.commandResultSummary.transitionSignals.map(renderCommandResultSignal).join('')}
+        ${shell.commandResultSummary.requiredEvidence.map(renderCommandResultEvidence).join('')}
+        ${shell.commandResultSummary.blockers.map(renderCommandResultBlocker).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Brand overview</p>
     <section class="workflow-grid" aria-label="Brand overview">
       <article class="panel">
@@ -2128,6 +2180,34 @@ function renderWorkflowTransitionBlocker(blocker) {
   return `<div class="workflow-transition-row">
     <span class="workflow-transition-label">Blocker</span>
     <span class="workflow-transition-value">Workflow transition blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderCommandResultItem(result) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Result</span>
+    <span class="command-result-value">Command result item: ${escapeHtml(result.label)} - ${escapeHtml(result.status)} - ${escapeHtml(result.detail)}</span>
+  </div>`;
+}
+
+function renderCommandResultSignal(signal) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Signal</span>
+    <span class="command-result-value">Command result signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderCommandResultEvidence(evidence) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Evidence</span>
+    <span class="command-result-value">Command result evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderCommandResultBlocker(blocker) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Blocker</span>
+    <span class="command-result-value">Command result blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 
