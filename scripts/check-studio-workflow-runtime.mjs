@@ -5,6 +5,7 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createStudioWorkflowRuntimeAggregateSummary,
+  createStudioWorkflowRuntimeFinalClosure,
   createWorkflowSessionSummary,
   createWorkflowTransitionPlan
 } from '../packages/domain/src/index.mjs';
@@ -23,11 +24,13 @@ const required = [
   'docs/development/iteration-v1.4-studio-workflow-runtime-aggregate-summary.md',
   'docs/development/release-v1.4-studio-workflow-runtime-aggregate-summary.md',
   'docs/development/closure-v1.4-studio-workflow-runtime-aggregate-summary.md',
+  'docs/development/iteration-v1.4-studio-workflow-runtime-final-closure.md',
   'docs/decisions/0026-studio-workflow-runtime-start.md',
   'fixtures/components/workflow-session-summary-panel.json',
   'fixtures/components/workflow-transition-plan-panel.json',
   'fixtures/components/command-result-summary-panel.json',
   'fixtures/components/studio-workflow-runtime-aggregate-summary-panel.json',
+  'fixtures/components/studio-workflow-runtime-final-closure-panel.json',
   'docs/development/README.md',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
@@ -80,6 +83,15 @@ if (blockedAggregate.status !== 'blocked' || blockedAggregate.aggregateReady !==
 }
 if (blockedAggregate.nextWorkflow !== 'Review Resolution Workflow') {
   console.error('Blocked Studio Workflow Runtime Aggregate Summary did not route work to Review Resolution Workflow.');
+  process.exit(1);
+}
+const blockedFinalClosure = createStudioWorkflowRuntimeFinalClosure(store, 'operator_run_example_001');
+if (blockedFinalClosure.status !== 'blocked' || blockedFinalClosure.closed !== false) {
+  console.error('Studio Workflow Runtime Final Closure did not expose the expected blocked state.');
+  process.exit(1);
+}
+if (blockedFinalClosure.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Blocked Studio Workflow Runtime Final Closure did not route work to Review Resolution Workflow.');
   process.exit(1);
 }
 
@@ -140,6 +152,20 @@ if (readyAggregate.status !== 'ready' || readyAggregate.aggregateReady !== true)
 }
 if (readyAggregate.nextWorkflow !== 'Studio Workflow Runtime Final Closure') {
   console.error('Ready Studio Workflow Runtime Aggregate Summary did not route work to Studio Workflow Runtime Final Closure.');
+  process.exit(1);
+}
+const readyFinalClosure = createStudioWorkflowRuntimeFinalClosure(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+if (readyFinalClosure.status !== 'closed' || readyFinalClosure.closed !== true) {
+  console.error('Studio Workflow Runtime Final Closure did not expose the expected closed state.');
+  process.exit(1);
+}
+if (readyFinalClosure.nextWorkflow !== 'Studio Workflow Runtime v1.4 Closed') {
+  console.error('Closed Studio Workflow Runtime Final Closure did not route work to v1.4 closed state.');
   process.exit(1);
 }
 

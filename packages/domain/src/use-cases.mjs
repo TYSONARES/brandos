@@ -968,6 +968,50 @@ export function createStudioWorkflowRuntimeAggregateSummary(store, operatorRunId
   };
 }
 
+export function createStudioWorkflowRuntimeFinalClosure(store, operatorRunId, options = {}) {
+  const aggregateSummary = createStudioWorkflowRuntimeAggregateSummary(store, operatorRunId, options);
+  const closed = aggregateSummary.aggregateReady;
+
+  return {
+    title: 'Studio Workflow Runtime Final Closure',
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    operatorRunId,
+    contextPackId: aggregateSummary.contextPackId,
+    workflowName: aggregateSummary.workflowName,
+    scenario: aggregateSummary.scenario,
+    stateSource: aggregateSummary.stateSource,
+    stateStatus: aggregateSummary.stateStatus,
+    completedActionCount: aggregateSummary.completedActionCount,
+    closureDecision: closed ? 'Close Studio Workflow Runtime v1.4' : 'Keep Studio Workflow Runtime v1.4 open',
+    closureSummary: closed
+      ? 'Studio Workflow Runtime v1.4 is closed with aggregate command evidence and is ready for archive.'
+      : 'Studio Workflow Runtime v1.4 final closure waits for aggregate readiness.',
+    releaseArtifacts: closed
+      ? [
+        'Workflow Session Summary',
+        'Workflow Transition Plan',
+        'Command Result Summary',
+        'Studio Workflow Runtime Aggregate Summary'
+      ]
+      : [],
+    closureEvidence: closed
+      ? [
+        `Aggregate status: ${aggregateSummary.status}`,
+        `Aggregate commands complete: ${aggregateSummary.completeCommandCount}/${aggregateSummary.commandCount}`,
+        `Aggregate evidence count: ${aggregateSummary.requiredEvidence.length}`
+      ]
+      : aggregateSummary.requiredEvidence,
+    closureChecks: [
+      { label: 'Aggregate summary ready', status: aggregateSummary.aggregateReady ? 'pass' : 'blocked' },
+      { label: 'Command evidence present', status: aggregateSummary.requiredEvidence.length > 0 ? 'pass' : 'blocked' },
+      { label: 'Release artifacts assigned', status: closed ? 'pass' : 'blocked' }
+    ],
+    blockers: aggregateSummary.blockers,
+    nextWorkflow: closed ? 'Studio Workflow Runtime v1.4 Closed' : aggregateSummary.nextWorkflow
+  };
+}
+
 export function completeWorkflowAction(store, actionId, completedAt) {
   const action = requireRecord(store, 'workflow-action', actionId);
   const completedAction = store.save('workflow-action', {

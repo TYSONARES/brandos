@@ -25,6 +25,7 @@
 - Added Command Result Summary release notes and closure checklist.
 - Added Studio Workflow Runtime Aggregate Summary package start.
 - Added Studio Workflow Runtime Aggregate Summary release notes and closure checklist.
+- Added Studio Workflow Runtime Final Closure package start.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

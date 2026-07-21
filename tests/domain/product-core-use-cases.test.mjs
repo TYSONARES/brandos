@@ -23,6 +23,7 @@ import {
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioWorkflowRuntimeAggregateSummary,
+  createStudioWorkflowRuntimeFinalClosure,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
@@ -853,4 +854,43 @@ test('Studio Workflow Runtime Aggregate Summary rolls command results into relea
   assert.ok(ready.requiredEvidence.includes('Command route: index.html -> ready.html'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Studio Workflow Runtime Final Closure');
+});
+
+test('Studio Workflow Runtime Final Closure closes only ready aggregate summaries', () => {
+  const store = createExampleStore();
+  const blocked = createStudioWorkflowRuntimeFinalClosure(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Studio Workflow Runtime Final Closure');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.closed, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.closureDecision, 'Keep Studio Workflow Runtime v1.4 open');
+  assert.equal(blocked.closureSummary, 'Studio Workflow Runtime v1.4 final closure waits for aggregate readiness.');
+  assert.deepEqual(blocked.releaseArtifacts, []);
+  assert.deepEqual(blocked.closureChecks.map((check) => check.status), ['blocked', 'pass', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const closed = createStudioWorkflowRuntimeFinalClosure(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(closed.status, 'closed');
+  assert.equal(closed.closed, true);
+  assert.equal(closed.scenario, 'ready');
+  assert.equal(closed.closureDecision, 'Close Studio Workflow Runtime v1.4');
+  assert.equal(closed.closureSummary, 'Studio Workflow Runtime v1.4 is closed with aggregate command evidence and is ready for archive.');
+  assert.deepEqual(closed.releaseArtifacts, [
+    'Workflow Session Summary',
+    'Workflow Transition Plan',
+    'Command Result Summary',
+    'Studio Workflow Runtime Aggregate Summary'
+  ]);
+  assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
+  assert.ok(closed.closureEvidence.includes('Aggregate commands complete: 1/1'));
+  assert.deepEqual(closed.blockers, []);
+  assert.equal(closed.nextWorkflow, 'Studio Workflow Runtime v1.4 Closed');
 });

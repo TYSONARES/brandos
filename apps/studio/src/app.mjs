@@ -19,6 +19,7 @@ import {
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioWorkflowRuntimeAggregateSummary,
+  createStudioWorkflowRuntimeFinalClosure,
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
@@ -140,6 +141,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionIds: contextPackWorkflow.completedActionIds
   });
   const studioWorkflowRuntimeAggregateSummary = createStudioWorkflowRuntimeAggregateSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const studioWorkflowRuntimeFinalClosure = createStudioWorkflowRuntimeFinalClosure(store, operatorRunbookExecution.runId, {
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
     completedActionCount: contextPackWorkflow.completedActionCount,
@@ -297,6 +304,7 @@ export function createBrandOSStudioShell(options = {}) {
     workflowTransitionPlan,
     commandResultSummary,
     studioWorkflowRuntimeAggregateSummary,
+    studioWorkflowRuntimeFinalClosure,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

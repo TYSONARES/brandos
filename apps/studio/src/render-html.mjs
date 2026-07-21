@@ -910,6 +910,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .studio-workflow-runtime-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-workflow-runtime-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .studio-workflow-runtime-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .studio-workflow-runtime-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1601,6 +1628,29 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Studio Workflow Runtime Final Closure</p>
+    <section class="panel" aria-label="Studio Workflow Runtime Final Closure">
+      <h2>${escapeHtml(shell.studioWorkflowRuntimeFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio workflow runtime final closure status: ${shell.studioWorkflowRuntimeFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Studio workflow runtime final closure closed: ${shell.studioWorkflowRuntimeFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Studio workflow runtime final closure workflow: ${shell.studioWorkflowRuntimeFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Studio workflow runtime final closure scenario: ${shell.studioWorkflowRuntimeFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Studio workflow runtime final closure source: ${shell.studioWorkflowRuntimeFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Studio workflow runtime final closure state status: ${shell.studioWorkflowRuntimeFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Studio workflow runtime final closure completed actions: ${shell.studioWorkflowRuntimeFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Studio workflow runtime final closure decision: ${shell.studioWorkflowRuntimeFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Studio workflow runtime final closure summary: ${shell.studioWorkflowRuntimeFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Studio workflow runtime final closure next workflow: ${shell.studioWorkflowRuntimeFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="studio-workflow-runtime-final-closure-list">
+        ${shell.studioWorkflowRuntimeFinalClosure.releaseArtifacts.map(renderStudioWorkflowRuntimeFinalClosureArtifact).join('')}
+        ${shell.studioWorkflowRuntimeFinalClosure.closureEvidence.map(renderStudioWorkflowRuntimeFinalClosureEvidence).join('')}
+        ${shell.studioWorkflowRuntimeFinalClosure.closureChecks.map(renderStudioWorkflowRuntimeFinalClosureCheck).join('')}
+        ${shell.studioWorkflowRuntimeFinalClosure.blockers.map(renderStudioWorkflowRuntimeFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Brand overview</p>
     <section class="workflow-grid" aria-label="Brand overview">
       <article class="panel">
@@ -2280,6 +2330,34 @@ function renderStudioWorkflowRuntimeAggregateBlocker(blocker) {
   return `<div class="studio-workflow-runtime-aggregate-row">
     <span class="studio-workflow-runtime-aggregate-label">Blocker</span>
     <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureArtifact(artifact) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Artifact</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure artifact: ${escapeHtml(artifact)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureEvidence(evidence) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Evidence</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureCheck(check) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Check</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureBlocker(blocker) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Blocker</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 
