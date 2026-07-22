@@ -25,6 +25,8 @@ const required = [
   'docs/development/closure-v1.5-operator-workflow-design-final-closure.md',
   'docs/development/release-v1.5-aggregate-summary.md',
   'docs/development/closure-v1.5-aggregate-summary.md',
+  'docs/development/release-v1.5-final-closure.md',
+  'docs/development/closure-v1.5-final-closure.md',
   'docs/decisions/0027-operator-workflow-design-start.md',
   'fixtures/components/operator-workflow-map-panel.json',
   'fixtures/components/operator-task-selection-panel.json',
