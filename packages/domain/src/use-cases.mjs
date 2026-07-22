@@ -334,6 +334,75 @@ export function createOperatorTaskSelection(store, operatorRunId, options = {}) 
   };
 }
 
+export function createOperatorStepDetail(store, operatorRunId, options = {}) {
+  const taskSelection = createOperatorTaskSelection(store, operatorRunId, options);
+  const detailReady = taskSelection.selectionReady;
+  const stepDetails = detailReady
+    ? [
+      {
+        label: 'Confirm selected task',
+        status: 'complete',
+        detail: `${taskSelection.selectedTask} is selected for ${taskSelection.selectedWorkflow}.`
+      },
+      {
+        label: 'Inspect ready evidence',
+        status: 'complete',
+        detail: taskSelection.requiredEvidence[0] ?? 'Ready task evidence is present.'
+      },
+      {
+        label: 'Prepare operator handoff readiness',
+        status: 'active',
+        detail: 'Step detail is ready for Operator Handoff Readiness.'
+      }
+    ]
+    : [
+      {
+        label: 'Confirm selected blocker task',
+        status: 'complete',
+        detail: `${taskSelection.selectedTask} is selected for ${taskSelection.selectedWorkflow}.`
+      },
+      {
+        label: 'Inspect blocker detail',
+        status: 'active',
+        detail: taskSelection.selectionDecision
+      },
+      {
+        label: 'Resolve selected blocker',
+        status: 'blocked',
+        detail: taskSelection.blockers[0] ?? 'Selected task has unresolved blockers.'
+      }
+    ];
+
+  return {
+    title: 'Operator Step Detail',
+    status: detailReady ? 'ready' : 'blocked',
+    detailReady,
+    operatorRunId,
+    workflowName: taskSelection.workflowName,
+    scenario: taskSelection.scenario,
+    stateSource: taskSelection.stateSource,
+    stateStatus: taskSelection.stateStatus,
+    completedActionCount: taskSelection.completedActionCount,
+    selectedTask: taskSelection.selectedTask,
+    selectedWorkflow: taskSelection.selectedWorkflow,
+    activeStep: detailReady ? 'Prepare operator handoff readiness' : 'Inspect blocker detail',
+    stepOwner: 'operator@example.local',
+    stepCommand: detailReady ? 'Prepare handoff readiness evidence' : 'Resolve workflow blockers',
+    stepOutcome: detailReady ? 'Operator step can move toward handoff readiness.' : 'Operator step waits for blocker resolution.',
+    stepCount: stepDetails.length,
+    readyStepCount: stepDetails.filter((step) => step.status === 'complete' || step.status === 'active').length,
+    blockedStepCount: stepDetails.filter((step) => step.status === 'blocked').length,
+    detailDecision: detailReady ? 'Inspect ready operator task step' : 'Inspect blocker resolution step',
+    detailSummary: detailReady
+      ? 'Operator Step Detail can inspect the ready task and prepare handoff readiness.'
+      : 'Operator Step Detail keeps the blocker resolution task visible before execution.',
+    stepDetails,
+    requiredEvidence: taskSelection.requiredEvidence,
+    blockers: taskSelection.blockers,
+    nextWorkflow: detailReady ? 'Operator Handoff Readiness' : 'Review Resolution Workflow'
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

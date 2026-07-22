@@ -3,6 +3,7 @@ import {
   completeWorkflowAction,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createOperatorStepDetail,
   createOperatorTaskSelection,
   createOperatorWorkflowMap
 } from '../packages/domain/src/index.mjs';
@@ -11,9 +12,11 @@ const required = [
   'docs/development/v1.5-scope.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
+  'docs/development/iteration-v1.5-operator-step-detail.md',
   'docs/decisions/0027-operator-workflow-design-start.md',
   'fixtures/components/operator-workflow-map-panel.json',
   'fixtures/components/operator-task-selection-panel.json',
+  'fixtures/components/operator-step-detail-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -34,6 +37,7 @@ if (missing.length) {
 const store = createInMemoryProductCoreStore(createExampleProductCoreState());
 const blocked = createOperatorWorkflowMap(store, 'operator_run_example_001');
 const blockedSelection = createOperatorTaskSelection(store, 'operator_run_example_001');
+const blockedDetail = createOperatorStepDetail(store, 'operator_run_example_001');
 
 if (blocked.status !== 'blocked' || blocked.mapReady || blocked.nextWorkflow !== 'Review Resolution Workflow') {
   console.error('Operator Workflow Map blocked scenario did not route to Review Resolution Workflow.');
@@ -42,6 +46,11 @@ if (blocked.status !== 'blocked' || blocked.mapReady || blocked.nextWorkflow !==
 
 if (blockedSelection.status !== 'blocked' || blockedSelection.selectedWorkflow !== 'Review Resolution Workflow') {
   console.error('Operator Task Selection blocked scenario did not select Review Resolution Workflow.');
+  process.exit(1);
+}
+
+if (blockedDetail.status !== 'blocked' || blockedDetail.activeStep !== 'Inspect blocker detail') {
+  console.error('Operator Step Detail blocked scenario did not expose the blocker detail step.');
   process.exit(1);
 }
 
@@ -58,6 +67,12 @@ const readySelection = createOperatorTaskSelection(store, 'operator_run_example_
   completedActionCount: 1,
   completedActionIds: ['workflow_action_example_001']
 });
+const readyDetail = createOperatorStepDetail(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
 
 if (ready.status !== 'ready' || !ready.mapReady || ready.nextWorkflow !== 'Operator Task Selection') {
   console.error('Operator Workflow Map ready scenario did not route to Operator Task Selection.');
@@ -66,6 +81,11 @@ if (ready.status !== 'ready' || !ready.mapReady || ready.nextWorkflow !== 'Opera
 
 if (readySelection.status !== 'ready' || readySelection.selectedWorkflow !== 'Use Context Pack' || readySelection.nextWorkflow !== 'Operator Step Detail') {
   console.error('Operator Task Selection ready scenario did not select Use Context Pack and route to Operator Step Detail.');
+  process.exit(1);
+}
+
+if (readyDetail.status !== 'ready' || readyDetail.nextWorkflow !== 'Operator Handoff Readiness') {
+  console.error('Operator Step Detail ready scenario did not route to Operator Handoff Readiness.');
   process.exit(1);
 }
 

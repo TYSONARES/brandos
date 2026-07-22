@@ -5,6 +5,7 @@
 - Started Operator Workflow Design v1.5 scope and decision record.
 - Added Operator Workflow Map package start.
 - Added Operator Task Selection package start.
+- Added Operator Step Detail package start.
 
 ## Unreleased - Runtime Reliability v1.3
 

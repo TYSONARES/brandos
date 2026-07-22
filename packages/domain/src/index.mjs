@@ -18,6 +18,7 @@ export {
   createDraftReview,
   createHandoffAcceptance,
   createOperatorRunQueue,
+  createOperatorStepDetail,
   createOperatorTaskSelection,
   createOperatorWorkflowMap,
   createOperatorRunbookExecution,

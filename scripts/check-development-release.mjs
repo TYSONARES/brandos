@@ -19,6 +19,7 @@ const required = [
   'docs/development/v1.5-scope.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
+  'docs/development/iteration-v1.5-operator-step-detail.md',
   'docs/development/iteration-v1.4-workflow-session-summary.md',
   'docs/development/release-v1.4-workflow-session-summary.md',
   'docs/development/closure-v1.4-workflow-session-summary.md',

@@ -20,6 +20,7 @@ import {
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
+  createOperatorStepDetail,
   createOperatorTaskSelection,
   createOperatorWorkflowMap,
   createReviewResolutionWorkflow,
@@ -974,4 +975,52 @@ test('Operator Task Selection selects blocker and ready tasks from the workflow 
   assert.deepEqual(ready.taskOptions.map((task) => task.status), ['selected', 'available', 'next']);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Operator Step Detail');
+});
+
+test('Operator Step Detail exposes blocked and ready active step detail', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorStepDetail(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Step Detail');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.detailReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.selectedTask, 'Resolve workflow blockers');
+  assert.equal(blocked.selectedWorkflow, 'Review Resolution Workflow');
+  assert.equal(blocked.activeStep, 'Inspect blocker detail');
+  assert.equal(blocked.stepOwner, 'operator@example.local');
+  assert.equal(blocked.stepCommand, 'Resolve workflow blockers');
+  assert.equal(blocked.stepOutcome, 'Operator step waits for blocker resolution.');
+  assert.equal(blocked.stepCount, 3);
+  assert.equal(blocked.readyStepCount, 2);
+  assert.equal(blocked.blockedStepCount, 1);
+  assert.equal(blocked.detailDecision, 'Inspect blocker resolution step');
+  assert.equal(blocked.detailSummary, 'Operator Step Detail keeps the blocker resolution task visible before execution.');
+  assert.deepEqual(blocked.stepDetails.map((step) => step.status), ['complete', 'active', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createOperatorStepDetail(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.detailReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.selectedTask, 'Use Context Pack');
+  assert.equal(ready.selectedWorkflow, 'Use Context Pack');
+  assert.equal(ready.activeStep, 'Prepare operator handoff readiness');
+  assert.equal(ready.stepCommand, 'Prepare handoff readiness evidence');
+  assert.equal(ready.stepOutcome, 'Operator step can move toward handoff readiness.');
+  assert.equal(ready.stepCount, 3);
+  assert.equal(ready.readyStepCount, 3);
+  assert.equal(ready.blockedStepCount, 0);
+  assert.equal(ready.detailDecision, 'Inspect ready operator task step');
+  assert.equal(ready.detailSummary, 'Operator Step Detail can inspect the ready task and prepare handoff readiness.');
+  assert.deepEqual(ready.stepDetails.map((step) => step.status), ['complete', 'complete', 'active']);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Operator Handoff Readiness');
 });

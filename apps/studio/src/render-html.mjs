@@ -991,6 +991,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-step-detail-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-step-detail-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-step-detail-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-step-detail-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1220,6 +1247,7 @@ export function renderStudioHtml(shell, options = {}) {
       .workflow-transition-row,
       .operator-workflow-map-row,
       .operator-task-selection-row,
+      .operator-step-detail-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1755,6 +1783,36 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.operatorTaskSelection.taskOptions.map(renderOperatorTaskSelectionOption).join('')}
         ${shell.operatorTaskSelection.requiredEvidence.map(renderOperatorTaskSelectionEvidence).join('')}
         ${shell.operatorTaskSelection.blockers.map(renderOperatorTaskSelectionBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Step Detail</p>
+    <section class="panel" aria-label="Operator Step Detail">
+      <h2>${escapeHtml(shell.operatorStepDetail.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator step detail status: ${shell.operatorStepDetail.status}`)}
+        ${renderGuidanceRow('Ready', `Operator step detail ready: ${shell.operatorStepDetail.detailReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator step detail workflow: ${shell.operatorStepDetail.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator step detail scenario: ${shell.operatorStepDetail.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator step detail source: ${shell.operatorStepDetail.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator step detail state status: ${shell.operatorStepDetail.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator step detail completed actions: ${shell.operatorStepDetail.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator step detail selected task: ${shell.operatorStepDetail.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator step detail selected workflow: ${shell.operatorStepDetail.selectedWorkflow}`)}
+        ${renderGuidanceRow('Active step', `Operator step detail active step: ${shell.operatorStepDetail.activeStep}`)}
+        ${renderGuidanceRow('Owner', `Operator step detail owner: ${shell.operatorStepDetail.stepOwner}`)}
+        ${renderGuidanceRow('Command', `Operator step detail command: ${shell.operatorStepDetail.stepCommand}`)}
+        ${renderGuidanceRow('Outcome', `Operator step detail outcome: ${shell.operatorStepDetail.stepOutcome}`)}
+        ${renderGuidanceRow('Steps', `Operator step detail steps: ${shell.operatorStepDetail.readyStepCount}/${shell.operatorStepDetail.stepCount}`)}
+        ${renderGuidanceRow('Blocked steps', `Operator step detail blocked steps: ${shell.operatorStepDetail.blockedStepCount}`)}
+        ${renderGuidanceRow('Decision', `Operator step detail decision: ${shell.operatorStepDetail.detailDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator step detail summary: ${shell.operatorStepDetail.detailSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator step detail next workflow: ${shell.operatorStepDetail.nextWorkflow}`)}
+      </div>
+      <div class="operator-step-detail-list">
+        ${shell.operatorStepDetail.stepDetails.map(renderOperatorStepDetailStep).join('')}
+        ${shell.operatorStepDetail.requiredEvidence.map(renderOperatorStepDetailEvidence).join('')}
+        ${shell.operatorStepDetail.blockers.map(renderOperatorStepDetailBlocker).join('')}
       </div>
     </section>
 
@@ -2507,6 +2565,27 @@ function renderOperatorTaskSelectionBlocker(blocker) {
   return `<div class="operator-task-selection-row">
     <span class="operator-task-selection-label">Blocker</span>
     <span class="operator-task-selection-value">Operator task selection blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorStepDetailStep(step) {
+  return `<div class="operator-step-detail-row">
+    <span class="operator-step-detail-label">Step</span>
+    <span class="operator-step-detail-value">Operator step detail step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorStepDetailEvidence(evidence) {
+  return `<div class="operator-step-detail-row">
+    <span class="operator-step-detail-label">Evidence</span>
+    <span class="operator-step-detail-value">Operator step detail evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorStepDetailBlocker(blocker) {
+  return `<div class="operator-step-detail-row">
+    <span class="operator-step-detail-label">Blocker</span>
+    <span class="operator-step-detail-value">Operator step detail blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 
