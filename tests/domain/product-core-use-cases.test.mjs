@@ -23,6 +23,7 @@ import {
   createOperatorRunSummary,
   createOperatorStepDetail,
   createOperatorTaskSelection,
+  createOperatorWorkflowDesignAggregateSummary,
   createOperatorWorkflowMap,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -1074,4 +1075,48 @@ test('Operator Handoff Readiness exposes blocked and ready transfer checks', () 
   assert.deepEqual(ready.handoffChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Operator Workflow Design Aggregate Summary');
+});
+
+test('Operator Workflow Design Aggregate Summary rolls workflow design packages into readiness evidence', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorWorkflowDesignAggregateSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Workflow Design Aggregate Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.aggregateReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.selectedTask, 'Resolve workflow blockers');
+  assert.equal(blocked.selectedWorkflow, 'Review Resolution Workflow');
+  assert.equal(blocked.handoffTarget, 'Operator');
+  assert.equal(blocked.workflowCount, 4);
+  assert.equal(blocked.readyWorkflowCount, 0);
+  assert.equal(blocked.blockedWorkflowCount, 4);
+  assert.equal(blocked.aggregateDecision, 'Keep operator workflow design aggregate blocked');
+  assert.equal(blocked.aggregateSummary, 'Operator Workflow Design v1.5 aggregate waits for operator workflow readiness.');
+  assert.deepEqual(blocked.workflowItems.map((item) => item.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createOperatorWorkflowDesignAggregateSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.aggregateReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.selectedTask, 'Use Context Pack');
+  assert.equal(ready.selectedWorkflow, 'Use Context Pack');
+  assert.equal(ready.handoffTarget, 'AI writing agent');
+  assert.equal(ready.workflowCount, 4);
+  assert.equal(ready.readyWorkflowCount, 4);
+  assert.equal(ready.blockedWorkflowCount, 0);
+  assert.equal(ready.aggregateDecision, 'Aggregate operator workflow design evidence');
+  assert.equal(ready.aggregateSummary, 'Operator Workflow Design v1.5 has ready workflow map, task selection, step detail, and handoff readiness evidence.');
+  assert.deepEqual(ready.workflowItems.map((item) => item.status), ['ready', 'ready', 'ready', 'ready']);
+  assert.ok(ready.requiredEvidence.includes('Handoff checks passed: 4/4'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Operator Workflow Design Final Closure');
 });

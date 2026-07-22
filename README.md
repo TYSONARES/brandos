@@ -8,9 +8,9 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Operator Runtime v1.1
-- Active workstream: Agent Handoff Runtime v1.2
-- Status: agent handoff runtime scope started
+- Latest completed implementation cycle: Studio Workflow Runtime v1.4
+- Active workstream: Operator Workflow Design v1.5
+- Status: operator workflow design aggregate summary in progress
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,8 +54,8 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Agent Handoff Runtime v1.2 turns accepted Operator Runtime handoff context into deterministic,
-repository-backed agent work context.
+Operator Workflow Design v1.5 turns closed runtime work into deterministic operator-facing workflow
+choice, sequencing, step detail, and handoff readiness.
 
 ## Repository Contract
 

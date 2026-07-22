@@ -6,6 +6,7 @@ import {
   createOperatorHandoffReadiness,
   createOperatorStepDetail,
   createOperatorTaskSelection,
+  createOperatorWorkflowDesignAggregateSummary,
   createOperatorWorkflowMap
 } from '../packages/domain/src/index.mjs';
 
@@ -15,11 +16,13 @@ const required = [
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',
   'docs/development/iteration-v1.5-operator-handoff-readiness.md',
+  'docs/development/iteration-v1.5-operator-workflow-design-aggregate-summary.md',
   'docs/decisions/0027-operator-workflow-design-start.md',
   'fixtures/components/operator-workflow-map-panel.json',
   'fixtures/components/operator-task-selection-panel.json',
   'fixtures/components/operator-step-detail-panel.json',
   'fixtures/components/operator-handoff-readiness-panel.json',
+  'fixtures/components/operator-workflow-design-aggregate-summary-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -42,6 +45,7 @@ const blocked = createOperatorWorkflowMap(store, 'operator_run_example_001');
 const blockedSelection = createOperatorTaskSelection(store, 'operator_run_example_001');
 const blockedDetail = createOperatorStepDetail(store, 'operator_run_example_001');
 const blockedHandoff = createOperatorHandoffReadiness(store, 'operator_run_example_001');
+const blockedAggregate = createOperatorWorkflowDesignAggregateSummary(store, 'operator_run_example_001');
 
 if (blocked.status !== 'blocked' || blocked.mapReady || blocked.nextWorkflow !== 'Review Resolution Workflow') {
   console.error('Operator Workflow Map blocked scenario did not route to Review Resolution Workflow.');
@@ -60,6 +64,11 @@ if (blockedDetail.status !== 'blocked' || blockedDetail.activeStep !== 'Inspect 
 
 if (blockedHandoff.status !== 'blocked' || blockedHandoff.handoffTarget !== 'Operator') {
   console.error('Operator Handoff Readiness blocked scenario did not keep work with the operator.');
+  process.exit(1);
+}
+
+if (blockedAggregate.status !== 'blocked' || blockedAggregate.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Operator Workflow Design Aggregate Summary blocked scenario did not route to Review Resolution Workflow.');
   process.exit(1);
 }
 
@@ -88,6 +97,12 @@ const readyHandoff = createOperatorHandoffReadiness(store, 'operator_run_example
   completedActionCount: 1,
   completedActionIds: ['workflow_action_example_001']
 });
+const readyAggregate = createOperatorWorkflowDesignAggregateSummary(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
 
 if (ready.status !== 'ready' || !ready.mapReady || ready.nextWorkflow !== 'Operator Task Selection') {
   console.error('Operator Workflow Map ready scenario did not route to Operator Task Selection.');
@@ -106,6 +121,11 @@ if (readyDetail.status !== 'ready' || readyDetail.nextWorkflow !== 'Operator Han
 
 if (readyHandoff.status !== 'ready' || readyHandoff.nextWorkflow !== 'Operator Workflow Design Aggregate Summary') {
   console.error('Operator Handoff Readiness ready scenario did not route to Operator Workflow Design Aggregate Summary.');
+  process.exit(1);
+}
+
+if (readyAggregate.status !== 'ready' || readyAggregate.nextWorkflow !== 'Operator Workflow Design Final Closure') {
+  console.error('Operator Workflow Design Aggregate Summary ready scenario did not route to Operator Workflow Design Final Closure.');
   process.exit(1);
 }
 

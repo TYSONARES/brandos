@@ -1045,6 +1045,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-workflow-design-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-workflow-design-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-workflow-design-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-workflow-design-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1276,6 +1303,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-task-selection-row,
       .operator-step-detail-row,
       .operator-handoff-readiness-row,
+      .operator-workflow-design-aggregate-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1872,6 +1900,33 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.operatorHandoffReadiness.handoffChecks.map(renderOperatorHandoffReadinessCheck).join('')}
         ${shell.operatorHandoffReadiness.requiredEvidence.map(renderOperatorHandoffReadinessEvidence).join('')}
         ${shell.operatorHandoffReadiness.blockers.map(renderOperatorHandoffReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Workflow Design Aggregate Summary</p>
+    <section class="panel" aria-label="Operator Workflow Design Aggregate Summary">
+      <h2>${escapeHtml(shell.operatorWorkflowDesignAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator workflow design aggregate status: ${shell.operatorWorkflowDesignAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Operator workflow design aggregate ready: ${shell.operatorWorkflowDesignAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator workflow design aggregate workflow: ${shell.operatorWorkflowDesignAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator workflow design aggregate scenario: ${shell.operatorWorkflowDesignAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator workflow design aggregate source: ${shell.operatorWorkflowDesignAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator workflow design aggregate state status: ${shell.operatorWorkflowDesignAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator workflow design aggregate completed actions: ${shell.operatorWorkflowDesignAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator workflow design aggregate selected task: ${shell.operatorWorkflowDesignAggregateSummary.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator workflow design aggregate selected workflow: ${shell.operatorWorkflowDesignAggregateSummary.selectedWorkflow}`)}
+        ${renderGuidanceRow('Handoff target', `Operator workflow design aggregate handoff target: ${shell.operatorWorkflowDesignAggregateSummary.handoffTarget}`)}
+        ${renderGuidanceRow('Workflows', `Operator workflow design aggregate workflows: ${shell.operatorWorkflowDesignAggregateSummary.readyWorkflowCount}/${shell.operatorWorkflowDesignAggregateSummary.workflowCount}`)}
+        ${renderGuidanceRow('Blocked workflows', `Operator workflow design aggregate blocked workflows: ${shell.operatorWorkflowDesignAggregateSummary.blockedWorkflowCount}`)}
+        ${renderGuidanceRow('Decision', `Operator workflow design aggregate decision: ${shell.operatorWorkflowDesignAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator workflow design aggregate summary: ${shell.operatorWorkflowDesignAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator workflow design aggregate next workflow: ${shell.operatorWorkflowDesignAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="operator-workflow-design-aggregate-list">
+        ${shell.operatorWorkflowDesignAggregateSummary.workflowItems.map(renderOperatorWorkflowDesignAggregateItem).join('')}
+        ${shell.operatorWorkflowDesignAggregateSummary.requiredEvidence.map(renderOperatorWorkflowDesignAggregateEvidence).join('')}
+        ${shell.operatorWorkflowDesignAggregateSummary.blockers.map(renderOperatorWorkflowDesignAggregateBlocker).join('')}
       </div>
     </section>
 
@@ -2666,6 +2721,27 @@ function renderOperatorHandoffReadinessBlocker(blocker) {
   return `<div class="operator-handoff-readiness-row">
     <span class="operator-handoff-readiness-label">Blocker</span>
     <span class="operator-handoff-readiness-value">Operator handoff readiness blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignAggregateItem(item) {
+  return `<div class="operator-workflow-design-aggregate-row">
+    <span class="operator-workflow-design-aggregate-label">Workflow</span>
+    <span class="operator-workflow-design-aggregate-value">Operator workflow design aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.ready)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignAggregateEvidence(evidence) {
+  return `<div class="operator-workflow-design-aggregate-row">
+    <span class="operator-workflow-design-aggregate-label">Evidence</span>
+    <span class="operator-workflow-design-aggregate-value">Operator workflow design aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignAggregateBlocker(blocker) {
+  return `<div class="operator-workflow-design-aggregate-row">
+    <span class="operator-workflow-design-aggregate-label">Blocker</span>
+    <span class="operator-workflow-design-aggregate-value">Operator workflow design aggregate blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

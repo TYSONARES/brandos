@@ -22,6 +22,7 @@ export {
   createOperatorStepDetail,
   createOperatorTaskSelection,
   createOperatorWorkflowMap,
+  createOperatorWorkflowDesignAggregateSummary,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
   createReviewResolutionWorkflow,

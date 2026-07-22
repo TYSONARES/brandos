@@ -451,6 +451,72 @@ export function createOperatorHandoffReadiness(store, operatorRunId, options = {
   };
 }
 
+export function createOperatorWorkflowDesignAggregateSummary(store, operatorRunId, options = {}) {
+  const workflowMap = createOperatorWorkflowMap(store, operatorRunId, options);
+  const taskSelection = createOperatorTaskSelection(store, operatorRunId, options);
+  const stepDetail = createOperatorStepDetail(store, operatorRunId, options);
+  const handoffReadiness = createOperatorHandoffReadiness(store, operatorRunId, options);
+  const aggregateReady = handoffReadiness.handoffReady;
+  const workflowItems = [
+    {
+      label: workflowMap.title,
+      status: workflowMap.status,
+      ready: workflowMap.mapReady,
+      detail: workflowMap.mapDecision
+    },
+    {
+      label: taskSelection.title,
+      status: taskSelection.status,
+      ready: taskSelection.selectionReady,
+      detail: taskSelection.selectionDecision
+    },
+    {
+      label: stepDetail.title,
+      status: stepDetail.status,
+      ready: stepDetail.detailReady,
+      detail: stepDetail.detailDecision
+    },
+    {
+      label: handoffReadiness.title,
+      status: handoffReadiness.status,
+      ready: handoffReadiness.handoffReady,
+      detail: handoffReadiness.handoffDecision
+    }
+  ];
+
+  return {
+    title: 'Operator Workflow Design Aggregate Summary',
+    status: aggregateReady ? 'ready' : 'blocked',
+    aggregateReady,
+    operatorRunId,
+    workflowName: handoffReadiness.workflowName,
+    scenario: handoffReadiness.scenario,
+    stateSource: handoffReadiness.stateSource,
+    stateStatus: handoffReadiness.stateStatus,
+    completedActionCount: handoffReadiness.completedActionCount,
+    selectedTask: handoffReadiness.selectedTask,
+    selectedWorkflow: handoffReadiness.selectedWorkflow,
+    handoffTarget: handoffReadiness.handoffTarget,
+    workflowCount: workflowItems.length,
+    readyWorkflowCount: workflowItems.filter((item) => item.ready).length,
+    blockedWorkflowCount: workflowItems.filter((item) => !item.ready).length,
+    aggregateDecision: aggregateReady ? 'Aggregate operator workflow design evidence' : 'Keep operator workflow design aggregate blocked',
+    aggregateSummary: aggregateReady
+      ? 'Operator Workflow Design v1.5 has ready workflow map, task selection, step detail, and handoff readiness evidence.'
+      : 'Operator Workflow Design v1.5 aggregate waits for operator workflow readiness.',
+    workflowItems,
+    requiredEvidence: aggregateReady
+      ? [
+        `Handoff readiness status: ${handoffReadiness.status}`,
+        `Selected workflow: ${handoffReadiness.selectedWorkflow}`,
+        `Handoff checks passed: ${handoffReadiness.passedCheckCount}/${handoffReadiness.checkCount}`
+      ]
+      : handoffReadiness.requiredEvidence,
+    blockers: handoffReadiness.blockers,
+    nextWorkflow: aggregateReady ? 'Operator Workflow Design Final Closure' : handoffReadiness.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

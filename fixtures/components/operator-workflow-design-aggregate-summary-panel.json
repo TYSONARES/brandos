@@ -1,0 +1,14 @@
+{
+  "id": "component_operator_workflow_design_aggregate_summary_panel",
+  "name": "Operator Workflow Design Aggregate Summary Panel",
+  "status": "draft",
+  "purpose": "Summarizes operator workflow design readiness across map, task selection, step detail, and handoff readiness.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose aggregate status, selected task, selected workflow, handoff target, workflow counts, decision, summary, item details, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate aggregate readiness.",
+    "Keep workflow item labels and decisions readable so operators can understand the version-level readiness summary."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}
