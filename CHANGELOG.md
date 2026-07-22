@@ -6,6 +6,7 @@
 - Added Operator Workflow Map package start.
 - Added Operator Task Selection package start.
 - Added Operator Step Detail package start.
+- Added Operator Handoff Readiness package start.
 
 ## Unreleased - Runtime Reliability v1.3
 

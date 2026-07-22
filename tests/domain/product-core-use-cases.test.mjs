@@ -17,6 +17,7 @@ import {
   createExampleProductCoreState,
   createHandoffAcceptance,
   createInMemoryProductCoreStore,
+  createOperatorHandoffReadiness,
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
@@ -1023,4 +1024,54 @@ test('Operator Step Detail exposes blocked and ready active step detail', () => 
   assert.deepEqual(ready.stepDetails.map((step) => step.status), ['complete', 'complete', 'active']);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Operator Handoff Readiness');
+});
+
+test('Operator Handoff Readiness exposes blocked and ready transfer checks', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorHandoffReadiness(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Handoff Readiness');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.handoffReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.selectedTask, 'Resolve workflow blockers');
+  assert.equal(blocked.selectedWorkflow, 'Review Resolution Workflow');
+  assert.equal(blocked.activeStep, 'Inspect blocker detail');
+  assert.equal(blocked.handoffTarget, 'Operator');
+  assert.equal(blocked.handoffMode, 'operator-resolution');
+  assert.equal(blocked.handoffCommand, 'Resolve blockers before handoff');
+  assert.equal(blocked.handoffOutcome, 'Operator handoff readiness waits for blocker resolution.');
+  assert.equal(blocked.checkCount, 4);
+  assert.equal(blocked.passedCheckCount, 1);
+  assert.equal(blocked.blockedCheckCount, 3);
+  assert.equal(blocked.handoffDecision, 'Keep handoff readiness blocked');
+  assert.equal(blocked.handoffSummary, 'Operator Handoff Readiness keeps local work with the operator until blockers clear.');
+  assert.deepEqual(blocked.handoffChecks.map((check) => check.status), ['pass', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createOperatorHandoffReadiness(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.handoffReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.selectedTask, 'Use Context Pack');
+  assert.equal(ready.selectedWorkflow, 'Use Context Pack');
+  assert.equal(ready.handoffTarget, 'AI writing agent');
+  assert.equal(ready.handoffMode, 'agent-ready');
+  assert.equal(ready.handoffCommand, 'Prepare operator handoff package');
+  assert.equal(ready.handoffOutcome, 'Operator handoff readiness is ready for transfer.');
+  assert.equal(ready.checkCount, 4);
+  assert.equal(ready.passedCheckCount, 4);
+  assert.equal(ready.blockedCheckCount, 0);
+  assert.equal(ready.handoffDecision, 'Prepare handoff readiness package');
+  assert.equal(ready.handoffSummary, 'Operator Handoff Readiness can transfer the selected ready task with evidence.');
+  assert.deepEqual(ready.handoffChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Operator Workflow Design Aggregate Summary');
 });

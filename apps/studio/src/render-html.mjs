@@ -1018,6 +1018,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-handoff-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-handoff-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-handoff-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-handoff-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1248,6 +1275,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-workflow-map-row,
       .operator-task-selection-row,
       .operator-step-detail-row,
+      .operator-handoff-readiness-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1813,6 +1841,37 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.operatorStepDetail.stepDetails.map(renderOperatorStepDetailStep).join('')}
         ${shell.operatorStepDetail.requiredEvidence.map(renderOperatorStepDetailEvidence).join('')}
         ${shell.operatorStepDetail.blockers.map(renderOperatorStepDetailBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Handoff Readiness</p>
+    <section class="panel" aria-label="Operator Handoff Readiness">
+      <h2>${escapeHtml(shell.operatorHandoffReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator handoff readiness status: ${shell.operatorHandoffReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Operator handoff readiness ready: ${shell.operatorHandoffReadiness.handoffReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator handoff readiness workflow: ${shell.operatorHandoffReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator handoff readiness scenario: ${shell.operatorHandoffReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator handoff readiness source: ${shell.operatorHandoffReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator handoff readiness state status: ${shell.operatorHandoffReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator handoff readiness completed actions: ${shell.operatorHandoffReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator handoff readiness selected task: ${shell.operatorHandoffReadiness.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator handoff readiness selected workflow: ${shell.operatorHandoffReadiness.selectedWorkflow}`)}
+        ${renderGuidanceRow('Active step', `Operator handoff readiness active step: ${shell.operatorHandoffReadiness.activeStep}`)}
+        ${renderGuidanceRow('Target', `Operator handoff readiness target: ${shell.operatorHandoffReadiness.handoffTarget}`)}
+        ${renderGuidanceRow('Mode', `Operator handoff readiness mode: ${shell.operatorHandoffReadiness.handoffMode}`)}
+        ${renderGuidanceRow('Command', `Operator handoff readiness command: ${shell.operatorHandoffReadiness.handoffCommand}`)}
+        ${renderGuidanceRow('Outcome', `Operator handoff readiness outcome: ${shell.operatorHandoffReadiness.handoffOutcome}`)}
+        ${renderGuidanceRow('Checks', `Operator handoff readiness checks: ${shell.operatorHandoffReadiness.passedCheckCount}/${shell.operatorHandoffReadiness.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Operator handoff readiness blocked checks: ${shell.operatorHandoffReadiness.blockedCheckCount}`)}
+        ${renderGuidanceRow('Decision', `Operator handoff readiness decision: ${shell.operatorHandoffReadiness.handoffDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator handoff readiness summary: ${shell.operatorHandoffReadiness.handoffSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator handoff readiness next workflow: ${shell.operatorHandoffReadiness.nextWorkflow}`)}
+      </div>
+      <div class="operator-handoff-readiness-list">
+        ${shell.operatorHandoffReadiness.handoffChecks.map(renderOperatorHandoffReadinessCheck).join('')}
+        ${shell.operatorHandoffReadiness.requiredEvidence.map(renderOperatorHandoffReadinessEvidence).join('')}
+        ${shell.operatorHandoffReadiness.blockers.map(renderOperatorHandoffReadinessBlocker).join('')}
       </div>
     </section>
 
@@ -2586,6 +2645,27 @@ function renderOperatorStepDetailBlocker(blocker) {
   return `<div class="operator-step-detail-row">
     <span class="operator-step-detail-label">Blocker</span>
     <span class="operator-step-detail-value">Operator step detail blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorHandoffReadinessCheck(check) {
+  return `<div class="operator-handoff-readiness-row">
+    <span class="operator-handoff-readiness-label">Check</span>
+    <span class="operator-handoff-readiness-value">Operator handoff readiness check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorHandoffReadinessEvidence(evidence) {
+  return `<div class="operator-handoff-readiness-row">
+    <span class="operator-handoff-readiness-label">Evidence</span>
+    <span class="operator-handoff-readiness-value">Operator handoff readiness evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorHandoffReadinessBlocker(blocker) {
+  return `<div class="operator-handoff-readiness-row">
+    <span class="operator-handoff-readiness-label">Blocker</span>
+    <span class="operator-handoff-readiness-value">Operator handoff readiness blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

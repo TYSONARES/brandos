@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_handoff_readiness_panel",
+  "name": "Operator Handoff Readiness Panel",
+  "status": "draft",
+  "purpose": "Shows whether selected operator work is ready to transfer with evidence.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose handoff readiness status, target, mode, command, outcome, checks, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate readiness or blocked checks.",
+    "Keep handoff check details readable so operators can transfer work with the right evidence."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
