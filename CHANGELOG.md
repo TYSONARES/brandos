@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Repository Collaboration Workflow v1.6
+
+- Started Repository Collaboration Workflow v1.6 scope and decision record.
+
 ## Unreleased - Operator Workflow Design v1.5
 
 - Started Operator Workflow Design v1.5 scope and decision record.

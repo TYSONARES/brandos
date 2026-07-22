@@ -9,8 +9,8 @@ architecture decisions, and delivery workflow.
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
 - Latest completed implementation cycle: Operator Workflow Design v1.5
-- Active workstream: Next cycle pending
-- Status: operator workflow design v1.5 closed
+- Active workstream: Repository Collaboration Workflow v1.6
+- Status: repository collaboration workflow scope started
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,8 +54,8 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Operator Workflow Design v1.5 turned closed runtime work into deterministic operator-facing workflow
-choice, sequencing, step detail, handoff readiness, aggregate evidence, and final closure.
+Repository Collaboration Workflow v1.6 turns GitHub, branch, pull request, review, and merge readiness
+into deterministic repository-backed collaboration evidence.
 
 ## Repository Contract
 
