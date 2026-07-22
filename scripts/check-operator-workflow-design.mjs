@@ -18,6 +18,8 @@ const required = [
   'docs/development/iteration-v1.5-operator-step-detail.md',
   'docs/development/iteration-v1.5-operator-handoff-readiness.md',
   'docs/development/iteration-v1.5-operator-workflow-design-aggregate-summary.md',
+  'docs/development/release-v1.5-operator-workflow-design-aggregate-summary.md',
+  'docs/development/closure-v1.5-operator-workflow-design-aggregate-summary.md',
   'docs/development/iteration-v1.5-operator-workflow-design-final-closure.md',
   'docs/decisions/0027-operator-workflow-design-start.md',
   'fixtures/components/operator-workflow-map-panel.json',
