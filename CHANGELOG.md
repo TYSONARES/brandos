@@ -10,6 +10,7 @@
 - Added Operator Workflow Design Aggregate Summary package start.
 - Added Operator Workflow Design Aggregate Summary release notes and closure checklist.
 - Added Operator Workflow Design Final Closure package start.
+- Added Operator Workflow Design Final Closure release notes and closure checklist.
 
 ## Unreleased - Runtime Reliability v1.3
 

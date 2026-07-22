@@ -25,6 +25,8 @@ const required = [
   'docs/development/release-v1.5-operator-workflow-design-aggregate-summary.md',
   'docs/development/closure-v1.5-operator-workflow-design-aggregate-summary.md',
   'docs/development/iteration-v1.5-operator-workflow-design-final-closure.md',
+  'docs/development/release-v1.5-operator-workflow-design-final-closure.md',
+  'docs/development/closure-v1.5-operator-workflow-design-final-closure.md',
   'docs/development/iteration-v1.4-workflow-session-summary.md',
   'docs/development/release-v1.4-workflow-session-summary.md',
   'docs/development/closure-v1.4-workflow-session-summary.md',
