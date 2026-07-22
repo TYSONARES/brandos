@@ -262,6 +262,78 @@ export function createOperatorWorkflowMap(store, operatorRunId, options = {}) {
   };
 }
 
+export function createOperatorTaskSelection(store, operatorRunId, options = {}) {
+  const workflowMap = createOperatorWorkflowMap(store, operatorRunId, options);
+  const selectionReady = workflowMap.mapReady;
+  const taskOptions = selectionReady
+    ? [
+      {
+        label: 'Use Context Pack',
+        workflow: 'Use Context Pack',
+        status: 'selected',
+        reason: 'Operator workflow map is ready and points to the ready Context Pack path.'
+      },
+      {
+        label: 'Inspect ready route',
+        workflow: 'Operator Workflow Map',
+        status: 'available',
+        reason: `${workflowMap.readyPathCount}/${workflowMap.pathCount} workflow paths are ready.`
+      },
+      {
+        label: 'Prepare step detail',
+        workflow: 'Operator Step Detail',
+        status: 'next',
+        reason: 'Selected task can move into inspectable operator step detail.'
+      }
+    ]
+    : [
+      {
+        label: 'Resolve workflow blockers',
+        workflow: 'Review Resolution Workflow',
+        status: 'selected',
+        reason: workflowMap.mapDecision
+      },
+      {
+        label: 'Inspect workflow map',
+        workflow: 'Operator Workflow Map',
+        status: 'available',
+        reason: `${workflowMap.blockedPathCount} blocked paths require review.`
+      },
+      {
+        label: 'Select operator task',
+        workflow: 'Operator Task Selection',
+        status: 'blocked',
+        reason: 'Task selection waits for a ready operator workflow map.'
+      }
+    ];
+  const selectedTask = taskOptions.find((task) => task.status === 'selected');
+
+  return {
+    title: 'Operator Task Selection',
+    status: selectionReady ? 'ready' : 'blocked',
+    selectionReady,
+    operatorRunId,
+    workflowName: workflowMap.workflowName,
+    scenario: workflowMap.scenario,
+    stateSource: workflowMap.stateSource,
+    stateStatus: workflowMap.stateStatus,
+    completedActionCount: workflowMap.completedActionCount,
+    selectedTask: selectedTask.label,
+    selectedWorkflow: selectedTask.workflow,
+    taskCount: taskOptions.length,
+    availableTaskCount: taskOptions.filter((task) => task.status === 'selected' || task.status === 'available' || task.status === 'next').length,
+    blockedTaskCount: taskOptions.filter((task) => task.status === 'blocked').length,
+    selectionDecision: selectionReady ? 'Select ready Context Pack task' : 'Select blocker resolution task',
+    selectionSummary: selectionReady
+      ? 'Operator Task Selection can proceed with the ready Context Pack task.'
+      : 'Operator Task Selection must resolve workflow blockers before task execution.',
+    taskOptions,
+    requiredEvidence: workflowMap.requiredEvidence,
+    blockers: workflowMap.blockers,
+    nextWorkflow: selectionReady ? 'Operator Step Detail' : 'Review Resolution Workflow'
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

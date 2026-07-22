@@ -20,6 +20,7 @@ import {
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
+  createOperatorTaskSelection,
   createOperatorWorkflowMap,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -932,4 +933,45 @@ test('Operator Workflow Map exposes blocked and ready operator paths', () => {
   assert.deepEqual(ready.workflowPaths.map((path) => path.status), ['complete', 'complete', 'complete', 'active']);
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Operator Task Selection');
+});
+
+test('Operator Task Selection selects blocker and ready tasks from the workflow map', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorTaskSelection(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Task Selection');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.selectionReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.selectedTask, 'Resolve workflow blockers');
+  assert.equal(blocked.selectedWorkflow, 'Review Resolution Workflow');
+  assert.equal(blocked.taskCount, 3);
+  assert.equal(blocked.availableTaskCount, 2);
+  assert.equal(blocked.blockedTaskCount, 1);
+  assert.equal(blocked.selectionDecision, 'Select blocker resolution task');
+  assert.equal(blocked.selectionSummary, 'Operator Task Selection must resolve workflow blockers before task execution.');
+  assert.deepEqual(blocked.taskOptions.map((task) => task.status), ['selected', 'available', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createOperatorTaskSelection(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.selectionReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.selectedTask, 'Use Context Pack');
+  assert.equal(ready.selectedWorkflow, 'Use Context Pack');
+  assert.equal(ready.taskCount, 3);
+  assert.equal(ready.availableTaskCount, 3);
+  assert.equal(ready.blockedTaskCount, 0);
+  assert.equal(ready.selectionDecision, 'Select ready Context Pack task');
+  assert.equal(ready.selectionSummary, 'Operator Task Selection can proceed with the ready Context Pack task.');
+  assert.deepEqual(ready.taskOptions.map((task) => task.status), ['selected', 'available', 'next']);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Operator Step Detail');
 });

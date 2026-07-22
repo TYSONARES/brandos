@@ -964,6 +964,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-task-selection-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-task-selection-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-task-selection-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-task-selection-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1192,6 +1219,7 @@ export function renderStudioHtml(shell, options = {}) {
       .workflow-session-row,
       .workflow-transition-row,
       .operator-workflow-map-row,
+      .operator-task-selection-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1701,6 +1729,32 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.operatorWorkflowMap.workflowPaths.map(renderOperatorWorkflowMapPath).join('')}
         ${shell.operatorWorkflowMap.requiredEvidence.map(renderOperatorWorkflowMapEvidence).join('')}
         ${shell.operatorWorkflowMap.blockers.map(renderOperatorWorkflowMapBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Task Selection</p>
+    <section class="panel" aria-label="Operator Task Selection">
+      <h2>${escapeHtml(shell.operatorTaskSelection.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator task selection status: ${shell.operatorTaskSelection.status}`)}
+        ${renderGuidanceRow('Ready', `Operator task selection ready: ${shell.operatorTaskSelection.selectionReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator task selection workflow: ${shell.operatorTaskSelection.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator task selection scenario: ${shell.operatorTaskSelection.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator task selection source: ${shell.operatorTaskSelection.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator task selection state status: ${shell.operatorTaskSelection.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator task selection completed actions: ${shell.operatorTaskSelection.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator task selection selected task: ${shell.operatorTaskSelection.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator task selection selected workflow: ${shell.operatorTaskSelection.selectedWorkflow}`)}
+        ${renderGuidanceRow('Tasks', `Operator task selection tasks: ${shell.operatorTaskSelection.availableTaskCount}/${shell.operatorTaskSelection.taskCount}`)}
+        ${renderGuidanceRow('Blocked tasks', `Operator task selection blocked tasks: ${shell.operatorTaskSelection.blockedTaskCount}`)}
+        ${renderGuidanceRow('Decision', `Operator task selection decision: ${shell.operatorTaskSelection.selectionDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator task selection summary: ${shell.operatorTaskSelection.selectionSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator task selection next workflow: ${shell.operatorTaskSelection.nextWorkflow}`)}
+      </div>
+      <div class="operator-task-selection-list">
+        ${shell.operatorTaskSelection.taskOptions.map(renderOperatorTaskSelectionOption).join('')}
+        ${shell.operatorTaskSelection.requiredEvidence.map(renderOperatorTaskSelectionEvidence).join('')}
+        ${shell.operatorTaskSelection.blockers.map(renderOperatorTaskSelectionBlocker).join('')}
       </div>
     </section>
 
@@ -2432,6 +2486,27 @@ function renderOperatorWorkflowMapBlocker(blocker) {
   return `<div class="operator-workflow-map-row">
     <span class="operator-workflow-map-label">Blocker</span>
     <span class="operator-workflow-map-value">Operator workflow map blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorTaskSelectionOption(option) {
+  return `<div class="operator-task-selection-row">
+    <span class="operator-task-selection-label">Task</span>
+    <span class="operator-task-selection-value">Operator task selection option: ${escapeHtml(option.label)} - ${escapeHtml(option.workflow)} - ${escapeHtml(option.status)} - ${escapeHtml(option.reason)}</span>
+  </div>`;
+}
+
+function renderOperatorTaskSelectionEvidence(evidence) {
+  return `<div class="operator-task-selection-row">
+    <span class="operator-task-selection-label">Evidence</span>
+    <span class="operator-task-selection-value">Operator task selection evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorTaskSelectionBlocker(blocker) {
+  return `<div class="operator-task-selection-row">
+    <span class="operator-task-selection-label">Blocker</span>
+    <span class="operator-task-selection-value">Operator task selection blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

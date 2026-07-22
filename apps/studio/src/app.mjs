@@ -15,6 +15,7 @@ import {
   createDraftReview,
   createHandoffAcceptance,
   createOperatorRunQueue,
+  createOperatorTaskSelection,
   createOperatorWorkflowMap,
   createOperatorRunbookExecution,
   createReviewResolutionWorkflow,
@@ -154,6 +155,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionIds: contextPackWorkflow.completedActionIds
   });
   const operatorWorkflowMap = createOperatorWorkflowMap(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorTaskSelection = createOperatorTaskSelection(store, operatorRunbookExecution.runId, {
     stateSource: contextPackWorkflow.stateSource,
     stateStatus: contextPackWorkflow.repositoryStateStatus,
     completedActionCount: contextPackWorkflow.completedActionCount,
@@ -313,6 +320,7 @@ export function createBrandOSStudioShell(options = {}) {
     studioWorkflowRuntimeAggregateSummary,
     studioWorkflowRuntimeFinalClosure,
     operatorWorkflowMap,
+    operatorTaskSelection,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,
