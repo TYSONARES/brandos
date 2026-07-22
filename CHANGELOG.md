@@ -3,6 +3,7 @@
 ## Unreleased - Operator Workflow Design v1.5
 
 - Started Operator Workflow Design v1.5 scope and decision record.
+- Added Operator Workflow Map package start.
 
 ## Unreleased - Runtime Reliability v1.3
 

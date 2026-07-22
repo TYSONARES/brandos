@@ -20,6 +20,7 @@ import {
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
+  createOperatorWorkflowMap,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioWorkflowRuntimeAggregateSummary,
@@ -893,4 +894,42 @@ test('Studio Workflow Runtime Final Closure closes only ready aggregate summarie
   assert.ok(closed.closureEvidence.includes('Aggregate commands complete: 1/1'));
   assert.deepEqual(closed.blockers, []);
   assert.equal(closed.nextWorkflow, 'Studio Workflow Runtime v1.4 Closed');
+});
+
+test('Operator Workflow Map exposes blocked and ready operator paths', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorWorkflowMap(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Workflow Map');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.mapReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.activePath, 'Review Resolution Workflow');
+  assert.equal(blocked.pathCount, 4);
+  assert.equal(blocked.blockedPathCount, 1);
+  assert.equal(blocked.mapDecision, 'Resolve blockers before operator workflow selection');
+  assert.equal(blocked.mapSummary, 'Operator workflow map waits for runtime closure and session readiness.');
+  assert.deepEqual(blocked.workflowPaths.map((path) => path.status), ['active', 'blocked', 'pending', 'pending']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createOperatorWorkflowMap(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.mapReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.activePath, 'Use Context Pack');
+  assert.equal(ready.pathCount, 4);
+  assert.equal(ready.readyPathCount, 4);
+  assert.equal(ready.blockedPathCount, 0);
+  assert.equal(ready.mapDecision, 'Use ready operator workflow map');
+  assert.equal(ready.mapSummary, 'Operator workflow paths are ready for task selection.');
+  assert.deepEqual(ready.workflowPaths.map((path) => path.status), ['complete', 'complete', 'complete', 'active']);
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Operator Task Selection');
 });

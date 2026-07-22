@@ -937,6 +937,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .operator-workflow-map-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-workflow-map-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-workflow-map-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-workflow-map-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1164,6 +1191,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-recovery-row,
       .workflow-session-row,
       .workflow-transition-row,
+      .operator-workflow-map-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1648,6 +1676,31 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.studioWorkflowRuntimeFinalClosure.closureEvidence.map(renderStudioWorkflowRuntimeFinalClosureEvidence).join('')}
         ${shell.studioWorkflowRuntimeFinalClosure.closureChecks.map(renderStudioWorkflowRuntimeFinalClosureCheck).join('')}
         ${shell.studioWorkflowRuntimeFinalClosure.blockers.map(renderStudioWorkflowRuntimeFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Workflow Map</p>
+    <section class="panel" aria-label="Operator Workflow Map">
+      <h2>${escapeHtml(shell.operatorWorkflowMap.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator workflow map status: ${shell.operatorWorkflowMap.status}`)}
+        ${renderGuidanceRow('Ready', `Operator workflow map ready: ${shell.operatorWorkflowMap.mapReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator workflow map workflow: ${shell.operatorWorkflowMap.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator workflow map scenario: ${shell.operatorWorkflowMap.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator workflow map source: ${shell.operatorWorkflowMap.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator workflow map state status: ${shell.operatorWorkflowMap.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator workflow map completed actions: ${shell.operatorWorkflowMap.completedActionCount}`)}
+        ${renderGuidanceRow('Active path', `Operator workflow map active path: ${shell.operatorWorkflowMap.activePath}`)}
+        ${renderGuidanceRow('Paths', `Operator workflow map paths: ${shell.operatorWorkflowMap.readyPathCount}/${shell.operatorWorkflowMap.pathCount}`)}
+        ${renderGuidanceRow('Blocked paths', `Operator workflow map blocked paths: ${shell.operatorWorkflowMap.blockedPathCount}`)}
+        ${renderGuidanceRow('Decision', `Operator workflow map decision: ${shell.operatorWorkflowMap.mapDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator workflow map summary: ${shell.operatorWorkflowMap.mapSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator workflow map next workflow: ${shell.operatorWorkflowMap.nextWorkflow}`)}
+      </div>
+      <div class="operator-workflow-map-list">
+        ${shell.operatorWorkflowMap.workflowPaths.map(renderOperatorWorkflowMapPath).join('')}
+        ${shell.operatorWorkflowMap.requiredEvidence.map(renderOperatorWorkflowMapEvidence).join('')}
+        ${shell.operatorWorkflowMap.blockers.map(renderOperatorWorkflowMapBlocker).join('')}
       </div>
     </section>
 
@@ -2358,6 +2411,27 @@ function renderStudioWorkflowRuntimeFinalClosureBlocker(blocker) {
   return `<div class="studio-workflow-runtime-final-closure-row">
     <span class="studio-workflow-runtime-final-closure-label">Blocker</span>
     <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowMapPath(path) {
+  return `<div class="operator-workflow-map-row">
+    <span class="operator-workflow-map-label">Path</span>
+    <span class="operator-workflow-map-value">Operator workflow map path: ${escapeHtml(path.label)} - ${escapeHtml(path.status)} - ${escapeHtml(path.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowMapEvidence(evidence) {
+  return `<div class="operator-workflow-map-row">
+    <span class="operator-workflow-map-label">Evidence</span>
+    <span class="operator-workflow-map-value">Operator workflow map evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowMapBlocker(blocker) {
+  return `<div class="operator-workflow-map-row">
+    <span class="operator-workflow-map-label">Blocker</span>
+    <span class="operator-workflow-map-value">Operator workflow map blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

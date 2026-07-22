@@ -216,6 +216,52 @@ export function createOperatorRunQueue(store) {
   };
 }
 
+export function createOperatorWorkflowMap(store, operatorRunId, options = {}) {
+  const queue = createOperatorRunQueue(store);
+  const runbook = createOperatorRunbookExecution(store, operatorRunId);
+  const session = createWorkflowSessionSummary(store, operatorRunId, options);
+  const finalClosure = createStudioWorkflowRuntimeFinalClosure(store, operatorRunId, options);
+  const mapReady = finalClosure.closed;
+  const workflowPaths = mapReady
+    ? [
+      { label: 'Confirm ready workflow', status: 'complete', detail: `${session.workflowName} is ${session.status}.` },
+      { label: 'Use ready route', status: 'complete', detail: `Route ${session.nextRoute} is ready.` },
+      { label: 'Close runtime evidence', status: 'complete', detail: finalClosure.closureDecision },
+      { label: 'Select operator task', status: 'active', detail: 'Operator Workflow Map can move to Operator Task Selection.' }
+    ]
+    : [
+      { label: 'Review active run', status: 'active', detail: `${runbook.runId} is ${runbook.status}.` },
+      { label: 'Resolve workflow blocker', status: 'blocked', detail: session.blockers[0] ?? 'Workflow session is blocked.' },
+      { label: 'Rebuild Studio workflow runtime', status: 'pending', detail: finalClosure.closureDecision },
+      { label: 'Select operator task', status: 'pending', detail: 'Task selection waits for a ready workflow map.' }
+    ];
+
+  return {
+    title: 'Operator Workflow Map',
+    status: mapReady ? 'ready' : 'blocked',
+    mapReady,
+    operatorRunId,
+    activeRunId: queue.activeRunId,
+    workflowName: session.workflowName,
+    scenario: session.scenario,
+    stateSource: session.stateSource,
+    stateStatus: session.stateStatus,
+    completedActionCount: session.completedActionCount,
+    activePath: mapReady ? 'Use Context Pack' : 'Review Resolution Workflow',
+    pathCount: workflowPaths.length,
+    readyPathCount: workflowPaths.filter((path) => path.status === 'complete' || path.status === 'active').length,
+    blockedPathCount: workflowPaths.filter((path) => path.status === 'blocked').length,
+    mapDecision: mapReady ? 'Use ready operator workflow map' : 'Resolve blockers before operator workflow selection',
+    mapSummary: mapReady
+      ? 'Operator workflow paths are ready for task selection.'
+      : 'Operator workflow map waits for runtime closure and session readiness.',
+    workflowPaths,
+    requiredEvidence: finalClosure.closureEvidence,
+    blockers: finalClosure.blockers,
+    nextWorkflow: mapReady ? 'Operator Task Selection' : 'Review Resolution Workflow'
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

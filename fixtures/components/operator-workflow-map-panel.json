@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_workflow_map_panel",
+  "name": "Operator Workflow Map Panel",
+  "status": "draft",
+  "purpose": "Shows operator workflow paths and readiness before task selection.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose workflow map status, active path, path counts, decision, summary, path details, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate workflow map readiness.",
+    "Keep workflow path labels readable so operators can choose the next task safely."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
