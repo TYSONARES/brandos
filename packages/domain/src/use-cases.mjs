@@ -564,6 +564,75 @@ export function createOperatorWorkflowDesignFinalClosure(store, operatorRunId, o
   };
 }
 
+export function createRepositoryBranchStatus(store, operatorRunId, options = {}) {
+  const finalClosure = createOperatorWorkflowDesignFinalClosure(store, operatorRunId, options);
+  const branchReady = finalClosure.closed;
+  const localBranch = options.localBranch || 'codex/development-ready-v1.0';
+  const remoteName = options.remoteName || 'origin';
+  const remoteBranch = options.remoteBranch || `${remoteName}/${localBranch}`;
+  const mainBranch = options.mainBranch || 'main';
+  const workingTreeStatus = branchReady ? 'clean' : 'blocked-preview';
+  const syncStatus = branchReady ? 'synced' : 'waiting-for-cycle-closure';
+  const branchItems = [
+    {
+      label: 'Local branch',
+      status: branchReady ? 'active' : 'blocked',
+      detail: localBranch
+    },
+    {
+      label: 'Remote branch',
+      status: branchReady ? 'synced' : 'blocked',
+      detail: remoteBranch
+    },
+    {
+      label: 'Main branch',
+      status: 'protected',
+      detail: mainBranch
+    },
+    {
+      label: 'Working tree',
+      status: workingTreeStatus,
+      detail: branchReady ? 'No local collaboration blockers are present.' : 'Repository collaboration waits for v1.5 closure.'
+    }
+  ];
+
+  return {
+    title: 'Repository Branch Status',
+    status: branchReady ? 'ready' : 'blocked',
+    branchReady,
+    operatorRunId,
+    workflowName: 'Repository Collaboration Workflow',
+    scenario: finalClosure.scenario,
+    stateSource: finalClosure.stateSource,
+    stateStatus: finalClosure.stateStatus,
+    completedActionCount: finalClosure.completedActionCount,
+    localBranch,
+    remoteBranch,
+    mainBranch,
+    remoteName,
+    syncStatus,
+    workingTreeStatus,
+    branchCount: branchItems.length,
+    readyBranchCount: branchItems.filter((item) => item.status === 'active' || item.status === 'synced' || item.status === 'protected' || item.status === 'clean').length,
+    blockedBranchCount: branchItems.filter((item) => item.status === 'blocked' || item.status === 'blocked-preview').length,
+    branchDecision: branchReady ? 'Use repository collaboration branch' : 'Keep repository branch status blocked',
+    branchSummary: branchReady
+      ? 'Repository Branch Status can use the active collaboration branch with remote and main evidence.'
+      : 'Repository Branch Status waits for Operator Workflow Design v1.5 closure before collaboration.',
+    branchItems,
+    requiredEvidence: branchReady
+      ? [
+        `Final closure status: ${finalClosure.status}`,
+        `Local branch: ${localBranch}`,
+        `Remote branch: ${remoteBranch}`,
+        `Main branch: ${mainBranch}`
+      ]
+      : finalClosure.closureEvidence,
+    blockers: finalClosure.blockers,
+    nextWorkflow: branchReady ? 'Pull Request Readiness' : finalClosure.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

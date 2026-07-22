@@ -26,6 +26,7 @@ import {
   createOperatorWorkflowDesignAggregateSummary,
   createOperatorWorkflowDesignFinalClosure,
   createOperatorWorkflowMap,
+  createRepositoryBranchStatus,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioWorkflowRuntimeAggregateSummary,
@@ -1166,4 +1167,48 @@ test('Operator Workflow Design Final Closure closes only ready aggregate summari
   assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
   assert.deepEqual(closed.blockers, []);
   assert.equal(closed.nextWorkflow, 'Operator Workflow Design v1.5 Closed');
+});
+
+test('Repository Branch Status maps workflow closure into branch collaboration readiness', () => {
+  const store = createExampleStore();
+  const blocked = createRepositoryBranchStatus(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Repository Branch Status');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.branchReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.localBranch, 'codex/development-ready-v1.0');
+  assert.equal(blocked.remoteBranch, 'origin/codex/development-ready-v1.0');
+  assert.equal(blocked.mainBranch, 'main');
+  assert.equal(blocked.syncStatus, 'waiting-for-cycle-closure');
+  assert.equal(blocked.workingTreeStatus, 'blocked-preview');
+  assert.equal(blocked.branchCount, 4);
+  assert.equal(blocked.readyBranchCount, 1);
+  assert.equal(blocked.blockedBranchCount, 3);
+  assert.equal(blocked.branchDecision, 'Keep repository branch status blocked');
+  assert.equal(blocked.branchSummary, 'Repository Branch Status waits for Operator Workflow Design v1.5 closure before collaboration.');
+  assert.deepEqual(blocked.branchItems.map((item) => item.status), ['blocked', 'blocked', 'protected', 'blocked-preview']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createRepositoryBranchStatus(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.branchReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.syncStatus, 'synced');
+  assert.equal(ready.workingTreeStatus, 'clean');
+  assert.equal(ready.readyBranchCount, 4);
+  assert.equal(ready.blockedBranchCount, 0);
+  assert.equal(ready.branchDecision, 'Use repository collaboration branch');
+  assert.equal(ready.branchSummary, 'Repository Branch Status can use the active collaboration branch with remote and main evidence.');
+  assert.deepEqual(ready.branchItems.map((item) => item.status), ['active', 'synced', 'protected', 'clean']);
+  assert.ok(ready.requiredEvidence.includes('Final closure status: closed'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Pull Request Readiness');
 });

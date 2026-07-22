@@ -26,6 +26,7 @@ export {
   createOperatorWorkflowDesignFinalClosure,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
+  createRepositoryBranchStatus,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioWorkflowRuntimeAggregateSummary,

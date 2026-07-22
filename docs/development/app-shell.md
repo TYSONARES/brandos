@@ -90,6 +90,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Operator Handoff Readiness panel
 - dedicated Operator Workflow Design Aggregate Summary panel
 - dedicated Operator Workflow Design Final Closure panel
+- dedicated Repository Branch Status panel
 - post-v1 aggregate release summary
 - post-v1 aggregate closure checklist
 - post-v1 final closure release notes

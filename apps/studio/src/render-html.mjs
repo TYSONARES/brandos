@@ -1099,6 +1099,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .repository-branch-status-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .repository-branch-status-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .repository-branch-status-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .repository-branch-status-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1332,6 +1359,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-handoff-readiness-row,
       .operator-workflow-design-aggregate-row,
       .operator-workflow-design-final-closure-row,
+      .repository-branch-status-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1981,6 +2009,35 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.operatorWorkflowDesignFinalClosure.closureEvidence.map(renderOperatorWorkflowDesignFinalClosureEvidence).join('')}
         ${shell.operatorWorkflowDesignFinalClosure.closureChecks.map(renderOperatorWorkflowDesignFinalClosureCheck).join('')}
         ${shell.operatorWorkflowDesignFinalClosure.blockers.map(renderOperatorWorkflowDesignFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Repository Branch Status</p>
+    <section class="panel" aria-label="Repository Branch Status">
+      <h2>${escapeHtml(shell.repositoryBranchStatus.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Repository branch status: ${shell.repositoryBranchStatus.status}`)}
+        ${renderGuidanceRow('Ready', `Repository branch ready: ${shell.repositoryBranchStatus.branchReady}`)}
+        ${renderGuidanceRow('Workflow', `Repository branch workflow: ${shell.repositoryBranchStatus.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Repository branch scenario: ${shell.repositoryBranchStatus.scenario}`)}
+        ${renderGuidanceRow('State source', `Repository branch source: ${shell.repositoryBranchStatus.stateSource}`)}
+        ${renderGuidanceRow('State status', `Repository branch state status: ${shell.repositoryBranchStatus.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Repository branch completed actions: ${shell.repositoryBranchStatus.completedActionCount}`)}
+        ${renderGuidanceRow('Local branch', `Repository branch local: ${shell.repositoryBranchStatus.localBranch}`)}
+        ${renderGuidanceRow('Remote branch', `Repository branch remote: ${shell.repositoryBranchStatus.remoteBranch}`)}
+        ${renderGuidanceRow('Main branch', `Repository branch main: ${shell.repositoryBranchStatus.mainBranch}`)}
+        ${renderGuidanceRow('Sync status', `Repository branch sync: ${shell.repositoryBranchStatus.syncStatus}`)}
+        ${renderGuidanceRow('Working tree', `Repository branch working tree: ${shell.repositoryBranchStatus.workingTreeStatus}`)}
+        ${renderGuidanceRow('Branches', `Repository branch branches: ${shell.repositoryBranchStatus.readyBranchCount}/${shell.repositoryBranchStatus.branchCount}`)}
+        ${renderGuidanceRow('Blocked branches', `Repository branch blocked branches: ${shell.repositoryBranchStatus.blockedBranchCount}`)}
+        ${renderGuidanceRow('Decision', `Repository branch decision: ${shell.repositoryBranchStatus.branchDecision}`)}
+        ${renderGuidanceRow('Summary', `Repository branch summary: ${shell.repositoryBranchStatus.branchSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Repository branch next workflow: ${shell.repositoryBranchStatus.nextWorkflow}`)}
+      </div>
+      <div class="repository-branch-status-list">
+        ${shell.repositoryBranchStatus.branchItems.map(renderRepositoryBranchStatusItem).join('')}
+        ${shell.repositoryBranchStatus.requiredEvidence.map(renderRepositoryBranchStatusEvidence).join('')}
+        ${shell.repositoryBranchStatus.blockers.map(renderRepositoryBranchStatusBlocker).join('')}
       </div>
     </section>
 
@@ -2824,6 +2881,27 @@ function renderOperatorWorkflowDesignFinalClosureBlocker(blocker) {
   return `<div class="operator-workflow-design-final-closure-row">
     <span class="operator-workflow-design-final-closure-label">Blocker</span>
     <span class="operator-workflow-design-final-closure-value">Operator workflow design final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRepositoryBranchStatusItem(item) {
+  return `<div class="repository-branch-status-row">
+    <span class="repository-branch-status-label">Branch</span>
+    <span class="repository-branch-status-value">Repository branch item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderRepositoryBranchStatusEvidence(evidence) {
+  return `<div class="repository-branch-status-row">
+    <span class="repository-branch-status-label">Evidence</span>
+    <span class="repository-branch-status-value">Repository branch evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRepositoryBranchStatusBlocker(blocker) {
+  return `<div class="repository-branch-status-row">
+    <span class="repository-branch-status-label">Blocker</span>
+    <span class="repository-branch-status-value">Repository branch blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

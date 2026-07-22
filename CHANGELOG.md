@@ -3,6 +3,7 @@
 ## Unreleased - Repository Collaboration Workflow v1.6
 
 - Started Repository Collaboration Workflow v1.6 scope and decision record.
+- Added Repository Branch Status package start.
 
 ## Unreleased - Operator Workflow Design v1.5
 
