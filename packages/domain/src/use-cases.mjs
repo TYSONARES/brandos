@@ -517,6 +517,53 @@ export function createOperatorWorkflowDesignAggregateSummary(store, operatorRunI
   };
 }
 
+export function createOperatorWorkflowDesignFinalClosure(store, operatorRunId, options = {}) {
+  const aggregateSummary = createOperatorWorkflowDesignAggregateSummary(store, operatorRunId, options);
+  const closed = aggregateSummary.aggregateReady;
+
+  return {
+    title: 'Operator Workflow Design Final Closure',
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    operatorRunId,
+    workflowName: aggregateSummary.workflowName,
+    scenario: aggregateSummary.scenario,
+    stateSource: aggregateSummary.stateSource,
+    stateStatus: aggregateSummary.stateStatus,
+    completedActionCount: aggregateSummary.completedActionCount,
+    selectedTask: aggregateSummary.selectedTask,
+    selectedWorkflow: aggregateSummary.selectedWorkflow,
+    handoffTarget: aggregateSummary.handoffTarget,
+    closureDecision: closed ? 'Close Operator Workflow Design v1.5' : 'Keep Operator Workflow Design v1.5 open',
+    closureSummary: closed
+      ? 'Operator Workflow Design v1.5 is closed with aggregate workflow evidence and is ready for archive.'
+      : 'Operator Workflow Design v1.5 final closure waits for aggregate readiness.',
+    releaseArtifacts: closed
+      ? [
+        'Operator Workflow Map',
+        'Operator Task Selection',
+        'Operator Step Detail',
+        'Operator Handoff Readiness',
+        'Operator Workflow Design Aggregate Summary'
+      ]
+      : [],
+    closureEvidence: closed
+      ? [
+        `Aggregate status: ${aggregateSummary.status}`,
+        `Aggregate workflows ready: ${aggregateSummary.readyWorkflowCount}/${aggregateSummary.workflowCount}`,
+        `Aggregate evidence count: ${aggregateSummary.requiredEvidence.length}`
+      ]
+      : aggregateSummary.requiredEvidence,
+    closureChecks: [
+      { label: 'Aggregate summary ready', status: aggregateSummary.aggregateReady ? 'pass' : 'blocked' },
+      { label: 'Workflow evidence present', status: aggregateSummary.requiredEvidence.length > 0 ? 'pass' : 'blocked' },
+      { label: 'Release artifacts assigned', status: closed ? 'pass' : 'blocked' }
+    ],
+    blockers: aggregateSummary.blockers,
+    nextWorkflow: closed ? 'Operator Workflow Design v1.5 Closed' : aggregateSummary.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

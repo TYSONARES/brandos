@@ -24,6 +24,7 @@ import {
   createOperatorStepDetail,
   createOperatorTaskSelection,
   createOperatorWorkflowDesignAggregateSummary,
+  createOperatorWorkflowDesignFinalClosure,
   createOperatorWorkflowMap,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -1119,4 +1120,50 @@ test('Operator Workflow Design Aggregate Summary rolls workflow design packages 
   assert.ok(ready.requiredEvidence.includes('Handoff checks passed: 4/4'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Operator Workflow Design Final Closure');
+});
+
+test('Operator Workflow Design Final Closure closes only ready aggregate summaries', () => {
+  const store = createExampleStore();
+  const blocked = createOperatorWorkflowDesignFinalClosure(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Operator Workflow Design Final Closure');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.closed, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.selectedTask, 'Resolve workflow blockers');
+  assert.equal(blocked.selectedWorkflow, 'Review Resolution Workflow');
+  assert.equal(blocked.handoffTarget, 'Operator');
+  assert.equal(blocked.closureDecision, 'Keep Operator Workflow Design v1.5 open');
+  assert.equal(blocked.closureSummary, 'Operator Workflow Design v1.5 final closure waits for aggregate readiness.');
+  assert.deepEqual(blocked.releaseArtifacts, []);
+  assert.deepEqual(blocked.closureChecks.map((check) => check.status), ['blocked', 'pass', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const closed = createOperatorWorkflowDesignFinalClosure(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(closed.status, 'closed');
+  assert.equal(closed.closed, true);
+  assert.equal(closed.scenario, 'ready');
+  assert.equal(closed.selectedTask, 'Use Context Pack');
+  assert.equal(closed.selectedWorkflow, 'Use Context Pack');
+  assert.equal(closed.handoffTarget, 'AI writing agent');
+  assert.equal(closed.closureDecision, 'Close Operator Workflow Design v1.5');
+  assert.equal(closed.closureSummary, 'Operator Workflow Design v1.5 is closed with aggregate workflow evidence and is ready for archive.');
+  assert.deepEqual(closed.releaseArtifacts, [
+    'Operator Workflow Map',
+    'Operator Task Selection',
+    'Operator Step Detail',
+    'Operator Handoff Readiness',
+    'Operator Workflow Design Aggregate Summary'
+  ]);
+  assert.ok(closed.closureEvidence.includes('Aggregate workflows ready: 4/4'));
+  assert.deepEqual(closed.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass']);
+  assert.deepEqual(closed.blockers, []);
+  assert.equal(closed.nextWorkflow, 'Operator Workflow Design v1.5 Closed');
 });

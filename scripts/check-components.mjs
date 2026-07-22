@@ -31,6 +31,7 @@ const componentFiles = [
   'fixtures/components/operator-step-detail-panel.json',
   'fixtures/components/operator-handoff-readiness-panel.json',
   'fixtures/components/operator-workflow-design-aggregate-summary-panel.json',
+  'fixtures/components/operator-workflow-design-final-closure-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',

@@ -1,0 +1,14 @@
+{
+  "id": "component_operator_workflow_design_final_closure_panel",
+  "name": "Operator Workflow Design Final Closure Panel",
+  "status": "draft",
+  "purpose": "Shows whether Operator Workflow Design v1.5 can close from aggregate workflow evidence.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "closed"],
+  "accessibility": [
+    "Expose final closure status, selected task, selected workflow, handoff target, decision, summary, artifacts, evidence, checks, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate blocked or closed closure state.",
+    "Keep closure checks and release artifacts readable so operators can audit why v1.5 is open or closed."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

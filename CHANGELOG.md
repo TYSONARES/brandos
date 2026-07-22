@@ -8,6 +8,7 @@
 - Added Operator Step Detail package start.
 - Added Operator Handoff Readiness package start.
 - Added Operator Workflow Design Aggregate Summary package start.
+- Added Operator Workflow Design Final Closure package start.
 
 ## Unreleased - Runtime Reliability v1.3
 

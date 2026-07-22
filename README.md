@@ -10,7 +10,7 @@ architecture decisions, and delivery workflow.
 - Latest completed workstream: Development Ready v1.0
 - Latest completed implementation cycle: Studio Workflow Runtime v1.4
 - Active workstream: Operator Workflow Design v1.5
-- Status: operator workflow design aggregate summary in progress
+- Status: operator workflow design final closure in progress
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
