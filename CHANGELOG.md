@@ -28,6 +28,7 @@
 - Added Studio Workflow Runtime Final Closure package start.
 - Added Studio Workflow Runtime Final Closure release notes and closure checklist.
 - Added Studio Workflow Runtime v1.4 aggregate release summary and closure checklist.
+- Closed Studio Workflow Runtime v1.4 with final release notes and closure checklist.
 
 ## Unreleased - Agent Handoff Runtime v1.2
 

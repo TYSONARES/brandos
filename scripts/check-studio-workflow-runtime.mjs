@@ -29,6 +29,8 @@ const required = [
   'docs/development/closure-v1.4-studio-workflow-runtime-final-closure.md',
   'docs/development/release-v1.4-aggregate-summary.md',
   'docs/development/closure-v1.4-aggregate-summary.md',
+  'docs/development/release-v1.4-final-closure.md',
+  'docs/development/closure-v1.4-final-closure.md',
   'docs/decisions/0026-studio-workflow-runtime-start.md',
   'fixtures/components/workflow-session-summary-panel.json',
   'fixtures/components/workflow-transition-plan-panel.json',
