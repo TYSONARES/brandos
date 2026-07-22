@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Operator Workflow Design v1.5
+
+- Started Operator Workflow Design v1.5 scope and decision record.
+
 ## Unreleased - Runtime Reliability v1.3
 
 - Started Runtime Reliability v1.3 scope and decision record.

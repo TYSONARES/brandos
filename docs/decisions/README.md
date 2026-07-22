@@ -12,6 +12,7 @@ Keep this index current whenever files are added, renamed, or promoted to offici
 
 ## Latest Decisions
 
+- `0027-operator-workflow-design-start.md`: starts Operator Workflow Design v1.5 after Studio Workflow Runtime v1.4 final closure.
 - `0026-studio-workflow-runtime-start.md`: starts Studio Workflow Runtime v1.4 after Runtime Reliability v1.3 final closure.
 - `0025-runtime-reliability-start.md`: starts Runtime Reliability v1.3 after Agent Handoff Runtime v1.2 final closure.
 - `0024-agent-handoff-runtime-start.md`: starts Agent Handoff Runtime v1.2 after Operator Runtime v1.1 final closure.
