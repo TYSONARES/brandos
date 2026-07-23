@@ -1,0 +1,14 @@
+{
+  "id": "component_pull_request_readiness_panel",
+  "name": "Pull Request Readiness Panel",
+  "status": "draft",
+  "purpose": "Shows whether repository collaboration work is ready to open or review a pull request.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose pull request status, title, source branch, target branch, remote branch, review mode, merge policy, checks, evidence, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate pull request readiness.",
+    "Keep review and merge policy text readable so operators can understand what must happen before main changes."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

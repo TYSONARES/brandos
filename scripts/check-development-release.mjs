@@ -19,6 +19,7 @@ const required = [
   'docs/development/v1.5-scope.md',
   'docs/development/v1.6-scope.md',
   'docs/development/iteration-v1.6-repository-branch-status.md',
+  'docs/development/iteration-v1.6-pull-request-readiness.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',

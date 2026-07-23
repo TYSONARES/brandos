@@ -1126,6 +1126,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .pull-request-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pull-request-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .pull-request-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pull-request-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1360,6 +1387,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-workflow-design-aggregate-row,
       .operator-workflow-design-final-closure-row,
       .repository-branch-status-row,
+      .pull-request-readiness-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2038,6 +2066,36 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.repositoryBranchStatus.branchItems.map(renderRepositoryBranchStatusItem).join('')}
         ${shell.repositoryBranchStatus.requiredEvidence.map(renderRepositoryBranchStatusEvidence).join('')}
         ${shell.repositoryBranchStatus.blockers.map(renderRepositoryBranchStatusBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Pull Request Readiness</p>
+    <section class="panel" aria-label="Pull Request Readiness">
+      <h2>${escapeHtml(shell.pullRequestReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Pull request readiness status: ${shell.pullRequestReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Pull request ready: ${shell.pullRequestReadiness.prReady}`)}
+        ${renderGuidanceRow('Workflow', `Pull request workflow: ${shell.pullRequestReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Pull request scenario: ${shell.pullRequestReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Pull request source: ${shell.pullRequestReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Pull request state status: ${shell.pullRequestReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Pull request completed actions: ${shell.pullRequestReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Pull request title: ${shell.pullRequestReadiness.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Pull request source branch: ${shell.pullRequestReadiness.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Pull request target branch: ${shell.pullRequestReadiness.pullRequestTarget}`)}
+        ${renderGuidanceRow('Remote branch', `Pull request remote branch: ${shell.pullRequestReadiness.remoteBranch}`)}
+        ${renderGuidanceRow('Review mode', `Pull request review mode: ${shell.pullRequestReadiness.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Pull request merge policy: ${shell.pullRequestReadiness.mergePolicy}`)}
+        ${renderGuidanceRow('Checks', `Pull request checks: ${shell.pullRequestReadiness.passedCheckCount}/${shell.pullRequestReadiness.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Pull request blocked checks: ${shell.pullRequestReadiness.blockedCheckCount}`)}
+        ${renderGuidanceRow('Decision', `Pull request decision: ${shell.pullRequestReadiness.readinessDecision}`)}
+        ${renderGuidanceRow('Summary', `Pull request summary: ${shell.pullRequestReadiness.readinessSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Pull request next workflow: ${shell.pullRequestReadiness.nextWorkflow}`)}
+      </div>
+      <div class="pull-request-readiness-list">
+        ${shell.pullRequestReadiness.readinessChecks.map(renderPullRequestReadinessCheck).join('')}
+        ${shell.pullRequestReadiness.requiredEvidence.map(renderPullRequestReadinessEvidence).join('')}
+        ${shell.pullRequestReadiness.blockers.map(renderPullRequestReadinessBlocker).join('')}
       </div>
     </section>
 
@@ -2902,6 +2960,27 @@ function renderRepositoryBranchStatusBlocker(blocker) {
   return `<div class="repository-branch-status-row">
     <span class="repository-branch-status-label">Blocker</span>
     <span class="repository-branch-status-value">Repository branch blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderPullRequestReadinessCheck(check) {
+  return `<div class="pull-request-readiness-row">
+    <span class="pull-request-readiness-label">Check</span>
+    <span class="pull-request-readiness-value">Pull request check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderPullRequestReadinessEvidence(evidence) {
+  return `<div class="pull-request-readiness-row">
+    <span class="pull-request-readiness-label">Evidence</span>
+    <span class="pull-request-readiness-value">Pull request evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderPullRequestReadinessBlocker(blocker) {
+  return `<div class="pull-request-readiness-row">
+    <span class="pull-request-readiness-label">Blocker</span>
+    <span class="pull-request-readiness-value">Pull request blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

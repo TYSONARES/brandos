@@ -26,6 +26,7 @@ import {
   createOperatorWorkflowDesignAggregateSummary,
   createOperatorWorkflowDesignFinalClosure,
   createOperatorWorkflowMap,
+  createPullRequestReadiness,
   createRepositoryBranchStatus,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -1211,4 +1212,49 @@ test('Repository Branch Status maps workflow closure into branch collaboration r
   assert.ok(ready.requiredEvidence.includes('Final closure status: closed'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Pull Request Readiness');
+});
+
+test('Pull Request Readiness maps branch status into review readiness', () => {
+  const store = createExampleStore();
+  const blocked = createPullRequestReadiness(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Pull Request Readiness');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.prReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.pullRequestTitle, 'Repository Collaboration Workflow v1.6');
+  assert.equal(blocked.pullRequestSource, 'codex/development-ready-v1.0');
+  assert.equal(blocked.pullRequestTarget, 'main');
+  assert.equal(blocked.remoteBranch, 'origin/codex/development-ready-v1.0');
+  assert.equal(blocked.reviewMode, 'blocked-preview');
+  assert.equal(blocked.mergePolicy, 'hold-before-review');
+  assert.equal(blocked.checkCount, 4);
+  assert.equal(blocked.passedCheckCount, 1);
+  assert.equal(blocked.blockedCheckCount, 3);
+  assert.equal(blocked.readinessDecision, 'Keep pull request readiness blocked');
+  assert.equal(blocked.readinessSummary, 'Pull Request Readiness waits for repository branch status before review.');
+  assert.deepEqual(blocked.readinessChecks.map((check) => check.status), ['blocked', 'blocked', 'pass', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createPullRequestReadiness(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.prReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'ready-for-review');
+  assert.equal(ready.mergePolicy, 'review-before-main');
+  assert.equal(ready.passedCheckCount, 4);
+  assert.equal(ready.blockedCheckCount, 0);
+  assert.equal(ready.readinessDecision, 'Prepare pull request review');
+  assert.equal(ready.readinessSummary, 'Pull Request Readiness can open review from synced branch evidence.');
+  assert.deepEqual(ready.readinessChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
+  assert.ok(ready.requiredEvidence.includes('Review mode: ready-for-review'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Review Evidence Summary');
 });

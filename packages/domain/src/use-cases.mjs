@@ -633,6 +633,76 @@ export function createRepositoryBranchStatus(store, operatorRunId, options = {})
   };
 }
 
+export function createPullRequestReadiness(store, operatorRunId, options = {}) {
+  const branchStatus = createRepositoryBranchStatus(store, operatorRunId, options);
+  const prReady = branchStatus.branchReady;
+  const pullRequestTitle = options.pullRequestTitle || 'Repository Collaboration Workflow v1.6';
+  const pullRequestTarget = options.pullRequestTarget || branchStatus.mainBranch;
+  const pullRequestSource = options.pullRequestSource || branchStatus.localBranch;
+  const reviewMode = prReady ? 'ready-for-review' : 'blocked-preview';
+  const mergePolicy = prReady ? 'review-before-main' : 'hold-before-review';
+  const readinessChecks = [
+    {
+      label: 'Branch status ready',
+      status: branchStatus.branchReady ? 'pass' : 'blocked',
+      detail: branchStatus.branchDecision
+    },
+    {
+      label: 'Remote branch available',
+      status: branchStatus.syncStatus === 'synced' ? 'pass' : 'blocked',
+      detail: branchStatus.remoteBranch
+    },
+    {
+      label: 'Main branch protected',
+      status: branchStatus.mainBranch ? 'pass' : 'blocked',
+      detail: branchStatus.mainBranch
+    },
+    {
+      label: 'Review required before merge',
+      status: prReady ? 'pass' : 'blocked',
+      detail: mergePolicy
+    }
+  ];
+
+  return {
+    title: 'Pull Request Readiness',
+    status: prReady ? 'ready' : 'blocked',
+    prReady,
+    operatorRunId,
+    workflowName: branchStatus.workflowName,
+    scenario: branchStatus.scenario,
+    stateSource: branchStatus.stateSource,
+    stateStatus: branchStatus.stateStatus,
+    completedActionCount: branchStatus.completedActionCount,
+    pullRequestTitle,
+    pullRequestSource,
+    pullRequestTarget,
+    localBranch: branchStatus.localBranch,
+    remoteBranch: branchStatus.remoteBranch,
+    mainBranch: branchStatus.mainBranch,
+    reviewMode,
+    mergePolicy,
+    checkCount: readinessChecks.length,
+    passedCheckCount: readinessChecks.filter((check) => check.status === 'pass').length,
+    blockedCheckCount: readinessChecks.filter((check) => check.status === 'blocked').length,
+    readinessDecision: prReady ? 'Prepare pull request review' : 'Keep pull request readiness blocked',
+    readinessSummary: prReady
+      ? 'Pull Request Readiness can open review from synced branch evidence.'
+      : 'Pull Request Readiness waits for repository branch status before review.',
+    readinessChecks,
+    requiredEvidence: prReady
+      ? [
+        `Branch status: ${branchStatus.status}`,
+        `Source branch: ${pullRequestSource}`,
+        `Target branch: ${pullRequestTarget}`,
+        `Review mode: ${reviewMode}`
+      ]
+      : branchStatus.requiredEvidence,
+    blockers: branchStatus.blockers,
+    nextWorkflow: prReady ? 'Review Evidence Summary' : branchStatus.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';
