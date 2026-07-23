@@ -703,6 +703,74 @@ export function createPullRequestReadiness(store, operatorRunId, options = {}) {
   };
 }
 
+export function createReviewEvidenceSummary(store, operatorRunId, options = {}) {
+  const pullRequest = createPullRequestReadiness(store, operatorRunId, options);
+  const evidenceReady = pullRequest.prReady;
+  const releaseNotesStatus = evidenceReady ? 'prepared' : 'blocked';
+  const closureEvidenceStatus = evidenceReady ? 'complete' : 'blocked';
+  const unresolvedBlockers = evidenceReady ? [] : pullRequest.blockers;
+  const evidenceItems = [
+    {
+      label: 'Pull request readiness',
+      status: pullRequest.status,
+      detail: pullRequest.readinessDecision
+    },
+    {
+      label: 'Release notes',
+      status: releaseNotesStatus,
+      detail: evidenceReady ? 'Release notes can cite pull request readiness evidence.' : 'Release notes wait for pull request readiness.'
+    },
+    {
+      label: 'Closure evidence',
+      status: closureEvidenceStatus,
+      detail: evidenceReady ? 'Closure evidence can reference synced branch and review mode.' : 'Closure evidence waits for repository collaboration readiness.'
+    },
+    {
+      label: 'Unresolved blockers',
+      status: evidenceReady ? 'clear' : 'blocked',
+      detail: evidenceReady ? 'No review evidence blockers remain.' : `${unresolvedBlockers.length} blockers remain.`
+    }
+  ];
+
+  return {
+    title: 'Review Evidence Summary',
+    status: evidenceReady ? 'ready' : 'blocked',
+    evidenceReady,
+    operatorRunId,
+    workflowName: pullRequest.workflowName,
+    scenario: pullRequest.scenario,
+    stateSource: pullRequest.stateSource,
+    stateStatus: pullRequest.stateStatus,
+    completedActionCount: pullRequest.completedActionCount,
+    pullRequestTitle: pullRequest.pullRequestTitle,
+    pullRequestSource: pullRequest.pullRequestSource,
+    pullRequestTarget: pullRequest.pullRequestTarget,
+    reviewMode: pullRequest.reviewMode,
+    mergePolicy: pullRequest.mergePolicy,
+    releaseNotesStatus,
+    closureEvidenceStatus,
+    unresolvedBlockerCount: unresolvedBlockers.length,
+    evidenceCount: evidenceItems.length,
+    readyEvidenceCount: evidenceItems.filter((item) => item.status === 'ready' || item.status === 'prepared' || item.status === 'complete' || item.status === 'clear').length,
+    blockedEvidenceCount: evidenceItems.filter((item) => item.status === 'blocked').length,
+    evidenceDecision: evidenceReady ? 'Summarize review evidence for merge readiness' : 'Keep review evidence blocked',
+    evidenceSummary: evidenceReady
+      ? 'Review Evidence Summary has pull request readiness, release notes, and closure evidence for merge readiness.'
+      : 'Review Evidence Summary waits for pull request readiness before merge review.',
+    evidenceItems,
+    requiredEvidence: evidenceReady
+      ? [
+        `Pull request status: ${pullRequest.status}`,
+        `Release notes status: ${releaseNotesStatus}`,
+        `Closure evidence status: ${closureEvidenceStatus}`,
+        `Merge policy: ${pullRequest.mergePolicy}`
+      ]
+      : pullRequest.requiredEvidence,
+    blockers: unresolvedBlockers,
+    nextWorkflow: evidenceReady ? 'Merge Readiness' : pullRequest.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

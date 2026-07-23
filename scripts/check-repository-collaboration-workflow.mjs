@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import {
   completeWorkflowAction,
   createPullRequestReadiness,
+  createReviewEvidenceSummary,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createRepositoryBranchStatus
@@ -11,9 +12,11 @@ const required = [
   'docs/development/v1.6-scope.md',
   'docs/development/iteration-v1.6-repository-branch-status.md',
   'docs/development/iteration-v1.6-pull-request-readiness.md',
+  'docs/development/iteration-v1.6-review-evidence-summary.md',
   'docs/decisions/0028-repository-collaboration-workflow-start.md',
   'fixtures/components/repository-branch-status-panel.json',
   'fixtures/components/pull-request-readiness-panel.json',
+  'fixtures/components/review-evidence-summary-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -48,6 +51,13 @@ if (blockedPullRequest.status !== 'blocked' || blockedPullRequest.nextWorkflow !
   process.exit(1);
 }
 
+const blockedReviewEvidence = createReviewEvidenceSummary(store, 'operator_run_example_001');
+
+if (blockedReviewEvidence.status !== 'blocked' || blockedReviewEvidence.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Review Evidence Summary blocked scenario did not route to Review Resolution Workflow.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const ready = createRepositoryBranchStatus(store, 'operator_run_example_001', {
   stateSource: 'command',
@@ -70,6 +80,18 @@ const readyPullRequest = createPullRequestReadiness(store, 'operator_run_example
 
 if (readyPullRequest.status !== 'ready' || readyPullRequest.nextWorkflow !== 'Review Evidence Summary') {
   console.error('Pull Request Readiness ready scenario did not route to Review Evidence Summary.');
+  process.exit(1);
+}
+
+const readyReviewEvidence = createReviewEvidenceSummary(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+
+if (readyReviewEvidence.status !== 'ready' || readyReviewEvidence.nextWorkflow !== 'Merge Readiness') {
+  console.error('Review Evidence Summary ready scenario did not route to Merge Readiness.');
   process.exit(1);
 }
 

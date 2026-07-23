@@ -1153,6 +1153,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .review-evidence-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .review-evidence-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .review-evidence-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .review-evidence-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1388,6 +1415,7 @@ export function renderStudioHtml(shell, options = {}) {
       .operator-workflow-design-final-closure-row,
       .repository-branch-status-row,
       .pull-request-readiness-row,
+      .review-evidence-summary-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2096,6 +2124,38 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.pullRequestReadiness.readinessChecks.map(renderPullRequestReadinessCheck).join('')}
         ${shell.pullRequestReadiness.requiredEvidence.map(renderPullRequestReadinessEvidence).join('')}
         ${shell.pullRequestReadiness.blockers.map(renderPullRequestReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Review Evidence Summary</p>
+    <section class="panel" aria-label="Review Evidence Summary">
+      <h2>${escapeHtml(shell.reviewEvidenceSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Review evidence status: ${shell.reviewEvidenceSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Review evidence ready: ${shell.reviewEvidenceSummary.evidenceReady}`)}
+        ${renderGuidanceRow('Workflow', `Review evidence workflow: ${shell.reviewEvidenceSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Review evidence scenario: ${shell.reviewEvidenceSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Review evidence source: ${shell.reviewEvidenceSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Review evidence state status: ${shell.reviewEvidenceSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Review evidence completed actions: ${shell.reviewEvidenceSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Review evidence pull request title: ${shell.reviewEvidenceSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Review evidence source branch: ${shell.reviewEvidenceSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Review evidence target branch: ${shell.reviewEvidenceSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Review evidence review mode: ${shell.reviewEvidenceSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Review evidence merge policy: ${shell.reviewEvidenceSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Release notes', `Review evidence release notes: ${shell.reviewEvidenceSummary.releaseNotesStatus}`)}
+        ${renderGuidanceRow('Closure evidence', `Review evidence closure evidence: ${shell.reviewEvidenceSummary.closureEvidenceStatus}`)}
+        ${renderGuidanceRow('Evidence', `Review evidence items: ${shell.reviewEvidenceSummary.readyEvidenceCount}/${shell.reviewEvidenceSummary.evidenceCount}`)}
+        ${renderGuidanceRow('Blocked evidence', `Review evidence blocked items: ${shell.reviewEvidenceSummary.blockedEvidenceCount}`)}
+        ${renderGuidanceRow('Unresolved blockers', `Review evidence unresolved blockers: ${shell.reviewEvidenceSummary.unresolvedBlockerCount}`)}
+        ${renderGuidanceRow('Decision', `Review evidence decision: ${shell.reviewEvidenceSummary.evidenceDecision}`)}
+        ${renderGuidanceRow('Summary', `Review evidence summary: ${shell.reviewEvidenceSummary.evidenceSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Review evidence next workflow: ${shell.reviewEvidenceSummary.nextWorkflow}`)}
+      </div>
+      <div class="review-evidence-summary-list">
+        ${shell.reviewEvidenceSummary.evidenceItems.map(renderReviewEvidenceSummaryItem).join('')}
+        ${shell.reviewEvidenceSummary.requiredEvidence.map(renderReviewEvidenceSummaryEvidence).join('')}
+        ${shell.reviewEvidenceSummary.blockers.map(renderReviewEvidenceSummaryBlocker).join('')}
       </div>
     </section>
 
@@ -2981,6 +3041,27 @@ function renderPullRequestReadinessBlocker(blocker) {
   return `<div class="pull-request-readiness-row">
     <span class="pull-request-readiness-label">Blocker</span>
     <span class="pull-request-readiness-value">Pull request blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderReviewEvidenceSummaryItem(item) {
+  return `<div class="review-evidence-summary-row">
+    <span class="review-evidence-summary-label">Evidence item</span>
+    <span class="review-evidence-summary-value">Review evidence item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderReviewEvidenceSummaryEvidence(evidence) {
+  return `<div class="review-evidence-summary-row">
+    <span class="review-evidence-summary-label">Evidence</span>
+    <span class="review-evidence-summary-value">Review evidence proof: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderReviewEvidenceSummaryBlocker(blocker) {
+  return `<div class="review-evidence-summary-row">
+    <span class="review-evidence-summary-label">Blocker</span>
+    <span class="review-evidence-summary-value">Review evidence blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

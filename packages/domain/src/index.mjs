@@ -28,6 +28,7 @@ export {
   createOperatorRunSummary,
   createPullRequestReadiness,
   createRepositoryBranchStatus,
+  createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
   createStudioWorkflowRuntimeAggregateSummary,
