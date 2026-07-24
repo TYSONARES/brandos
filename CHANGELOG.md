@@ -6,6 +6,7 @@
 - Added Repository Branch Status package start.
 - Added Pull Request Readiness package start.
 - Added Review Evidence Summary package start.
+- Added Merge Readiness package start.
 
 ## Unreleased - Operator Workflow Design v1.5
 

@@ -17,6 +17,7 @@ import {
   createExampleProductCoreState,
   createHandoffAcceptance,
   createInMemoryProductCoreStore,
+  createMergeReadiness,
   createOperatorHandoffReadiness,
   createOperatorRunQueue,
   createOperatorRunbookExecution,
@@ -1306,4 +1307,56 @@ test('Review Evidence Summary maps pull request readiness into merge evidence', 
   assert.ok(ready.requiredEvidence.includes('Merge policy: review-before-main'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Merge Readiness');
+});
+
+test('Merge Readiness maps review evidence into main branch merge readiness', () => {
+  const store = createExampleStore();
+  const blocked = createMergeReadiness(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Merge Readiness');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.mergeReady, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.pullRequestTitle, 'Repository Collaboration Workflow v1.6');
+  assert.equal(blocked.pullRequestSource, 'codex/development-ready-v1.0');
+  assert.equal(blocked.pullRequestTarget, 'main');
+  assert.equal(blocked.reviewMode, 'blocked-preview');
+  assert.equal(blocked.mergePolicy, 'hold-before-review');
+  assert.equal(blocked.mainBranchStatus, 'blocked');
+  assert.equal(blocked.reviewEvidenceStatus, 'blocked');
+  assert.equal(blocked.releaseEvidenceStatus, 'blocked');
+  assert.equal(blocked.mergeWindowStatus, 'blocked');
+  assert.equal(blocked.checkCount, 4);
+  assert.equal(blocked.passedCheckCount, 0);
+  assert.equal(blocked.blockedCheckCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.mergeDecision, 'Keep merge readiness blocked');
+  assert.equal(blocked.mergeSummary, 'Merge Readiness waits for review evidence before any main branch action.');
+  assert.deepEqual(blocked.mergeChecks.map((check) => check.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createMergeReadiness(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.mergeReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.reviewEvidenceStatus, 'complete');
+  assert.equal(ready.releaseEvidenceStatus, 'prepared');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.passedCheckCount, 4);
+  assert.equal(ready.blockedCheckCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.mergeDecision, 'Prepare main branch merge review');
+  assert.equal(ready.mergeSummary, 'Merge Readiness can proceed with review evidence, protected main target, and release evidence.');
+  assert.deepEqual(ready.mergeChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
+  assert.ok(ready.requiredEvidence.includes('Release evidence status: prepared'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Repository Collaboration Aggregate Summary');
 });

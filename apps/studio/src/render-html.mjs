@@ -1180,6 +1180,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .merge-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .merge-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .merge-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .merge-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1416,6 +1443,7 @@ export function renderStudioHtml(shell, options = {}) {
       .repository-branch-status-row,
       .pull-request-readiness-row,
       .review-evidence-summary-row,
+      .merge-readiness-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2156,6 +2184,40 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.reviewEvidenceSummary.evidenceItems.map(renderReviewEvidenceSummaryItem).join('')}
         ${shell.reviewEvidenceSummary.requiredEvidence.map(renderReviewEvidenceSummaryEvidence).join('')}
         ${shell.reviewEvidenceSummary.blockers.map(renderReviewEvidenceSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Merge Readiness</p>
+    <section class="panel" aria-label="Merge Readiness">
+      <h2>${escapeHtml(shell.mergeReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Merge readiness status: ${shell.mergeReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Merge readiness ready: ${shell.mergeReadiness.mergeReady}`)}
+        ${renderGuidanceRow('Workflow', `Merge readiness workflow: ${shell.mergeReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Merge readiness scenario: ${shell.mergeReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Merge readiness source: ${shell.mergeReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Merge readiness state status: ${shell.mergeReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Merge readiness completed actions: ${shell.mergeReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Merge readiness pull request title: ${shell.mergeReadiness.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Merge readiness source branch: ${shell.mergeReadiness.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Merge readiness target branch: ${shell.mergeReadiness.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Merge readiness review mode: ${shell.mergeReadiness.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Merge readiness merge policy: ${shell.mergeReadiness.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Merge readiness main branch: ${shell.mergeReadiness.mainBranchStatus}`)}
+        ${renderGuidanceRow('Review evidence', `Merge readiness review evidence: ${shell.mergeReadiness.reviewEvidenceStatus}`)}
+        ${renderGuidanceRow('Release evidence', `Merge readiness release evidence: ${shell.mergeReadiness.releaseEvidenceStatus}`)}
+        ${renderGuidanceRow('Merge window', `Merge readiness merge window: ${shell.mergeReadiness.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Checks', `Merge readiness checks: ${shell.mergeReadiness.passedCheckCount}/${shell.mergeReadiness.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Merge readiness blocked checks: ${shell.mergeReadiness.blockedCheckCount}`)}
+        ${renderGuidanceRow('Blockers', `Merge readiness blockers: ${shell.mergeReadiness.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Merge readiness decision: ${shell.mergeReadiness.mergeDecision}`)}
+        ${renderGuidanceRow('Summary', `Merge readiness summary: ${shell.mergeReadiness.mergeSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Merge readiness next workflow: ${shell.mergeReadiness.nextWorkflow}`)}
+      </div>
+      <div class="merge-readiness-list">
+        ${shell.mergeReadiness.mergeChecks.map(renderMergeReadinessCheck).join('')}
+        ${shell.mergeReadiness.requiredEvidence.map(renderMergeReadinessEvidence).join('')}
+        ${shell.mergeReadiness.blockers.map(renderMergeReadinessBlocker).join('')}
       </div>
     </section>
 
@@ -3062,6 +3124,27 @@ function renderReviewEvidenceSummaryBlocker(blocker) {
   return `<div class="review-evidence-summary-row">
     <span class="review-evidence-summary-label">Blocker</span>
     <span class="review-evidence-summary-value">Review evidence blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMergeReadinessCheck(check) {
+  return `<div class="merge-readiness-row">
+    <span class="merge-readiness-label">Check</span>
+    <span class="merge-readiness-value">Merge readiness check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderMergeReadinessEvidence(evidence) {
+  return `<div class="merge-readiness-row">
+    <span class="merge-readiness-label">Evidence</span>
+    <span class="merge-readiness-value">Merge readiness evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMergeReadinessBlocker(blocker) {
+  return `<div class="merge-readiness-row">
+    <span class="merge-readiness-label">Blocker</span>
+    <span class="merge-readiness-value">Merge readiness blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

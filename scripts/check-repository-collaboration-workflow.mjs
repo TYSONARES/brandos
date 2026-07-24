@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import {
   completeWorkflowAction,
+  createMergeReadiness,
   createPullRequestReadiness,
   createReviewEvidenceSummary,
   createExampleProductCoreState,
@@ -13,10 +14,12 @@ const required = [
   'docs/development/iteration-v1.6-repository-branch-status.md',
   'docs/development/iteration-v1.6-pull-request-readiness.md',
   'docs/development/iteration-v1.6-review-evidence-summary.md',
+  'docs/development/iteration-v1.6-merge-readiness.md',
   'docs/decisions/0028-repository-collaboration-workflow-start.md',
   'fixtures/components/repository-branch-status-panel.json',
   'fixtures/components/pull-request-readiness-panel.json',
   'fixtures/components/review-evidence-summary-panel.json',
+  'fixtures/components/merge-readiness-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -58,6 +61,13 @@ if (blockedReviewEvidence.status !== 'blocked' || blockedReviewEvidence.nextWork
   process.exit(1);
 }
 
+const blockedMergeReadiness = createMergeReadiness(store, 'operator_run_example_001');
+
+if (blockedMergeReadiness.status !== 'blocked' || blockedMergeReadiness.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Merge Readiness blocked scenario did not route to Review Resolution Workflow.');
+  process.exit(1);
+}
+
 completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
 const ready = createRepositoryBranchStatus(store, 'operator_run_example_001', {
   stateSource: 'command',
@@ -92,6 +102,18 @@ const readyReviewEvidence = createReviewEvidenceSummary(store, 'operator_run_exa
 
 if (readyReviewEvidence.status !== 'ready' || readyReviewEvidence.nextWorkflow !== 'Merge Readiness') {
   console.error('Review Evidence Summary ready scenario did not route to Merge Readiness.');
+  process.exit(1);
+}
+
+const readyMergeReadiness = createMergeReadiness(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+
+if (readyMergeReadiness.status !== 'ready' || readyMergeReadiness.nextWorkflow !== 'Repository Collaboration Aggregate Summary') {
+  console.error('Merge Readiness ready scenario did not route to Repository Collaboration Aggregate Summary.');
   process.exit(1);
 }
 

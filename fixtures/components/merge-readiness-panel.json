@@ -1,0 +1,14 @@
+{
+  "id": "component_merge_readiness_panel",
+  "name": "Merge Readiness Panel",
+  "status": "draft",
+  "purpose": "Shows whether review evidence, main branch target, release evidence, and merge policy are ready before main branch merge review.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose merge readiness status, pull request title, source branch, target branch, review mode, merge policy, main branch status, review evidence, release evidence, merge window, checks, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate merge readiness.",
+    "Keep main branch and merge policy text readable before any merge action."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

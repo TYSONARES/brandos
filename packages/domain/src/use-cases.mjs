@@ -771,6 +771,77 @@ export function createReviewEvidenceSummary(store, operatorRunId, options = {}) 
   };
 }
 
+export function createMergeReadiness(store, operatorRunId, options = {}) {
+  const reviewEvidence = createReviewEvidenceSummary(store, operatorRunId, options);
+  const mergeReady = reviewEvidence.evidenceReady;
+  const mainBranchStatus = mergeReady ? 'protected' : 'blocked';
+  const reviewEvidenceStatus = mergeReady ? 'complete' : 'blocked';
+  const releaseEvidenceStatus = mergeReady ? 'prepared' : 'blocked';
+  const mergeWindowStatus = mergeReady ? 'open' : 'blocked';
+  const mergeChecks = [
+    {
+      label: 'Review evidence ready',
+      status: reviewEvidence.status === 'ready' ? 'pass' : 'blocked',
+      detail: reviewEvidence.evidenceDecision
+    },
+    {
+      label: 'Main branch target',
+      status: mergeReady ? 'pass' : 'blocked',
+      detail: reviewEvidence.pullRequestTarget
+    },
+    {
+      label: 'Release evidence prepared',
+      status: releaseEvidenceStatus === 'prepared' ? 'pass' : 'blocked',
+      detail: reviewEvidence.releaseNotesStatus
+    },
+    {
+      label: 'Merge policy accepted',
+      status: reviewEvidence.mergePolicy === 'review-before-main' ? 'pass' : 'blocked',
+      detail: reviewEvidence.mergePolicy
+    }
+  ];
+
+  return {
+    title: 'Merge Readiness',
+    status: mergeReady ? 'ready' : 'blocked',
+    mergeReady,
+    operatorRunId,
+    workflowName: reviewEvidence.workflowName,
+    scenario: reviewEvidence.scenario,
+    stateSource: reviewEvidence.stateSource,
+    stateStatus: reviewEvidence.stateStatus,
+    completedActionCount: reviewEvidence.completedActionCount,
+    pullRequestTitle: reviewEvidence.pullRequestTitle,
+    pullRequestSource: reviewEvidence.pullRequestSource,
+    pullRequestTarget: reviewEvidence.pullRequestTarget,
+    reviewMode: reviewEvidence.reviewMode,
+    mergePolicy: reviewEvidence.mergePolicy,
+    mainBranchStatus,
+    reviewEvidenceStatus,
+    releaseEvidenceStatus,
+    mergeWindowStatus,
+    checkCount: mergeChecks.length,
+    passedCheckCount: mergeChecks.filter((check) => check.status === 'pass').length,
+    blockedCheckCount: mergeChecks.filter((check) => check.status === 'blocked').length,
+    blockerCount: reviewEvidence.blockers.length,
+    mergeDecision: mergeReady ? 'Prepare main branch merge review' : 'Keep merge readiness blocked',
+    mergeSummary: mergeReady
+      ? 'Merge Readiness can proceed with review evidence, protected main target, and release evidence.'
+      : 'Merge Readiness waits for review evidence before any main branch action.',
+    mergeChecks,
+    requiredEvidence: mergeReady
+      ? [
+        `Review evidence status: ${reviewEvidence.status}`,
+        `Main branch target: ${reviewEvidence.pullRequestTarget}`,
+        `Merge policy: ${reviewEvidence.mergePolicy}`,
+        `Release evidence status: ${releaseEvidenceStatus}`
+      ]
+      : reviewEvidence.requiredEvidence,
+    blockers: reviewEvidence.blockers,
+    nextWorkflow: mergeReady ? 'Repository Collaboration Aggregate Summary' : reviewEvidence.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';
