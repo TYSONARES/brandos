@@ -22,6 +22,7 @@ const required = [
   'docs/development/iteration-v1.6-pull-request-readiness.md',
   'docs/development/iteration-v1.6-review-evidence-summary.md',
   'docs/development/iteration-v1.6-merge-readiness.md',
+  'docs/development/iteration-v1.6-repository-collaboration-aggregate-summary.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',

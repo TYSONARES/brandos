@@ -94,6 +94,7 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Pull Request Readiness panel
 - dedicated Review Evidence Summary panel
 - dedicated Merge Readiness panel
+- dedicated Repository Collaboration Aggregate Summary panel
 - post-v1 aggregate release summary
 - post-v1 aggregate closure checklist
 - post-v1 final closure release notes

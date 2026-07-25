@@ -842,6 +842,75 @@ export function createMergeReadiness(store, operatorRunId, options = {}) {
   };
 }
 
+export function createRepositoryCollaborationAggregateSummary(store, operatorRunId, options = {}) {
+  const mergeReadiness = createMergeReadiness(store, operatorRunId, options);
+  const aggregateReady = mergeReadiness.mergeReady;
+  const workflowItems = [
+    {
+      label: 'Repository Branch Status',
+      status: aggregateReady ? 'ready' : 'blocked',
+      ready: aggregateReady,
+      detail: aggregateReady ? 'Branch, remote, and main evidence are ready.' : 'Repository branch status waits for workflow closure.'
+    },
+    {
+      label: 'Pull Request Readiness',
+      status: aggregateReady ? 'ready' : 'blocked',
+      ready: aggregateReady,
+      detail: aggregateReady ? 'Pull request readiness is available for review.' : 'Pull request readiness waits for branch status.'
+    },
+    {
+      label: 'Review Evidence Summary',
+      status: aggregateReady ? 'ready' : 'blocked',
+      ready: aggregateReady,
+      detail: aggregateReady ? 'Review evidence is ready for merge readiness.' : 'Review evidence waits for pull request readiness.'
+    },
+    {
+      label: 'Merge Readiness',
+      status: mergeReadiness.status,
+      ready: mergeReadiness.mergeReady,
+      detail: mergeReadiness.mergeDecision
+    }
+  ];
+
+  return {
+    title: 'Repository Collaboration Aggregate Summary',
+    status: aggregateReady ? 'ready' : 'blocked',
+    aggregateReady,
+    operatorRunId,
+    workflowName: mergeReadiness.workflowName,
+    scenario: mergeReadiness.scenario,
+    stateSource: mergeReadiness.stateSource,
+    stateStatus: mergeReadiness.stateStatus,
+    completedActionCount: mergeReadiness.completedActionCount,
+    pullRequestTitle: mergeReadiness.pullRequestTitle,
+    pullRequestSource: mergeReadiness.pullRequestSource,
+    pullRequestTarget: mergeReadiness.pullRequestTarget,
+    reviewMode: mergeReadiness.reviewMode,
+    mergePolicy: mergeReadiness.mergePolicy,
+    mainBranchStatus: mergeReadiness.mainBranchStatus,
+    mergeWindowStatus: mergeReadiness.mergeWindowStatus,
+    workflowCount: workflowItems.length,
+    readyWorkflowCount: workflowItems.filter((item) => item.ready).length,
+    blockedWorkflowCount: workflowItems.filter((item) => !item.ready).length,
+    blockerCount: mergeReadiness.blockers.length,
+    aggregateDecision: aggregateReady ? 'Aggregate repository collaboration evidence' : 'Keep repository collaboration aggregate blocked',
+    aggregateSummary: aggregateReady
+      ? 'Repository Collaboration v1.6 has branch, pull request, review evidence, and merge readiness evidence.'
+      : 'Repository Collaboration v1.6 aggregate waits for merge readiness.',
+    workflowItems,
+    requiredEvidence: aggregateReady
+      ? [
+        `Merge readiness status: ${mergeReadiness.status}`,
+        `Workflows ready: ${workflowItems.filter((item) => item.ready).length}/${workflowItems.length}`,
+        `Main branch status: ${mergeReadiness.mainBranchStatus}`,
+        `Merge window: ${mergeReadiness.mergeWindowStatus}`
+      ]
+      : mergeReadiness.requiredEvidence,
+    blockers: mergeReadiness.blockers,
+    nextWorkflow: aggregateReady ? 'Repository Collaboration Final Closure' : mergeReadiness.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

@@ -36,6 +36,7 @@ const componentFiles = [
   'fixtures/components/pull-request-readiness-panel.json',
   'fixtures/components/review-evidence-summary-panel.json',
   'fixtures/components/merge-readiness-panel.json',
+  'fixtures/components/repository-collaboration-aggregate-summary-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',

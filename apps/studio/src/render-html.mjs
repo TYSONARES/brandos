@@ -1207,6 +1207,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .repository-collaboration-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .repository-collaboration-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .repository-collaboration-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .repository-collaboration-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1444,6 +1471,7 @@ export function renderStudioHtml(shell, options = {}) {
       .pull-request-readiness-row,
       .review-evidence-summary-row,
       .merge-readiness-row,
+      .repository-collaboration-aggregate-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2218,6 +2246,38 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.mergeReadiness.mergeChecks.map(renderMergeReadinessCheck).join('')}
         ${shell.mergeReadiness.requiredEvidence.map(renderMergeReadinessEvidence).join('')}
         ${shell.mergeReadiness.blockers.map(renderMergeReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Repository Collaboration Aggregate Summary</p>
+    <section class="panel" aria-label="Repository Collaboration Aggregate Summary">
+      <h2>${escapeHtml(shell.repositoryCollaborationAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Repository collaboration aggregate status: ${shell.repositoryCollaborationAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Repository collaboration aggregate ready: ${shell.repositoryCollaborationAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Repository collaboration aggregate workflow: ${shell.repositoryCollaborationAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Repository collaboration aggregate scenario: ${shell.repositoryCollaborationAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Repository collaboration aggregate source: ${shell.repositoryCollaborationAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Repository collaboration aggregate state status: ${shell.repositoryCollaborationAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Repository collaboration aggregate completed actions: ${shell.repositoryCollaborationAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Repository collaboration aggregate pull request title: ${shell.repositoryCollaborationAggregateSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Repository collaboration aggregate source branch: ${shell.repositoryCollaborationAggregateSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Repository collaboration aggregate target branch: ${shell.repositoryCollaborationAggregateSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Repository collaboration aggregate review mode: ${shell.repositoryCollaborationAggregateSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Repository collaboration aggregate merge policy: ${shell.repositoryCollaborationAggregateSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Repository collaboration aggregate main branch: ${shell.repositoryCollaborationAggregateSummary.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Repository collaboration aggregate merge window: ${shell.repositoryCollaborationAggregateSummary.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Workflows', `Repository collaboration aggregate workflows: ${shell.repositoryCollaborationAggregateSummary.readyWorkflowCount}/${shell.repositoryCollaborationAggregateSummary.workflowCount}`)}
+        ${renderGuidanceRow('Blocked workflows', `Repository collaboration aggregate blocked workflows: ${shell.repositoryCollaborationAggregateSummary.blockedWorkflowCount}`)}
+        ${renderGuidanceRow('Blockers', `Repository collaboration aggregate blockers: ${shell.repositoryCollaborationAggregateSummary.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Repository collaboration aggregate decision: ${shell.repositoryCollaborationAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Repository collaboration aggregate summary: ${shell.repositoryCollaborationAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Repository collaboration aggregate next workflow: ${shell.repositoryCollaborationAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="repository-collaboration-aggregate-list">
+        ${shell.repositoryCollaborationAggregateSummary.workflowItems.map(renderRepositoryCollaborationAggregateItem).join('')}
+        ${shell.repositoryCollaborationAggregateSummary.requiredEvidence.map(renderRepositoryCollaborationAggregateEvidence).join('')}
+        ${shell.repositoryCollaborationAggregateSummary.blockers.map(renderRepositoryCollaborationAggregateBlocker).join('')}
       </div>
     </section>
 
@@ -3145,6 +3205,27 @@ function renderMergeReadinessBlocker(blocker) {
   return `<div class="merge-readiness-row">
     <span class="merge-readiness-label">Blocker</span>
     <span class="merge-readiness-value">Merge readiness blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationAggregateItem(item) {
+  return `<div class="repository-collaboration-aggregate-row">
+    <span class="repository-collaboration-aggregate-label">Workflow</span>
+    <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.ready)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationAggregateEvidence(evidence) {
+  return `<div class="repository-collaboration-aggregate-row">
+    <span class="repository-collaboration-aggregate-label">Evidence</span>
+    <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationAggregateBlocker(blocker) {
+  return `<div class="repository-collaboration-aggregate-row">
+    <span class="repository-collaboration-aggregate-label">Blocker</span>
+    <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

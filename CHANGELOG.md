@@ -7,6 +7,7 @@
 - Added Pull Request Readiness package start.
 - Added Review Evidence Summary package start.
 - Added Merge Readiness package start.
+- Added Repository Collaboration Aggregate Summary package start.
 
 ## Unreleased - Operator Workflow Design v1.5
 

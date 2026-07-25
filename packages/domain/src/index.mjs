@@ -37,6 +37,7 @@ export {
   createStudioStateRecovery,
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
+  createRepositoryCollaborationAggregateSummary,
   createWorkflowSessionSummary,
   createWorkflowTransitionPlan,
   evaluateContextPackReadiness
