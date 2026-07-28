@@ -4,6 +4,7 @@ import {
   createMergeReadiness,
   createPullRequestReadiness,
   createRepositoryCollaborationAggregateSummary,
+  createRepositoryCollaborationFinalClosure,
   createReviewEvidenceSummary,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
@@ -17,12 +18,16 @@ const required = [
   'docs/development/iteration-v1.6-review-evidence-summary.md',
   'docs/development/iteration-v1.6-merge-readiness.md',
   'docs/development/iteration-v1.6-repository-collaboration-aggregate-summary.md',
+  'docs/development/iteration-v1.6-repository-collaboration-final-closure.md',
+  'docs/development/release-v1.6-final-closure.md',
+  'docs/development/closure-v1.6-final-closure.md',
   'docs/decisions/0028-repository-collaboration-workflow-start.md',
   'fixtures/components/repository-branch-status-panel.json',
   'fixtures/components/pull-request-readiness-panel.json',
   'fixtures/components/review-evidence-summary-panel.json',
   'fixtures/components/merge-readiness-panel.json',
   'fixtures/components/repository-collaboration-aggregate-summary-panel.json',
+  'fixtures/components/repository-collaboration-final-closure-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -75,6 +80,13 @@ const blockedAggregateSummary = createRepositoryCollaborationAggregateSummary(st
 
 if (blockedAggregateSummary.status !== 'blocked' || blockedAggregateSummary.nextWorkflow !== 'Review Resolution Workflow') {
   console.error('Repository Collaboration Aggregate Summary blocked scenario did not route to Review Resolution Workflow.');
+  process.exit(1);
+}
+
+const blockedFinalClosure = createRepositoryCollaborationFinalClosure(store, 'operator_run_example_001');
+
+if (blockedFinalClosure.status !== 'blocked' || blockedFinalClosure.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Repository Collaboration Final Closure blocked scenario did not route to Review Resolution Workflow.');
   process.exit(1);
 }
 
@@ -136,6 +148,18 @@ const readyAggregateSummary = createRepositoryCollaborationAggregateSummary(stor
 
 if (readyAggregateSummary.status !== 'ready' || readyAggregateSummary.nextWorkflow !== 'Repository Collaboration Final Closure') {
   console.error('Repository Collaboration Aggregate Summary ready scenario did not route to Repository Collaboration Final Closure.');
+  process.exit(1);
+}
+
+const readyFinalClosure = createRepositoryCollaborationFinalClosure(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+
+if (readyFinalClosure.status !== 'closed' || readyFinalClosure.nextWorkflow !== 'Repository Collaboration v1.6 Closed') {
+  console.error('Repository Collaboration Final Closure ready scenario did not close Repository Collaboration v1.6.');
   process.exit(1);
 }
 

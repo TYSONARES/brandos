@@ -1234,6 +1234,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .repository-collaboration-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .repository-collaboration-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .repository-collaboration-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .repository-collaboration-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1472,6 +1499,7 @@ export function renderStudioHtml(shell, options = {}) {
       .review-evidence-summary-row,
       .merge-readiness-row,
       .repository-collaboration-aggregate-row,
+      .repository-collaboration-final-closure-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2278,6 +2306,40 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.repositoryCollaborationAggregateSummary.workflowItems.map(renderRepositoryCollaborationAggregateItem).join('')}
         ${shell.repositoryCollaborationAggregateSummary.requiredEvidence.map(renderRepositoryCollaborationAggregateEvidence).join('')}
         ${shell.repositoryCollaborationAggregateSummary.blockers.map(renderRepositoryCollaborationAggregateBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Repository Collaboration Final Closure</p>
+    <section class="panel" aria-label="Repository Collaboration Final Closure">
+      <h2>${escapeHtml(shell.repositoryCollaborationFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Repository collaboration final closure status: ${shell.repositoryCollaborationFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Repository collaboration final closure closed: ${shell.repositoryCollaborationFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Repository collaboration final closure workflow: ${shell.repositoryCollaborationFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Repository collaboration final closure scenario: ${shell.repositoryCollaborationFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Repository collaboration final closure source: ${shell.repositoryCollaborationFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Repository collaboration final closure state status: ${shell.repositoryCollaborationFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Repository collaboration final closure completed actions: ${shell.repositoryCollaborationFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Repository collaboration final closure pull request title: ${shell.repositoryCollaborationFinalClosure.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Repository collaboration final closure source branch: ${shell.repositoryCollaborationFinalClosure.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Repository collaboration final closure target branch: ${shell.repositoryCollaborationFinalClosure.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Repository collaboration final closure review mode: ${shell.repositoryCollaborationFinalClosure.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Repository collaboration final closure merge policy: ${shell.repositoryCollaborationFinalClosure.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Repository collaboration final closure main branch: ${shell.repositoryCollaborationFinalClosure.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Repository collaboration final closure merge window: ${shell.repositoryCollaborationFinalClosure.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Release artifact', `Repository collaboration final closure release artifact: ${shell.repositoryCollaborationFinalClosure.releaseArtifact}`)}
+        ${renderGuidanceRow('Closure checklist', `Repository collaboration final closure checklist: ${shell.repositoryCollaborationFinalClosure.closureChecklist}`)}
+        ${renderGuidanceRow('Checks', `Repository collaboration final closure checks: ${shell.repositoryCollaborationFinalClosure.passedCheckCount}/${shell.repositoryCollaborationFinalClosure.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Repository collaboration final closure blocked checks: ${shell.repositoryCollaborationFinalClosure.blockedCheckCount}`)}
+        ${renderGuidanceRow('Blockers', `Repository collaboration final closure blockers: ${shell.repositoryCollaborationFinalClosure.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Repository collaboration final closure decision: ${shell.repositoryCollaborationFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Repository collaboration final closure summary: ${shell.repositoryCollaborationFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Repository collaboration final closure next workflow: ${shell.repositoryCollaborationFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="repository-collaboration-final-closure-list">
+        ${shell.repositoryCollaborationFinalClosure.closureChecks.map(renderRepositoryCollaborationFinalClosureCheck).join('')}
+        ${shell.repositoryCollaborationFinalClosure.closureEvidence.map(renderRepositoryCollaborationFinalClosureEvidence).join('')}
+        ${shell.repositoryCollaborationFinalClosure.blockers.map(renderRepositoryCollaborationFinalClosureBlocker).join('')}
       </div>
     </section>
 
@@ -3226,6 +3288,27 @@ function renderRepositoryCollaborationAggregateBlocker(blocker) {
   return `<div class="repository-collaboration-aggregate-row">
     <span class="repository-collaboration-aggregate-label">Blocker</span>
     <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationFinalClosureCheck(check) {
+  return `<div class="repository-collaboration-final-closure-row">
+    <span class="repository-collaboration-final-closure-label">Check</span>
+    <span class="repository-collaboration-final-closure-value">Repository collaboration final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationFinalClosureEvidence(evidence) {
+  return `<div class="repository-collaboration-final-closure-row">
+    <span class="repository-collaboration-final-closure-label">Evidence</span>
+    <span class="repository-collaboration-final-closure-value">Repository collaboration final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationFinalClosureBlocker(blocker) {
+  return `<div class="repository-collaboration-final-closure-row">
+    <span class="repository-collaboration-final-closure-label">Blocker</span>
+    <span class="repository-collaboration-final-closure-value">Repository collaboration final closure blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

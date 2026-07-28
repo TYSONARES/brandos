@@ -38,6 +38,7 @@ export {
   createRuntimeValidationSignals,
   createOperatorRecoveryGuidance,
   createRepositoryCollaborationAggregateSummary,
+  createRepositoryCollaborationFinalClosure,
   createWorkflowSessionSummary,
   createWorkflowTransitionPlan,
   evaluateContextPackReadiness

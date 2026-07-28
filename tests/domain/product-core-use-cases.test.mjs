@@ -30,6 +30,7 @@ import {
   createPullRequestReadiness,
   createRepositoryBranchStatus,
   createRepositoryCollaborationAggregateSummary,
+  createRepositoryCollaborationFinalClosure,
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -1408,4 +1409,54 @@ test('Repository Collaboration Aggregate Summary rolls repository workflow evide
   assert.ok(ready.requiredEvidence.includes('Merge window: open'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Repository Collaboration Final Closure');
+});
+
+test('Repository Collaboration Final Closure closes only ready aggregate summaries', () => {
+  const store = createExampleStore();
+  const blocked = createRepositoryCollaborationFinalClosure(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Repository Collaboration Final Closure');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.closed, false);
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.pullRequestTitle, 'Repository Collaboration Workflow v1.6');
+  assert.equal(blocked.pullRequestSource, 'codex/development-ready-v1.0');
+  assert.equal(blocked.pullRequestTarget, 'main');
+  assert.equal(blocked.reviewMode, 'blocked-preview');
+  assert.equal(blocked.mergePolicy, 'hold-before-review');
+  assert.equal(blocked.mainBranchStatus, 'blocked');
+  assert.equal(blocked.mergeWindowStatus, 'blocked');
+  assert.equal(blocked.releaseArtifact, 'Repository Collaboration Workflow v1.6 Release Notes');
+  assert.equal(blocked.closureChecklist, 'Repository Collaboration Workflow v1.6 Closure Checklist');
+  assert.equal(blocked.checkCount, 4);
+  assert.equal(blocked.passedCheckCount, 0);
+  assert.equal(blocked.blockedCheckCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.closureDecision, 'Keep Repository Collaboration v1.6 open');
+  assert.equal(blocked.closureSummary, 'Repository Collaboration v1.6 final closure waits for aggregate readiness.');
+  assert.deepEqual(blocked.closureChecks.map((check) => check.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createRepositoryCollaborationFinalClosure(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'closed');
+  assert.equal(ready.closed, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.passedCheckCount, 4);
+  assert.equal(ready.blockedCheckCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.closureDecision, 'Close Repository Collaboration v1.6');
+  assert.equal(ready.closureSummary, 'Repository Collaboration v1.6 is closed with aggregate evidence and is ready for archive.');
+  assert.deepEqual(ready.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
+  assert.ok(ready.closureEvidence.includes('Next workflow: Repository Collaboration v1.6 Closed'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Repository Collaboration v1.6 Closed');
 });

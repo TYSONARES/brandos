@@ -911,6 +911,75 @@ export function createRepositoryCollaborationAggregateSummary(store, operatorRun
   };
 }
 
+export function createRepositoryCollaborationFinalClosure(store, operatorRunId, options = {}) {
+  const aggregate = createRepositoryCollaborationAggregateSummary(store, operatorRunId, options);
+  const closed = aggregate.aggregateReady;
+  const releaseArtifact = options.releaseArtifact || 'Repository Collaboration Workflow v1.6 Release Notes';
+  const closureChecklist = options.closureChecklist || 'Repository Collaboration Workflow v1.6 Closure Checklist';
+  const closureChecks = [
+    {
+      label: 'Aggregate summary ready',
+      status: aggregate.status === 'ready' ? 'pass' : 'blocked',
+      detail: aggregate.aggregateDecision
+    },
+    {
+      label: 'Release notes assigned',
+      status: closed ? 'pass' : 'blocked',
+      detail: releaseArtifact
+    },
+    {
+      label: 'Closure checklist assigned',
+      status: closed ? 'pass' : 'blocked',
+      detail: closureChecklist
+    },
+    {
+      label: 'Next cycle protected',
+      status: closed ? 'pass' : 'blocked',
+      detail: closed ? 'Repository Collaboration v1.6 can close before next package.' : 'Next cycle waits for aggregate readiness.'
+    }
+  ];
+
+  return {
+    title: 'Repository Collaboration Final Closure',
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    operatorRunId,
+    workflowName: aggregate.workflowName,
+    scenario: aggregate.scenario,
+    stateSource: aggregate.stateSource,
+    stateStatus: aggregate.stateStatus,
+    completedActionCount: aggregate.completedActionCount,
+    pullRequestTitle: aggregate.pullRequestTitle,
+    pullRequestSource: aggregate.pullRequestSource,
+    pullRequestTarget: aggregate.pullRequestTarget,
+    reviewMode: aggregate.reviewMode,
+    mergePolicy: aggregate.mergePolicy,
+    mainBranchStatus: aggregate.mainBranchStatus,
+    mergeWindowStatus: aggregate.mergeWindowStatus,
+    releaseArtifact,
+    closureChecklist,
+    checkCount: closureChecks.length,
+    passedCheckCount: closureChecks.filter((check) => check.status === 'pass').length,
+    blockedCheckCount: closureChecks.filter((check) => check.status === 'blocked').length,
+    blockerCount: aggregate.blockers.length,
+    closureDecision: closed ? 'Close Repository Collaboration v1.6' : 'Keep Repository Collaboration v1.6 open',
+    closureSummary: closed
+      ? 'Repository Collaboration v1.6 is closed with aggregate evidence and is ready for archive.'
+      : 'Repository Collaboration v1.6 final closure waits for aggregate readiness.',
+    closureChecks,
+    closureEvidence: closed
+      ? [
+        `Aggregate status: ${aggregate.status}`,
+        `Release artifact: ${releaseArtifact}`,
+        `Closure checklist: ${closureChecklist}`,
+        `Next workflow: Repository Collaboration v1.6 Closed`
+      ]
+      : aggregate.requiredEvidence,
+    blockers: aggregate.blockers,
+    nextWorkflow: closed ? 'Repository Collaboration v1.6 Closed' : aggregate.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';
