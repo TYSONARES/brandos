@@ -19,6 +19,8 @@ const required = [
   'docs/development/iteration-v1.6-merge-readiness.md',
   'docs/development/iteration-v1.6-repository-collaboration-aggregate-summary.md',
   'docs/development/iteration-v1.6-repository-collaboration-final-closure.md',
+  'docs/development/release-v1.6-aggregate-summary.md',
+  'docs/development/closure-v1.6-aggregate-summary.md',
   'docs/development/release-v1.6-final-closure.md',
   'docs/development/closure-v1.6-final-closure.md',
   'docs/decisions/0028-repository-collaboration-workflow-start.md',
