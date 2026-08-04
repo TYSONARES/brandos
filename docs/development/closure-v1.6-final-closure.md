@@ -1,21 +1,41 @@
-# Repository Collaboration Workflow v1.6 Final Closure Checklist
+# Repository Collaboration Workflow v1.6 Closure Checklist: Final Closure
 
 ## Status
 
-Draft.
+Closed.
 
-## Checklist
+## Scope Lock
 
-- [ ] Repository Branch Status is ready.
-- [ ] Pull Request Readiness is ready.
-- [ ] Review Evidence Summary is ready.
-- [ ] Merge Readiness is ready.
-- [ ] Repository Collaboration Aggregate Summary is ready.
-- [ ] Repository Collaboration Final Closure is closed.
-- [ ] Release notes reference v1.6 validation.
-- [ ] Closure checklist remains visible in Studio final closure.
-- [ ] `npm run check:all` passes.
+- Repository Collaboration Workflow v1.6 is closed.
+- All completed v1.6 packages are summarized by the aggregate release.
+- Every v1.6 package has release notes and closure evidence.
+- Full validation passed before closure.
+- Future work must start as a new named cycle or named product milestone.
 
-## Closure Decision
+## Validation Evidence
 
-Close Repository Collaboration Workflow v1.6 only after aggregate evidence, release notes, and closure checklist are present.
+- `npm run check:docs`
+- `npm run check:development`
+- `npm run check:development-release`
+- `npm run check:repository-collaboration-workflow`
+- `npm run check:all`
+
+## Closure Criteria
+
+- [x] Repository Branch Status is ready.
+- [x] Pull Request Readiness is ready.
+- [x] Review Evidence Summary is ready.
+- [x] Merge Readiness is ready.
+- [x] Repository Collaboration Aggregate Summary is ready.
+- [x] Repository Collaboration Final Closure is closed.
+- [x] Aggregate release summary exists.
+- [x] Aggregate closure checklist exists.
+- [x] Final closure release notes exist.
+- [x] Final closure checklist exists.
+- [x] Development index includes final closure documents.
+- [x] Development and Repository Collaboration checks require final closure documents.
+- [x] Changelog records final closure.
+
+## Next Package
+
+Start a new named cycle only after defining its scope in repository documents.

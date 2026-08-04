@@ -1,14 +1,15 @@
-# Repository Collaboration Workflow v1.6 Final Closure Release Notes
+# Repository Collaboration Workflow v1.6 Release Notes: Final Closure
 
 ## Status
 
-Draft.
+Release candidate.
 
-## Summary
+## Purpose
 
-Repository Collaboration Workflow v1.6 adds deterministic Studio and domain surfaces for repository branch status, pull request readiness, review evidence, merge readiness, aggregate summary, and final closure.
+This release package closes Repository Collaboration Workflow v1.6 after the aggregate summary remained
+stable under full validation.
 
-## Included Packages
+## Completed Scope
 
 - Repository Branch Status
 - Pull Request Readiness
@@ -16,16 +17,33 @@ Repository Collaboration Workflow v1.6 adds deterministic Studio and domain surf
 - Merge Readiness
 - Repository Collaboration Aggregate Summary
 - Repository Collaboration Final Closure
+- Repository Collaboration Workflow v1.6 Aggregate Summary
+
+## Closure Result
+
+- BrandOS Studio has deterministic repository collaboration surfaces from branch status to final closure.
+- Blocked and ready Studio scenarios expose different branch, pull request, review evidence, merge, aggregate, and closure outcomes.
+- Every Repository Collaboration Workflow v1.6 package has release notes and closure evidence.
+- Quality gates require the final closure documents and aggregate closure documents.
+- Future repository collaboration work can start as a new named cycle.
 
 ## Validation
 
+- `npm run check:docs`
+- `npm run check:development`
+- `npm run check:development-release`
 - `npm run check:repository-collaboration-workflow`
-- `npm run check:studio-render`
-- `npm run build:studio`
-- `npm run check:studio-build`
-- `npm test`
 - `npm run check:all`
 
-## Release Decision
+## Acceptance Checklist
 
-Ready when Repository Collaboration Final Closure reports closed with aggregate evidence.
+- [x] Repository Collaboration aggregate release summary exists.
+- [x] Repository Collaboration aggregate closure checklist exists.
+- [x] Final closure release notes identify completed scope.
+- [x] Final closure checklist defines closure criteria and evidence.
+- [x] Required quality gates include final closure documents.
+
+## Follow-Up
+
+Future work should start as a new named cycle or named product milestone instead of extending this
+closed v1.6 cycle.

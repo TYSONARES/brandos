@@ -10,6 +10,7 @@
 - Added Repository Collaboration Aggregate Summary package start.
 - Added Repository Collaboration Final Closure package start.
 - Added Repository Collaboration Workflow v1.6 aggregate release summary and closure checklist.
+- Closed Repository Collaboration Workflow v1.6 with final release notes and closure checklist.
 
 ## Unreleased - Operator Workflow Design v1.5
 

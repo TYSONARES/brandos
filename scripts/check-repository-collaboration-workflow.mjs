@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import {
   completeWorkflowAction,
   createMergeReadiness,
@@ -46,6 +46,29 @@ const missing = required.filter((file) => !existsSync(file));
 
 if (missing.length) {
   console.error(`Missing Repository Collaboration Workflow requirements: ${missing.join(', ')}`);
+  process.exit(1);
+}
+
+const finalRelease = readFileSync('docs/development/release-v1.6-final-closure.md', 'utf8');
+const finalClosure = readFileSync('docs/development/closure-v1.6-final-closure.md', 'utf8');
+const changelog = readFileSync('CHANGELOG.md', 'utf8');
+const requiredFinalClosureSnippets = [
+  ['docs/development/release-v1.6-final-closure.md', finalRelease, '## Status\n\nRelease candidate.'],
+  ['docs/development/release-v1.6-final-closure.md', finalRelease, 'Repository Collaboration Workflow v1.6 Aggregate Summary'],
+  ['docs/development/release-v1.6-final-closure.md', finalRelease, 'Future work should start as a new named cycle or named product milestone'],
+  ['docs/development/closure-v1.6-final-closure.md', finalClosure, '## Status\n\nClosed.'],
+  ['docs/development/closure-v1.6-final-closure.md', finalClosure, '- [x] Repository Branch Status is ready.'],
+  ['docs/development/closure-v1.6-final-closure.md', finalClosure, '- [x] Repository Collaboration Final Closure is closed.'],
+  ['docs/development/closure-v1.6-final-closure.md', finalClosure, '- [x] Changelog records final closure.'],
+  ['CHANGELOG.md', changelog, 'Closed Repository Collaboration Workflow v1.6 with final release notes and closure checklist.']
+];
+
+const missingFinalClosureSnippets = requiredFinalClosureSnippets
+  .filter(([, content, snippet]) => !content.includes(snippet))
+  .map(([file, , snippet]) => `${file}: ${snippet}`);
+
+if (missingFinalClosureSnippets.length) {
+  console.error(`Missing Repository Collaboration final closure content: ${missingFinalClosureSnippets.join(', ')}`);
   process.exit(1);
 }
 
