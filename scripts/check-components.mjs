@@ -42,6 +42,7 @@ const componentFiles = [
   'fixtures/components/ci-evidence-summary-panel.json',
   'fixtures/components/main-merge-plan-panel.json',
   'fixtures/components/release-tag-readiness-panel.json',
+  'fixtures/components/mainline-aggregate-summary-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',

@@ -1276,6 +1276,86 @@ export function createReleaseTagReadiness(store, operatorRunId, options = {}) {
   };
 }
 
+export function createMainlineAggregateSummary(store, operatorRunId, options = {}) {
+  const tagReadiness = createReleaseTagReadiness(store, operatorRunId, options);
+  const aggregateReady = tagReadiness.tagReady && tagReadiness.nextWorkflow === 'Mainline Aggregate Summary';
+  const aggregateArtifact = options.aggregateArtifact || 'Mainline Release Readiness v1.7 Aggregate Summary';
+  const closureChecklist = options.closureChecklist || 'Mainline Final Closure v1.7 Checklist';
+  const workflowItems = [
+    {
+      label: 'Release tag readiness ready',
+      status: tagReadiness.tagReady ? 'ready' : 'blocked',
+      detail: tagReadiness.tagDecision
+    },
+    {
+      label: 'Aggregate artifact assigned',
+      status: aggregateReady ? 'ready' : 'blocked',
+      detail: aggregateArtifact
+    },
+    {
+      label: 'Closure checklist assigned',
+      status: aggregateReady ? 'ready' : 'blocked',
+      detail: closureChecklist
+    },
+    {
+      label: 'Mainline closure held',
+      status: aggregateReady ? 'held' : 'blocked',
+      detail: aggregateReady ? 'Final closure waits for explicit release owner approval.' : 'Final closure remains blocked before aggregate readiness.'
+    }
+  ];
+
+  return {
+    title: 'Mainline Aggregate Summary',
+    status: aggregateReady ? 'ready' : 'blocked',
+    aggregateReady,
+    operatorRunId,
+    workflowName: tagReadiness.workflowName,
+    scenario: tagReadiness.scenario,
+    stateSource: tagReadiness.stateSource,
+    stateStatus: tagReadiness.stateStatus,
+    completedActionCount: tagReadiness.completedActionCount,
+    pullRequestTitle: tagReadiness.pullRequestTitle,
+    pullRequestSource: tagReadiness.pullRequestSource,
+    pullRequestTarget: tagReadiness.pullRequestTarget,
+    reviewMode: tagReadiness.reviewMode,
+    mergePolicy: tagReadiness.mergePolicy,
+    mainBranchStatus: tagReadiness.mainBranchStatus,
+    mergeWindowStatus: tagReadiness.mergeWindowStatus,
+    ciCommand: tagReadiness.ciCommand,
+    ciStatus: tagReadiness.ciStatus,
+    ciProvider: tagReadiness.ciProvider,
+    mergeStrategy: tagReadiness.mergeStrategy,
+    rollbackPlan: tagReadiness.rollbackPlan,
+    verificationCommand: tagReadiness.verificationCommand,
+    releaseVersion: tagReadiness.releaseVersion,
+    tagPolicy: tagReadiness.tagPolicy,
+    releaseNotes: tagReadiness.releaseNotes,
+    tagChecklist: tagReadiness.tagChecklist,
+    aggregateArtifact,
+    closureChecklist,
+    workflowItemCount: workflowItems.length,
+    readyWorkflowItemCount: workflowItems.filter((item) => item.status === 'ready' || item.status === 'held').length,
+    blockedWorkflowItemCount: workflowItems.filter((item) => item.status === 'blocked').length,
+    blockerCount: tagReadiness.blockers.length,
+    aggregateDecision: aggregateReady ? 'Prepare mainline aggregate summary' : 'Keep mainline aggregate summary blocked',
+    aggregateSummary: aggregateReady
+      ? 'Mainline Aggregate Summary can roll v1.7 review, CI, merge, and tag readiness evidence into final closure.'
+      : 'Mainline Aggregate Summary waits for Release Tag Readiness.',
+    workflowItems,
+    aggregateEvidence: aggregateReady
+      ? [
+        `Release tag readiness: ${tagReadiness.status}`,
+        `Release version: ${tagReadiness.releaseVersion}`,
+        `Aggregate artifact: ${aggregateArtifact}`,
+        `Closure checklist: ${closureChecklist}`,
+        `Next workflow: Mainline Final Closure`
+      ]
+      : tagReadiness.tagEvidence,
+    blockers: tagReadiness.blockers,
+    nextWorkflow: aggregateReady ? 'Mainline Final Closure' : tagReadiness.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

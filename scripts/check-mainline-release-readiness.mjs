@@ -4,6 +4,7 @@ import {
   createCiEvidenceSummary,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createMainlineAggregateSummary,
   createMainMergePlan,
   createPullRequestReviewPackage,
   createReleaseTagReadiness
@@ -15,11 +16,13 @@ const required = [
   'docs/development/iteration-v1.7-ci-evidence-summary.md',
   'docs/development/iteration-v1.7-main-merge-plan.md',
   'docs/development/iteration-v1.7-release-tag-readiness.md',
+  'docs/development/iteration-v1.7-mainline-aggregate-summary.md',
   'docs/decisions/0029-mainline-release-readiness-start.md',
   'fixtures/components/pull-request-review-package-panel.json',
   'fixtures/components/ci-evidence-summary-panel.json',
   'fixtures/components/main-merge-plan-panel.json',
   'fixtures/components/release-tag-readiness-panel.json',
+  'fixtures/components/mainline-aggregate-summary-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -52,6 +55,7 @@ const requiredSnippets = [
   ['docs/development/iteration-v1.7-ci-evidence-summary.md', readFileSync('docs/development/iteration-v1.7-ci-evidence-summary.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: CI Evidence Summary'],
   ['docs/development/iteration-v1.7-main-merge-plan.md', readFileSync('docs/development/iteration-v1.7-main-merge-plan.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Main Merge Plan'],
   ['docs/development/iteration-v1.7-release-tag-readiness.md', readFileSync('docs/development/iteration-v1.7-release-tag-readiness.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Release Tag Readiness'],
+  ['docs/development/iteration-v1.7-mainline-aggregate-summary.md', readFileSync('docs/development/iteration-v1.7-mainline-aggregate-summary.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Mainline Aggregate Summary'],
   ['docs/development/v1.7-scope.md', scope, 'CI Evidence Summary'],
   ['docs/development/v1.7-scope.md', scope, 'Main Merge Plan'],
   ['docs/development/v1.7-scope.md', scope, 'Release Tag Readiness'],
@@ -66,12 +70,14 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-ci-evidence-summary.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-main-merge-plan.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-release-tag-readiness.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.7-mainline-aggregate-summary.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0029-mainline-release-readiness-start.md`'],
   ['CHANGELOG.md', changelog, 'Started Mainline Release Readiness v1.7 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Pull Request Review Package start.'],
   ['CHANGELOG.md', changelog, 'Added CI Evidence Summary package start.'],
   ['CHANGELOG.md', changelog, 'Added Main Merge Plan package start.'],
-  ['CHANGELOG.md', changelog, 'Added Release Tag Readiness package start.']
+  ['CHANGELOG.md', changelog, 'Added Release Tag Readiness package start.'],
+  ['CHANGELOG.md', changelog, 'Added Mainline Aggregate Summary package start.']
 ];
 
 const missingSnippets = requiredSnippets
@@ -158,6 +164,25 @@ const readyReleaseTagReadiness = createReleaseTagReadiness(store, 'operator_run_
 
 if (readyReleaseTagReadiness.status !== 'ready' || readyReleaseTagReadiness.nextWorkflow !== 'Mainline Aggregate Summary') {
   console.error('Release Tag Readiness ready scenario did not route to Mainline Aggregate Summary.');
+  process.exit(1);
+}
+
+const blockedMainlineAggregateSummary = createMainlineAggregateSummary(createInMemoryProductCoreStore(createExampleProductCoreState()), 'operator_run_example_001');
+
+if (blockedMainlineAggregateSummary.status !== 'blocked' || blockedMainlineAggregateSummary.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Mainline Aggregate Summary blocked scenario did not route to Review Resolution Workflow.');
+  process.exit(1);
+}
+
+const readyMainlineAggregateSummary = createMainlineAggregateSummary(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+
+if (readyMainlineAggregateSummary.status !== 'ready' || readyMainlineAggregateSummary.nextWorkflow !== 'Mainline Final Closure') {
+  console.error('Mainline Aggregate Summary ready scenario did not route to Mainline Final Closure.');
   process.exit(1);
 }
 

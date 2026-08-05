@@ -18,6 +18,7 @@ export {
   createContextPackUsageFlow,
   createDraftReview,
   createHandoffAcceptance,
+  createMainlineAggregateSummary,
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,

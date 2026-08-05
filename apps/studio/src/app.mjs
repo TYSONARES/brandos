@@ -15,6 +15,7 @@ import {
   createContextPackUsageFlow,
   createDraftReview,
   createHandoffAcceptance,
+  createMainlineAggregateSummary,
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
@@ -264,6 +265,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionCount: contextPackWorkflow.completedActionCount,
     completedActionIds: contextPackWorkflow.completedActionIds
   });
+  const mainlineAggregateSummary = createMainlineAggregateSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
   const diagnostics = {
     title: 'Studio diagnostics',
     packageCount: 3,
@@ -433,6 +440,7 @@ export function createBrandOSStudioShell(options = {}) {
     ciEvidenceSummary,
     mainMergePlan,
     releaseTagReadiness,
+    mainlineAggregateSummary,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

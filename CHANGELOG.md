@@ -7,6 +7,7 @@
 - Added CI Evidence Summary package start.
 - Added Main Merge Plan package start.
 - Added Release Tag Readiness package start.
+- Added Mainline Aggregate Summary package start.
 
 ## Unreleased - Repository Collaboration Workflow v1.6
 

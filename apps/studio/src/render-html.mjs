@@ -1369,6 +1369,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .mainline-aggregate-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .mainline-aggregate-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .mainline-aggregate-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .mainline-aggregate-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1612,6 +1639,7 @@ export function renderStudioHtml(shell, options = {}) {
       .ci-evidence-summary-row,
       .main-merge-plan-row,
       .release-tag-readiness-row,
+      .mainline-aggregate-summary-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2601,6 +2629,50 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.releaseTagReadiness.tagItems.map(renderReleaseTagReadinessItem).join('')}
         ${shell.releaseTagReadiness.tagEvidence.map(renderReleaseTagReadinessEvidence).join('')}
         ${shell.releaseTagReadiness.blockers.map(renderReleaseTagReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Mainline Aggregate Summary</p>
+    <section class="panel" aria-label="Mainline Aggregate Summary">
+      <h2>${escapeHtml(shell.mainlineAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Mainline aggregate summary status: ${shell.mainlineAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Mainline aggregate summary ready: ${shell.mainlineAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Mainline aggregate summary workflow: ${shell.mainlineAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Mainline aggregate summary scenario: ${shell.mainlineAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Mainline aggregate summary source: ${shell.mainlineAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Mainline aggregate summary state status: ${shell.mainlineAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Mainline aggregate summary completed actions: ${shell.mainlineAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Mainline aggregate summary pull request title: ${shell.mainlineAggregateSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Mainline aggregate summary source branch: ${shell.mainlineAggregateSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Mainline aggregate summary target branch: ${shell.mainlineAggregateSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Mainline aggregate summary review mode: ${shell.mainlineAggregateSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Mainline aggregate summary merge policy: ${shell.mainlineAggregateSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Mainline aggregate summary main branch: ${shell.mainlineAggregateSummary.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Mainline aggregate summary merge window: ${shell.mainlineAggregateSummary.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Mainline aggregate summary ci command: ${shell.mainlineAggregateSummary.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Mainline aggregate summary ci status: ${shell.mainlineAggregateSummary.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Mainline aggregate summary ci provider: ${shell.mainlineAggregateSummary.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Mainline aggregate summary merge strategy: ${shell.mainlineAggregateSummary.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Mainline aggregate summary rollback: ${shell.mainlineAggregateSummary.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Mainline aggregate summary verification command: ${shell.mainlineAggregateSummary.verificationCommand}`)}
+        ${renderGuidanceRow('Release version', `Mainline aggregate summary version: ${shell.mainlineAggregateSummary.releaseVersion}`)}
+        ${renderGuidanceRow('Tag policy', `Mainline aggregate summary tag policy: ${shell.mainlineAggregateSummary.tagPolicy}`)}
+        ${renderGuidanceRow('Release notes', `Mainline aggregate summary release notes: ${shell.mainlineAggregateSummary.releaseNotes}`)}
+        ${renderGuidanceRow('Tag checklist', `Mainline aggregate summary tag checklist: ${shell.mainlineAggregateSummary.tagChecklist}`)}
+        ${renderGuidanceRow('Aggregate artifact', `Mainline aggregate summary artifact: ${shell.mainlineAggregateSummary.aggregateArtifact}`)}
+        ${renderGuidanceRow('Closure checklist', `Mainline aggregate summary closure checklist: ${shell.mainlineAggregateSummary.closureChecklist}`)}
+        ${renderGuidanceRow('Workflow items', `Mainline aggregate summary items: ${shell.mainlineAggregateSummary.readyWorkflowItemCount}/${shell.mainlineAggregateSummary.workflowItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Mainline aggregate summary blocked items: ${shell.mainlineAggregateSummary.blockedWorkflowItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Mainline aggregate summary blockers: ${shell.mainlineAggregateSummary.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Mainline aggregate summary decision: ${shell.mainlineAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Mainline aggregate summary summary: ${shell.mainlineAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Mainline aggregate summary next workflow: ${shell.mainlineAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="mainline-aggregate-summary-list">
+        ${shell.mainlineAggregateSummary.workflowItems.map(renderMainlineAggregateSummaryItem).join('')}
+        ${shell.mainlineAggregateSummary.aggregateEvidence.map(renderMainlineAggregateSummaryEvidence).join('')}
+        ${shell.mainlineAggregateSummary.blockers.map(renderMainlineAggregateSummaryBlocker).join('')}
       </div>
     </section>
 
@@ -3654,6 +3726,27 @@ function renderReleaseTagReadinessBlocker(blocker) {
   return `<div class="release-tag-readiness-row">
     <span class="release-tag-readiness-label">Blocker</span>
     <span class="release-tag-readiness-value">Release tag readiness blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMainlineAggregateSummaryItem(item) {
+  return `<div class="mainline-aggregate-summary-row">
+    <span class="mainline-aggregate-summary-label">Workflow item</span>
+    <span class="mainline-aggregate-summary-value">Mainline aggregate summary item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderMainlineAggregateSummaryEvidence(evidence) {
+  return `<div class="mainline-aggregate-summary-row">
+    <span class="mainline-aggregate-summary-label">Evidence</span>
+    <span class="mainline-aggregate-summary-value">Mainline aggregate summary evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMainlineAggregateSummaryBlocker(blocker) {
+  return `<div class="mainline-aggregate-summary-row">
+    <span class="mainline-aggregate-summary-label">Blocker</span>
+    <span class="mainline-aggregate-summary-value">Mainline aggregate summary blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

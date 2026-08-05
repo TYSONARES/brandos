@@ -18,6 +18,7 @@ import {
   createExampleProductCoreState,
   createHandoffAcceptance,
   createInMemoryProductCoreStore,
+  createMainlineAggregateSummary,
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
@@ -1666,4 +1667,53 @@ test('Release Tag Readiness opens only after main merge plan readiness', () => {
   assert.ok(ready.tagEvidence.includes('Release version: v1.7.0'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Mainline Aggregate Summary');
+});
+
+test('Mainline Aggregate Summary opens only after release tag readiness', () => {
+  const store = createExampleStore();
+  const blocked = createMainlineAggregateSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Mainline Aggregate Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.aggregateReady, false);
+  assert.equal(blocked.workflowName, 'Mainline Release Readiness');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.releaseVersion, 'v1.7.0');
+  assert.equal(blocked.tagPolicy, 'annotated-tag-after-main-merge');
+  assert.equal(blocked.aggregateArtifact, 'Mainline Release Readiness v1.7 Aggregate Summary');
+  assert.equal(blocked.closureChecklist, 'Mainline Final Closure v1.7 Checklist');
+  assert.equal(blocked.workflowItemCount, 4);
+  assert.equal(blocked.readyWorkflowItemCount, 0);
+  assert.equal(blocked.blockedWorkflowItemCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.aggregateDecision, 'Keep mainline aggregate summary blocked');
+  assert.equal(blocked.aggregateSummary, 'Mainline Aggregate Summary waits for Release Tag Readiness.');
+  assert.deepEqual(blocked.workflowItems.map((item) => item.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createMainlineAggregateSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.aggregateReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'operator-review');
+  assert.equal(ready.mergePolicy, 'no-main-before-review');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.ciStatus, 'passed');
+  assert.equal(ready.readyWorkflowItemCount, 4);
+  assert.equal(ready.blockedWorkflowItemCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.aggregateDecision, 'Prepare mainline aggregate summary');
+  assert.equal(ready.aggregateSummary, 'Mainline Aggregate Summary can roll v1.7 review, CI, merge, and tag readiness evidence into final closure.');
+  assert.deepEqual(ready.workflowItems.map((item) => item.status), ['ready', 'ready', 'ready', 'held']);
+  assert.ok(ready.aggregateEvidence.includes('Next workflow: Mainline Final Closure'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Mainline Final Closure');
 });
