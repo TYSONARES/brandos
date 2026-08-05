@@ -13,6 +13,7 @@ export {
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,
+  createCiEvidenceSummary,
   createCommandResultSummary,
   createContextPackUsageFlow,
   createDraftReview,

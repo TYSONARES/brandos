@@ -4,6 +4,7 @@
 
 - Started Mainline Release Readiness v1.7 scope and decision record.
 - Added Pull Request Review Package start.
+- Added CI Evidence Summary package start.
 
 ## Unreleased - Repository Collaboration Workflow v1.6
 

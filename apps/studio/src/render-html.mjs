@@ -1288,6 +1288,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .ci-evidence-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .ci-evidence-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .ci-evidence-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ci-evidence-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1528,6 +1555,7 @@ export function renderStudioHtml(shell, options = {}) {
       .repository-collaboration-aggregate-row,
       .repository-collaboration-final-closure-row,
       .pull-request-review-package-row,
+      .ci-evidence-summary-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2402,6 +2430,41 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.pullRequestReviewPackage.reviewItems.map(renderPullRequestReviewPackageItem).join('')}
         ${shell.pullRequestReviewPackage.reviewEvidence.map(renderPullRequestReviewPackageEvidence).join('')}
         ${shell.pullRequestReviewPackage.blockers.map(renderPullRequestReviewPackageBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">CI Evidence Summary</p>
+    <section class="panel" aria-label="CI Evidence Summary">
+      <h2>${escapeHtml(shell.ciEvidenceSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `CI evidence summary status: ${shell.ciEvidenceSummary.status}`)}
+        ${renderGuidanceRow('Ready', `CI evidence summary ready: ${shell.ciEvidenceSummary.ciReady}`)}
+        ${renderGuidanceRow('Workflow', `CI evidence summary workflow: ${shell.ciEvidenceSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `CI evidence summary scenario: ${shell.ciEvidenceSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `CI evidence summary source: ${shell.ciEvidenceSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `CI evidence summary state status: ${shell.ciEvidenceSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `CI evidence summary completed actions: ${shell.ciEvidenceSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `CI evidence summary pull request title: ${shell.ciEvidenceSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `CI evidence summary source branch: ${shell.ciEvidenceSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `CI evidence summary target branch: ${shell.ciEvidenceSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `CI evidence summary review mode: ${shell.ciEvidenceSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `CI evidence summary merge policy: ${shell.ciEvidenceSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `CI evidence summary main branch: ${shell.ciEvidenceSummary.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `CI evidence summary merge window: ${shell.ciEvidenceSummary.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `CI evidence summary command: ${shell.ciEvidenceSummary.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `CI evidence summary ci status: ${shell.ciEvidenceSummary.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `CI evidence summary provider: ${shell.ciEvidenceSummary.ciProvider}`)}
+        ${renderGuidanceRow('Evidence items', `CI evidence summary items: ${shell.ciEvidenceSummary.readyEvidenceItemCount}/${shell.ciEvidenceSummary.evidenceItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `CI evidence summary blocked items: ${shell.ciEvidenceSummary.blockedEvidenceItemCount}`)}
+        ${renderGuidanceRow('Blockers', `CI evidence summary blockers: ${shell.ciEvidenceSummary.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `CI evidence summary decision: ${shell.ciEvidenceSummary.ciDecision}`)}
+        ${renderGuidanceRow('Summary', `CI evidence summary summary: ${shell.ciEvidenceSummary.ciSummary}`)}
+        ${renderGuidanceRow('Next workflow', `CI evidence summary next workflow: ${shell.ciEvidenceSummary.nextWorkflow}`)}
+      </div>
+      <div class="ci-evidence-summary-list">
+        ${shell.ciEvidenceSummary.evidenceItems.map(renderCiEvidenceSummaryItem).join('')}
+        ${shell.ciEvidenceSummary.ciEvidence.map(renderCiEvidenceSummaryEvidence).join('')}
+        ${shell.ciEvidenceSummary.blockers.map(renderCiEvidenceSummaryBlocker).join('')}
       </div>
     </section>
 
@@ -3392,6 +3455,27 @@ function renderPullRequestReviewPackageBlocker(blocker) {
   return `<div class="pull-request-review-package-row">
     <span class="pull-request-review-package-label">Blocker</span>
     <span class="pull-request-review-package-value">Pull request review package blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderCiEvidenceSummaryItem(item) {
+  return `<div class="ci-evidence-summary-row">
+    <span class="ci-evidence-summary-label">CI item</span>
+    <span class="ci-evidence-summary-value">CI evidence summary item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderCiEvidenceSummaryEvidence(evidence) {
+  return `<div class="ci-evidence-summary-row">
+    <span class="ci-evidence-summary-label">Evidence</span>
+    <span class="ci-evidence-summary-value">CI evidence summary evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderCiEvidenceSummaryBlocker(blocker) {
+  return `<div class="ci-evidence-summary-row">
+    <span class="ci-evidence-summary-label">Blocker</span>
+    <span class="ci-evidence-summary-value">CI evidence summary blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

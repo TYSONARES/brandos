@@ -11,6 +11,7 @@ import {
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createBrandProfileOverview,
+  createCiEvidenceSummary,
   createCommandResultSummary,
   createContextPackUsageFlow,
   createDraftReview,
@@ -1511,4 +1512,52 @@ test('Pull Request Review Package opens only after repository collaboration fina
   assert.ok(ready.reviewEvidence.includes('Repository collaboration final closure: closed'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'CI Evidence Summary');
+});
+
+test('CI Evidence Summary opens only after pull request review package readiness', () => {
+  const store = createExampleStore();
+  const blocked = createCiEvidenceSummary(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'CI Evidence Summary');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.ciReady, false);
+  assert.equal(blocked.workflowName, 'Mainline Release Readiness');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.ciCommand, 'npm run check:all');
+  assert.equal(blocked.ciStatus, 'blocked');
+  assert.equal(blocked.ciProvider, 'local-repository-gates');
+  assert.equal(blocked.evidenceItemCount, 4);
+  assert.equal(blocked.readyEvidenceItemCount, 0);
+  assert.equal(blocked.blockedEvidenceItemCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.ciDecision, 'Keep CI evidence summary blocked');
+  assert.equal(blocked.ciSummary, 'CI Evidence Summary waits for Pull Request Review Package readiness.');
+  assert.deepEqual(blocked.evidenceItems.map((item) => item.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createCiEvidenceSummary(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.ciReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'operator-review');
+  assert.equal(ready.mergePolicy, 'no-main-before-review');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.ciStatus, 'passed');
+  assert.equal(ready.readyEvidenceItemCount, 4);
+  assert.equal(ready.blockedEvidenceItemCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.ciDecision, 'Prepare CI evidence summary');
+  assert.equal(ready.ciSummary, 'CI Evidence Summary can cite pull request review package readiness and local repository gates.');
+  assert.deepEqual(ready.evidenceItems.map((item) => item.status), ['ready', 'passed', 'passed', 'held']);
+  assert.ok(ready.ciEvidence.includes('CI command: npm run check:all'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Main Merge Plan');
 });

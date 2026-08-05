@@ -1050,6 +1050,77 @@ export function createPullRequestReviewPackage(store, operatorRunId, options = {
   };
 }
 
+export function createCiEvidenceSummary(store, operatorRunId, options = {}) {
+  const reviewPackage = createPullRequestReviewPackage(store, operatorRunId, options);
+  const ciReady = reviewPackage.reviewReady;
+  const ciCommand = options.ciCommand || 'npm run check:all';
+  const ciStatus = ciReady ? 'passed' : 'blocked';
+  const ciProvider = options.ciProvider || 'local-repository-gates';
+  const evidenceItems = [
+    {
+      label: 'Review package ready',
+      status: reviewPackage.reviewReady ? 'ready' : 'blocked',
+      detail: reviewPackage.reviewDecision
+    },
+    {
+      label: 'CI command assigned',
+      status: ciReady ? 'passed' : 'blocked',
+      detail: ciCommand
+    },
+    {
+      label: 'CI provider scoped',
+      status: ciReady ? 'passed' : 'blocked',
+      detail: ciProvider
+    },
+    {
+      label: 'Main merge held',
+      status: ciReady ? 'held' : 'blocked',
+      detail: ciReady ? 'Main merge waits for explicit merge plan approval.' : 'Main merge remains blocked before CI evidence.'
+    }
+  ];
+
+  return {
+    title: 'CI Evidence Summary',
+    status: ciReady ? 'ready' : 'blocked',
+    ciReady,
+    operatorRunId,
+    workflowName: reviewPackage.workflowName,
+    scenario: reviewPackage.scenario,
+    stateSource: reviewPackage.stateSource,
+    stateStatus: reviewPackage.stateStatus,
+    completedActionCount: reviewPackage.completedActionCount,
+    pullRequestTitle: reviewPackage.pullRequestTitle,
+    pullRequestSource: reviewPackage.pullRequestSource,
+    pullRequestTarget: reviewPackage.pullRequestTarget,
+    reviewMode: reviewPackage.reviewMode,
+    mergePolicy: reviewPackage.mergePolicy,
+    mainBranchStatus: reviewPackage.mainBranchStatus,
+    mergeWindowStatus: reviewPackage.mergeWindowStatus,
+    ciCommand,
+    ciStatus,
+    ciProvider,
+    evidenceItemCount: evidenceItems.length,
+    readyEvidenceItemCount: evidenceItems.filter((item) => item.status === 'ready' || item.status === 'passed' || item.status === 'held').length,
+    blockedEvidenceItemCount: evidenceItems.filter((item) => item.status === 'blocked').length,
+    blockerCount: reviewPackage.blockers.length,
+    ciDecision: ciReady ? 'Prepare CI evidence summary' : 'Keep CI evidence summary blocked',
+    ciSummary: ciReady
+      ? 'CI Evidence Summary can cite pull request review package readiness and local repository gates.'
+      : 'CI Evidence Summary waits for Pull Request Review Package readiness.',
+    evidenceItems,
+    ciEvidence: ciReady
+      ? [
+        `Pull request review package: ${reviewPackage.status}`,
+        `CI command: ${ciCommand}`,
+        `CI status: ${ciStatus}`,
+        `CI provider: ${ciProvider}`
+      ]
+      : reviewPackage.reviewEvidence,
+    blockers: reviewPackage.blockers,
+    nextWorkflow: ciReady ? 'Main Merge Plan' : reviewPackage.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

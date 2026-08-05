@@ -10,6 +10,7 @@ import {
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
+  createCiEvidenceSummary,
   createCommandResultSummary,
   createContextPackUsageFlow,
   createDraftReview,
@@ -243,6 +244,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionCount: contextPackWorkflow.completedActionCount,
     completedActionIds: contextPackWorkflow.completedActionIds
   });
+  const ciEvidenceSummary = createCiEvidenceSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
   const diagnostics = {
     title: 'Studio diagnostics',
     packageCount: 3,
@@ -409,6 +416,7 @@ export function createBrandOSStudioShell(options = {}) {
     repositoryCollaborationAggregateSummary,
     repositoryCollaborationFinalClosure,
     pullRequestReviewPackage,
+    ciEvidenceSummary,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

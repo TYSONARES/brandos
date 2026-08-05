@@ -1,0 +1,14 @@
+{
+  "id": "component_ci_evidence_summary_panel",
+  "name": "CI Evidence Summary Panel",
+  "status": "draft",
+  "purpose": "Shows whether pull request review package evidence is ready to cite local repository validation before mainline merge planning.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose CI evidence status, pull request title, source branch, target branch, review mode, merge policy, CI command, CI status, CI provider, evidence items, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate CI evidence readiness.",
+    "Keep CI command and main merge hold policy readable before merge planning."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}
