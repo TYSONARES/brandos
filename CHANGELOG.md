@@ -6,6 +6,7 @@
 - Added Pull Request Review Package start.
 - Added CI Evidence Summary package start.
 - Added Main Merge Plan package start.
+- Added Release Tag Readiness package start.
 
 ## Unreleased - Repository Collaboration Workflow v1.6
 

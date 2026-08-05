@@ -1342,6 +1342,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .release-tag-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .release-tag-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .release-tag-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .release-tag-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1584,6 +1611,7 @@ export function renderStudioHtml(shell, options = {}) {
       .pull-request-review-package-row,
       .ci-evidence-summary-row,
       .main-merge-plan-row,
+      .release-tag-readiness-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2531,6 +2559,48 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.mainMergePlan.planItems.map(renderMainMergePlanItem).join('')}
         ${shell.mainMergePlan.mergeEvidence.map(renderMainMergePlanEvidence).join('')}
         ${shell.mainMergePlan.blockers.map(renderMainMergePlanBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Release Tag Readiness</p>
+    <section class="panel" aria-label="Release Tag Readiness">
+      <h2>${escapeHtml(shell.releaseTagReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Release tag readiness status: ${shell.releaseTagReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Release tag readiness ready: ${shell.releaseTagReadiness.tagReady}`)}
+        ${renderGuidanceRow('Workflow', `Release tag readiness workflow: ${shell.releaseTagReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Release tag readiness scenario: ${shell.releaseTagReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Release tag readiness source: ${shell.releaseTagReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Release tag readiness state status: ${shell.releaseTagReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Release tag readiness completed actions: ${shell.releaseTagReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Release tag readiness pull request title: ${shell.releaseTagReadiness.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Release tag readiness source branch: ${shell.releaseTagReadiness.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Release tag readiness target branch: ${shell.releaseTagReadiness.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Release tag readiness review mode: ${shell.releaseTagReadiness.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Release tag readiness merge policy: ${shell.releaseTagReadiness.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Release tag readiness main branch: ${shell.releaseTagReadiness.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Release tag readiness merge window: ${shell.releaseTagReadiness.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Release tag readiness ci command: ${shell.releaseTagReadiness.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Release tag readiness ci status: ${shell.releaseTagReadiness.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Release tag readiness ci provider: ${shell.releaseTagReadiness.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Release tag readiness merge strategy: ${shell.releaseTagReadiness.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Release tag readiness rollback: ${shell.releaseTagReadiness.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Release tag readiness verification command: ${shell.releaseTagReadiness.verificationCommand}`)}
+        ${renderGuidanceRow('Release version', `Release tag readiness version: ${shell.releaseTagReadiness.releaseVersion}`)}
+        ${renderGuidanceRow('Tag policy', `Release tag readiness policy: ${shell.releaseTagReadiness.tagPolicy}`)}
+        ${renderGuidanceRow('Release notes', `Release tag readiness notes: ${shell.releaseTagReadiness.releaseNotes}`)}
+        ${renderGuidanceRow('Tag checklist', `Release tag readiness checklist: ${shell.releaseTagReadiness.tagChecklist}`)}
+        ${renderGuidanceRow('Tag items', `Release tag readiness items: ${shell.releaseTagReadiness.readyTagItemCount}/${shell.releaseTagReadiness.tagItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Release tag readiness blocked items: ${shell.releaseTagReadiness.blockedTagItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Release tag readiness blockers: ${shell.releaseTagReadiness.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Release tag readiness decision: ${shell.releaseTagReadiness.tagDecision}`)}
+        ${renderGuidanceRow('Summary', `Release tag readiness summary: ${shell.releaseTagReadiness.tagSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Release tag readiness next workflow: ${shell.releaseTagReadiness.nextWorkflow}`)}
+      </div>
+      <div class="release-tag-readiness-list">
+        ${shell.releaseTagReadiness.tagItems.map(renderReleaseTagReadinessItem).join('')}
+        ${shell.releaseTagReadiness.tagEvidence.map(renderReleaseTagReadinessEvidence).join('')}
+        ${shell.releaseTagReadiness.blockers.map(renderReleaseTagReadinessBlocker).join('')}
       </div>
     </section>
 
@@ -3563,6 +3633,27 @@ function renderMainMergePlanBlocker(blocker) {
   return `<div class="main-merge-plan-row">
     <span class="main-merge-plan-label">Blocker</span>
     <span class="main-merge-plan-value">Main merge plan blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderReleaseTagReadinessItem(item) {
+  return `<div class="release-tag-readiness-row">
+    <span class="release-tag-readiness-label">Tag item</span>
+    <span class="release-tag-readiness-value">Release tag readiness item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderReleaseTagReadinessEvidence(evidence) {
+  return `<div class="release-tag-readiness-row">
+    <span class="release-tag-readiness-label">Evidence</span>
+    <span class="release-tag-readiness-value">Release tag readiness evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderReleaseTagReadinessBlocker(blocker) {
+  return `<div class="release-tag-readiness-row">
+    <span class="release-tag-readiness-label">Blocker</span>
+    <span class="release-tag-readiness-value">Release tag readiness blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

@@ -30,6 +30,7 @@ import {
   createRepositoryCollaborationAggregateSummary,
   createRepositoryCollaborationFinalClosure,
   createRepositoryBranchStatus,
+  createReleaseTagReadiness,
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -257,6 +258,12 @@ export function createBrandOSStudioShell(options = {}) {
     completedActionCount: contextPackWorkflow.completedActionCount,
     completedActionIds: contextPackWorkflow.completedActionIds
   });
+  const releaseTagReadiness = createReleaseTagReadiness(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
   const diagnostics = {
     title: 'Studio diagnostics',
     packageCount: 3,
@@ -425,6 +432,7 @@ export function createBrandOSStudioShell(options = {}) {
     pullRequestReviewPackage,
     ciEvidenceSummary,
     mainMergePlan,
+    releaseTagReadiness,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

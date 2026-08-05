@@ -1196,6 +1196,86 @@ export function createMainMergePlan(store, operatorRunId, options = {}) {
   };
 }
 
+export function createReleaseTagReadiness(store, operatorRunId, options = {}) {
+  const mergePlan = createMainMergePlan(store, operatorRunId, options);
+  const tagReady = mergePlan.mergePlanReady && mergePlan.nextWorkflow === 'Release Tag Readiness';
+  const releaseVersion = options.releaseVersion || 'v1.7.0';
+  const tagPolicy = options.tagPolicy || 'annotated-tag-after-main-merge';
+  const releaseNotes = options.releaseNotes || 'Mainline Release Readiness v1.7 Release Notes';
+  const tagChecklist = options.tagChecklist || 'Release Tag Readiness v1.7 Checklist';
+  const tagItems = [
+    {
+      label: 'Main merge plan ready',
+      status: mergePlan.mergePlanReady ? 'ready' : 'blocked',
+      detail: mergePlan.mergeDecision
+    },
+    {
+      label: 'Release version assigned',
+      status: tagReady ? 'ready' : 'blocked',
+      detail: releaseVersion
+    },
+    {
+      label: 'Tag policy assigned',
+      status: tagReady ? 'ready' : 'blocked',
+      detail: tagPolicy
+    },
+    {
+      label: 'Tag creation held',
+      status: tagReady ? 'held' : 'blocked',
+      detail: tagReady ? 'Tag creation waits for explicit post-merge operator approval.' : 'Tag creation remains blocked before release tag readiness.'
+    }
+  ];
+
+  return {
+    title: 'Release Tag Readiness',
+    status: tagReady ? 'ready' : 'blocked',
+    tagReady,
+    operatorRunId,
+    workflowName: mergePlan.workflowName,
+    scenario: mergePlan.scenario,
+    stateSource: mergePlan.stateSource,
+    stateStatus: mergePlan.stateStatus,
+    completedActionCount: mergePlan.completedActionCount,
+    pullRequestTitle: mergePlan.pullRequestTitle,
+    pullRequestSource: mergePlan.pullRequestSource,
+    pullRequestTarget: mergePlan.pullRequestTarget,
+    reviewMode: mergePlan.reviewMode,
+    mergePolicy: mergePlan.mergePolicy,
+    mainBranchStatus: mergePlan.mainBranchStatus,
+    mergeWindowStatus: mergePlan.mergeWindowStatus,
+    ciCommand: mergePlan.ciCommand,
+    ciStatus: mergePlan.ciStatus,
+    ciProvider: mergePlan.ciProvider,
+    mergeStrategy: mergePlan.mergeStrategy,
+    rollbackPlan: mergePlan.rollbackPlan,
+    verificationCommand: mergePlan.verificationCommand,
+    releaseVersion,
+    tagPolicy,
+    releaseNotes,
+    tagChecklist,
+    tagItemCount: tagItems.length,
+    readyTagItemCount: tagItems.filter((item) => item.status === 'ready' || item.status === 'held').length,
+    blockedTagItemCount: tagItems.filter((item) => item.status === 'blocked').length,
+    blockerCount: mergePlan.blockers.length,
+    tagDecision: tagReady ? 'Prepare release tag readiness' : 'Keep release tag readiness blocked',
+    tagSummary: tagReady
+      ? 'Release Tag Readiness can prepare tag evidence after main merge approval without creating a tag.'
+      : 'Release Tag Readiness waits for Main Merge Plan readiness.',
+    tagItems,
+    tagEvidence: tagReady
+      ? [
+        `Main merge plan: ${mergePlan.status}`,
+        `Release version: ${releaseVersion}`,
+        `Tag policy: ${tagPolicy}`,
+        `Release notes: ${releaseNotes}`,
+        `Checklist: ${tagChecklist}`
+      ]
+      : mergePlan.mergeEvidence,
+    blockers: mergePlan.blockers,
+    nextWorkflow: tagReady ? 'Mainline Aggregate Summary' : mergePlan.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

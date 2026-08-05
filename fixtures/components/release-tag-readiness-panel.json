@@ -1,0 +1,14 @@
+{
+  "id": "component_release_tag_readiness_panel",
+  "name": "Release Tag Readiness Panel",
+  "status": "draft",
+  "purpose": "Shows whether a mainline release has enough evidence to prepare a version tag after explicit operator approval.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose release tag readiness status, pull request title, source branch, target branch, review mode, merge policy, main branch status, merge window, CI command, CI status, CI provider, merge strategy, rollback plan, verification command, release version, tag policy, release notes, checklist, tag items, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate tag readiness.",
+    "Keep tag creation hold policy readable before any release tag action."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

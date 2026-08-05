@@ -34,6 +34,7 @@ import {
   createRepositoryBranchStatus,
   createRepositoryCollaborationAggregateSummary,
   createRepositoryCollaborationFinalClosure,
+  createReleaseTagReadiness,
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
@@ -1612,4 +1613,57 @@ test('Main Merge Plan opens only after CI evidence readiness', () => {
   assert.ok(ready.mergeEvidence.includes('Merge strategy: reviewed-squash-merge'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Release Tag Readiness');
+});
+
+test('Release Tag Readiness opens only after main merge plan readiness', () => {
+  const store = createExampleStore();
+  const blocked = createReleaseTagReadiness(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Release Tag Readiness');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.tagReady, false);
+  assert.equal(blocked.workflowName, 'Mainline Release Readiness');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.ciCommand, 'npm run check:all');
+  assert.equal(blocked.ciStatus, 'blocked');
+  assert.equal(blocked.ciProvider, 'local-repository-gates');
+  assert.equal(blocked.mergeStrategy, 'reviewed-squash-merge');
+  assert.equal(blocked.releaseVersion, 'v1.7.0');
+  assert.equal(blocked.tagPolicy, 'annotated-tag-after-main-merge');
+  assert.equal(blocked.releaseNotes, 'Mainline Release Readiness v1.7 Release Notes');
+  assert.equal(blocked.tagChecklist, 'Release Tag Readiness v1.7 Checklist');
+  assert.equal(blocked.tagItemCount, 4);
+  assert.equal(blocked.readyTagItemCount, 0);
+  assert.equal(blocked.blockedTagItemCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.tagDecision, 'Keep release tag readiness blocked');
+  assert.equal(blocked.tagSummary, 'Release Tag Readiness waits for Main Merge Plan readiness.');
+  assert.deepEqual(blocked.tagItems.map((item) => item.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createReleaseTagReadiness(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.tagReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'operator-review');
+  assert.equal(ready.mergePolicy, 'no-main-before-review');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.ciStatus, 'passed');
+  assert.equal(ready.readyTagItemCount, 4);
+  assert.equal(ready.blockedTagItemCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.tagDecision, 'Prepare release tag readiness');
+  assert.equal(ready.tagSummary, 'Release Tag Readiness can prepare tag evidence after main merge approval without creating a tag.');
+  assert.deepEqual(ready.tagItems.map((item) => item.status), ['ready', 'ready', 'ready', 'held']);
+  assert.ok(ready.tagEvidence.includes('Release version: v1.7.0'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Mainline Aggregate Summary');
 });
