@@ -3,6 +3,7 @@
 ## Unreleased - Mainline Release Readiness v1.7
 
 - Started Mainline Release Readiness v1.7 scope and decision record.
+- Added Pull Request Review Package start.
 
 ## Unreleased - Repository Collaboration Workflow v1.6
 

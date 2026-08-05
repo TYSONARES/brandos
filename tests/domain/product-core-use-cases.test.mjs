@@ -28,6 +28,7 @@ import {
   createOperatorWorkflowDesignFinalClosure,
   createOperatorWorkflowMap,
   createPullRequestReadiness,
+  createPullRequestReviewPackage,
   createRepositoryBranchStatus,
   createRepositoryCollaborationAggregateSummary,
   createRepositoryCollaborationFinalClosure,
@@ -1459,4 +1460,55 @@ test('Repository Collaboration Final Closure closes only ready aggregate summari
   assert.ok(ready.closureEvidence.includes('Next workflow: Repository Collaboration v1.6 Closed'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Repository Collaboration v1.6 Closed');
+});
+
+test('Pull Request Review Package opens only after repository collaboration final closure', () => {
+  const store = createExampleStore();
+  const blocked = createPullRequestReviewPackage(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Pull Request Review Package');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.reviewReady, false);
+  assert.equal(blocked.workflowName, 'Mainline Release Readiness');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.pullRequestTitle, 'Repository Collaboration Workflow v1.6');
+  assert.equal(blocked.pullRequestSource, 'codex/development-ready-v1.0');
+  assert.equal(blocked.pullRequestTarget, 'main');
+  assert.equal(blocked.reviewMode, 'blocked-preview');
+  assert.equal(blocked.mergePolicy, 'hold-before-review');
+  assert.equal(blocked.reviewChecklist, 'Pull Request Review Package v1.7 Checklist');
+  assert.equal(blocked.reviewSummaryArtifact, 'Pull Request Review Package v1.7 Summary');
+  assert.equal(blocked.reviewItemCount, 4);
+  assert.equal(blocked.readyReviewItemCount, 0);
+  assert.equal(blocked.blockedReviewItemCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.reviewDecision, 'Keep pull request review package blocked');
+  assert.equal(blocked.reviewSummary, 'Pull Request Review Package waits for Repository Collaboration v1.6 final closure.');
+  assert.deepEqual(blocked.reviewItems.map((item) => item.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createPullRequestReviewPackage(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.reviewReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'operator-review');
+  assert.equal(ready.mergePolicy, 'no-main-before-review');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.readyReviewItemCount, 4);
+  assert.equal(ready.blockedReviewItemCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.reviewDecision, 'Prepare pull request review package');
+  assert.equal(ready.reviewSummary, 'Pull Request Review Package can summarize closed v1.6 evidence before mainline review.');
+  assert.deepEqual(ready.reviewItems.map((item) => item.status), ['ready', 'ready', 'ready', 'ready']);
+  assert.ok(ready.reviewEvidence.includes('Repository collaboration final closure: closed'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'CI Evidence Summary');
 });

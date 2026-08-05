@@ -1261,6 +1261,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .pull-request-review-package-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pull-request-review-package-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .pull-request-review-package-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pull-request-review-package-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1500,6 +1527,7 @@ export function renderStudioHtml(shell, options = {}) {
       .merge-readiness-row,
       .repository-collaboration-aggregate-row,
       .repository-collaboration-final-closure-row,
+      .pull-request-review-package-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2340,6 +2368,40 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.repositoryCollaborationFinalClosure.closureChecks.map(renderRepositoryCollaborationFinalClosureCheck).join('')}
         ${shell.repositoryCollaborationFinalClosure.closureEvidence.map(renderRepositoryCollaborationFinalClosureEvidence).join('')}
         ${shell.repositoryCollaborationFinalClosure.blockers.map(renderRepositoryCollaborationFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Pull Request Review Package</p>
+    <section class="panel" aria-label="Pull Request Review Package">
+      <h2>${escapeHtml(shell.pullRequestReviewPackage.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Pull request review package status: ${shell.pullRequestReviewPackage.status}`)}
+        ${renderGuidanceRow('Ready', `Pull request review package ready: ${shell.pullRequestReviewPackage.reviewReady}`)}
+        ${renderGuidanceRow('Workflow', `Pull request review package workflow: ${shell.pullRequestReviewPackage.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Pull request review package scenario: ${shell.pullRequestReviewPackage.scenario}`)}
+        ${renderGuidanceRow('State source', `Pull request review package source: ${shell.pullRequestReviewPackage.stateSource}`)}
+        ${renderGuidanceRow('State status', `Pull request review package state status: ${shell.pullRequestReviewPackage.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Pull request review package completed actions: ${shell.pullRequestReviewPackage.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Pull request review package title: ${shell.pullRequestReviewPackage.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Pull request review package source branch: ${shell.pullRequestReviewPackage.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Pull request review package target branch: ${shell.pullRequestReviewPackage.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Pull request review package review mode: ${shell.pullRequestReviewPackage.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Pull request review package merge policy: ${shell.pullRequestReviewPackage.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Pull request review package main branch: ${shell.pullRequestReviewPackage.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Pull request review package merge window: ${shell.pullRequestReviewPackage.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Review checklist', `Pull request review package checklist: ${shell.pullRequestReviewPackage.reviewChecklist}`)}
+        ${renderGuidanceRow('Review summary', `Pull request review package summary artifact: ${shell.pullRequestReviewPackage.reviewSummaryArtifact}`)}
+        ${renderGuidanceRow('Review items', `Pull request review package items: ${shell.pullRequestReviewPackage.readyReviewItemCount}/${shell.pullRequestReviewPackage.reviewItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Pull request review package blocked items: ${shell.pullRequestReviewPackage.blockedReviewItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Pull request review package blockers: ${shell.pullRequestReviewPackage.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Pull request review package decision: ${shell.pullRequestReviewPackage.reviewDecision}`)}
+        ${renderGuidanceRow('Summary', `Pull request review package summary: ${shell.pullRequestReviewPackage.reviewSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Pull request review package next workflow: ${shell.pullRequestReviewPackage.nextWorkflow}`)}
+      </div>
+      <div class="pull-request-review-package-list">
+        ${shell.pullRequestReviewPackage.reviewItems.map(renderPullRequestReviewPackageItem).join('')}
+        ${shell.pullRequestReviewPackage.reviewEvidence.map(renderPullRequestReviewPackageEvidence).join('')}
+        ${shell.pullRequestReviewPackage.blockers.map(renderPullRequestReviewPackageBlocker).join('')}
       </div>
     </section>
 
@@ -3309,6 +3371,27 @@ function renderRepositoryCollaborationFinalClosureBlocker(blocker) {
   return `<div class="repository-collaboration-final-closure-row">
     <span class="repository-collaboration-final-closure-label">Blocker</span>
     <span class="repository-collaboration-final-closure-value">Repository collaboration final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderPullRequestReviewPackageItem(item) {
+  return `<div class="pull-request-review-package-row">
+    <span class="pull-request-review-package-label">Review item</span>
+    <span class="pull-request-review-package-value">Pull request review package item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderPullRequestReviewPackageEvidence(evidence) {
+  return `<div class="pull-request-review-package-row">
+    <span class="pull-request-review-package-label">Evidence</span>
+    <span class="pull-request-review-package-value">Pull request review package evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderPullRequestReviewPackageBlocker(blocker) {
+  return `<div class="pull-request-review-package-row">
+    <span class="pull-request-review-package-label">Blocker</span>
+    <span class="pull-request-review-package-value">Pull request review package blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

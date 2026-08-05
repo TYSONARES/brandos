@@ -980,6 +980,76 @@ export function createRepositoryCollaborationFinalClosure(store, operatorRunId, 
   };
 }
 
+export function createPullRequestReviewPackage(store, operatorRunId, options = {}) {
+  const finalClosure = createRepositoryCollaborationFinalClosure(store, operatorRunId, options);
+  const reviewReady = finalClosure.closed;
+  const reviewChecklist = options.reviewChecklist || 'Pull Request Review Package v1.7 Checklist';
+  const reviewSummaryArtifact = options.reviewSummaryArtifact || 'Pull Request Review Package v1.7 Summary';
+  const reviewItems = [
+    {
+      label: 'Repository collaboration closed',
+      status: finalClosure.closed ? 'ready' : 'blocked',
+      detail: finalClosure.closureDecision
+    },
+    {
+      label: 'Review checklist assigned',
+      status: reviewReady ? 'ready' : 'blocked',
+      detail: reviewChecklist
+    },
+    {
+      label: 'Review summary assigned',
+      status: reviewReady ? 'ready' : 'blocked',
+      detail: reviewSummaryArtifact
+    },
+    {
+      label: 'Main branch action held',
+      status: reviewReady ? 'ready' : 'blocked',
+      detail: reviewReady ? 'Main branch action waits for explicit operator approval.' : 'Main branch action remains blocked before review package readiness.'
+    }
+  ];
+
+  return {
+    title: 'Pull Request Review Package',
+    status: reviewReady ? 'ready' : 'blocked',
+    reviewReady,
+    operatorRunId,
+    workflowName: 'Mainline Release Readiness',
+    scenario: finalClosure.scenario,
+    stateSource: finalClosure.stateSource,
+    stateStatus: finalClosure.stateStatus,
+    completedActionCount: finalClosure.completedActionCount,
+    pullRequestTitle: finalClosure.pullRequestTitle,
+    pullRequestSource: finalClosure.pullRequestSource,
+    pullRequestTarget: finalClosure.pullRequestTarget,
+    reviewMode: reviewReady ? 'operator-review' : finalClosure.reviewMode,
+    mergePolicy: reviewReady ? 'no-main-before-review' : finalClosure.mergePolicy,
+    mainBranchStatus: finalClosure.mainBranchStatus,
+    mergeWindowStatus: finalClosure.mergeWindowStatus,
+    reviewChecklist,
+    reviewSummaryArtifact,
+    reviewItemCount: reviewItems.length,
+    readyReviewItemCount: reviewItems.filter((item) => item.status === 'ready').length,
+    blockedReviewItemCount: reviewItems.filter((item) => item.status === 'blocked').length,
+    blockerCount: finalClosure.blockers.length,
+    reviewDecision: reviewReady ? 'Prepare pull request review package' : 'Keep pull request review package blocked',
+    reviewSummary: reviewReady
+      ? 'Pull Request Review Package can summarize closed v1.6 evidence before mainline review.'
+      : 'Pull Request Review Package waits for Repository Collaboration v1.6 final closure.',
+    reviewItems,
+    reviewEvidence: reviewReady
+      ? [
+        `Repository collaboration final closure: ${finalClosure.status}`,
+        `Pull request title: ${finalClosure.pullRequestTitle}`,
+        `Source branch: ${finalClosure.pullRequestSource}`,
+        `Target branch: ${finalClosure.pullRequestTarget}`,
+        `Review checklist: ${reviewChecklist}`
+      ]
+      : finalClosure.closureEvidence,
+    blockers: finalClosure.blockers,
+    nextWorkflow: reviewReady ? 'CI Evidence Summary' : finalClosure.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';
