@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Mainline Release Readiness v1.7
+
+- Started Mainline Release Readiness v1.7 scope and decision record.
+
 ## Unreleased - Repository Collaboration Workflow v1.6
 
 - Started Repository Collaboration Workflow v1.6 scope and decision record.
