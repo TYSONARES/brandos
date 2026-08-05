@@ -31,6 +31,7 @@ const required = [
   'docs/development/v1.7-scope.md',
   'docs/development/iteration-v1.7-pull-request-review-package.md',
   'docs/development/iteration-v1.7-ci-evidence-summary.md',
+  'docs/development/iteration-v1.7-main-merge-plan.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',

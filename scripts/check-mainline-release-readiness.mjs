@@ -4,6 +4,7 @@ import {
   createCiEvidenceSummary,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
+  createMainMergePlan,
   createPullRequestReviewPackage
 } from '../packages/domain/src/index.mjs';
 
@@ -11,9 +12,11 @@ const required = [
   'docs/development/v1.7-scope.md',
   'docs/development/iteration-v1.7-pull-request-review-package.md',
   'docs/development/iteration-v1.7-ci-evidence-summary.md',
+  'docs/development/iteration-v1.7-main-merge-plan.md',
   'docs/decisions/0029-mainline-release-readiness-start.md',
   'fixtures/components/pull-request-review-package-panel.json',
   'fixtures/components/ci-evidence-summary-panel.json',
+  'fixtures/components/main-merge-plan-panel.json',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
   'packages/domain/src/use-cases.mjs',
@@ -44,6 +47,7 @@ const requiredSnippets = [
   ['docs/development/v1.7-scope.md', scope, 'Pull Request Review Package'],
   ['docs/development/iteration-v1.7-pull-request-review-package.md', readFileSync('docs/development/iteration-v1.7-pull-request-review-package.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Pull Request Review Package'],
   ['docs/development/iteration-v1.7-ci-evidence-summary.md', readFileSync('docs/development/iteration-v1.7-ci-evidence-summary.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: CI Evidence Summary'],
+  ['docs/development/iteration-v1.7-main-merge-plan.md', readFileSync('docs/development/iteration-v1.7-main-merge-plan.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Main Merge Plan'],
   ['docs/development/v1.7-scope.md', scope, 'CI Evidence Summary'],
   ['docs/development/v1.7-scope.md', scope, 'Main Merge Plan'],
   ['docs/development/v1.7-scope.md', scope, 'Release Tag Readiness'],
@@ -56,10 +60,12 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`v1.7-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-pull-request-review-package.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-ci-evidence-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.7-main-merge-plan.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0029-mainline-release-readiness-start.md`'],
   ['CHANGELOG.md', changelog, 'Started Mainline Release Readiness v1.7 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Pull Request Review Package start.'],
-  ['CHANGELOG.md', changelog, 'Added CI Evidence Summary package start.']
+  ['CHANGELOG.md', changelog, 'Added CI Evidence Summary package start.'],
+  ['CHANGELOG.md', changelog, 'Added Main Merge Plan package start.']
 ];
 
 const missingSnippets = requiredSnippets
@@ -108,6 +114,25 @@ const readyCiEvidence = createCiEvidenceSummary(store, 'operator_run_example_001
 
 if (readyCiEvidence.status !== 'ready' || readyCiEvidence.nextWorkflow !== 'Main Merge Plan') {
   console.error('CI Evidence Summary ready scenario did not route to Main Merge Plan.');
+  process.exit(1);
+}
+
+const blockedMainMergePlan = createMainMergePlan(createInMemoryProductCoreStore(createExampleProductCoreState()), 'operator_run_example_001');
+
+if (blockedMainMergePlan.status !== 'blocked' || blockedMainMergePlan.nextWorkflow !== 'Review Resolution Workflow') {
+  console.error('Main Merge Plan blocked scenario did not route to Review Resolution Workflow.');
+  process.exit(1);
+}
+
+const readyMainMergePlan = createMainMergePlan(store, 'operator_run_example_001', {
+  stateSource: 'command',
+  stateStatus: 'loaded',
+  completedActionCount: 1,
+  completedActionIds: ['workflow_action_example_001']
+});
+
+if (readyMainMergePlan.status !== 'ready' || readyMainMergePlan.nextWorkflow !== 'Release Tag Readiness') {
+  console.error('Main Merge Plan ready scenario did not route to Release Tag Readiness.');
   process.exit(1);
 }
 

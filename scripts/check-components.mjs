@@ -40,6 +40,7 @@ const componentFiles = [
   'fixtures/components/repository-collaboration-final-closure-panel.json',
   'fixtures/components/pull-request-review-package-panel.json',
   'fixtures/components/ci-evidence-summary-panel.json',
+  'fixtures/components/main-merge-plan-panel.json',
   'fixtures/components/operator-guidance-panel.json',
   'fixtures/components/operator-handoff-panel.json',
   'fixtures/components/handoff-acceptance-panel.json',

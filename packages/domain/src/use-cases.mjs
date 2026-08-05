@@ -1121,6 +1121,81 @@ export function createCiEvidenceSummary(store, operatorRunId, options = {}) {
   };
 }
 
+export function createMainMergePlan(store, operatorRunId, options = {}) {
+  const ciEvidence = createCiEvidenceSummary(store, operatorRunId, options);
+  const mergePlanReady = ciEvidence.ciReady && ciEvidence.ciStatus === 'passed' && ciEvidence.mainBranchStatus === 'protected';
+  const mergeStrategy = options.mergeStrategy || 'reviewed-squash-merge';
+  const rollbackPlan = options.rollbackPlan || 'restore codex/development-ready-v1.0 as recovery branch';
+  const verificationCommand = options.verificationCommand || ciEvidence.ciCommand;
+  const planItems = [
+    {
+      label: 'CI evidence ready',
+      status: ciEvidence.ciReady ? 'ready' : 'blocked',
+      detail: ciEvidence.ciDecision
+    },
+    {
+      label: 'Merge strategy assigned',
+      status: mergePlanReady ? 'ready' : 'blocked',
+      detail: mergeStrategy
+    },
+    {
+      label: 'Rollback plan assigned',
+      status: mergePlanReady ? 'ready' : 'blocked',
+      detail: rollbackPlan
+    },
+    {
+      label: 'Main branch protected',
+      status: mergePlanReady ? 'held' : 'blocked',
+      detail: mergePlanReady ? 'Main merge still requires explicit operator approval.' : 'Main branch action remains blocked before merge plan readiness.'
+    }
+  ];
+
+  return {
+    title: 'Main Merge Plan',
+    status: mergePlanReady ? 'ready' : 'blocked',
+    mergePlanReady,
+    operatorRunId,
+    workflowName: ciEvidence.workflowName,
+    scenario: ciEvidence.scenario,
+    stateSource: ciEvidence.stateSource,
+    stateStatus: ciEvidence.stateStatus,
+    completedActionCount: ciEvidence.completedActionCount,
+    pullRequestTitle: ciEvidence.pullRequestTitle,
+    pullRequestSource: ciEvidence.pullRequestSource,
+    pullRequestTarget: ciEvidence.pullRequestTarget,
+    reviewMode: ciEvidence.reviewMode,
+    mergePolicy: ciEvidence.mergePolicy,
+    mainBranchStatus: ciEvidence.mainBranchStatus,
+    mergeWindowStatus: ciEvidence.mergeWindowStatus,
+    ciCommand: ciEvidence.ciCommand,
+    ciStatus: ciEvidence.ciStatus,
+    ciProvider: ciEvidence.ciProvider,
+    mergeStrategy,
+    rollbackPlan,
+    verificationCommand,
+    planItemCount: planItems.length,
+    readyPlanItemCount: planItems.filter((item) => item.status === 'ready' || item.status === 'held').length,
+    blockedPlanItemCount: planItems.filter((item) => item.status === 'blocked').length,
+    blockerCount: ciEvidence.blockers.length,
+    mergeDecision: mergePlanReady ? 'Prepare main merge plan' : 'Keep main merge plan blocked',
+    mergeSummary: mergePlanReady
+      ? 'Main Merge Plan can proceed to explicit operator approval without mutating main.'
+      : 'Main Merge Plan waits for CI Evidence Summary readiness.',
+    planItems,
+    mergeEvidence: mergePlanReady
+      ? [
+        `CI evidence summary: ${ciEvidence.status}`,
+        `Source branch: ${ciEvidence.pullRequestSource}`,
+        `Target branch: ${ciEvidence.pullRequestTarget}`,
+        `Merge strategy: ${mergeStrategy}`,
+        `Verification command: ${verificationCommand}`
+      ]
+      : ciEvidence.ciEvidence,
+    blockers: ciEvidence.blockers,
+    nextWorkflow: mergePlanReady ? 'Release Tag Readiness' : ciEvidence.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

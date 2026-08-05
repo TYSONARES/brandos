@@ -18,6 +18,7 @@ import {
   createExampleProductCoreState,
   createHandoffAcceptance,
   createInMemoryProductCoreStore,
+  createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
   createOperatorRunQueue,
@@ -1560,4 +1561,55 @@ test('CI Evidence Summary opens only after pull request review package readiness
   assert.ok(ready.ciEvidence.includes('CI command: npm run check:all'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Main Merge Plan');
+});
+
+test('Main Merge Plan opens only after CI evidence readiness', () => {
+  const store = createExampleStore();
+  const blocked = createMainMergePlan(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Main Merge Plan');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.mergePlanReady, false);
+  assert.equal(blocked.workflowName, 'Mainline Release Readiness');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.ciCommand, 'npm run check:all');
+  assert.equal(blocked.ciStatus, 'blocked');
+  assert.equal(blocked.ciProvider, 'local-repository-gates');
+  assert.equal(blocked.mergeStrategy, 'reviewed-squash-merge');
+  assert.equal(blocked.rollbackPlan, 'restore codex/development-ready-v1.0 as recovery branch');
+  assert.equal(blocked.verificationCommand, 'npm run check:all');
+  assert.equal(blocked.planItemCount, 4);
+  assert.equal(blocked.readyPlanItemCount, 0);
+  assert.equal(blocked.blockedPlanItemCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.mergeDecision, 'Keep main merge plan blocked');
+  assert.equal(blocked.mergeSummary, 'Main Merge Plan waits for CI Evidence Summary readiness.');
+  assert.deepEqual(blocked.planItems.map((item) => item.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createMainMergePlan(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'ready');
+  assert.equal(ready.mergePlanReady, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'operator-review');
+  assert.equal(ready.mergePolicy, 'no-main-before-review');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.ciStatus, 'passed');
+  assert.equal(ready.readyPlanItemCount, 4);
+  assert.equal(ready.blockedPlanItemCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.mergeDecision, 'Prepare main merge plan');
+  assert.equal(ready.mergeSummary, 'Main Merge Plan can proceed to explicit operator approval without mutating main.');
+  assert.deepEqual(ready.planItems.map((item) => item.status), ['ready', 'ready', 'ready', 'held']);
+  assert.ok(ready.mergeEvidence.includes('Merge strategy: reviewed-squash-merge'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Release Tag Readiness');
 });

@@ -1,0 +1,14 @@
+{
+  "id": "component_main_merge_plan_panel",
+  "name": "Main Merge Plan Panel",
+  "status": "draft",
+  "purpose": "Shows whether CI evidence is ready to support an explicit operator-approved main branch merge plan.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose main merge plan status, pull request title, source branch, target branch, review mode, merge policy, main branch status, merge window, CI command, CI status, CI provider, merge strategy, rollback plan, verification command, plan items, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate merge plan readiness.",
+    "Keep explicit operator approval and rollback details readable before any main branch action."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

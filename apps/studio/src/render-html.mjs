@@ -1315,6 +1315,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .main-merge-plan-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .main-merge-plan-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .main-merge-plan-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .main-merge-plan-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1556,6 +1583,7 @@ export function renderStudioHtml(shell, options = {}) {
       .repository-collaboration-final-closure-row,
       .pull-request-review-package-row,
       .ci-evidence-summary-row,
+      .main-merge-plan-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2465,6 +2493,44 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.ciEvidenceSummary.evidenceItems.map(renderCiEvidenceSummaryItem).join('')}
         ${shell.ciEvidenceSummary.ciEvidence.map(renderCiEvidenceSummaryEvidence).join('')}
         ${shell.ciEvidenceSummary.blockers.map(renderCiEvidenceSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Main Merge Plan</p>
+    <section class="panel" aria-label="Main Merge Plan">
+      <h2>${escapeHtml(shell.mainMergePlan.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Main merge plan status: ${shell.mainMergePlan.status}`)}
+        ${renderGuidanceRow('Ready', `Main merge plan ready: ${shell.mainMergePlan.mergePlanReady}`)}
+        ${renderGuidanceRow('Workflow', `Main merge plan workflow: ${shell.mainMergePlan.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Main merge plan scenario: ${shell.mainMergePlan.scenario}`)}
+        ${renderGuidanceRow('State source', `Main merge plan source: ${shell.mainMergePlan.stateSource}`)}
+        ${renderGuidanceRow('State status', `Main merge plan state status: ${shell.mainMergePlan.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Main merge plan completed actions: ${shell.mainMergePlan.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Main merge plan pull request title: ${shell.mainMergePlan.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Main merge plan source branch: ${shell.mainMergePlan.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Main merge plan target branch: ${shell.mainMergePlan.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Main merge plan review mode: ${shell.mainMergePlan.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Main merge plan merge policy: ${shell.mainMergePlan.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Main merge plan main branch: ${shell.mainMergePlan.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Main merge plan merge window: ${shell.mainMergePlan.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Main merge plan ci command: ${shell.mainMergePlan.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Main merge plan ci status: ${shell.mainMergePlan.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Main merge plan ci provider: ${shell.mainMergePlan.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Main merge plan strategy: ${shell.mainMergePlan.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Main merge plan rollback: ${shell.mainMergePlan.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Main merge plan verification command: ${shell.mainMergePlan.verificationCommand}`)}
+        ${renderGuidanceRow('Plan items', `Main merge plan items: ${shell.mainMergePlan.readyPlanItemCount}/${shell.mainMergePlan.planItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Main merge plan blocked items: ${shell.mainMergePlan.blockedPlanItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Main merge plan blockers: ${shell.mainMergePlan.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Main merge plan decision: ${shell.mainMergePlan.mergeDecision}`)}
+        ${renderGuidanceRow('Summary', `Main merge plan summary: ${shell.mainMergePlan.mergeSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Main merge plan next workflow: ${shell.mainMergePlan.nextWorkflow}`)}
+      </div>
+      <div class="main-merge-plan-list">
+        ${shell.mainMergePlan.planItems.map(renderMainMergePlanItem).join('')}
+        ${shell.mainMergePlan.mergeEvidence.map(renderMainMergePlanEvidence).join('')}
+        ${shell.mainMergePlan.blockers.map(renderMainMergePlanBlocker).join('')}
       </div>
     </section>
 
@@ -3476,6 +3542,27 @@ function renderCiEvidenceSummaryBlocker(blocker) {
   return `<div class="ci-evidence-summary-row">
     <span class="ci-evidence-summary-label">Blocker</span>
     <span class="ci-evidence-summary-value">CI evidence summary blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMainMergePlanItem(item) {
+  return `<div class="main-merge-plan-row">
+    <span class="main-merge-plan-label">Plan item</span>
+    <span class="main-merge-plan-value">Main merge plan item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderMainMergePlanEvidence(evidence) {
+  return `<div class="main-merge-plan-row">
+    <span class="main-merge-plan-label">Evidence</span>
+    <span class="main-merge-plan-value">Main merge plan evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMainMergePlanBlocker(blocker) {
+  return `<div class="main-merge-plan-row">
+    <span class="main-merge-plan-label">Blocker</span>
+    <span class="main-merge-plan-value">Main merge plan blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 
