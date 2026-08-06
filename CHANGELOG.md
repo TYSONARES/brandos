@@ -7,6 +7,7 @@
 - Added Release Approval Evidence release notes and closure checklist.
 - Added Publication Plan release notes and closure checklist.
 - Added Rollback Readiness release notes and closure checklist.
+- Added Post-Release Audit Summary release notes and closure checklist.
 
 ## Unreleased - Mainline Release Readiness v1.7
 
