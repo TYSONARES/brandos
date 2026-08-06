@@ -5,6 +5,7 @@
 - Started Release Governance v1.8 scope and decision record.
 - Added Release Decision Record release notes and closure checklist.
 - Added Release Approval Evidence release notes and closure checklist.
+- Added Publication Plan release notes and closure checklist.
 
 ## Unreleased - Mainline Release Readiness v1.7
 

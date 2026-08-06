@@ -8,6 +8,9 @@ const required = [
   'docs/development/iteration-v1.8-release-approval-evidence.md',
   'docs/development/release-v1.8-release-approval-evidence.md',
   'docs/development/closure-v1.8-release-approval-evidence.md',
+  'docs/development/iteration-v1.8-publication-plan.md',
+  'docs/development/release-v1.8-publication-plan.md',
+  'docs/development/closure-v1.8-publication-plan.md',
   'docs/decisions/0030-release-governance-start.md',
   'docs/development/README.md',
   'docs/decisions/README.md',
@@ -40,6 +43,9 @@ const releaseDecisionClosure = readFileSync('docs/development/closure-v1.8-relea
 const approvalIteration = readFileSync('docs/development/iteration-v1.8-release-approval-evidence.md', 'utf8');
 const approvalRelease = readFileSync('docs/development/release-v1.8-release-approval-evidence.md', 'utf8');
 const approvalClosure = readFileSync('docs/development/closure-v1.8-release-approval-evidence.md', 'utf8');
+const publicationIteration = readFileSync('docs/development/iteration-v1.8-publication-plan.md', 'utf8');
+const publicationRelease = readFileSync('docs/development/release-v1.8-publication-plan.md', 'utf8');
+const publicationClosure = readFileSync('docs/development/closure-v1.8-publication-plan.md', 'utf8');
 
 const requiredSnippets = [
   ['docs/development/v1.8-scope.md', scope, '# Release Governance v1.8 Scope'],
@@ -65,6 +71,13 @@ const requiredSnippets = [
   ['docs/development/release-v1.8-release-approval-evidence.md', approvalRelease, 'Release Approval Evidence release notes exist.'],
   ['docs/development/closure-v1.8-release-approval-evidence.md', approvalClosure, '# Release Governance v1.8 Closure Checklist: Release Approval Evidence'],
   ['docs/development/closure-v1.8-release-approval-evidence.md', approvalClosure, 'Publication Plan.'],
+  ['docs/development/iteration-v1.8-publication-plan.md', publicationIteration, '# Release Governance v1.8 Iteration: Publication Plan'],
+  ['docs/development/iteration-v1.8-publication-plan.md', publicationIteration, 'Explicit non-execution boundary'],
+  ['docs/development/iteration-v1.8-publication-plan.md', publicationIteration, 'Rollback handoff requirement'],
+  ['docs/development/release-v1.8-publication-plan.md', publicationRelease, '# Release Governance v1.8 Release Notes: Publication Plan'],
+  ['docs/development/release-v1.8-publication-plan.md', publicationRelease, 'Publication Plan release notes exist.'],
+  ['docs/development/closure-v1.8-publication-plan.md', publicationClosure, '# Release Governance v1.8 Closure Checklist: Publication Plan'],
+  ['docs/development/closure-v1.8-publication-plan.md', publicationClosure, 'Rollback Readiness.'],
   ['docs/decisions/0030-release-governance-start.md', decision, '# ADR 0030: Release Governance v1.8 Start'],
   ['docs/decisions/0030-release-governance-start.md', decision, '- Status: accepted'],
   ['docs/decisions/0030-release-governance-start.md', decision, 'Mainline Release Readiness v1.7 remains closed'],
@@ -77,6 +90,9 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.8-release-approval-evidence.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.8-release-approval-evidence.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.8-release-approval-evidence.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.8-publication-plan.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.8-publication-plan.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.8-publication-plan.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0030-release-governance-start.md`'],
   ['README.md', rootReadme, '- Latest completed implementation cycle: Mainline Release Readiness v1.7'],
   ['README.md', rootReadme, '- Active workstream: Release Governance v1.8'],
@@ -87,6 +103,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Started Release Governance v1.8 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Release Decision Record release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Release Approval Evidence release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added Publication Plan release notes and closure checklist.'],
   ['package.json', packageJson, '"check:release-governance"']
 ];
 
