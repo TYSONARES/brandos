@@ -8,6 +8,7 @@
 - Added Publication Plan release notes and closure checklist.
 - Added Rollback Readiness release notes and closure checklist.
 - Added Post-Release Audit Summary release notes and closure checklist.
+- Added Release Governance v1.8 aggregate release summary and closure checklist.
 
 ## Unreleased - Mainline Release Readiness v1.7
 

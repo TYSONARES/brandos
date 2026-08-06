@@ -17,6 +17,9 @@ const required = [
   'docs/development/iteration-v1.8-post-release-audit-summary.md',
   'docs/development/release-v1.8-post-release-audit-summary.md',
   'docs/development/closure-v1.8-post-release-audit-summary.md',
+  'docs/development/iteration-v1.8-release-governance-aggregate-summary.md',
+  'docs/development/release-v1.8-aggregate-summary.md',
+  'docs/development/closure-v1.8-aggregate-summary.md',
   'docs/decisions/0030-release-governance-start.md',
   'docs/development/README.md',
   'docs/decisions/README.md',
@@ -58,6 +61,9 @@ const rollbackClosure = readFileSync('docs/development/closure-v1.8-rollback-rea
 const auditIteration = readFileSync('docs/development/iteration-v1.8-post-release-audit-summary.md', 'utf8');
 const auditRelease = readFileSync('docs/development/release-v1.8-post-release-audit-summary.md', 'utf8');
 const auditClosure = readFileSync('docs/development/closure-v1.8-post-release-audit-summary.md', 'utf8');
+const aggregateIteration = readFileSync('docs/development/iteration-v1.8-release-governance-aggregate-summary.md', 'utf8');
+const aggregateRelease = readFileSync('docs/development/release-v1.8-aggregate-summary.md', 'utf8');
+const aggregateClosure = readFileSync('docs/development/closure-v1.8-aggregate-summary.md', 'utf8');
 
 const requiredSnippets = [
   ['docs/development/v1.8-scope.md', scope, '# Release Governance v1.8 Scope'],
@@ -104,6 +110,13 @@ const requiredSnippets = [
   ['docs/development/release-v1.8-post-release-audit-summary.md', auditRelease, 'Post-Release Audit Summary release notes exist.'],
   ['docs/development/closure-v1.8-post-release-audit-summary.md', auditClosure, '# Release Governance v1.8 Closure Checklist: Post-Release Audit Summary'],
   ['docs/development/closure-v1.8-post-release-audit-summary.md', auditClosure, 'Release Governance Aggregate Summary.'],
+  ['docs/development/iteration-v1.8-release-governance-aggregate-summary.md', aggregateIteration, '# Release Governance v1.8 Iteration: Release Governance Aggregate Summary'],
+  ['docs/development/iteration-v1.8-release-governance-aggregate-summary.md', aggregateIteration, 'Every included package has a closure checklist.'],
+  ['docs/development/release-v1.8-aggregate-summary.md', aggregateRelease, '# Release Governance v1.8 Release Notes: Aggregate Summary'],
+  ['docs/development/release-v1.8-aggregate-summary.md', aggregateRelease, 'Post-Release Audit Summary'],
+  ['docs/development/closure-v1.8-aggregate-summary.md', aggregateClosure, '# Release Governance v1.8 Closure Checklist: Aggregate Summary'],
+  ['docs/development/closure-v1.8-aggregate-summary.md', aggregateClosure, 'Ready for closure.'],
+  ['docs/development/closure-v1.8-aggregate-summary.md', aggregateClosure, 'Release Governance Final Closure.'],
   ['docs/decisions/0030-release-governance-start.md', decision, '# ADR 0030: Release Governance v1.8 Start'],
   ['docs/decisions/0030-release-governance-start.md', decision, '- Status: accepted'],
   ['docs/decisions/0030-release-governance-start.md', decision, 'Mainline Release Readiness v1.7 remains closed'],
@@ -125,6 +138,9 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.8-post-release-audit-summary.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.8-post-release-audit-summary.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.8-post-release-audit-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.8-release-governance-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.8-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.8-aggregate-summary.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0030-release-governance-start.md`'],
   ['README.md', rootReadme, '- Latest completed implementation cycle: Mainline Release Readiness v1.7'],
   ['README.md', rootReadme, '- Active workstream: Release Governance v1.8'],
@@ -138,6 +154,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Publication Plan release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Rollback Readiness release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Post-Release Audit Summary release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added Release Governance v1.8 aggregate release summary and closure checklist.'],
   ['package.json', packageJson, '"check:release-governance"']
 ];
 
