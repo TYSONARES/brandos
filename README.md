@@ -8,9 +8,9 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Mainline Release Readiness v1.7
-- Active workstream: Release Governance v1.8
-- Status: release governance scope started
+- Latest completed implementation cycle: Release Governance v1.8
+- Active workstream: Next named cycle not started
+- Status: release governance closed
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,8 +54,8 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Release Governance v1.8 turns completed mainline readiness into deterministic release decision,
-approval, publication, rollback, and post-release evidence.
+Release Governance v1.8 closed deterministic release decision, approval, publication, rollback, and
+post-release audit evidence. The next named cycle has not started yet.
 
 ## Repository Contract
 

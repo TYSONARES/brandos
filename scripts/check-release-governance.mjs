@@ -20,6 +20,9 @@ const required = [
   'docs/development/iteration-v1.8-release-governance-aggregate-summary.md',
   'docs/development/release-v1.8-aggregate-summary.md',
   'docs/development/closure-v1.8-aggregate-summary.md',
+  'docs/development/iteration-v1.8-release-governance-final-closure.md',
+  'docs/development/release-v1.8-final-closure.md',
+  'docs/development/closure-v1.8-final-closure.md',
   'docs/decisions/0030-release-governance-start.md',
   'docs/development/README.md',
   'docs/decisions/README.md',
@@ -64,6 +67,9 @@ const auditClosure = readFileSync('docs/development/closure-v1.8-post-release-au
 const aggregateIteration = readFileSync('docs/development/iteration-v1.8-release-governance-aggregate-summary.md', 'utf8');
 const aggregateRelease = readFileSync('docs/development/release-v1.8-aggregate-summary.md', 'utf8');
 const aggregateClosure = readFileSync('docs/development/closure-v1.8-aggregate-summary.md', 'utf8');
+const finalIteration = readFileSync('docs/development/iteration-v1.8-release-governance-final-closure.md', 'utf8');
+const finalRelease = readFileSync('docs/development/release-v1.8-final-closure.md', 'utf8');
+const finalClosure = readFileSync('docs/development/closure-v1.8-final-closure.md', 'utf8');
 
 const requiredSnippets = [
   ['docs/development/v1.8-scope.md', scope, '# Release Governance v1.8 Scope'],
@@ -117,11 +123,18 @@ const requiredSnippets = [
   ['docs/development/closure-v1.8-aggregate-summary.md', aggregateClosure, '# Release Governance v1.8 Closure Checklist: Aggregate Summary'],
   ['docs/development/closure-v1.8-aggregate-summary.md', aggregateClosure, 'Ready for closure.'],
   ['docs/development/closure-v1.8-aggregate-summary.md', aggregateClosure, 'Release Governance Final Closure.'],
+  ['docs/development/iteration-v1.8-release-governance-final-closure.md', finalIteration, '# Release Governance v1.8 Iteration: Release Governance Final Closure'],
+  ['docs/development/iteration-v1.8-release-governance-final-closure.md', finalIteration, 'Top-level repository status reflects Release Governance v1.8 completion.'],
+  ['docs/development/release-v1.8-final-closure.md', finalRelease, '# Release Governance v1.8 Release Notes: Final Closure'],
+  ['docs/development/release-v1.8-final-closure.md', finalRelease, 'Release Governance Final Closure'],
+  ['docs/development/closure-v1.8-final-closure.md', finalClosure, '# Release Governance v1.8 Closure Checklist: Final Closure'],
+  ['docs/development/closure-v1.8-final-closure.md', finalClosure, 'Closed.'],
+  ['docs/development/closure-v1.8-final-closure.md', finalClosure, 'Development and Release Governance checks require final closure documents.'],
   ['docs/decisions/0030-release-governance-start.md', decision, '# ADR 0030: Release Governance v1.8 Start'],
   ['docs/decisions/0030-release-governance-start.md', decision, '- Status: accepted'],
   ['docs/decisions/0030-release-governance-start.md', decision, 'Mainline Release Readiness v1.7 remains closed'],
-  ['docs/development/README.md', developmentIndex, '- Latest completed implementation cycle: Mainline Release Readiness v1.7'],
-  ['docs/development/README.md', developmentIndex, '- Active workstream: Release Governance v1.8'],
+  ['docs/development/README.md', developmentIndex, '- Latest completed implementation cycle: Release Governance v1.8'],
+  ['docs/development/README.md', developmentIndex, '- Active workstream: Next named cycle not started'],
   ['docs/development/README.md', developmentIndex, '`v1.8-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.8-release-decision-record.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.8-release-decision-record.md`'],
@@ -141,13 +154,17 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.8-release-governance-aggregate-summary.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.8-aggregate-summary.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.8-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.8-release-governance-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.8-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.8-final-closure.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0030-release-governance-start.md`'],
-  ['README.md', rootReadme, '- Latest completed implementation cycle: Mainline Release Readiness v1.7'],
-  ['README.md', rootReadme, '- Active workstream: Release Governance v1.8'],
-  ['PROJECT_MANIFEST.md', manifest, '- Latest completed implementation cycle: Mainline Release Readiness v1.7'],
-  ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Release Governance v1.8'],
+  ['README.md', rootReadme, '- Latest completed implementation cycle: Release Governance v1.8'],
+  ['README.md', rootReadme, '- Active workstream: Next named cycle not started'],
+  ['PROJECT_MANIFEST.md', manifest, '- Latest completed implementation cycle: Release Governance v1.8'],
+  ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Next named cycle not started'],
   ['PROJECT_MANIFEST.md', manifest, '## v1.8 Scope'],
-  ['docs/README.md', docsIndex, 'active Release Governance v1.8 work'],
+  ['PROJECT_MANIFEST.md', manifest, '## v1.8 Completion'],
+  ['docs/README.md', docsIndex, 'next named cycle not started'],
   ['CHANGELOG.md', changelog, 'Started Release Governance v1.8 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Release Decision Record release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Release Approval Evidence release notes and closure checklist.'],
@@ -155,6 +172,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Rollback Readiness release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Post-Release Audit Summary release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Release Governance v1.8 aggregate release summary and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Closed Release Governance v1.8 with final release notes and closure checklist.'],
   ['package.json', packageJson, '"check:release-governance"']
 ];
 

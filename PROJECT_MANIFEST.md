@@ -5,8 +5,8 @@
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Mainline Release Readiness v1.7
-- Active workstream: Release Governance v1.8
+- Latest completed implementation cycle: Release Governance v1.8
+- Active workstream: Next named cycle not started
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -119,6 +119,11 @@ Release Governance v1.8 turns completed mainline readiness into repository-backe
 It defines release decision evidence, approval readiness, publication planning, rollback readiness, and
 post-release audit signals without adding production deployment, external release automation, database
 integration, authentication runtime, or live AI model execution.
+
+## v1.8 Completion
+
+Release Governance v1.8 is complete at implementation cycle level. See
+`docs/development/release-v1.8-final-closure.md` and `docs/development/closure-v1.8-final-closure.md`.
 
 ## Definition of Done
 
