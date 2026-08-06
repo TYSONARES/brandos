@@ -83,6 +83,7 @@ const required = [
   'docs/development/closure-v1.7-aggregate-summary.md',
   'docs/development/release-v1.7-final-closure.md',
   'docs/development/closure-v1.7-final-closure.md',
+  'docs/development/v1.8-scope.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',

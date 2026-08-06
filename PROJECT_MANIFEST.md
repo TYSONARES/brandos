@@ -5,8 +5,8 @@
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Operator Runtime v1.1
-- Active workstream: Agent Handoff Runtime v1.2
+- Latest completed implementation cycle: Mainline Release Readiness v1.7
+- Active workstream: Release Governance v1.8
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -107,6 +107,18 @@ Operator Runtime v1.1 is complete at implementation cycle level. See
 Agent Handoff Runtime v1.2 turns accepted Operator Runtime handoff context into deterministic,
 repository-backed agent work context. It defines agent handoff context, agent task packets, inspection,
 and traceability checks without adding live AI model execution or external agent orchestration.
+
+## v1.7 Completion
+
+Mainline Release Readiness v1.7 is complete at implementation cycle level. See
+`docs/development/release-v1.7-final-closure.md` and `docs/development/closure-v1.7-final-closure.md`.
+
+## v1.8 Scope
+
+Release Governance v1.8 turns completed mainline readiness into repository-backed release governance.
+It defines release decision evidence, approval readiness, publication planning, rollback readiness, and
+post-release audit signals without adding production deployment, external release automation, database
+integration, authentication runtime, or live AI model execution.
 
 ## Definition of Done
 

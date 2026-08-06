@@ -8,9 +8,9 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Operator Workflow Design v1.5
-- Active workstream: Repository Collaboration Workflow v1.6
-- Status: repository collaboration workflow scope started
+- Latest completed implementation cycle: Mainline Release Readiness v1.7
+- Active workstream: Release Governance v1.8
+- Status: release governance scope started
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,8 +54,8 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Repository Collaboration Workflow v1.6 turns GitHub, branch, pull request, review, and merge readiness
-into deterministic repository-backed collaboration evidence.
+Release Governance v1.8 turns completed mainline readiness into deterministic release decision,
+approval, publication, rollback, and post-release evidence.
 
 ## Repository Contract
 

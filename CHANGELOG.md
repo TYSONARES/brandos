@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - Release Governance v1.8
+
+- Started Release Governance v1.8 scope and decision record.
+
 ## Unreleased - Mainline Release Readiness v1.7
 
 - Started Mainline Release Readiness v1.7 scope and decision record.
