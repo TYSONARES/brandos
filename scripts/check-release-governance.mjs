@@ -11,6 +11,9 @@ const required = [
   'docs/development/iteration-v1.8-publication-plan.md',
   'docs/development/release-v1.8-publication-plan.md',
   'docs/development/closure-v1.8-publication-plan.md',
+  'docs/development/iteration-v1.8-rollback-readiness.md',
+  'docs/development/release-v1.8-rollback-readiness.md',
+  'docs/development/closure-v1.8-rollback-readiness.md',
   'docs/decisions/0030-release-governance-start.md',
   'docs/development/README.md',
   'docs/decisions/README.md',
@@ -46,6 +49,9 @@ const approvalClosure = readFileSync('docs/development/closure-v1.8-release-appr
 const publicationIteration = readFileSync('docs/development/iteration-v1.8-publication-plan.md', 'utf8');
 const publicationRelease = readFileSync('docs/development/release-v1.8-publication-plan.md', 'utf8');
 const publicationClosure = readFileSync('docs/development/closure-v1.8-publication-plan.md', 'utf8');
+const rollbackIteration = readFileSync('docs/development/iteration-v1.8-rollback-readiness.md', 'utf8');
+const rollbackRelease = readFileSync('docs/development/release-v1.8-rollback-readiness.md', 'utf8');
+const rollbackClosure = readFileSync('docs/development/closure-v1.8-rollback-readiness.md', 'utf8');
 
 const requiredSnippets = [
   ['docs/development/v1.8-scope.md', scope, '# Release Governance v1.8 Scope'],
@@ -78,6 +84,13 @@ const requiredSnippets = [
   ['docs/development/release-v1.8-publication-plan.md', publicationRelease, 'Publication Plan release notes exist.'],
   ['docs/development/closure-v1.8-publication-plan.md', publicationClosure, '# Release Governance v1.8 Closure Checklist: Publication Plan'],
   ['docs/development/closure-v1.8-publication-plan.md', publicationClosure, 'Rollback Readiness.'],
+  ['docs/development/iteration-v1.8-rollback-readiness.md', rollbackIteration, '# Release Governance v1.8 Iteration: Rollback Readiness'],
+  ['docs/development/iteration-v1.8-rollback-readiness.md', rollbackIteration, 'Rollback trigger conditions'],
+  ['docs/development/iteration-v1.8-rollback-readiness.md', rollbackIteration, 'Last known stable reference'],
+  ['docs/development/release-v1.8-rollback-readiness.md', rollbackRelease, '# Release Governance v1.8 Release Notes: Rollback Readiness'],
+  ['docs/development/release-v1.8-rollback-readiness.md', rollbackRelease, 'Rollback Readiness release notes exist.'],
+  ['docs/development/closure-v1.8-rollback-readiness.md', rollbackClosure, '# Release Governance v1.8 Closure Checklist: Rollback Readiness'],
+  ['docs/development/closure-v1.8-rollback-readiness.md', rollbackClosure, 'Post-Release Audit Summary.'],
   ['docs/decisions/0030-release-governance-start.md', decision, '# ADR 0030: Release Governance v1.8 Start'],
   ['docs/decisions/0030-release-governance-start.md', decision, '- Status: accepted'],
   ['docs/decisions/0030-release-governance-start.md', decision, 'Mainline Release Readiness v1.7 remains closed'],
@@ -93,6 +106,9 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.8-publication-plan.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.8-publication-plan.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.8-publication-plan.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.8-rollback-readiness.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.8-rollback-readiness.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.8-rollback-readiness.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0030-release-governance-start.md`'],
   ['README.md', rootReadme, '- Latest completed implementation cycle: Mainline Release Readiness v1.7'],
   ['README.md', rootReadme, '- Active workstream: Release Governance v1.8'],
@@ -104,6 +120,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Release Decision Record release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Release Approval Evidence release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Publication Plan release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added Rollback Readiness release notes and closure checklist.'],
   ['package.json', packageJson, '"check:release-governance"']
 ];
 
