@@ -19,6 +19,8 @@ const required = [
   'docs/development/iteration-v1.7-release-tag-readiness.md',
   'docs/development/iteration-v1.7-mainline-aggregate-summary.md',
   'docs/development/iteration-v1.7-mainline-final-closure.md',
+  'docs/development/release-v1.7-aggregate-summary.md',
+  'docs/development/closure-v1.7-aggregate-summary.md',
   'docs/decisions/0029-mainline-release-readiness-start.md',
   'fixtures/components/pull-request-review-package-panel.json',
   'fixtures/components/ci-evidence-summary-panel.json',
@@ -50,6 +52,8 @@ const decision = readFileSync('docs/decisions/0029-mainline-release-readiness-st
 const developmentIndex = readFileSync('docs/development/README.md', 'utf8');
 const decisionsIndex = readFileSync('docs/decisions/README.md', 'utf8');
 const changelog = readFileSync('CHANGELOG.md', 'utf8');
+const aggregateRelease = readFileSync('docs/development/release-v1.7-aggregate-summary.md', 'utf8');
+const aggregateClosure = readFileSync('docs/development/closure-v1.7-aggregate-summary.md', 'utf8');
 
 const requiredSnippets = [
   ['docs/development/v1.7-scope.md', scope, '# Mainline Release Readiness v1.7 Scope'],
@@ -60,6 +64,12 @@ const requiredSnippets = [
   ['docs/development/iteration-v1.7-release-tag-readiness.md', readFileSync('docs/development/iteration-v1.7-release-tag-readiness.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Release Tag Readiness'],
   ['docs/development/iteration-v1.7-mainline-aggregate-summary.md', readFileSync('docs/development/iteration-v1.7-mainline-aggregate-summary.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Mainline Aggregate Summary'],
   ['docs/development/iteration-v1.7-mainline-final-closure.md', readFileSync('docs/development/iteration-v1.7-mainline-final-closure.md', 'utf8'), '# Mainline Release Readiness v1.7 Iteration: Mainline Final Closure'],
+  ['docs/development/release-v1.7-aggregate-summary.md', aggregateRelease, '# Mainline Release Readiness v1.7 Release Notes: Aggregate Summary'],
+  ['docs/development/closure-v1.7-aggregate-summary.md', aggregateClosure, '# Mainline Release Readiness v1.7 Closure Checklist: Aggregate Summary'],
+  ['docs/development/release-v1.7-aggregate-summary.md', aggregateRelease, 'Pull Request Review Package'],
+  ['docs/development/release-v1.7-aggregate-summary.md', aggregateRelease, 'Mainline Final Closure'],
+  ['docs/development/closure-v1.7-aggregate-summary.md', aggregateClosure, 'Ready for closure'],
+  ['docs/development/closure-v1.7-aggregate-summary.md', aggregateClosure, 'Required Mainline Release Readiness checks include aggregate summary documents.'],
   ['docs/development/v1.7-scope.md', scope, 'CI Evidence Summary'],
   ['docs/development/v1.7-scope.md', scope, 'Main Merge Plan'],
   ['docs/development/v1.7-scope.md', scope, 'Release Tag Readiness'],
@@ -76,6 +86,8 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-release-tag-readiness.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-mainline-aggregate-summary.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-mainline-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.7-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.7-aggregate-summary.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0029-mainline-release-readiness-start.md`'],
   ['CHANGELOG.md', changelog, 'Started Mainline Release Readiness v1.7 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Pull Request Review Package start.'],
@@ -83,7 +95,8 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Main Merge Plan package start.'],
   ['CHANGELOG.md', changelog, 'Added Release Tag Readiness package start.'],
   ['CHANGELOG.md', changelog, 'Added Mainline Aggregate Summary package start.'],
-  ['CHANGELOG.md', changelog, 'Added Mainline Final Closure package start.']
+  ['CHANGELOG.md', changelog, 'Added Mainline Final Closure package start.'],
+  ['CHANGELOG.md', changelog, 'Added Mainline Release Readiness v1.7 aggregate release summary and closure checklist.']
 ];
 
 const missingSnippets = requiredSnippets

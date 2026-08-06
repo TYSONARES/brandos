@@ -35,6 +35,8 @@ const required = [
   'docs/development/iteration-v1.7-release-tag-readiness.md',
   'docs/development/iteration-v1.7-mainline-aggregate-summary.md',
   'docs/development/iteration-v1.7-mainline-final-closure.md',
+  'docs/development/release-v1.7-aggregate-summary.md',
+  'docs/development/closure-v1.7-aggregate-summary.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',
