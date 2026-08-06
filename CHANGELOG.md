@@ -8,6 +8,7 @@
 - Added Main Merge Plan package start.
 - Added Release Tag Readiness package start.
 - Added Mainline Aggregate Summary package start.
+- Added Mainline Final Closure package start.
 
 ## Unreleased - Repository Collaboration Workflow v1.6
 

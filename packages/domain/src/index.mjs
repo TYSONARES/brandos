@@ -19,6 +19,7 @@ export {
   createDraftReview,
   createHandoffAcceptance,
   createMainlineAggregateSummary,
+  createMainlineFinalClosure,
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,

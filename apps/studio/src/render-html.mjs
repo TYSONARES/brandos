@@ -1396,6 +1396,33 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .mainline-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .mainline-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .mainline-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .mainline-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -1640,6 +1667,7 @@ export function renderStudioHtml(shell, options = {}) {
       .main-merge-plan-row,
       .release-tag-readiness-row,
       .mainline-aggregate-summary-row,
+      .mainline-final-closure-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -2673,6 +2701,52 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.mainlineAggregateSummary.workflowItems.map(renderMainlineAggregateSummaryItem).join('')}
         ${shell.mainlineAggregateSummary.aggregateEvidence.map(renderMainlineAggregateSummaryEvidence).join('')}
         ${shell.mainlineAggregateSummary.blockers.map(renderMainlineAggregateSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Mainline Final Closure</p>
+    <section class="panel" aria-label="Mainline Final Closure">
+      <h2>${escapeHtml(shell.mainlineFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Mainline final closure status: ${shell.mainlineFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Mainline final closure closed: ${shell.mainlineFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Mainline final closure workflow: ${shell.mainlineFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Mainline final closure scenario: ${shell.mainlineFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Mainline final closure source: ${shell.mainlineFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Mainline final closure state status: ${shell.mainlineFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Mainline final closure completed actions: ${shell.mainlineFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Mainline final closure pull request title: ${shell.mainlineFinalClosure.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Mainline final closure source branch: ${shell.mainlineFinalClosure.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Mainline final closure target branch: ${shell.mainlineFinalClosure.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Mainline final closure review mode: ${shell.mainlineFinalClosure.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Mainline final closure merge policy: ${shell.mainlineFinalClosure.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Mainline final closure main branch: ${shell.mainlineFinalClosure.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Mainline final closure merge window: ${shell.mainlineFinalClosure.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Mainline final closure ci command: ${shell.mainlineFinalClosure.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Mainline final closure ci status: ${shell.mainlineFinalClosure.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Mainline final closure ci provider: ${shell.mainlineFinalClosure.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Mainline final closure merge strategy: ${shell.mainlineFinalClosure.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Mainline final closure rollback: ${shell.mainlineFinalClosure.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Mainline final closure verification command: ${shell.mainlineFinalClosure.verificationCommand}`)}
+        ${renderGuidanceRow('Release version', `Mainline final closure version: ${shell.mainlineFinalClosure.releaseVersion}`)}
+        ${renderGuidanceRow('Tag policy', `Mainline final closure tag policy: ${shell.mainlineFinalClosure.tagPolicy}`)}
+        ${renderGuidanceRow('Release notes', `Mainline final closure release notes: ${shell.mainlineFinalClosure.releaseNotes}`)}
+        ${renderGuidanceRow('Tag checklist', `Mainline final closure tag checklist: ${shell.mainlineFinalClosure.tagChecklist}`)}
+        ${renderGuidanceRow('Aggregate artifact', `Mainline final closure aggregate artifact: ${shell.mainlineFinalClosure.aggregateArtifact}`)}
+        ${renderGuidanceRow('Closure checklist', `Mainline final closure closure checklist: ${shell.mainlineFinalClosure.closureChecklist}`)}
+        ${renderGuidanceRow('Final release notes', `Mainline final closure final release notes: ${shell.mainlineFinalClosure.finalReleaseNotes}`)}
+        ${renderGuidanceRow('Archive checklist', `Mainline final closure archive checklist: ${shell.mainlineFinalClosure.archiveChecklist}`)}
+        ${renderGuidanceRow('Checks', `Mainline final closure checks: ${shell.mainlineFinalClosure.passedCheckCount}/${shell.mainlineFinalClosure.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Mainline final closure blocked checks: ${shell.mainlineFinalClosure.blockedCheckCount}`)}
+        ${renderGuidanceRow('Blockers', `Mainline final closure blockers: ${shell.mainlineFinalClosure.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Mainline final closure decision: ${shell.mainlineFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Mainline final closure summary: ${shell.mainlineFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Mainline final closure next workflow: ${shell.mainlineFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="mainline-final-closure-list">
+        ${shell.mainlineFinalClosure.closureChecks.map(renderMainlineFinalClosureCheck).join('')}
+        ${shell.mainlineFinalClosure.closureEvidence.map(renderMainlineFinalClosureEvidence).join('')}
+        ${shell.mainlineFinalClosure.blockers.map(renderMainlineFinalClosureBlocker).join('')}
       </div>
     </section>
 
@@ -3747,6 +3821,27 @@ function renderMainlineAggregateSummaryBlocker(blocker) {
   return `<div class="mainline-aggregate-summary-row">
     <span class="mainline-aggregate-summary-label">Blocker</span>
     <span class="mainline-aggregate-summary-value">Mainline aggregate summary blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMainlineFinalClosureCheck(check) {
+  return `<div class="mainline-final-closure-row">
+    <span class="mainline-final-closure-label">Closure check</span>
+    <span class="mainline-final-closure-value">Mainline final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderMainlineFinalClosureEvidence(evidence) {
+  return `<div class="mainline-final-closure-row">
+    <span class="mainline-final-closure-label">Evidence</span>
+    <span class="mainline-final-closure-value">Mainline final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMainlineFinalClosureBlocker(blocker) {
+  return `<div class="mainline-final-closure-row">
+    <span class="mainline-final-closure-label">Blocker</span>
+    <span class="mainline-final-closure-value">Mainline final closure blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

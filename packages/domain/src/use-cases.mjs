@@ -1356,6 +1356,87 @@ export function createMainlineAggregateSummary(store, operatorRunId, options = {
   };
 }
 
+export function createMainlineFinalClosure(store, operatorRunId, options = {}) {
+  const aggregate = createMainlineAggregateSummary(store, operatorRunId, options);
+  const closed = aggregate.aggregateReady && aggregate.nextWorkflow === 'Mainline Final Closure';
+  const finalReleaseNotes = options.finalReleaseNotes || 'Mainline Release Readiness v1.7 Final Release Notes';
+  const archiveChecklist = options.archiveChecklist || 'Mainline Release Readiness v1.7 Archive Checklist';
+  const closureChecks = [
+    {
+      label: 'Aggregate summary ready',
+      status: aggregate.aggregateReady ? 'pass' : 'blocked',
+      detail: aggregate.aggregateDecision
+    },
+    {
+      label: 'Final release notes assigned',
+      status: closed ? 'pass' : 'blocked',
+      detail: finalReleaseNotes
+    },
+    {
+      label: 'Archive checklist assigned',
+      status: closed ? 'pass' : 'blocked',
+      detail: archiveChecklist
+    },
+    {
+      label: 'Mainline workstream closed',
+      status: closed ? 'pass' : 'blocked',
+      detail: closed ? 'Mainline Release Readiness v1.7 can close before repository archive.' : 'Mainline Release Readiness v1.7 remains open before final closure.'
+    }
+  ];
+
+  return {
+    title: 'Mainline Final Closure',
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    operatorRunId,
+    workflowName: aggregate.workflowName,
+    scenario: aggregate.scenario,
+    stateSource: aggregate.stateSource,
+    stateStatus: aggregate.stateStatus,
+    completedActionCount: aggregate.completedActionCount,
+    pullRequestTitle: aggregate.pullRequestTitle,
+    pullRequestSource: aggregate.pullRequestSource,
+    pullRequestTarget: aggregate.pullRequestTarget,
+    reviewMode: aggregate.reviewMode,
+    mergePolicy: aggregate.mergePolicy,
+    mainBranchStatus: aggregate.mainBranchStatus,
+    mergeWindowStatus: aggregate.mergeWindowStatus,
+    ciCommand: aggregate.ciCommand,
+    ciStatus: aggregate.ciStatus,
+    ciProvider: aggregate.ciProvider,
+    mergeStrategy: aggregate.mergeStrategy,
+    rollbackPlan: aggregate.rollbackPlan,
+    verificationCommand: aggregate.verificationCommand,
+    releaseVersion: aggregate.releaseVersion,
+    tagPolicy: aggregate.tagPolicy,
+    releaseNotes: aggregate.releaseNotes,
+    tagChecklist: aggregate.tagChecklist,
+    aggregateArtifact: aggregate.aggregateArtifact,
+    closureChecklist: aggregate.closureChecklist,
+    finalReleaseNotes,
+    archiveChecklist,
+    checkCount: closureChecks.length,
+    passedCheckCount: closureChecks.filter((check) => check.status === 'pass').length,
+    blockedCheckCount: closureChecks.filter((check) => check.status === 'blocked').length,
+    blockerCount: aggregate.blockers.length,
+    closureDecision: closed ? 'Close Mainline Release Readiness v1.7' : 'Keep Mainline Release Readiness v1.7 open',
+    closureSummary: closed
+      ? 'Mainline Release Readiness v1.7 is closed with aggregate evidence and is ready for archive.'
+      : 'Mainline Final Closure waits for Mainline Aggregate Summary readiness.',
+    closureChecks,
+    closureEvidence: closed
+      ? [
+        `Aggregate summary: ${aggregate.status}`,
+        `Final release notes: ${finalReleaseNotes}`,
+        `Archive checklist: ${archiveChecklist}`,
+        `Next workflow: Mainline Release Readiness v1.7 Closed`
+      ]
+      : aggregate.aggregateEvidence,
+    blockers: aggregate.blockers,
+    nextWorkflow: closed ? 'Mainline Release Readiness v1.7 Closed' : aggregate.nextWorkflow
+  };
+}
+
 export function createOperatorRunbookExecution(store, operatorRunId) {
   const run = createOperatorRunSummary(store, operatorRunId);
   const currentActionDone = run.currentActionStatus === 'complete' || run.currentActionStatus === 'ready';

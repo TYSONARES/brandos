@@ -1,0 +1,14 @@
+{
+  "id": "component_mainline_final_closure_panel",
+  "name": "Mainline Final Closure Panel",
+  "status": "draft",
+  "purpose": "Closes Mainline Release Readiness v1.7 after aggregate evidence is ready and archive evidence is assigned.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "closed"],
+  "accessibility": [
+    "Expose mainline final closure status, pull request title, source branch, target branch, review mode, merge policy, main branch status, merge window, CI command, CI status, CI provider, merge strategy, rollback plan, verification command, release version, tag policy, release notes, tag checklist, aggregate artifact, closure checklist, final release notes, archive checklist, closure checks, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate final closure status.",
+    "Keep archive readiness readable before the workstream is considered closed."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

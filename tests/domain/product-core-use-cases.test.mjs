@@ -19,6 +19,7 @@ import {
   createHandoffAcceptance,
   createInMemoryProductCoreStore,
   createMainlineAggregateSummary,
+  createMainlineFinalClosure,
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
@@ -1716,4 +1717,53 @@ test('Mainline Aggregate Summary opens only after release tag readiness', () => 
   assert.ok(ready.aggregateEvidence.includes('Next workflow: Mainline Final Closure'));
   assert.deepEqual(ready.blockers, []);
   assert.equal(ready.nextWorkflow, 'Mainline Final Closure');
+});
+
+test('Mainline Final Closure closes only after aggregate summary readiness', () => {
+  const store = createExampleStore();
+  const blocked = createMainlineFinalClosure(store, 'operator_run_example_001');
+
+  assert.equal(blocked.title, 'Mainline Final Closure');
+  assert.equal(blocked.status, 'blocked');
+  assert.equal(blocked.closed, false);
+  assert.equal(blocked.workflowName, 'Mainline Release Readiness');
+  assert.equal(blocked.scenario, 'blocked');
+  assert.equal(blocked.aggregateArtifact, 'Mainline Release Readiness v1.7 Aggregate Summary');
+  assert.equal(blocked.closureChecklist, 'Mainline Final Closure v1.7 Checklist');
+  assert.equal(blocked.finalReleaseNotes, 'Mainline Release Readiness v1.7 Final Release Notes');
+  assert.equal(blocked.archiveChecklist, 'Mainline Release Readiness v1.7 Archive Checklist');
+  assert.equal(blocked.checkCount, 4);
+  assert.equal(blocked.passedCheckCount, 0);
+  assert.equal(blocked.blockedCheckCount, 4);
+  assert.equal(blocked.blockerCount, 6);
+  assert.equal(blocked.closureDecision, 'Keep Mainline Release Readiness v1.7 open');
+  assert.equal(blocked.closureSummary, 'Mainline Final Closure waits for Mainline Aggregate Summary readiness.');
+  assert.deepEqual(blocked.closureChecks.map((check) => check.status), ['blocked', 'blocked', 'blocked', 'blocked']);
+  assert.equal(blocked.nextWorkflow, 'Review Resolution Workflow');
+
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-20');
+  const ready = createMainlineFinalClosure(store, 'operator_run_example_001', {
+    stateSource: 'command',
+    stateStatus: 'loaded',
+    completedActionCount: 1,
+    completedActionIds: ['workflow_action_example_001']
+  });
+
+  assert.equal(ready.status, 'closed');
+  assert.equal(ready.closed, true);
+  assert.equal(ready.scenario, 'ready');
+  assert.equal(ready.reviewMode, 'operator-review');
+  assert.equal(ready.mergePolicy, 'no-main-before-review');
+  assert.equal(ready.mainBranchStatus, 'protected');
+  assert.equal(ready.mergeWindowStatus, 'open');
+  assert.equal(ready.ciStatus, 'passed');
+  assert.equal(ready.passedCheckCount, 4);
+  assert.equal(ready.blockedCheckCount, 0);
+  assert.equal(ready.blockerCount, 0);
+  assert.equal(ready.closureDecision, 'Close Mainline Release Readiness v1.7');
+  assert.equal(ready.closureSummary, 'Mainline Release Readiness v1.7 is closed with aggregate evidence and is ready for archive.');
+  assert.deepEqual(ready.closureChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
+  assert.ok(ready.closureEvidence.includes('Next workflow: Mainline Release Readiness v1.7 Closed'));
+  assert.deepEqual(ready.blockers, []);
+  assert.equal(ready.nextWorkflow, 'Mainline Release Readiness v1.7 Closed');
 });
