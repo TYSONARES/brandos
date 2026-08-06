@@ -10,6 +10,7 @@
 - Added Mainline Aggregate Summary package start.
 - Added Mainline Final Closure package start.
 - Added Mainline Release Readiness v1.7 aggregate release summary and closure checklist.
+- Closed Mainline Release Readiness v1.7 with final release notes and closure checklist.
 
 ## Unreleased - Repository Collaboration Workflow v1.6
 
