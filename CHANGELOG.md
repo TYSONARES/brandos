@@ -3,6 +3,7 @@
 ## Unreleased - Release Governance v1.8
 
 - Started Release Governance v1.8 scope and decision record.
+- Added Release Decision Record release notes and closure checklist.
 
 ## Unreleased - Mainline Release Readiness v1.7
 
