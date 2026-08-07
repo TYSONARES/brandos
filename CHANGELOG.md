@@ -2,6 +2,7 @@
 
 ## Unreleased - Release Governance v1.8
 
+- Added mainline pull request handoff and updated the pull request template.
 - Started Release Governance v1.8 scope and decision record.
 - Added Release Decision Record release notes and closure checklist.
 - Added Release Approval Evidence release notes and closure checklist.

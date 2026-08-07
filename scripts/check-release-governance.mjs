@@ -23,6 +23,8 @@ const required = [
   'docs/development/iteration-v1.8-release-governance-final-closure.md',
   'docs/development/release-v1.8-final-closure.md',
   'docs/development/closure-v1.8-final-closure.md',
+  'docs/development/pr-mainline-handoff-v1.8.md',
+  '.github/PULL_REQUEST_TEMPLATE.md',
   'docs/decisions/0030-release-governance-start.md',
   'docs/development/README.md',
   'docs/decisions/README.md',
@@ -70,6 +72,8 @@ const aggregateClosure = readFileSync('docs/development/closure-v1.8-aggregate-s
 const finalIteration = readFileSync('docs/development/iteration-v1.8-release-governance-final-closure.md', 'utf8');
 const finalRelease = readFileSync('docs/development/release-v1.8-final-closure.md', 'utf8');
 const finalClosure = readFileSync('docs/development/closure-v1.8-final-closure.md', 'utf8');
+const pullRequestHandoff = readFileSync('docs/development/pr-mainline-handoff-v1.8.md', 'utf8');
+const pullRequestTemplate = readFileSync('.github/PULL_REQUEST_TEMPLATE.md', 'utf8');
 
 const requiredSnippets = [
   ['docs/development/v1.8-scope.md', scope, '# Release Governance v1.8 Scope'],
@@ -130,6 +134,12 @@ const requiredSnippets = [
   ['docs/development/closure-v1.8-final-closure.md', finalClosure, '# Release Governance v1.8 Closure Checklist: Final Closure'],
   ['docs/development/closure-v1.8-final-closure.md', finalClosure, 'Closed.'],
   ['docs/development/closure-v1.8-final-closure.md', finalClosure, 'Development and Release Governance checks require final closure documents.'],
+  ['docs/development/pr-mainline-handoff-v1.8.md', pullRequestHandoff, '# Mainline Pull Request Handoff: Development Ready through Release Governance v1.8'],
+  ['docs/development/pr-mainline-handoff-v1.8.md', pullRequestHandoff, 'codex/development-ready-v1.0'],
+  ['docs/development/pr-mainline-handoff-v1.8.md', pullRequestHandoff, 'b7e9661 docs: close release governance v1.8'],
+  ['docs/development/pr-mainline-handoff-v1.8.md', pullRequestHandoff, 'GitHub connector access attempted to'],
+  ['.github/PULL_REQUEST_TEMPLATE.md', pullRequestTemplate, 'Release Boundary'],
+  ['.github/PULL_REQUEST_TEMPLATE.md', pullRequestTemplate, '`npm run check:all`'],
   ['docs/decisions/0030-release-governance-start.md', decision, '# ADR 0030: Release Governance v1.8 Start'],
   ['docs/decisions/0030-release-governance-start.md', decision, '- Status: accepted'],
   ['docs/decisions/0030-release-governance-start.md', decision, 'Mainline Release Readiness v1.7 remains closed'],
@@ -157,6 +167,7 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.8-release-governance-final-closure.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.8-final-closure.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.8-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`pr-mainline-handoff-v1.8.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0030-release-governance-start.md`'],
   ['README.md', rootReadme, '- Latest completed implementation cycle: Release Governance v1.8'],
   ['README.md', rootReadme, '- Active workstream: Next named cycle not started'],
@@ -173,6 +184,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Post-Release Audit Summary release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Release Governance v1.8 aggregate release summary and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Closed Release Governance v1.8 with final release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added mainline pull request handoff and updated the pull request template.'],
   ['package.json', packageJson, '"check:release-governance"']
 ];
 

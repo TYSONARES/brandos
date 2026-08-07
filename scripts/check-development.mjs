@@ -105,6 +105,7 @@ const required = [
   'docs/development/iteration-v1.8-release-governance-final-closure.md',
   'docs/development/release-v1.8-final-closure.md',
   'docs/development/closure-v1.8-final-closure.md',
+  'docs/development/pr-mainline-handoff-v1.8.md',
   'docs/development/iteration-v1.5-operator-workflow-map.md',
   'docs/development/iteration-v1.5-operator-task-selection.md',
   'docs/development/iteration-v1.5-operator-step-detail.md',

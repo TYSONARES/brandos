@@ -1,6 +1,6 @@
 ## Summary
 
-Describe what changed and why.
+Describe what changed and why. Link the repository evidence that makes the change official.
 
 ## Repository Truth
 
@@ -10,4 +10,10 @@ Describe what changed and why.
 
 ## Verification
 
-Describe checks performed.
+- [ ] `npm run check:all`
+- [ ] Other checks:
+
+## Release Boundary
+
+- [ ] This PR does not merge, tag, publish, deploy, or run external release automation without explicit operator approval.
+- [ ] If this PR changes release status, release notes and closure checklists are included.
