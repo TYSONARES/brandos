@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_task_selection_panel",
+  "name": "Operator Task Selection Panel",
+  "status": "draft",
+  "purpose": "Shows the selected operator task and why it should be handled next.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose task selection status, selected task, selected workflow, task counts, decision, summary, options, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate the selected task.",
+    "Keep task option labels and reasons readable so operators can understand the selected workflow."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

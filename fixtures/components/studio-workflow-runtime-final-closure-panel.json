@@ -1,0 +1,29 @@
+{
+  "id": "component_studio_workflow_runtime_final_closure_panel",
+  "name": "Studio Workflow Runtime Final Closure Panel",
+  "status": "draft",
+  "purpose": "Shows whether Studio Workflow Runtime v1.4 can be closed from aggregate evidence.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "closed"
+  ],
+  "accessibility": [
+    "Expose final closure status, decision, summary, release artifacts, evidence, checks, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate closure state.",
+    "Keep closure checks readable so operators can see why v1.4 is closed or still open."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

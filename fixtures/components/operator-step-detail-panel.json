@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_step_detail_panel",
+  "name": "Operator Step Detail Panel",
+  "status": "draft",
+  "purpose": "Shows the active operator step, command, expected outcome, evidence, and blockers.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose step detail status, active step, command, outcome, step counts, decision, summary, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate active or blocked steps.",
+    "Keep step labels and outcomes readable so operators can inspect the selected task before handoff."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

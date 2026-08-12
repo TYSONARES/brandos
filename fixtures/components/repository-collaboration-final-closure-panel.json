@@ -1,0 +1,14 @@
+{
+  "id": "component_repository_collaboration_final_closure_panel",
+  "name": "Repository Collaboration Final Closure Panel",
+  "status": "draft",
+  "purpose": "Shows whether Repository Collaboration Workflow v1.6 is closed with aggregate evidence, release notes, and closure checklist.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "closed"],
+  "accessibility": [
+    "Expose final closure status, pull request title, source branch, target branch, review mode, merge policy, main branch status, merge window, release artifact, closure checklist, checks, blockers, decision, summary, evidence, and next workflow as visible text.",
+    "Do not rely on color alone to communicate final closure status.",
+    "Keep release artifact and closure checklist labels readable before archiving the workflow."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

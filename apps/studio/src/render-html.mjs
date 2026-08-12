@@ -640,6 +640,789 @@ export function renderStudioHtml(shell, options = {}) {
       gap: 3px;
       overflow-wrap: anywhere;
     }
+    .agent-handoff-runtime-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-runtime-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-runtime-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-runtime-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .agent-handoff-runtime-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .agent-handoff-runtime-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .agent-handoff-runtime-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .agent-handoff-runtime-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .runtime-health-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .runtime-health-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .runtime-health-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .runtime-health-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .studio-state-recovery-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-state-recovery-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .studio-state-recovery-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .studio-state-recovery-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .runtime-validation-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .runtime-validation-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .runtime-validation-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .runtime-validation-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-recovery-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-recovery-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-recovery-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-recovery-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .workflow-session-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .workflow-session-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .workflow-session-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .workflow-session-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .workflow-transition-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .workflow-transition-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .workflow-transition-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .workflow-transition-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .command-result-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .command-result-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .command-result-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .command-result-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .studio-workflow-runtime-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-workflow-runtime-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .studio-workflow-runtime-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .studio-workflow-runtime-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .studio-workflow-runtime-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-workflow-runtime-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .studio-workflow-runtime-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .studio-workflow-runtime-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-workflow-map-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-workflow-map-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-workflow-map-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-workflow-map-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-task-selection-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-task-selection-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-task-selection-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-task-selection-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-step-detail-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-step-detail-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-step-detail-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-step-detail-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-handoff-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-handoff-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-handoff-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-handoff-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-workflow-design-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-workflow-design-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-workflow-design-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-workflow-design-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .operator-workflow-design-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .operator-workflow-design-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .operator-workflow-design-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .operator-workflow-design-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .repository-branch-status-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .repository-branch-status-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .repository-branch-status-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .repository-branch-status-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .pull-request-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pull-request-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .pull-request-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pull-request-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .review-evidence-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .review-evidence-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .review-evidence-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .review-evidence-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .merge-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .merge-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .merge-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .merge-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .repository-collaboration-aggregate-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .repository-collaboration-aggregate-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .repository-collaboration-aggregate-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .repository-collaboration-aggregate-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .repository-collaboration-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .repository-collaboration-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .repository-collaboration-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .repository-collaboration-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .pull-request-review-package-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pull-request-review-package-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .pull-request-review-package-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pull-request-review-package-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .ci-evidence-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .ci-evidence-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .ci-evidence-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ci-evidence-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .main-merge-plan-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .main-merge-plan-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .main-merge-plan-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .main-merge-plan-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .release-tag-readiness-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .release-tag-readiness-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .release-tag-readiness-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .release-tag-readiness-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .mainline-aggregate-summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .mainline-aggregate-summary-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .mainline-aggregate-summary-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .mainline-aggregate-summary-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
+    .mainline-final-closure-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .mainline-final-closure-row {
+      align-items: start;
+      background: var(--muted);
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .mainline-final-closure-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .mainline-final-closure-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .usage-list {
       display: grid;
       gap: 8px;
@@ -859,6 +1642,32 @@ export function renderStudioHtml(shell, options = {}) {
       .draft-review-row,
       .agent-handoff-closure-row,
       .agent-handoff-runtime-summary-row,
+      .agent-handoff-runtime-aggregate-row,
+      .agent-handoff-runtime-final-closure-row,
+      .runtime-health-row,
+      .studio-state-recovery-row,
+      .runtime-validation-row,
+      .operator-recovery-row,
+      .workflow-session-row,
+      .workflow-transition-row,
+      .operator-workflow-map-row,
+      .operator-task-selection-row,
+      .operator-step-detail-row,
+      .operator-handoff-readiness-row,
+      .operator-workflow-design-aggregate-row,
+      .operator-workflow-design-final-closure-row,
+      .repository-branch-status-row,
+      .pull-request-readiness-row,
+      .review-evidence-summary-row,
+      .merge-readiness-row,
+      .repository-collaboration-aggregate-row,
+      .repository-collaboration-final-closure-row,
+      .pull-request-review-package-row,
+      .ci-evidence-summary-row,
+      .main-merge-plan-row,
+      .release-tag-readiness-row,
+      .mainline-aggregate-summary-row,
+      .mainline-final-closure-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1095,6 +1904,849 @@ export function renderStudioHtml(shell, options = {}) {
         ${shell.agentHandoffRuntimeSummary.stages.map(renderAgentHandoffRuntimeSummaryStage).join('')}
         ${shell.agentHandoffRuntimeSummary.evidence.map(renderAgentHandoffRuntimeSummaryEvidence).join('')}
         ${shell.agentHandoffRuntimeSummary.blockers.map(renderAgentHandoffRuntimeSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Runtime Aggregate Summary</p>
+    <section class="panel" aria-label="Agent Handoff Runtime Aggregate Summary">
+      <h2>${escapeHtml(shell.agentHandoffRuntimeAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff runtime aggregate status: ${shell.agentHandoffRuntimeAggregateSummary.status}`)}
+        ${renderGuidanceRow('Complete', `Agent handoff runtime aggregate complete: ${shell.agentHandoffRuntimeAggregateSummary.complete}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff runtime aggregate context pack: ${shell.agentHandoffRuntimeAggregateSummary.contextPackId}`)}
+        ${renderGuidanceRow('Runtimes', `Agent handoff runtime aggregate runtimes: ${shell.agentHandoffRuntimeAggregateSummary.completeRuntimeCount}/${shell.agentHandoffRuntimeAggregateSummary.runtimeCount}`)}
+        ${renderGuidanceRow('Blocked', `Agent handoff runtime aggregate blocked runtimes: ${shell.agentHandoffRuntimeAggregateSummary.blockedRuntimeCount}`)}
+        ${renderGuidanceRow('Stages', `Agent handoff runtime aggregate stages: ${shell.agentHandoffRuntimeAggregateSummary.completedStageCount}/${shell.agentHandoffRuntimeAggregateSummary.totalStageCount}`)}
+        ${renderGuidanceRow('Decision', `Agent handoff runtime aggregate decision: ${shell.agentHandoffRuntimeAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Agent handoff runtime aggregate summary: ${shell.agentHandoffRuntimeAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff runtime aggregate next workflow: ${shell.agentHandoffRuntimeAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="agent-handoff-runtime-aggregate-list">
+        ${shell.agentHandoffRuntimeAggregateSummary.runtimeItems.map(renderAgentHandoffRuntimeAggregateItem).join('')}
+        ${shell.agentHandoffRuntimeAggregateSummary.evidence.map(renderAgentHandoffRuntimeAggregateEvidence).join('')}
+        ${shell.agentHandoffRuntimeAggregateSummary.blockers.map(renderAgentHandoffRuntimeAggregateBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Agent Handoff Runtime Final Closure</p>
+    <section class="panel" aria-label="Agent Handoff Runtime Final Closure">
+      <h2>${escapeHtml(shell.agentHandoffRuntimeFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent handoff runtime final closure status: ${shell.agentHandoffRuntimeFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Agent handoff runtime final closure closed: ${shell.agentHandoffRuntimeFinalClosure.closed}`)}
+        ${renderGuidanceRow('Context Pack', `Agent handoff runtime final closure context pack: ${shell.agentHandoffRuntimeFinalClosure.contextPackId}`)}
+        ${renderGuidanceRow('Decision', `Agent handoff runtime final closure decision: ${shell.agentHandoffRuntimeFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Agent handoff runtime final closure summary: ${shell.agentHandoffRuntimeFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Agent handoff runtime final closure next workflow: ${shell.agentHandoffRuntimeFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="agent-handoff-runtime-final-closure-list">
+        ${shell.agentHandoffRuntimeFinalClosure.releaseArtifacts.map(renderAgentHandoffRuntimeFinalClosureArtifact).join('')}
+        ${shell.agentHandoffRuntimeFinalClosure.closureEvidence.map(renderAgentHandoffRuntimeFinalClosureEvidence).join('')}
+        ${shell.agentHandoffRuntimeFinalClosure.closureChecks.map(renderAgentHandoffRuntimeFinalClosureCheck).join('')}
+        ${shell.agentHandoffRuntimeFinalClosure.blockers.map(renderAgentHandoffRuntimeFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Runtime Health Summary</p>
+    <section class="panel" aria-label="Runtime Health Summary">
+      <h2>${escapeHtml(shell.runtimeHealthSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Runtime health status: ${shell.runtimeHealthSummary.status}`)}
+        ${renderGuidanceRow('Healthy', `Runtime health healthy: ${shell.runtimeHealthSummary.healthy}`)}
+        ${renderGuidanceRow('State source', `Runtime health state source: ${shell.runtimeHealthSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Runtime health state status: ${shell.runtimeHealthSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Runtime health completed actions: ${shell.runtimeHealthSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Readiness', `Runtime health readiness: ${shell.runtimeHealthSummary.readinessStatus}`)}
+        ${renderGuidanceRow('Runtime closure', `Runtime health closure: ${shell.runtimeHealthSummary.runtimeClosureStatus}`)}
+        ${renderGuidanceRow('Decision', `Runtime health decision: ${shell.runtimeHealthSummary.healthDecision}`)}
+        ${renderGuidanceRow('Summary', `Runtime health summary: ${shell.runtimeHealthSummary.healthSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Runtime health next workflow: ${shell.runtimeHealthSummary.nextWorkflow}`)}
+      </div>
+      <div class="runtime-health-list">
+        ${shell.runtimeHealthSummary.signals.map(renderRuntimeHealthSignal).join('')}
+        ${shell.runtimeHealthSummary.recoveryActions.map(renderRuntimeHealthRecoveryAction).join('')}
+        ${shell.runtimeHealthSummary.blockers.map(renderRuntimeHealthBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Studio State Recovery</p>
+    <section class="panel" aria-label="Studio State Recovery">
+      <h2>${escapeHtml(shell.studioStateRecovery.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio state recovery status: ${shell.studioStateRecovery.status}`)}
+        ${renderGuidanceRow('Ready', `Studio state recovery ready: ${shell.studioStateRecovery.recoveryReady}`)}
+        ${renderGuidanceRow('State source', `Studio state recovery source: ${shell.studioStateRecovery.stateSource}`)}
+        ${renderGuidanceRow('State status', `Studio state recovery state status: ${shell.studioStateRecovery.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Studio state recovery completed actions: ${shell.studioStateRecovery.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Studio state recovery decision: ${shell.studioStateRecovery.recoveryDecision}`)}
+        ${renderGuidanceRow('Summary', `Studio state recovery summary: ${shell.studioStateRecovery.recoverySummary}`)}
+        ${renderGuidanceRow('Next workflow', `Studio state recovery next workflow: ${shell.studioStateRecovery.nextWorkflow}`)}
+      </div>
+      <div class="studio-state-recovery-list">
+        ${shell.studioStateRecovery.recoverySteps.map(renderStudioStateRecoveryStep).join('')}
+        ${shell.studioStateRecovery.requiredEvidence.map(renderStudioStateRecoveryEvidence).join('')}
+        ${shell.studioStateRecovery.blockers.map(renderStudioStateRecoveryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Runtime Validation Signals</p>
+    <section class="panel" aria-label="Runtime Validation Signals">
+      <h2>${escapeHtml(shell.runtimeValidationSignals.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Runtime validation status: ${shell.runtimeValidationSignals.status}`)}
+        ${renderGuidanceRow('Ready', `Runtime validation ready: ${shell.runtimeValidationSignals.validationReady}`)}
+        ${renderGuidanceRow('State source', `Runtime validation source: ${shell.runtimeValidationSignals.stateSource}`)}
+        ${renderGuidanceRow('State status', `Runtime validation state status: ${shell.runtimeValidationSignals.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Runtime validation completed actions: ${shell.runtimeValidationSignals.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Runtime validation decision: ${shell.runtimeValidationSignals.validationDecision}`)}
+        ${renderGuidanceRow('Summary', `Runtime validation summary: ${shell.runtimeValidationSignals.validationSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Runtime validation next workflow: ${shell.runtimeValidationSignals.nextWorkflow}`)}
+      </div>
+      <div class="runtime-validation-list">
+        ${shell.runtimeValidationSignals.validationSignals.map(renderRuntimeValidationSignal).join('')}
+        ${shell.runtimeValidationSignals.validationCommands.map(renderRuntimeValidationCommand).join('')}
+        ${shell.runtimeValidationSignals.requiredEvidence.map(renderRuntimeValidationEvidence).join('')}
+        ${shell.runtimeValidationSignals.blockers.map(renderRuntimeValidationBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Recovery Guidance</p>
+    <section class="panel" aria-label="Operator Recovery Guidance">
+      <h2>${escapeHtml(shell.operatorRecoveryGuidance.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator recovery status: ${shell.operatorRecoveryGuidance.status}`)}
+        ${renderGuidanceRow('Ready', `Operator recovery ready: ${shell.operatorRecoveryGuidance.guidanceReady}`)}
+        ${renderGuidanceRow('State source', `Operator recovery source: ${shell.operatorRecoveryGuidance.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator recovery state status: ${shell.operatorRecoveryGuidance.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator recovery completed actions: ${shell.operatorRecoveryGuidance.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Operator recovery decision: ${shell.operatorRecoveryGuidance.guidanceDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator recovery summary: ${shell.operatorRecoveryGuidance.guidanceSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator recovery next workflow: ${shell.operatorRecoveryGuidance.nextWorkflow}`)}
+      </div>
+      <div class="operator-recovery-list">
+        ${shell.operatorRecoveryGuidance.guidanceSteps.map(renderOperatorRecoveryStep).join('')}
+        ${shell.operatorRecoveryGuidance.validationSignals.map(renderOperatorRecoverySignal).join('')}
+        ${shell.operatorRecoveryGuidance.recommendedCommands.map(renderOperatorRecoveryCommand).join('')}
+        ${shell.operatorRecoveryGuidance.requiredEvidence.map(renderOperatorRecoveryEvidence).join('')}
+        ${shell.operatorRecoveryGuidance.blockers.map(renderOperatorRecoveryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Workflow Session Summary</p>
+    <section class="panel" aria-label="Workflow Session Summary">
+      <h2>${escapeHtml(shell.workflowSessionSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Workflow session status: ${shell.workflowSessionSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Workflow session ready: ${shell.workflowSessionSummary.sessionReady}`)}
+        ${renderGuidanceRow('Workflow', `Workflow session workflow: ${shell.workflowSessionSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Workflow session scenario: ${shell.workflowSessionSummary.scenario}`)}
+        ${renderGuidanceRow('Current step', `Workflow session current step: ${shell.workflowSessionSummary.currentStep}`)}
+        ${renderGuidanceRow('Action status', `Workflow session action status: ${shell.workflowSessionSummary.actionStatus}`)}
+        ${renderGuidanceRow('State source', `Workflow session source: ${shell.workflowSessionSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Workflow session state status: ${shell.workflowSessionSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Workflow session completed actions: ${shell.workflowSessionSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Workflow session decision: ${shell.workflowSessionSummary.sessionDecision}`)}
+        ${renderGuidanceRow('Summary', `Workflow session summary: ${shell.workflowSessionSummary.sessionSummary}`)}
+        ${renderGuidanceRow('Next route', `Workflow session next route: ${shell.workflowSessionSummary.nextRoute}`)}
+        ${renderGuidanceRow('Next workflow', `Workflow session next workflow: ${shell.workflowSessionSummary.nextWorkflow}`)}
+      </div>
+      <div class="workflow-session-list">
+        ${shell.workflowSessionSummary.sessionSignals.map(renderWorkflowSessionSignal).join('')}
+        ${shell.workflowSessionSummary.requiredEvidence.map(renderWorkflowSessionEvidence).join('')}
+        ${shell.workflowSessionSummary.blockers.map(renderWorkflowSessionBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Workflow Transition Plan</p>
+    <section class="panel" aria-label="Workflow Transition Plan">
+      <h2>${escapeHtml(shell.workflowTransitionPlan.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Workflow transition status: ${shell.workflowTransitionPlan.status}`)}
+        ${renderGuidanceRow('Ready', `Workflow transition ready: ${shell.workflowTransitionPlan.transitionReady}`)}
+        ${renderGuidanceRow('Workflow', `Workflow transition workflow: ${shell.workflowTransitionPlan.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Workflow transition scenario: ${shell.workflowTransitionPlan.scenario}`)}
+        ${renderGuidanceRow('Current step', `Workflow transition current step: ${shell.workflowTransitionPlan.currentStep}`)}
+        ${renderGuidanceRow('From route', `Workflow transition from route: ${shell.workflowTransitionPlan.fromRoute}`)}
+        ${renderGuidanceRow('To route', `Workflow transition to route: ${shell.workflowTransitionPlan.toRoute}`)}
+        ${renderGuidanceRow('State source', `Workflow transition source: ${shell.workflowTransitionPlan.stateSource}`)}
+        ${renderGuidanceRow('State status', `Workflow transition state status: ${shell.workflowTransitionPlan.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Workflow transition completed actions: ${shell.workflowTransitionPlan.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Workflow transition decision: ${shell.workflowTransitionPlan.transitionDecision}`)}
+        ${renderGuidanceRow('Summary', `Workflow transition summary: ${shell.workflowTransitionPlan.transitionSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Workflow transition next workflow: ${shell.workflowTransitionPlan.nextWorkflow}`)}
+      </div>
+      <div class="workflow-transition-list">
+        ${shell.workflowTransitionPlan.transitionSteps.map(renderWorkflowTransitionStep).join('')}
+        ${shell.workflowTransitionPlan.transitionSignals.map(renderWorkflowTransitionSignal).join('')}
+        ${shell.workflowTransitionPlan.requiredEvidence.map(renderWorkflowTransitionEvidence).join('')}
+        ${shell.workflowTransitionPlan.blockers.map(renderWorkflowTransitionBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Command Result Summary</p>
+    <section class="panel" aria-label="Command Result Summary">
+      <h2>${escapeHtml(shell.commandResultSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Command result status: ${shell.commandResultSummary.status}`)}
+        ${renderGuidanceRow('Complete', `Command result complete: ${shell.commandResultSummary.commandComplete}`)}
+        ${renderGuidanceRow('Workflow', `Command result workflow: ${shell.commandResultSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Command result scenario: ${shell.commandResultSummary.scenario}`)}
+        ${renderGuidanceRow('From route', `Command result from route: ${shell.commandResultSummary.fromRoute}`)}
+        ${renderGuidanceRow('To route', `Command result to route: ${shell.commandResultSummary.toRoute}`)}
+        ${renderGuidanceRow('State source', `Command result source: ${shell.commandResultSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Command result state status: ${shell.commandResultSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Command result completed actions: ${shell.commandResultSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Command result decision: ${shell.commandResultSummary.commandDecision}`)}
+        ${renderGuidanceRow('Summary', `Command result summary: ${shell.commandResultSummary.commandSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Command result next workflow: ${shell.commandResultSummary.nextWorkflow}`)}
+      </div>
+      <div class="command-result-list">
+        ${shell.commandResultSummary.commandResults.map(renderCommandResultItem).join('')}
+        ${shell.commandResultSummary.transitionSignals.map(renderCommandResultSignal).join('')}
+        ${shell.commandResultSummary.requiredEvidence.map(renderCommandResultEvidence).join('')}
+        ${shell.commandResultSummary.blockers.map(renderCommandResultBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Studio Workflow Runtime Aggregate Summary</p>
+    <section class="panel" aria-label="Studio Workflow Runtime Aggregate Summary">
+      <h2>${escapeHtml(shell.studioWorkflowRuntimeAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio workflow runtime aggregate status: ${shell.studioWorkflowRuntimeAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Studio workflow runtime aggregate ready: ${shell.studioWorkflowRuntimeAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Studio workflow runtime aggregate workflow: ${shell.studioWorkflowRuntimeAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Studio workflow runtime aggregate scenario: ${shell.studioWorkflowRuntimeAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Studio workflow runtime aggregate source: ${shell.studioWorkflowRuntimeAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Studio workflow runtime aggregate state status: ${shell.studioWorkflowRuntimeAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Studio workflow runtime aggregate completed actions: ${shell.studioWorkflowRuntimeAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Commands', `Studio workflow runtime aggregate commands: ${shell.studioWorkflowRuntimeAggregateSummary.completeCommandCount}/${shell.studioWorkflowRuntimeAggregateSummary.commandCount}`)}
+        ${renderGuidanceRow('Blocked commands', `Studio workflow runtime aggregate blocked commands: ${shell.studioWorkflowRuntimeAggregateSummary.blockedCommandCount}`)}
+        ${renderGuidanceRow('Decision', `Studio workflow runtime aggregate decision: ${shell.studioWorkflowRuntimeAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Studio workflow runtime aggregate summary: ${shell.studioWorkflowRuntimeAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Studio workflow runtime aggregate next workflow: ${shell.studioWorkflowRuntimeAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="studio-workflow-runtime-aggregate-list">
+        ${shell.studioWorkflowRuntimeAggregateSummary.commandItems.map(renderStudioWorkflowRuntimeAggregateItem).join('')}
+        ${shell.studioWorkflowRuntimeAggregateSummary.requiredEvidence.map(renderStudioWorkflowRuntimeAggregateEvidence).join('')}
+        ${shell.studioWorkflowRuntimeAggregateSummary.blockers.map(renderStudioWorkflowRuntimeAggregateBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Studio Workflow Runtime Final Closure</p>
+    <section class="panel" aria-label="Studio Workflow Runtime Final Closure">
+      <h2>${escapeHtml(shell.studioWorkflowRuntimeFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio workflow runtime final closure status: ${shell.studioWorkflowRuntimeFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Studio workflow runtime final closure closed: ${shell.studioWorkflowRuntimeFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Studio workflow runtime final closure workflow: ${shell.studioWorkflowRuntimeFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Studio workflow runtime final closure scenario: ${shell.studioWorkflowRuntimeFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Studio workflow runtime final closure source: ${shell.studioWorkflowRuntimeFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Studio workflow runtime final closure state status: ${shell.studioWorkflowRuntimeFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Studio workflow runtime final closure completed actions: ${shell.studioWorkflowRuntimeFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Decision', `Studio workflow runtime final closure decision: ${shell.studioWorkflowRuntimeFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Studio workflow runtime final closure summary: ${shell.studioWorkflowRuntimeFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Studio workflow runtime final closure next workflow: ${shell.studioWorkflowRuntimeFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="studio-workflow-runtime-final-closure-list">
+        ${shell.studioWorkflowRuntimeFinalClosure.releaseArtifacts.map(renderStudioWorkflowRuntimeFinalClosureArtifact).join('')}
+        ${shell.studioWorkflowRuntimeFinalClosure.closureEvidence.map(renderStudioWorkflowRuntimeFinalClosureEvidence).join('')}
+        ${shell.studioWorkflowRuntimeFinalClosure.closureChecks.map(renderStudioWorkflowRuntimeFinalClosureCheck).join('')}
+        ${shell.studioWorkflowRuntimeFinalClosure.blockers.map(renderStudioWorkflowRuntimeFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Workflow Map</p>
+    <section class="panel" aria-label="Operator Workflow Map">
+      <h2>${escapeHtml(shell.operatorWorkflowMap.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator workflow map status: ${shell.operatorWorkflowMap.status}`)}
+        ${renderGuidanceRow('Ready', `Operator workflow map ready: ${shell.operatorWorkflowMap.mapReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator workflow map workflow: ${shell.operatorWorkflowMap.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator workflow map scenario: ${shell.operatorWorkflowMap.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator workflow map source: ${shell.operatorWorkflowMap.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator workflow map state status: ${shell.operatorWorkflowMap.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator workflow map completed actions: ${shell.operatorWorkflowMap.completedActionCount}`)}
+        ${renderGuidanceRow('Active path', `Operator workflow map active path: ${shell.operatorWorkflowMap.activePath}`)}
+        ${renderGuidanceRow('Paths', `Operator workflow map paths: ${shell.operatorWorkflowMap.readyPathCount}/${shell.operatorWorkflowMap.pathCount}`)}
+        ${renderGuidanceRow('Blocked paths', `Operator workflow map blocked paths: ${shell.operatorWorkflowMap.blockedPathCount}`)}
+        ${renderGuidanceRow('Decision', `Operator workflow map decision: ${shell.operatorWorkflowMap.mapDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator workflow map summary: ${shell.operatorWorkflowMap.mapSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator workflow map next workflow: ${shell.operatorWorkflowMap.nextWorkflow}`)}
+      </div>
+      <div class="operator-workflow-map-list">
+        ${shell.operatorWorkflowMap.workflowPaths.map(renderOperatorWorkflowMapPath).join('')}
+        ${shell.operatorWorkflowMap.requiredEvidence.map(renderOperatorWorkflowMapEvidence).join('')}
+        ${shell.operatorWorkflowMap.blockers.map(renderOperatorWorkflowMapBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Task Selection</p>
+    <section class="panel" aria-label="Operator Task Selection">
+      <h2>${escapeHtml(shell.operatorTaskSelection.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator task selection status: ${shell.operatorTaskSelection.status}`)}
+        ${renderGuidanceRow('Ready', `Operator task selection ready: ${shell.operatorTaskSelection.selectionReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator task selection workflow: ${shell.operatorTaskSelection.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator task selection scenario: ${shell.operatorTaskSelection.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator task selection source: ${shell.operatorTaskSelection.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator task selection state status: ${shell.operatorTaskSelection.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator task selection completed actions: ${shell.operatorTaskSelection.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator task selection selected task: ${shell.operatorTaskSelection.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator task selection selected workflow: ${shell.operatorTaskSelection.selectedWorkflow}`)}
+        ${renderGuidanceRow('Tasks', `Operator task selection tasks: ${shell.operatorTaskSelection.availableTaskCount}/${shell.operatorTaskSelection.taskCount}`)}
+        ${renderGuidanceRow('Blocked tasks', `Operator task selection blocked tasks: ${shell.operatorTaskSelection.blockedTaskCount}`)}
+        ${renderGuidanceRow('Decision', `Operator task selection decision: ${shell.operatorTaskSelection.selectionDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator task selection summary: ${shell.operatorTaskSelection.selectionSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator task selection next workflow: ${shell.operatorTaskSelection.nextWorkflow}`)}
+      </div>
+      <div class="operator-task-selection-list">
+        ${shell.operatorTaskSelection.taskOptions.map(renderOperatorTaskSelectionOption).join('')}
+        ${shell.operatorTaskSelection.requiredEvidence.map(renderOperatorTaskSelectionEvidence).join('')}
+        ${shell.operatorTaskSelection.blockers.map(renderOperatorTaskSelectionBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Step Detail</p>
+    <section class="panel" aria-label="Operator Step Detail">
+      <h2>${escapeHtml(shell.operatorStepDetail.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator step detail status: ${shell.operatorStepDetail.status}`)}
+        ${renderGuidanceRow('Ready', `Operator step detail ready: ${shell.operatorStepDetail.detailReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator step detail workflow: ${shell.operatorStepDetail.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator step detail scenario: ${shell.operatorStepDetail.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator step detail source: ${shell.operatorStepDetail.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator step detail state status: ${shell.operatorStepDetail.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator step detail completed actions: ${shell.operatorStepDetail.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator step detail selected task: ${shell.operatorStepDetail.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator step detail selected workflow: ${shell.operatorStepDetail.selectedWorkflow}`)}
+        ${renderGuidanceRow('Active step', `Operator step detail active step: ${shell.operatorStepDetail.activeStep}`)}
+        ${renderGuidanceRow('Owner', `Operator step detail owner: ${shell.operatorStepDetail.stepOwner}`)}
+        ${renderGuidanceRow('Command', `Operator step detail command: ${shell.operatorStepDetail.stepCommand}`)}
+        ${renderGuidanceRow('Outcome', `Operator step detail outcome: ${shell.operatorStepDetail.stepOutcome}`)}
+        ${renderGuidanceRow('Steps', `Operator step detail steps: ${shell.operatorStepDetail.readyStepCount}/${shell.operatorStepDetail.stepCount}`)}
+        ${renderGuidanceRow('Blocked steps', `Operator step detail blocked steps: ${shell.operatorStepDetail.blockedStepCount}`)}
+        ${renderGuidanceRow('Decision', `Operator step detail decision: ${shell.operatorStepDetail.detailDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator step detail summary: ${shell.operatorStepDetail.detailSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator step detail next workflow: ${shell.operatorStepDetail.nextWorkflow}`)}
+      </div>
+      <div class="operator-step-detail-list">
+        ${shell.operatorStepDetail.stepDetails.map(renderOperatorStepDetailStep).join('')}
+        ${shell.operatorStepDetail.requiredEvidence.map(renderOperatorStepDetailEvidence).join('')}
+        ${shell.operatorStepDetail.blockers.map(renderOperatorStepDetailBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Handoff Readiness</p>
+    <section class="panel" aria-label="Operator Handoff Readiness">
+      <h2>${escapeHtml(shell.operatorHandoffReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator handoff readiness status: ${shell.operatorHandoffReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Operator handoff readiness ready: ${shell.operatorHandoffReadiness.handoffReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator handoff readiness workflow: ${shell.operatorHandoffReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator handoff readiness scenario: ${shell.operatorHandoffReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator handoff readiness source: ${shell.operatorHandoffReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator handoff readiness state status: ${shell.operatorHandoffReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator handoff readiness completed actions: ${shell.operatorHandoffReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator handoff readiness selected task: ${shell.operatorHandoffReadiness.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator handoff readiness selected workflow: ${shell.operatorHandoffReadiness.selectedWorkflow}`)}
+        ${renderGuidanceRow('Active step', `Operator handoff readiness active step: ${shell.operatorHandoffReadiness.activeStep}`)}
+        ${renderGuidanceRow('Target', `Operator handoff readiness target: ${shell.operatorHandoffReadiness.handoffTarget}`)}
+        ${renderGuidanceRow('Mode', `Operator handoff readiness mode: ${shell.operatorHandoffReadiness.handoffMode}`)}
+        ${renderGuidanceRow('Command', `Operator handoff readiness command: ${shell.operatorHandoffReadiness.handoffCommand}`)}
+        ${renderGuidanceRow('Outcome', `Operator handoff readiness outcome: ${shell.operatorHandoffReadiness.handoffOutcome}`)}
+        ${renderGuidanceRow('Checks', `Operator handoff readiness checks: ${shell.operatorHandoffReadiness.passedCheckCount}/${shell.operatorHandoffReadiness.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Operator handoff readiness blocked checks: ${shell.operatorHandoffReadiness.blockedCheckCount}`)}
+        ${renderGuidanceRow('Decision', `Operator handoff readiness decision: ${shell.operatorHandoffReadiness.handoffDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator handoff readiness summary: ${shell.operatorHandoffReadiness.handoffSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator handoff readiness next workflow: ${shell.operatorHandoffReadiness.nextWorkflow}`)}
+      </div>
+      <div class="operator-handoff-readiness-list">
+        ${shell.operatorHandoffReadiness.handoffChecks.map(renderOperatorHandoffReadinessCheck).join('')}
+        ${shell.operatorHandoffReadiness.requiredEvidence.map(renderOperatorHandoffReadinessEvidence).join('')}
+        ${shell.operatorHandoffReadiness.blockers.map(renderOperatorHandoffReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Workflow Design Aggregate Summary</p>
+    <section class="panel" aria-label="Operator Workflow Design Aggregate Summary">
+      <h2>${escapeHtml(shell.operatorWorkflowDesignAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator workflow design aggregate status: ${shell.operatorWorkflowDesignAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Operator workflow design aggregate ready: ${shell.operatorWorkflowDesignAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Operator workflow design aggregate workflow: ${shell.operatorWorkflowDesignAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator workflow design aggregate scenario: ${shell.operatorWorkflowDesignAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator workflow design aggregate source: ${shell.operatorWorkflowDesignAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator workflow design aggregate state status: ${shell.operatorWorkflowDesignAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator workflow design aggregate completed actions: ${shell.operatorWorkflowDesignAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator workflow design aggregate selected task: ${shell.operatorWorkflowDesignAggregateSummary.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator workflow design aggregate selected workflow: ${shell.operatorWorkflowDesignAggregateSummary.selectedWorkflow}`)}
+        ${renderGuidanceRow('Handoff target', `Operator workflow design aggregate handoff target: ${shell.operatorWorkflowDesignAggregateSummary.handoffTarget}`)}
+        ${renderGuidanceRow('Workflows', `Operator workflow design aggregate workflows: ${shell.operatorWorkflowDesignAggregateSummary.readyWorkflowCount}/${shell.operatorWorkflowDesignAggregateSummary.workflowCount}`)}
+        ${renderGuidanceRow('Blocked workflows', `Operator workflow design aggregate blocked workflows: ${shell.operatorWorkflowDesignAggregateSummary.blockedWorkflowCount}`)}
+        ${renderGuidanceRow('Decision', `Operator workflow design aggregate decision: ${shell.operatorWorkflowDesignAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator workflow design aggregate summary: ${shell.operatorWorkflowDesignAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator workflow design aggregate next workflow: ${shell.operatorWorkflowDesignAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="operator-workflow-design-aggregate-list">
+        ${shell.operatorWorkflowDesignAggregateSummary.workflowItems.map(renderOperatorWorkflowDesignAggregateItem).join('')}
+        ${shell.operatorWorkflowDesignAggregateSummary.requiredEvidence.map(renderOperatorWorkflowDesignAggregateEvidence).join('')}
+        ${shell.operatorWorkflowDesignAggregateSummary.blockers.map(renderOperatorWorkflowDesignAggregateBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Operator Workflow Design Final Closure</p>
+    <section class="panel" aria-label="Operator Workflow Design Final Closure">
+      <h2>${escapeHtml(shell.operatorWorkflowDesignFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator workflow design final closure status: ${shell.operatorWorkflowDesignFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Operator workflow design final closure closed: ${shell.operatorWorkflowDesignFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Operator workflow design final closure workflow: ${shell.operatorWorkflowDesignFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Operator workflow design final closure scenario: ${shell.operatorWorkflowDesignFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Operator workflow design final closure source: ${shell.operatorWorkflowDesignFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Operator workflow design final closure state status: ${shell.operatorWorkflowDesignFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Operator workflow design final closure completed actions: ${shell.operatorWorkflowDesignFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Selected task', `Operator workflow design final closure selected task: ${shell.operatorWorkflowDesignFinalClosure.selectedTask}`)}
+        ${renderGuidanceRow('Selected workflow', `Operator workflow design final closure selected workflow: ${shell.operatorWorkflowDesignFinalClosure.selectedWorkflow}`)}
+        ${renderGuidanceRow('Handoff target', `Operator workflow design final closure handoff target: ${shell.operatorWorkflowDesignFinalClosure.handoffTarget}`)}
+        ${renderGuidanceRow('Decision', `Operator workflow design final closure decision: ${shell.operatorWorkflowDesignFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Operator workflow design final closure summary: ${shell.operatorWorkflowDesignFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Operator workflow design final closure next workflow: ${shell.operatorWorkflowDesignFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="operator-workflow-design-final-closure-list">
+        ${shell.operatorWorkflowDesignFinalClosure.releaseArtifacts.map(renderOperatorWorkflowDesignFinalClosureArtifact).join('')}
+        ${shell.operatorWorkflowDesignFinalClosure.closureEvidence.map(renderOperatorWorkflowDesignFinalClosureEvidence).join('')}
+        ${shell.operatorWorkflowDesignFinalClosure.closureChecks.map(renderOperatorWorkflowDesignFinalClosureCheck).join('')}
+        ${shell.operatorWorkflowDesignFinalClosure.blockers.map(renderOperatorWorkflowDesignFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Repository Branch Status</p>
+    <section class="panel" aria-label="Repository Branch Status">
+      <h2>${escapeHtml(shell.repositoryBranchStatus.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Repository branch status: ${shell.repositoryBranchStatus.status}`)}
+        ${renderGuidanceRow('Ready', `Repository branch ready: ${shell.repositoryBranchStatus.branchReady}`)}
+        ${renderGuidanceRow('Workflow', `Repository branch workflow: ${shell.repositoryBranchStatus.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Repository branch scenario: ${shell.repositoryBranchStatus.scenario}`)}
+        ${renderGuidanceRow('State source', `Repository branch source: ${shell.repositoryBranchStatus.stateSource}`)}
+        ${renderGuidanceRow('State status', `Repository branch state status: ${shell.repositoryBranchStatus.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Repository branch completed actions: ${shell.repositoryBranchStatus.completedActionCount}`)}
+        ${renderGuidanceRow('Local branch', `Repository branch local: ${shell.repositoryBranchStatus.localBranch}`)}
+        ${renderGuidanceRow('Remote branch', `Repository branch remote: ${shell.repositoryBranchStatus.remoteBranch}`)}
+        ${renderGuidanceRow('Main branch', `Repository branch main: ${shell.repositoryBranchStatus.mainBranch}`)}
+        ${renderGuidanceRow('Sync status', `Repository branch sync: ${shell.repositoryBranchStatus.syncStatus}`)}
+        ${renderGuidanceRow('Working tree', `Repository branch working tree: ${shell.repositoryBranchStatus.workingTreeStatus}`)}
+        ${renderGuidanceRow('Branches', `Repository branch branches: ${shell.repositoryBranchStatus.readyBranchCount}/${shell.repositoryBranchStatus.branchCount}`)}
+        ${renderGuidanceRow('Blocked branches', `Repository branch blocked branches: ${shell.repositoryBranchStatus.blockedBranchCount}`)}
+        ${renderGuidanceRow('Decision', `Repository branch decision: ${shell.repositoryBranchStatus.branchDecision}`)}
+        ${renderGuidanceRow('Summary', `Repository branch summary: ${shell.repositoryBranchStatus.branchSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Repository branch next workflow: ${shell.repositoryBranchStatus.nextWorkflow}`)}
+      </div>
+      <div class="repository-branch-status-list">
+        ${shell.repositoryBranchStatus.branchItems.map(renderRepositoryBranchStatusItem).join('')}
+        ${shell.repositoryBranchStatus.requiredEvidence.map(renderRepositoryBranchStatusEvidence).join('')}
+        ${shell.repositoryBranchStatus.blockers.map(renderRepositoryBranchStatusBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Pull Request Readiness</p>
+    <section class="panel" aria-label="Pull Request Readiness">
+      <h2>${escapeHtml(shell.pullRequestReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Pull request readiness status: ${shell.pullRequestReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Pull request ready: ${shell.pullRequestReadiness.prReady}`)}
+        ${renderGuidanceRow('Workflow', `Pull request workflow: ${shell.pullRequestReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Pull request scenario: ${shell.pullRequestReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Pull request source: ${shell.pullRequestReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Pull request state status: ${shell.pullRequestReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Pull request completed actions: ${shell.pullRequestReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Pull request title: ${shell.pullRequestReadiness.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Pull request source branch: ${shell.pullRequestReadiness.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Pull request target branch: ${shell.pullRequestReadiness.pullRequestTarget}`)}
+        ${renderGuidanceRow('Remote branch', `Pull request remote branch: ${shell.pullRequestReadiness.remoteBranch}`)}
+        ${renderGuidanceRow('Review mode', `Pull request review mode: ${shell.pullRequestReadiness.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Pull request merge policy: ${shell.pullRequestReadiness.mergePolicy}`)}
+        ${renderGuidanceRow('Checks', `Pull request checks: ${shell.pullRequestReadiness.passedCheckCount}/${shell.pullRequestReadiness.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Pull request blocked checks: ${shell.pullRequestReadiness.blockedCheckCount}`)}
+        ${renderGuidanceRow('Decision', `Pull request decision: ${shell.pullRequestReadiness.readinessDecision}`)}
+        ${renderGuidanceRow('Summary', `Pull request summary: ${shell.pullRequestReadiness.readinessSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Pull request next workflow: ${shell.pullRequestReadiness.nextWorkflow}`)}
+      </div>
+      <div class="pull-request-readiness-list">
+        ${shell.pullRequestReadiness.readinessChecks.map(renderPullRequestReadinessCheck).join('')}
+        ${shell.pullRequestReadiness.requiredEvidence.map(renderPullRequestReadinessEvidence).join('')}
+        ${shell.pullRequestReadiness.blockers.map(renderPullRequestReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Review Evidence Summary</p>
+    <section class="panel" aria-label="Review Evidence Summary">
+      <h2>${escapeHtml(shell.reviewEvidenceSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Review evidence status: ${shell.reviewEvidenceSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Review evidence ready: ${shell.reviewEvidenceSummary.evidenceReady}`)}
+        ${renderGuidanceRow('Workflow', `Review evidence workflow: ${shell.reviewEvidenceSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Review evidence scenario: ${shell.reviewEvidenceSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Review evidence source: ${shell.reviewEvidenceSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Review evidence state status: ${shell.reviewEvidenceSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Review evidence completed actions: ${shell.reviewEvidenceSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Review evidence pull request title: ${shell.reviewEvidenceSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Review evidence source branch: ${shell.reviewEvidenceSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Review evidence target branch: ${shell.reviewEvidenceSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Review evidence review mode: ${shell.reviewEvidenceSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Review evidence merge policy: ${shell.reviewEvidenceSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Release notes', `Review evidence release notes: ${shell.reviewEvidenceSummary.releaseNotesStatus}`)}
+        ${renderGuidanceRow('Closure evidence', `Review evidence closure evidence: ${shell.reviewEvidenceSummary.closureEvidenceStatus}`)}
+        ${renderGuidanceRow('Evidence', `Review evidence items: ${shell.reviewEvidenceSummary.readyEvidenceCount}/${shell.reviewEvidenceSummary.evidenceCount}`)}
+        ${renderGuidanceRow('Blocked evidence', `Review evidence blocked items: ${shell.reviewEvidenceSummary.blockedEvidenceCount}`)}
+        ${renderGuidanceRow('Unresolved blockers', `Review evidence unresolved blockers: ${shell.reviewEvidenceSummary.unresolvedBlockerCount}`)}
+        ${renderGuidanceRow('Decision', `Review evidence decision: ${shell.reviewEvidenceSummary.evidenceDecision}`)}
+        ${renderGuidanceRow('Summary', `Review evidence summary: ${shell.reviewEvidenceSummary.evidenceSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Review evidence next workflow: ${shell.reviewEvidenceSummary.nextWorkflow}`)}
+      </div>
+      <div class="review-evidence-summary-list">
+        ${shell.reviewEvidenceSummary.evidenceItems.map(renderReviewEvidenceSummaryItem).join('')}
+        ${shell.reviewEvidenceSummary.requiredEvidence.map(renderReviewEvidenceSummaryEvidence).join('')}
+        ${shell.reviewEvidenceSummary.blockers.map(renderReviewEvidenceSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Merge Readiness</p>
+    <section class="panel" aria-label="Merge Readiness">
+      <h2>${escapeHtml(shell.mergeReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Merge readiness status: ${shell.mergeReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Merge readiness ready: ${shell.mergeReadiness.mergeReady}`)}
+        ${renderGuidanceRow('Workflow', `Merge readiness workflow: ${shell.mergeReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Merge readiness scenario: ${shell.mergeReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Merge readiness source: ${shell.mergeReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Merge readiness state status: ${shell.mergeReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Merge readiness completed actions: ${shell.mergeReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Merge readiness pull request title: ${shell.mergeReadiness.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Merge readiness source branch: ${shell.mergeReadiness.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Merge readiness target branch: ${shell.mergeReadiness.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Merge readiness review mode: ${shell.mergeReadiness.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Merge readiness merge policy: ${shell.mergeReadiness.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Merge readiness main branch: ${shell.mergeReadiness.mainBranchStatus}`)}
+        ${renderGuidanceRow('Review evidence', `Merge readiness review evidence: ${shell.mergeReadiness.reviewEvidenceStatus}`)}
+        ${renderGuidanceRow('Release evidence', `Merge readiness release evidence: ${shell.mergeReadiness.releaseEvidenceStatus}`)}
+        ${renderGuidanceRow('Merge window', `Merge readiness merge window: ${shell.mergeReadiness.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Checks', `Merge readiness checks: ${shell.mergeReadiness.passedCheckCount}/${shell.mergeReadiness.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Merge readiness blocked checks: ${shell.mergeReadiness.blockedCheckCount}`)}
+        ${renderGuidanceRow('Blockers', `Merge readiness blockers: ${shell.mergeReadiness.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Merge readiness decision: ${shell.mergeReadiness.mergeDecision}`)}
+        ${renderGuidanceRow('Summary', `Merge readiness summary: ${shell.mergeReadiness.mergeSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Merge readiness next workflow: ${shell.mergeReadiness.nextWorkflow}`)}
+      </div>
+      <div class="merge-readiness-list">
+        ${shell.mergeReadiness.mergeChecks.map(renderMergeReadinessCheck).join('')}
+        ${shell.mergeReadiness.requiredEvidence.map(renderMergeReadinessEvidence).join('')}
+        ${shell.mergeReadiness.blockers.map(renderMergeReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Repository Collaboration Aggregate Summary</p>
+    <section class="panel" aria-label="Repository Collaboration Aggregate Summary">
+      <h2>${escapeHtml(shell.repositoryCollaborationAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Repository collaboration aggregate status: ${shell.repositoryCollaborationAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Repository collaboration aggregate ready: ${shell.repositoryCollaborationAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Repository collaboration aggregate workflow: ${shell.repositoryCollaborationAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Repository collaboration aggregate scenario: ${shell.repositoryCollaborationAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Repository collaboration aggregate source: ${shell.repositoryCollaborationAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Repository collaboration aggregate state status: ${shell.repositoryCollaborationAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Repository collaboration aggregate completed actions: ${shell.repositoryCollaborationAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Repository collaboration aggregate pull request title: ${shell.repositoryCollaborationAggregateSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Repository collaboration aggregate source branch: ${shell.repositoryCollaborationAggregateSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Repository collaboration aggregate target branch: ${shell.repositoryCollaborationAggregateSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Repository collaboration aggregate review mode: ${shell.repositoryCollaborationAggregateSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Repository collaboration aggregate merge policy: ${shell.repositoryCollaborationAggregateSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Repository collaboration aggregate main branch: ${shell.repositoryCollaborationAggregateSummary.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Repository collaboration aggregate merge window: ${shell.repositoryCollaborationAggregateSummary.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Workflows', `Repository collaboration aggregate workflows: ${shell.repositoryCollaborationAggregateSummary.readyWorkflowCount}/${shell.repositoryCollaborationAggregateSummary.workflowCount}`)}
+        ${renderGuidanceRow('Blocked workflows', `Repository collaboration aggregate blocked workflows: ${shell.repositoryCollaborationAggregateSummary.blockedWorkflowCount}`)}
+        ${renderGuidanceRow('Blockers', `Repository collaboration aggregate blockers: ${shell.repositoryCollaborationAggregateSummary.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Repository collaboration aggregate decision: ${shell.repositoryCollaborationAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Repository collaboration aggregate summary: ${shell.repositoryCollaborationAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Repository collaboration aggregate next workflow: ${shell.repositoryCollaborationAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="repository-collaboration-aggregate-list">
+        ${shell.repositoryCollaborationAggregateSummary.workflowItems.map(renderRepositoryCollaborationAggregateItem).join('')}
+        ${shell.repositoryCollaborationAggregateSummary.requiredEvidence.map(renderRepositoryCollaborationAggregateEvidence).join('')}
+        ${shell.repositoryCollaborationAggregateSummary.blockers.map(renderRepositoryCollaborationAggregateBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Repository Collaboration Final Closure</p>
+    <section class="panel" aria-label="Repository Collaboration Final Closure">
+      <h2>${escapeHtml(shell.repositoryCollaborationFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Repository collaboration final closure status: ${shell.repositoryCollaborationFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Repository collaboration final closure closed: ${shell.repositoryCollaborationFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Repository collaboration final closure workflow: ${shell.repositoryCollaborationFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Repository collaboration final closure scenario: ${shell.repositoryCollaborationFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Repository collaboration final closure source: ${shell.repositoryCollaborationFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Repository collaboration final closure state status: ${shell.repositoryCollaborationFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Repository collaboration final closure completed actions: ${shell.repositoryCollaborationFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Repository collaboration final closure pull request title: ${shell.repositoryCollaborationFinalClosure.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Repository collaboration final closure source branch: ${shell.repositoryCollaborationFinalClosure.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Repository collaboration final closure target branch: ${shell.repositoryCollaborationFinalClosure.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Repository collaboration final closure review mode: ${shell.repositoryCollaborationFinalClosure.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Repository collaboration final closure merge policy: ${shell.repositoryCollaborationFinalClosure.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Repository collaboration final closure main branch: ${shell.repositoryCollaborationFinalClosure.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Repository collaboration final closure merge window: ${shell.repositoryCollaborationFinalClosure.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Release artifact', `Repository collaboration final closure release artifact: ${shell.repositoryCollaborationFinalClosure.releaseArtifact}`)}
+        ${renderGuidanceRow('Closure checklist', `Repository collaboration final closure checklist: ${shell.repositoryCollaborationFinalClosure.closureChecklist}`)}
+        ${renderGuidanceRow('Checks', `Repository collaboration final closure checks: ${shell.repositoryCollaborationFinalClosure.passedCheckCount}/${shell.repositoryCollaborationFinalClosure.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Repository collaboration final closure blocked checks: ${shell.repositoryCollaborationFinalClosure.blockedCheckCount}`)}
+        ${renderGuidanceRow('Blockers', `Repository collaboration final closure blockers: ${shell.repositoryCollaborationFinalClosure.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Repository collaboration final closure decision: ${shell.repositoryCollaborationFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Repository collaboration final closure summary: ${shell.repositoryCollaborationFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Repository collaboration final closure next workflow: ${shell.repositoryCollaborationFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="repository-collaboration-final-closure-list">
+        ${shell.repositoryCollaborationFinalClosure.closureChecks.map(renderRepositoryCollaborationFinalClosureCheck).join('')}
+        ${shell.repositoryCollaborationFinalClosure.closureEvidence.map(renderRepositoryCollaborationFinalClosureEvidence).join('')}
+        ${shell.repositoryCollaborationFinalClosure.blockers.map(renderRepositoryCollaborationFinalClosureBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Pull Request Review Package</p>
+    <section class="panel" aria-label="Pull Request Review Package">
+      <h2>${escapeHtml(shell.pullRequestReviewPackage.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Pull request review package status: ${shell.pullRequestReviewPackage.status}`)}
+        ${renderGuidanceRow('Ready', `Pull request review package ready: ${shell.pullRequestReviewPackage.reviewReady}`)}
+        ${renderGuidanceRow('Workflow', `Pull request review package workflow: ${shell.pullRequestReviewPackage.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Pull request review package scenario: ${shell.pullRequestReviewPackage.scenario}`)}
+        ${renderGuidanceRow('State source', `Pull request review package source: ${shell.pullRequestReviewPackage.stateSource}`)}
+        ${renderGuidanceRow('State status', `Pull request review package state status: ${shell.pullRequestReviewPackage.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Pull request review package completed actions: ${shell.pullRequestReviewPackage.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Pull request review package title: ${shell.pullRequestReviewPackage.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Pull request review package source branch: ${shell.pullRequestReviewPackage.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Pull request review package target branch: ${shell.pullRequestReviewPackage.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Pull request review package review mode: ${shell.pullRequestReviewPackage.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Pull request review package merge policy: ${shell.pullRequestReviewPackage.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Pull request review package main branch: ${shell.pullRequestReviewPackage.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Pull request review package merge window: ${shell.pullRequestReviewPackage.mergeWindowStatus}`)}
+        ${renderGuidanceRow('Review checklist', `Pull request review package checklist: ${shell.pullRequestReviewPackage.reviewChecklist}`)}
+        ${renderGuidanceRow('Review summary', `Pull request review package summary artifact: ${shell.pullRequestReviewPackage.reviewSummaryArtifact}`)}
+        ${renderGuidanceRow('Review items', `Pull request review package items: ${shell.pullRequestReviewPackage.readyReviewItemCount}/${shell.pullRequestReviewPackage.reviewItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Pull request review package blocked items: ${shell.pullRequestReviewPackage.blockedReviewItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Pull request review package blockers: ${shell.pullRequestReviewPackage.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Pull request review package decision: ${shell.pullRequestReviewPackage.reviewDecision}`)}
+        ${renderGuidanceRow('Summary', `Pull request review package summary: ${shell.pullRequestReviewPackage.reviewSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Pull request review package next workflow: ${shell.pullRequestReviewPackage.nextWorkflow}`)}
+      </div>
+      <div class="pull-request-review-package-list">
+        ${shell.pullRequestReviewPackage.reviewItems.map(renderPullRequestReviewPackageItem).join('')}
+        ${shell.pullRequestReviewPackage.reviewEvidence.map(renderPullRequestReviewPackageEvidence).join('')}
+        ${shell.pullRequestReviewPackage.blockers.map(renderPullRequestReviewPackageBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">CI Evidence Summary</p>
+    <section class="panel" aria-label="CI Evidence Summary">
+      <h2>${escapeHtml(shell.ciEvidenceSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `CI evidence summary status: ${shell.ciEvidenceSummary.status}`)}
+        ${renderGuidanceRow('Ready', `CI evidence summary ready: ${shell.ciEvidenceSummary.ciReady}`)}
+        ${renderGuidanceRow('Workflow', `CI evidence summary workflow: ${shell.ciEvidenceSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `CI evidence summary scenario: ${shell.ciEvidenceSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `CI evidence summary source: ${shell.ciEvidenceSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `CI evidence summary state status: ${shell.ciEvidenceSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `CI evidence summary completed actions: ${shell.ciEvidenceSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `CI evidence summary pull request title: ${shell.ciEvidenceSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `CI evidence summary source branch: ${shell.ciEvidenceSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `CI evidence summary target branch: ${shell.ciEvidenceSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `CI evidence summary review mode: ${shell.ciEvidenceSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `CI evidence summary merge policy: ${shell.ciEvidenceSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `CI evidence summary main branch: ${shell.ciEvidenceSummary.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `CI evidence summary merge window: ${shell.ciEvidenceSummary.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `CI evidence summary command: ${shell.ciEvidenceSummary.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `CI evidence summary ci status: ${shell.ciEvidenceSummary.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `CI evidence summary provider: ${shell.ciEvidenceSummary.ciProvider}`)}
+        ${renderGuidanceRow('Evidence items', `CI evidence summary items: ${shell.ciEvidenceSummary.readyEvidenceItemCount}/${shell.ciEvidenceSummary.evidenceItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `CI evidence summary blocked items: ${shell.ciEvidenceSummary.blockedEvidenceItemCount}`)}
+        ${renderGuidanceRow('Blockers', `CI evidence summary blockers: ${shell.ciEvidenceSummary.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `CI evidence summary decision: ${shell.ciEvidenceSummary.ciDecision}`)}
+        ${renderGuidanceRow('Summary', `CI evidence summary summary: ${shell.ciEvidenceSummary.ciSummary}`)}
+        ${renderGuidanceRow('Next workflow', `CI evidence summary next workflow: ${shell.ciEvidenceSummary.nextWorkflow}`)}
+      </div>
+      <div class="ci-evidence-summary-list">
+        ${shell.ciEvidenceSummary.evidenceItems.map(renderCiEvidenceSummaryItem).join('')}
+        ${shell.ciEvidenceSummary.ciEvidence.map(renderCiEvidenceSummaryEvidence).join('')}
+        ${shell.ciEvidenceSummary.blockers.map(renderCiEvidenceSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Main Merge Plan</p>
+    <section class="panel" aria-label="Main Merge Plan">
+      <h2>${escapeHtml(shell.mainMergePlan.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Main merge plan status: ${shell.mainMergePlan.status}`)}
+        ${renderGuidanceRow('Ready', `Main merge plan ready: ${shell.mainMergePlan.mergePlanReady}`)}
+        ${renderGuidanceRow('Workflow', `Main merge plan workflow: ${shell.mainMergePlan.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Main merge plan scenario: ${shell.mainMergePlan.scenario}`)}
+        ${renderGuidanceRow('State source', `Main merge plan source: ${shell.mainMergePlan.stateSource}`)}
+        ${renderGuidanceRow('State status', `Main merge plan state status: ${shell.mainMergePlan.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Main merge plan completed actions: ${shell.mainMergePlan.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Main merge plan pull request title: ${shell.mainMergePlan.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Main merge plan source branch: ${shell.mainMergePlan.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Main merge plan target branch: ${shell.mainMergePlan.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Main merge plan review mode: ${shell.mainMergePlan.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Main merge plan merge policy: ${shell.mainMergePlan.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Main merge plan main branch: ${shell.mainMergePlan.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Main merge plan merge window: ${shell.mainMergePlan.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Main merge plan ci command: ${shell.mainMergePlan.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Main merge plan ci status: ${shell.mainMergePlan.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Main merge plan ci provider: ${shell.mainMergePlan.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Main merge plan strategy: ${shell.mainMergePlan.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Main merge plan rollback: ${shell.mainMergePlan.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Main merge plan verification command: ${shell.mainMergePlan.verificationCommand}`)}
+        ${renderGuidanceRow('Plan items', `Main merge plan items: ${shell.mainMergePlan.readyPlanItemCount}/${shell.mainMergePlan.planItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Main merge plan blocked items: ${shell.mainMergePlan.blockedPlanItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Main merge plan blockers: ${shell.mainMergePlan.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Main merge plan decision: ${shell.mainMergePlan.mergeDecision}`)}
+        ${renderGuidanceRow('Summary', `Main merge plan summary: ${shell.mainMergePlan.mergeSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Main merge plan next workflow: ${shell.mainMergePlan.nextWorkflow}`)}
+      </div>
+      <div class="main-merge-plan-list">
+        ${shell.mainMergePlan.planItems.map(renderMainMergePlanItem).join('')}
+        ${shell.mainMergePlan.mergeEvidence.map(renderMainMergePlanEvidence).join('')}
+        ${shell.mainMergePlan.blockers.map(renderMainMergePlanBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Release Tag Readiness</p>
+    <section class="panel" aria-label="Release Tag Readiness">
+      <h2>${escapeHtml(shell.releaseTagReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Release tag readiness status: ${shell.releaseTagReadiness.status}`)}
+        ${renderGuidanceRow('Ready', `Release tag readiness ready: ${shell.releaseTagReadiness.tagReady}`)}
+        ${renderGuidanceRow('Workflow', `Release tag readiness workflow: ${shell.releaseTagReadiness.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Release tag readiness scenario: ${shell.releaseTagReadiness.scenario}`)}
+        ${renderGuidanceRow('State source', `Release tag readiness source: ${shell.releaseTagReadiness.stateSource}`)}
+        ${renderGuidanceRow('State status', `Release tag readiness state status: ${shell.releaseTagReadiness.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Release tag readiness completed actions: ${shell.releaseTagReadiness.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Release tag readiness pull request title: ${shell.releaseTagReadiness.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Release tag readiness source branch: ${shell.releaseTagReadiness.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Release tag readiness target branch: ${shell.releaseTagReadiness.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Release tag readiness review mode: ${shell.releaseTagReadiness.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Release tag readiness merge policy: ${shell.releaseTagReadiness.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Release tag readiness main branch: ${shell.releaseTagReadiness.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Release tag readiness merge window: ${shell.releaseTagReadiness.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Release tag readiness ci command: ${shell.releaseTagReadiness.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Release tag readiness ci status: ${shell.releaseTagReadiness.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Release tag readiness ci provider: ${shell.releaseTagReadiness.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Release tag readiness merge strategy: ${shell.releaseTagReadiness.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Release tag readiness rollback: ${shell.releaseTagReadiness.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Release tag readiness verification command: ${shell.releaseTagReadiness.verificationCommand}`)}
+        ${renderGuidanceRow('Release version', `Release tag readiness version: ${shell.releaseTagReadiness.releaseVersion}`)}
+        ${renderGuidanceRow('Tag policy', `Release tag readiness policy: ${shell.releaseTagReadiness.tagPolicy}`)}
+        ${renderGuidanceRow('Release notes', `Release tag readiness notes: ${shell.releaseTagReadiness.releaseNotes}`)}
+        ${renderGuidanceRow('Tag checklist', `Release tag readiness checklist: ${shell.releaseTagReadiness.tagChecklist}`)}
+        ${renderGuidanceRow('Tag items', `Release tag readiness items: ${shell.releaseTagReadiness.readyTagItemCount}/${shell.releaseTagReadiness.tagItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Release tag readiness blocked items: ${shell.releaseTagReadiness.blockedTagItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Release tag readiness blockers: ${shell.releaseTagReadiness.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Release tag readiness decision: ${shell.releaseTagReadiness.tagDecision}`)}
+        ${renderGuidanceRow('Summary', `Release tag readiness summary: ${shell.releaseTagReadiness.tagSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Release tag readiness next workflow: ${shell.releaseTagReadiness.nextWorkflow}`)}
+      </div>
+      <div class="release-tag-readiness-list">
+        ${shell.releaseTagReadiness.tagItems.map(renderReleaseTagReadinessItem).join('')}
+        ${shell.releaseTagReadiness.tagEvidence.map(renderReleaseTagReadinessEvidence).join('')}
+        ${shell.releaseTagReadiness.blockers.map(renderReleaseTagReadinessBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Mainline Aggregate Summary</p>
+    <section class="panel" aria-label="Mainline Aggregate Summary">
+      <h2>${escapeHtml(shell.mainlineAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Mainline aggregate summary status: ${shell.mainlineAggregateSummary.status}`)}
+        ${renderGuidanceRow('Ready', `Mainline aggregate summary ready: ${shell.mainlineAggregateSummary.aggregateReady}`)}
+        ${renderGuidanceRow('Workflow', `Mainline aggregate summary workflow: ${shell.mainlineAggregateSummary.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Mainline aggregate summary scenario: ${shell.mainlineAggregateSummary.scenario}`)}
+        ${renderGuidanceRow('State source', `Mainline aggregate summary source: ${shell.mainlineAggregateSummary.stateSource}`)}
+        ${renderGuidanceRow('State status', `Mainline aggregate summary state status: ${shell.mainlineAggregateSummary.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Mainline aggregate summary completed actions: ${shell.mainlineAggregateSummary.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Mainline aggregate summary pull request title: ${shell.mainlineAggregateSummary.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Mainline aggregate summary source branch: ${shell.mainlineAggregateSummary.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Mainline aggregate summary target branch: ${shell.mainlineAggregateSummary.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Mainline aggregate summary review mode: ${shell.mainlineAggregateSummary.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Mainline aggregate summary merge policy: ${shell.mainlineAggregateSummary.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Mainline aggregate summary main branch: ${shell.mainlineAggregateSummary.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Mainline aggregate summary merge window: ${shell.mainlineAggregateSummary.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Mainline aggregate summary ci command: ${shell.mainlineAggregateSummary.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Mainline aggregate summary ci status: ${shell.mainlineAggregateSummary.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Mainline aggregate summary ci provider: ${shell.mainlineAggregateSummary.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Mainline aggregate summary merge strategy: ${shell.mainlineAggregateSummary.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Mainline aggregate summary rollback: ${shell.mainlineAggregateSummary.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Mainline aggregate summary verification command: ${shell.mainlineAggregateSummary.verificationCommand}`)}
+        ${renderGuidanceRow('Release version', `Mainline aggregate summary version: ${shell.mainlineAggregateSummary.releaseVersion}`)}
+        ${renderGuidanceRow('Tag policy', `Mainline aggregate summary tag policy: ${shell.mainlineAggregateSummary.tagPolicy}`)}
+        ${renderGuidanceRow('Release notes', `Mainline aggregate summary release notes: ${shell.mainlineAggregateSummary.releaseNotes}`)}
+        ${renderGuidanceRow('Tag checklist', `Mainline aggregate summary tag checklist: ${shell.mainlineAggregateSummary.tagChecklist}`)}
+        ${renderGuidanceRow('Aggregate artifact', `Mainline aggregate summary artifact: ${shell.mainlineAggregateSummary.aggregateArtifact}`)}
+        ${renderGuidanceRow('Closure checklist', `Mainline aggregate summary closure checklist: ${shell.mainlineAggregateSummary.closureChecklist}`)}
+        ${renderGuidanceRow('Workflow items', `Mainline aggregate summary items: ${shell.mainlineAggregateSummary.readyWorkflowItemCount}/${shell.mainlineAggregateSummary.workflowItemCount}`)}
+        ${renderGuidanceRow('Blocked items', `Mainline aggregate summary blocked items: ${shell.mainlineAggregateSummary.blockedWorkflowItemCount}`)}
+        ${renderGuidanceRow('Blockers', `Mainline aggregate summary blockers: ${shell.mainlineAggregateSummary.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Mainline aggregate summary decision: ${shell.mainlineAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Mainline aggregate summary summary: ${shell.mainlineAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Mainline aggregate summary next workflow: ${shell.mainlineAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="mainline-aggregate-summary-list">
+        ${shell.mainlineAggregateSummary.workflowItems.map(renderMainlineAggregateSummaryItem).join('')}
+        ${shell.mainlineAggregateSummary.aggregateEvidence.map(renderMainlineAggregateSummaryEvidence).join('')}
+        ${shell.mainlineAggregateSummary.blockers.map(renderMainlineAggregateSummaryBlocker).join('')}
+      </div>
+    </section>
+
+    <p class="section-title">Mainline Final Closure</p>
+    <section class="panel" aria-label="Mainline Final Closure">
+      <h2>${escapeHtml(shell.mainlineFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Mainline final closure status: ${shell.mainlineFinalClosure.status}`)}
+        ${renderGuidanceRow('Closed', `Mainline final closure closed: ${shell.mainlineFinalClosure.closed}`)}
+        ${renderGuidanceRow('Workflow', `Mainline final closure workflow: ${shell.mainlineFinalClosure.workflowName}`)}
+        ${renderGuidanceRow('Scenario', `Mainline final closure scenario: ${shell.mainlineFinalClosure.scenario}`)}
+        ${renderGuidanceRow('State source', `Mainline final closure source: ${shell.mainlineFinalClosure.stateSource}`)}
+        ${renderGuidanceRow('State status', `Mainline final closure state status: ${shell.mainlineFinalClosure.stateStatus}`)}
+        ${renderGuidanceRow('Completed actions', `Mainline final closure completed actions: ${shell.mainlineFinalClosure.completedActionCount}`)}
+        ${renderGuidanceRow('Title', `Mainline final closure pull request title: ${shell.mainlineFinalClosure.pullRequestTitle}`)}
+        ${renderGuidanceRow('Source branch', `Mainline final closure source branch: ${shell.mainlineFinalClosure.pullRequestSource}`)}
+        ${renderGuidanceRow('Target branch', `Mainline final closure target branch: ${shell.mainlineFinalClosure.pullRequestTarget}`)}
+        ${renderGuidanceRow('Review mode', `Mainline final closure review mode: ${shell.mainlineFinalClosure.reviewMode}`)}
+        ${renderGuidanceRow('Merge policy', `Mainline final closure merge policy: ${shell.mainlineFinalClosure.mergePolicy}`)}
+        ${renderGuidanceRow('Main branch', `Mainline final closure main branch: ${shell.mainlineFinalClosure.mainBranchStatus}`)}
+        ${renderGuidanceRow('Merge window', `Mainline final closure merge window: ${shell.mainlineFinalClosure.mergeWindowStatus}`)}
+        ${renderGuidanceRow('CI command', `Mainline final closure ci command: ${shell.mainlineFinalClosure.ciCommand}`)}
+        ${renderGuidanceRow('CI status', `Mainline final closure ci status: ${shell.mainlineFinalClosure.ciStatus}`)}
+        ${renderGuidanceRow('CI provider', `Mainline final closure ci provider: ${shell.mainlineFinalClosure.ciProvider}`)}
+        ${renderGuidanceRow('Merge strategy', `Mainline final closure merge strategy: ${shell.mainlineFinalClosure.mergeStrategy}`)}
+        ${renderGuidanceRow('Rollback plan', `Mainline final closure rollback: ${shell.mainlineFinalClosure.rollbackPlan}`)}
+        ${renderGuidanceRow('Verification', `Mainline final closure verification command: ${shell.mainlineFinalClosure.verificationCommand}`)}
+        ${renderGuidanceRow('Release version', `Mainline final closure version: ${shell.mainlineFinalClosure.releaseVersion}`)}
+        ${renderGuidanceRow('Tag policy', `Mainline final closure tag policy: ${shell.mainlineFinalClosure.tagPolicy}`)}
+        ${renderGuidanceRow('Release notes', `Mainline final closure release notes: ${shell.mainlineFinalClosure.releaseNotes}`)}
+        ${renderGuidanceRow('Tag checklist', `Mainline final closure tag checklist: ${shell.mainlineFinalClosure.tagChecklist}`)}
+        ${renderGuidanceRow('Aggregate artifact', `Mainline final closure aggregate artifact: ${shell.mainlineFinalClosure.aggregateArtifact}`)}
+        ${renderGuidanceRow('Closure checklist', `Mainline final closure closure checklist: ${shell.mainlineFinalClosure.closureChecklist}`)}
+        ${renderGuidanceRow('Final release notes', `Mainline final closure final release notes: ${shell.mainlineFinalClosure.finalReleaseNotes}`)}
+        ${renderGuidanceRow('Archive checklist', `Mainline final closure archive checklist: ${shell.mainlineFinalClosure.archiveChecklist}`)}
+        ${renderGuidanceRow('Checks', `Mainline final closure checks: ${shell.mainlineFinalClosure.passedCheckCount}/${shell.mainlineFinalClosure.checkCount}`)}
+        ${renderGuidanceRow('Blocked checks', `Mainline final closure blocked checks: ${shell.mainlineFinalClosure.blockedCheckCount}`)}
+        ${renderGuidanceRow('Blockers', `Mainline final closure blockers: ${shell.mainlineFinalClosure.blockerCount}`)}
+        ${renderGuidanceRow('Decision', `Mainline final closure decision: ${shell.mainlineFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Mainline final closure summary: ${shell.mainlineFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Next workflow', `Mainline final closure next workflow: ${shell.mainlineFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="mainline-final-closure-list">
+        ${shell.mainlineFinalClosure.closureChecks.map(renderMainlineFinalClosureCheck).join('')}
+        ${shell.mainlineFinalClosure.closureEvidence.map(renderMainlineFinalClosureEvidence).join('')}
+        ${shell.mainlineFinalClosure.blockers.map(renderMainlineFinalClosureBlocker).join('')}
       </div>
     </section>
 
@@ -1525,6 +3177,671 @@ function renderAgentHandoffRuntimeSummaryBlocker(blocker) {
   return `<div class="agent-handoff-runtime-summary-row">
     <span class="agent-handoff-runtime-summary-label">Blocker</span>
     <span class="agent-handoff-runtime-summary-value">Agent handoff runtime blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeAggregateItem(item) {
+  return `<div class="agent-handoff-runtime-aggregate-row">
+    <span class="agent-handoff-runtime-aggregate-label">Runtime</span>
+    <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${item.completedStages}/${item.totalStages}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeAggregateEvidence(evidence) {
+  return `<div class="agent-handoff-runtime-aggregate-row">
+    <span class="agent-handoff-runtime-aggregate-label">Evidence</span>
+    <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeAggregateBlocker(blocker) {
+  return `<div class="agent-handoff-runtime-aggregate-row">
+    <span class="agent-handoff-runtime-aggregate-label">Blocker</span>
+    <span class="agent-handoff-runtime-aggregate-value">Agent handoff runtime aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureArtifact(artifact) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Artifact</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure artifact: ${escapeHtml(artifact)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureEvidence(evidence) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Evidence</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureCheck(check) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Check</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderAgentHandoffRuntimeFinalClosureBlocker(blocker) {
+  return `<div class="agent-handoff-runtime-final-closure-row">
+    <span class="agent-handoff-runtime-final-closure-label">Blocker</span>
+    <span class="agent-handoff-runtime-final-closure-value">Agent handoff runtime final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRuntimeHealthSignal(signal) {
+  return `<div class="runtime-health-row">
+    <span class="runtime-health-label">Signal</span>
+    <span class="runtime-health-value">Runtime health signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderRuntimeHealthRecoveryAction(action) {
+  return `<div class="runtime-health-row">
+    <span class="runtime-health-label">Recovery</span>
+    <span class="runtime-health-value">Runtime health recovery: ${escapeHtml(action)}</span>
+  </div>`;
+}
+
+function renderRuntimeHealthBlocker(blocker) {
+  return `<div class="runtime-health-row">
+    <span class="runtime-health-label">Blocker</span>
+    <span class="runtime-health-value">Runtime health blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderStudioStateRecoveryStep(step) {
+  return `<div class="studio-state-recovery-row">
+    <span class="studio-state-recovery-label">Step</span>
+    <span class="studio-state-recovery-value">Studio state recovery step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderStudioStateRecoveryEvidence(evidence) {
+  return `<div class="studio-state-recovery-row">
+    <span class="studio-state-recovery-label">Evidence</span>
+    <span class="studio-state-recovery-value">Studio state recovery evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderStudioStateRecoveryBlocker(blocker) {
+  return `<div class="studio-state-recovery-row">
+    <span class="studio-state-recovery-label">Blocker</span>
+    <span class="studio-state-recovery-value">Studio state recovery blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationSignal(signal) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Signal</span>
+    <span class="runtime-validation-value">Runtime validation signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationCommand(command) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Command</span>
+    <span class="runtime-validation-value">Runtime validation command: ${escapeHtml(command)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationEvidence(evidence) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Evidence</span>
+    <span class="runtime-validation-value">Runtime validation evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRuntimeValidationBlocker(blocker) {
+  return `<div class="runtime-validation-row">
+    <span class="runtime-validation-label">Blocker</span>
+    <span class="runtime-validation-value">Runtime validation blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryStep(step) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Step</span>
+    <span class="operator-recovery-value">Operator recovery step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoverySignal(signal) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Signal</span>
+    <span class="operator-recovery-value">Operator recovery signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryCommand(command) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Command</span>
+    <span class="operator-recovery-value">Operator recovery command: ${escapeHtml(command)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryEvidence(evidence) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Evidence</span>
+    <span class="operator-recovery-value">Operator recovery evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorRecoveryBlocker(blocker) {
+  return `<div class="operator-recovery-row">
+    <span class="operator-recovery-label">Blocker</span>
+    <span class="operator-recovery-value">Operator recovery blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderWorkflowSessionSignal(signal) {
+  return `<div class="workflow-session-row">
+    <span class="workflow-session-label">Signal</span>
+    <span class="workflow-session-value">Workflow session signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderWorkflowSessionEvidence(evidence) {
+  return `<div class="workflow-session-row">
+    <span class="workflow-session-label">Evidence</span>
+    <span class="workflow-session-value">Workflow session evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderWorkflowSessionBlocker(blocker) {
+  return `<div class="workflow-session-row">
+    <span class="workflow-session-label">Blocker</span>
+    <span class="workflow-session-value">Workflow session blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionStep(step) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Step</span>
+    <span class="workflow-transition-value">Workflow transition step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionSignal(signal) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Signal</span>
+    <span class="workflow-transition-value">Workflow transition signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionEvidence(evidence) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Evidence</span>
+    <span class="workflow-transition-value">Workflow transition evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderWorkflowTransitionBlocker(blocker) {
+  return `<div class="workflow-transition-row">
+    <span class="workflow-transition-label">Blocker</span>
+    <span class="workflow-transition-value">Workflow transition blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderCommandResultItem(result) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Result</span>
+    <span class="command-result-value">Command result item: ${escapeHtml(result.label)} - ${escapeHtml(result.status)} - ${escapeHtml(result.detail)}</span>
+  </div>`;
+}
+
+function renderCommandResultSignal(signal) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Signal</span>
+    <span class="command-result-value">Command result signal: ${escapeHtml(signal.label)} - ${escapeHtml(signal.status)} - ${escapeHtml(signal.detail)}</span>
+  </div>`;
+}
+
+function renderCommandResultEvidence(evidence) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Evidence</span>
+    <span class="command-result-value">Command result evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderCommandResultBlocker(blocker) {
+  return `<div class="command-result-row">
+    <span class="command-result-label">Blocker</span>
+    <span class="command-result-value">Command result blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeAggregateItem(item) {
+  return `<div class="studio-workflow-runtime-aggregate-row">
+    <span class="studio-workflow-runtime-aggregate-label">Command</span>
+    <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.scenario)} - ${escapeHtml(item.route)} - ${item.resultCount} results</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeAggregateEvidence(evidence) {
+  return `<div class="studio-workflow-runtime-aggregate-row">
+    <span class="studio-workflow-runtime-aggregate-label">Evidence</span>
+    <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeAggregateBlocker(blocker) {
+  return `<div class="studio-workflow-runtime-aggregate-row">
+    <span class="studio-workflow-runtime-aggregate-label">Blocker</span>
+    <span class="studio-workflow-runtime-aggregate-value">Studio workflow runtime aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureArtifact(artifact) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Artifact</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure artifact: ${escapeHtml(artifact)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureEvidence(evidence) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Evidence</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureCheck(check) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Check</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderStudioWorkflowRuntimeFinalClosureBlocker(blocker) {
+  return `<div class="studio-workflow-runtime-final-closure-row">
+    <span class="studio-workflow-runtime-final-closure-label">Blocker</span>
+    <span class="studio-workflow-runtime-final-closure-value">Studio workflow runtime final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowMapPath(path) {
+  return `<div class="operator-workflow-map-row">
+    <span class="operator-workflow-map-label">Path</span>
+    <span class="operator-workflow-map-value">Operator workflow map path: ${escapeHtml(path.label)} - ${escapeHtml(path.status)} - ${escapeHtml(path.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowMapEvidence(evidence) {
+  return `<div class="operator-workflow-map-row">
+    <span class="operator-workflow-map-label">Evidence</span>
+    <span class="operator-workflow-map-value">Operator workflow map evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowMapBlocker(blocker) {
+  return `<div class="operator-workflow-map-row">
+    <span class="operator-workflow-map-label">Blocker</span>
+    <span class="operator-workflow-map-value">Operator workflow map blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorTaskSelectionOption(option) {
+  return `<div class="operator-task-selection-row">
+    <span class="operator-task-selection-label">Task</span>
+    <span class="operator-task-selection-value">Operator task selection option: ${escapeHtml(option.label)} - ${escapeHtml(option.workflow)} - ${escapeHtml(option.status)} - ${escapeHtml(option.reason)}</span>
+  </div>`;
+}
+
+function renderOperatorTaskSelectionEvidence(evidence) {
+  return `<div class="operator-task-selection-row">
+    <span class="operator-task-selection-label">Evidence</span>
+    <span class="operator-task-selection-value">Operator task selection evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorTaskSelectionBlocker(blocker) {
+  return `<div class="operator-task-selection-row">
+    <span class="operator-task-selection-label">Blocker</span>
+    <span class="operator-task-selection-value">Operator task selection blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorStepDetailStep(step) {
+  return `<div class="operator-step-detail-row">
+    <span class="operator-step-detail-label">Step</span>
+    <span class="operator-step-detail-value">Operator step detail step: ${escapeHtml(step.label)} - ${escapeHtml(step.status)} - ${escapeHtml(step.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorStepDetailEvidence(evidence) {
+  return `<div class="operator-step-detail-row">
+    <span class="operator-step-detail-label">Evidence</span>
+    <span class="operator-step-detail-value">Operator step detail evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorStepDetailBlocker(blocker) {
+  return `<div class="operator-step-detail-row">
+    <span class="operator-step-detail-label">Blocker</span>
+    <span class="operator-step-detail-value">Operator step detail blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorHandoffReadinessCheck(check) {
+  return `<div class="operator-handoff-readiness-row">
+    <span class="operator-handoff-readiness-label">Check</span>
+    <span class="operator-handoff-readiness-value">Operator handoff readiness check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorHandoffReadinessEvidence(evidence) {
+  return `<div class="operator-handoff-readiness-row">
+    <span class="operator-handoff-readiness-label">Evidence</span>
+    <span class="operator-handoff-readiness-value">Operator handoff readiness evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorHandoffReadinessBlocker(blocker) {
+  return `<div class="operator-handoff-readiness-row">
+    <span class="operator-handoff-readiness-label">Blocker</span>
+    <span class="operator-handoff-readiness-value">Operator handoff readiness blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignAggregateItem(item) {
+  return `<div class="operator-workflow-design-aggregate-row">
+    <span class="operator-workflow-design-aggregate-label">Workflow</span>
+    <span class="operator-workflow-design-aggregate-value">Operator workflow design aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.ready)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignAggregateEvidence(evidence) {
+  return `<div class="operator-workflow-design-aggregate-row">
+    <span class="operator-workflow-design-aggregate-label">Evidence</span>
+    <span class="operator-workflow-design-aggregate-value">Operator workflow design aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignAggregateBlocker(blocker) {
+  return `<div class="operator-workflow-design-aggregate-row">
+    <span class="operator-workflow-design-aggregate-label">Blocker</span>
+    <span class="operator-workflow-design-aggregate-value">Operator workflow design aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignFinalClosureArtifact(artifact) {
+  return `<div class="operator-workflow-design-final-closure-row">
+    <span class="operator-workflow-design-final-closure-label">Artifact</span>
+    <span class="operator-workflow-design-final-closure-value">Operator workflow design final closure artifact: ${escapeHtml(artifact)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignFinalClosureEvidence(evidence) {
+  return `<div class="operator-workflow-design-final-closure-row">
+    <span class="operator-workflow-design-final-closure-label">Evidence</span>
+    <span class="operator-workflow-design-final-closure-value">Operator workflow design final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignFinalClosureCheck(check) {
+  return `<div class="operator-workflow-design-final-closure-row">
+    <span class="operator-workflow-design-final-closure-label">Check</span>
+    <span class="operator-workflow-design-final-closure-value">Operator workflow design final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)}</span>
+  </div>`;
+}
+
+function renderOperatorWorkflowDesignFinalClosureBlocker(blocker) {
+  return `<div class="operator-workflow-design-final-closure-row">
+    <span class="operator-workflow-design-final-closure-label">Blocker</span>
+    <span class="operator-workflow-design-final-closure-value">Operator workflow design final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRepositoryBranchStatusItem(item) {
+  return `<div class="repository-branch-status-row">
+    <span class="repository-branch-status-label">Branch</span>
+    <span class="repository-branch-status-value">Repository branch item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderRepositoryBranchStatusEvidence(evidence) {
+  return `<div class="repository-branch-status-row">
+    <span class="repository-branch-status-label">Evidence</span>
+    <span class="repository-branch-status-value">Repository branch evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRepositoryBranchStatusBlocker(blocker) {
+  return `<div class="repository-branch-status-row">
+    <span class="repository-branch-status-label">Blocker</span>
+    <span class="repository-branch-status-value">Repository branch blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderPullRequestReadinessCheck(check) {
+  return `<div class="pull-request-readiness-row">
+    <span class="pull-request-readiness-label">Check</span>
+    <span class="pull-request-readiness-value">Pull request check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderPullRequestReadinessEvidence(evidence) {
+  return `<div class="pull-request-readiness-row">
+    <span class="pull-request-readiness-label">Evidence</span>
+    <span class="pull-request-readiness-value">Pull request evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderPullRequestReadinessBlocker(blocker) {
+  return `<div class="pull-request-readiness-row">
+    <span class="pull-request-readiness-label">Blocker</span>
+    <span class="pull-request-readiness-value">Pull request blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderReviewEvidenceSummaryItem(item) {
+  return `<div class="review-evidence-summary-row">
+    <span class="review-evidence-summary-label">Evidence item</span>
+    <span class="review-evidence-summary-value">Review evidence item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderReviewEvidenceSummaryEvidence(evidence) {
+  return `<div class="review-evidence-summary-row">
+    <span class="review-evidence-summary-label">Evidence</span>
+    <span class="review-evidence-summary-value">Review evidence proof: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderReviewEvidenceSummaryBlocker(blocker) {
+  return `<div class="review-evidence-summary-row">
+    <span class="review-evidence-summary-label">Blocker</span>
+    <span class="review-evidence-summary-value">Review evidence blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMergeReadinessCheck(check) {
+  return `<div class="merge-readiness-row">
+    <span class="merge-readiness-label">Check</span>
+    <span class="merge-readiness-value">Merge readiness check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderMergeReadinessEvidence(evidence) {
+  return `<div class="merge-readiness-row">
+    <span class="merge-readiness-label">Evidence</span>
+    <span class="merge-readiness-value">Merge readiness evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMergeReadinessBlocker(blocker) {
+  return `<div class="merge-readiness-row">
+    <span class="merge-readiness-label">Blocker</span>
+    <span class="merge-readiness-value">Merge readiness blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationAggregateItem(item) {
+  return `<div class="repository-collaboration-aggregate-row">
+    <span class="repository-collaboration-aggregate-label">Workflow</span>
+    <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.ready)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationAggregateEvidence(evidence) {
+  return `<div class="repository-collaboration-aggregate-row">
+    <span class="repository-collaboration-aggregate-label">Evidence</span>
+    <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationAggregateBlocker(blocker) {
+  return `<div class="repository-collaboration-aggregate-row">
+    <span class="repository-collaboration-aggregate-label">Blocker</span>
+    <span class="repository-collaboration-aggregate-value">Repository collaboration aggregate blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationFinalClosureCheck(check) {
+  return `<div class="repository-collaboration-final-closure-row">
+    <span class="repository-collaboration-final-closure-label">Check</span>
+    <span class="repository-collaboration-final-closure-value">Repository collaboration final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationFinalClosureEvidence(evidence) {
+  return `<div class="repository-collaboration-final-closure-row">
+    <span class="repository-collaboration-final-closure-label">Evidence</span>
+    <span class="repository-collaboration-final-closure-value">Repository collaboration final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderRepositoryCollaborationFinalClosureBlocker(blocker) {
+  return `<div class="repository-collaboration-final-closure-row">
+    <span class="repository-collaboration-final-closure-label">Blocker</span>
+    <span class="repository-collaboration-final-closure-value">Repository collaboration final closure blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderPullRequestReviewPackageItem(item) {
+  return `<div class="pull-request-review-package-row">
+    <span class="pull-request-review-package-label">Review item</span>
+    <span class="pull-request-review-package-value">Pull request review package item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderPullRequestReviewPackageEvidence(evidence) {
+  return `<div class="pull-request-review-package-row">
+    <span class="pull-request-review-package-label">Evidence</span>
+    <span class="pull-request-review-package-value">Pull request review package evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderPullRequestReviewPackageBlocker(blocker) {
+  return `<div class="pull-request-review-package-row">
+    <span class="pull-request-review-package-label">Blocker</span>
+    <span class="pull-request-review-package-value">Pull request review package blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderCiEvidenceSummaryItem(item) {
+  return `<div class="ci-evidence-summary-row">
+    <span class="ci-evidence-summary-label">CI item</span>
+    <span class="ci-evidence-summary-value">CI evidence summary item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderCiEvidenceSummaryEvidence(evidence) {
+  return `<div class="ci-evidence-summary-row">
+    <span class="ci-evidence-summary-label">Evidence</span>
+    <span class="ci-evidence-summary-value">CI evidence summary evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderCiEvidenceSummaryBlocker(blocker) {
+  return `<div class="ci-evidence-summary-row">
+    <span class="ci-evidence-summary-label">Blocker</span>
+    <span class="ci-evidence-summary-value">CI evidence summary blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMainMergePlanItem(item) {
+  return `<div class="main-merge-plan-row">
+    <span class="main-merge-plan-label">Plan item</span>
+    <span class="main-merge-plan-value">Main merge plan item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderMainMergePlanEvidence(evidence) {
+  return `<div class="main-merge-plan-row">
+    <span class="main-merge-plan-label">Evidence</span>
+    <span class="main-merge-plan-value">Main merge plan evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMainMergePlanBlocker(blocker) {
+  return `<div class="main-merge-plan-row">
+    <span class="main-merge-plan-label">Blocker</span>
+    <span class="main-merge-plan-value">Main merge plan blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderReleaseTagReadinessItem(item) {
+  return `<div class="release-tag-readiness-row">
+    <span class="release-tag-readiness-label">Tag item</span>
+    <span class="release-tag-readiness-value">Release tag readiness item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderReleaseTagReadinessEvidence(evidence) {
+  return `<div class="release-tag-readiness-row">
+    <span class="release-tag-readiness-label">Evidence</span>
+    <span class="release-tag-readiness-value">Release tag readiness evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderReleaseTagReadinessBlocker(blocker) {
+  return `<div class="release-tag-readiness-row">
+    <span class="release-tag-readiness-label">Blocker</span>
+    <span class="release-tag-readiness-value">Release tag readiness blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMainlineAggregateSummaryItem(item) {
+  return `<div class="mainline-aggregate-summary-row">
+    <span class="mainline-aggregate-summary-label">Workflow item</span>
+    <span class="mainline-aggregate-summary-value">Mainline aggregate summary item: ${escapeHtml(item.label)} - ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+  </div>`;
+}
+
+function renderMainlineAggregateSummaryEvidence(evidence) {
+  return `<div class="mainline-aggregate-summary-row">
+    <span class="mainline-aggregate-summary-label">Evidence</span>
+    <span class="mainline-aggregate-summary-value">Mainline aggregate summary evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMainlineAggregateSummaryBlocker(blocker) {
+  return `<div class="mainline-aggregate-summary-row">
+    <span class="mainline-aggregate-summary-label">Blocker</span>
+    <span class="mainline-aggregate-summary-value">Mainline aggregate summary blocker: ${escapeHtml(blocker)}</span>
+  </div>`;
+}
+
+function renderMainlineFinalClosureCheck(check) {
+  return `<div class="mainline-final-closure-row">
+    <span class="mainline-final-closure-label">Closure check</span>
+    <span class="mainline-final-closure-value">Mainline final closure check: ${escapeHtml(check.label)} - ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+  </div>`;
+}
+
+function renderMainlineFinalClosureEvidence(evidence) {
+  return `<div class="mainline-final-closure-row">
+    <span class="mainline-final-closure-label">Evidence</span>
+    <span class="mainline-final-closure-value">Mainline final closure evidence: ${escapeHtml(evidence)}</span>
+  </div>`;
+}
+
+function renderMainlineFinalClosureBlocker(blocker) {
+  return `<div class="mainline-final-closure-row">
+    <span class="mainline-final-closure-label">Blocker</span>
+    <span class="mainline-final-closure-value">Mainline final closure blocker: ${escapeHtml(blocker)}</span>
   </div>`;
 }
 

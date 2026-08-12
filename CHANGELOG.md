@@ -1,5 +1,85 @@
 # Changelog
 
+## Unreleased - Release Governance v1.8
+
+- Added mainline pull request handoff and updated the pull request template.
+- Started Release Governance v1.8 scope and decision record.
+- Added Release Decision Record release notes and closure checklist.
+- Added Release Approval Evidence release notes and closure checklist.
+- Added Publication Plan release notes and closure checklist.
+- Added Rollback Readiness release notes and closure checklist.
+- Added Post-Release Audit Summary release notes and closure checklist.
+- Added Release Governance v1.8 aggregate release summary and closure checklist.
+- Closed Release Governance v1.8 with final release notes and closure checklist.
+
+## Unreleased - Mainline Release Readiness v1.7
+
+- Started Mainline Release Readiness v1.7 scope and decision record.
+- Added Pull Request Review Package start.
+- Added CI Evidence Summary package start.
+- Added Main Merge Plan package start.
+- Added Release Tag Readiness package start.
+- Added Mainline Aggregate Summary package start.
+- Added Mainline Final Closure package start.
+- Added Mainline Release Readiness v1.7 aggregate release summary and closure checklist.
+- Closed Mainline Release Readiness v1.7 with final release notes and closure checklist.
+
+## Unreleased - Repository Collaboration Workflow v1.6
+
+- Started Repository Collaboration Workflow v1.6 scope and decision record.
+- Added Repository Branch Status package start.
+- Added Pull Request Readiness package start.
+- Added Review Evidence Summary package start.
+- Added Merge Readiness package start.
+- Added Repository Collaboration Aggregate Summary package start.
+- Added Repository Collaboration Final Closure package start.
+- Added Repository Collaboration Workflow v1.6 aggregate release summary and closure checklist.
+- Closed Repository Collaboration Workflow v1.6 with final release notes and closure checklist.
+
+## Unreleased - Operator Workflow Design v1.5
+
+- Started Operator Workflow Design v1.5 scope and decision record.
+- Added Operator Workflow Map package start.
+- Added Operator Task Selection package start.
+- Added Operator Step Detail package start.
+- Added Operator Handoff Readiness package start.
+- Added Operator Workflow Design Aggregate Summary package start.
+- Added Operator Workflow Design Aggregate Summary release notes and closure checklist.
+- Added Operator Workflow Design Final Closure package start.
+- Added Operator Workflow Design Final Closure release notes and closure checklist.
+- Added Operator Workflow Design v1.5 aggregate release summary and closure checklist.
+- Closed Operator Workflow Design v1.5 with final release notes and closure checklist.
+
+## Unreleased - Runtime Reliability v1.3
+
+- Started Runtime Reliability v1.3 scope and decision record.
+- Added Runtime Health Summary package start.
+- Added Runtime Health Summary release notes and closure checklist.
+- Added Studio State Recovery package start.
+- Added Studio State Recovery release notes and closure checklist.
+- Added Runtime Validation Signals package start.
+- Added Runtime Validation Signals release notes and closure checklist.
+- Added Operator Recovery Guidance package start.
+- Added Operator Recovery Guidance release notes and closure checklist.
+- Added Runtime Reliability v1.3 aggregate release summary and closure checklist.
+- Closed Runtime Reliability v1.3 with final release notes and closure checklist.
+
+## Unreleased - Studio Workflow Runtime v1.4
+
+- Started Studio Workflow Runtime v1.4 scope and decision record.
+- Added Workflow Session Summary package start.
+- Added Workflow Session Summary release notes and closure checklist.
+- Added Workflow Transition Plan package start.
+- Added Workflow Transition Plan release notes and closure checklist.
+- Added Command Result Summary package start.
+- Added Command Result Summary release notes and closure checklist.
+- Added Studio Workflow Runtime Aggregate Summary package start.
+- Added Studio Workflow Runtime Aggregate Summary release notes and closure checklist.
+- Added Studio Workflow Runtime Final Closure package start.
+- Added Studio Workflow Runtime Final Closure release notes and closure checklist.
+- Added Studio Workflow Runtime v1.4 aggregate release summary and closure checklist.
+- Closed Studio Workflow Runtime v1.4 with final release notes and closure checklist.
+
 ## Unreleased - Agent Handoff Runtime v1.2
 
 - Started Agent Handoff Runtime v1.2 scope and decision record.
@@ -15,6 +95,12 @@
 - Added Agent Handoff Closure release notes and closure checklist.
 - Added Agent Handoff Runtime Summary package start.
 - Added Agent Handoff Runtime Summary release notes and closure checklist.
+- Added Agent Handoff Runtime Aggregate Summary package start.
+- Added Agent Handoff Runtime Aggregate Summary release notes and closure checklist.
+- Added Agent Handoff Runtime Final Closure package start.
+- Added Agent Handoff Runtime Final Closure release notes and closure checklist.
+- Added Agent Handoff Runtime v1.2 aggregate release summary and closure checklist.
+- Closed Agent Handoff Runtime v1.2 with final release notes and closure checklist.
 
 ## Unreleased - Operator Runtime v1.1
 

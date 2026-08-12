@@ -1,0 +1,14 @@
+{
+  "id": "component_repository_collaboration_aggregate_summary_panel",
+  "name": "Repository Collaboration Aggregate Summary Panel",
+  "status": "draft",
+  "purpose": "Aggregates repository branch status, pull request readiness, review evidence summary, and merge readiness before final closure.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose aggregate status, pull request title, source branch, target branch, review mode, merge policy, main branch status, merge window, workflow counts, blockers, decision, summary, evidence, and next workflow as visible text.",
+    "Do not rely on color alone to communicate aggregate readiness.",
+    "Keep each repository collaboration workflow item readable before final closure."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

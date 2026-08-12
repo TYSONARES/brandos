@@ -1,0 +1,14 @@
+{
+  "id": "component_review_evidence_summary_panel",
+  "name": "Review Evidence Summary Panel",
+  "status": "draft",
+  "purpose": "Summarizes pull request review evidence, release notes status, closure evidence status, and unresolved blockers before merge readiness.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose review evidence status, pull request title, source branch, target branch, review mode, merge policy, release notes, closure evidence, evidence counts, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate review evidence readiness.",
+    "Keep release notes, closure evidence, and unresolved blocker text readable before merge decisions."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

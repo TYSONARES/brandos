@@ -73,6 +73,29 @@ The first app is `apps/studio`. It exposes a minimal BrandOS Studio shell with:
 - dedicated Draft Review panel
 - dedicated Agent Handoff Closure panel
 - dedicated Agent Handoff Runtime Summary panel
+- dedicated Agent Handoff Runtime Aggregate Summary panel
+- dedicated Agent Handoff Runtime Final Closure panel
+- dedicated Runtime Health Summary panel
+- dedicated Studio State Recovery panel
+- dedicated Runtime Validation Signals panel
+- dedicated Operator Recovery Guidance panel
+- dedicated Workflow Session Summary panel
+- dedicated Workflow Transition Plan panel
+- dedicated Command Result Summary panel
+- dedicated Studio Workflow Runtime Aggregate Summary panel
+- dedicated Studio Workflow Runtime Final Closure panel
+- dedicated Operator Workflow Map panel
+- dedicated Operator Task Selection panel
+- dedicated Operator Step Detail panel
+- dedicated Operator Handoff Readiness panel
+- dedicated Operator Workflow Design Aggregate Summary panel
+- dedicated Operator Workflow Design Final Closure panel
+- dedicated Repository Branch Status panel
+- dedicated Pull Request Readiness panel
+- dedicated Review Evidence Summary panel
+- dedicated Merge Readiness panel
+- dedicated Repository Collaboration Aggregate Summary panel
+- dedicated Repository Collaboration Final Closure panel
 - post-v1 aggregate release summary
 - post-v1 aggregate closure checklist
 - post-v1 final closure release notes

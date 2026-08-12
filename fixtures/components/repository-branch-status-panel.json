@@ -1,0 +1,14 @@
+{
+  "id": "component_repository_branch_status_panel",
+  "name": "Repository Branch Status Panel",
+  "status": "draft",
+  "purpose": "Shows local branch, remote branch, main branch, sync, and working tree readiness for repository collaboration.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose branch status, local branch, remote branch, main branch, sync status, working tree status, branch counts, decision, summary, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate branch readiness.",
+    "Keep branch labels and status details readable so operators can understand collaboration readiness before pull request work."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

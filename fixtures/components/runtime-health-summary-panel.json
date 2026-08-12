@@ -1,0 +1,29 @@
+{
+  "id": "component_runtime_health_summary_panel",
+  "name": "Runtime Health Summary Panel",
+  "status": "draft",
+  "purpose": "Shows local runtime reliability state for repeated Studio runs.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "attention",
+    "healthy"
+  ],
+  "accessibility": [
+    "Expose runtime health status, state source, completed action count, readiness, closure, decision, summary, recovery actions, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate reliability.",
+    "Keep signal and recovery rows readable so operators can resolve local runtime reliability issues."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

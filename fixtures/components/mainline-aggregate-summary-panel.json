@@ -1,0 +1,14 @@
+{
+  "id": "component_mainline_aggregate_summary_panel",
+  "name": "Mainline Aggregate Summary Panel",
+  "status": "draft",
+  "purpose": "Summarizes v1.7 pull request review, CI, merge, and release tag readiness evidence before final closure.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose mainline aggregate summary status, pull request title, source branch, target branch, review mode, merge policy, main branch status, merge window, CI command, CI status, CI provider, merge strategy, rollback plan, verification command, release version, tag policy, release notes, tag checklist, aggregate artifact, closure checklist, workflow items, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate aggregate readiness.",
+    "Keep final closure hold policy readable before any closure action."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

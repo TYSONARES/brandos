@@ -3,17 +3,46 @@ import {
   createAgentDraftExecution,
   createAgentHandoffClosure,
   createAgentHandoffContext,
+  createAgentHandoffRuntimeAggregateSummary,
+  createAgentHandoffRuntimeFinalClosure,
   createAgentHandoffRuntimeSummary,
   createAgentPromptPlan,
   createExampleProductCoreState,
   createInMemoryProductCoreStore,
   createBrandProfileOverview,
+  createCiEvidenceSummary,
+  createCommandResultSummary,
   createContextPackUsageFlow,
   createDraftReview,
   createHandoffAcceptance,
+  createMainlineAggregateSummary,
+  createMainlineFinalClosure,
+  createMainMergePlan,
+  createMergeReadiness,
+  createOperatorHandoffReadiness,
   createOperatorRunQueue,
+  createOperatorStepDetail,
+  createOperatorTaskSelection,
+  createOperatorWorkflowMap,
+  createOperatorWorkflowDesignAggregateSummary,
+  createOperatorWorkflowDesignFinalClosure,
   createOperatorRunbookExecution,
+  createPullRequestReadiness,
+  createPullRequestReviewPackage,
+  createRepositoryCollaborationAggregateSummary,
+  createRepositoryCollaborationFinalClosure,
+  createRepositoryBranchStatus,
+  createReleaseTagReadiness,
+  createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
+  createRuntimeHealthSummary,
+  createStudioWorkflowRuntimeAggregateSummary,
+  createStudioWorkflowRuntimeFinalClosure,
+  createStudioStateRecovery,
+  createRuntimeValidationSignals,
+  createOperatorRecoveryGuidance,
+  createWorkflowSessionSummary,
+  createWorkflowTransitionPlan,
   completeWorkflowAction,
   evaluateContextPackReadiness,
   summarizeProductCoreState
@@ -50,6 +79,8 @@ export function createBrandOSStudioShell(options = {}) {
   const draftReview = createDraftReview(store, operatorRunbookExecution.runId);
   const agentHandoffClosure = createAgentHandoffClosure(store, operatorRunbookExecution.runId);
   const agentHandoffRuntimeSummary = createAgentHandoffRuntimeSummary(store, operatorRunbookExecution.runId);
+  const agentHandoffRuntimeAggregateSummary = createAgentHandoffRuntimeAggregateSummary(store, operatorRunbookExecution.runId);
+  const agentHandoffRuntimeFinalClosure = createAgentHandoffRuntimeFinalClosure(store, operatorRunbookExecution.runId);
   const contextPackWorkflow = {
     title: 'Context Pack workflow',
     currentStep: contextPackReadiness.ready ? 'ready-for-use' : 'resolve-review',
@@ -85,6 +116,168 @@ export function createBrandOSStudioShell(options = {}) {
     readinessImpact: contextPackReadiness.ready ? 'readiness resolved' : 'readiness blocked',
     stateSource: contextPackWorkflow.stateSource
   };
+  const runtimeHealthSummary = createRuntimeHealthSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const studioStateRecovery = createStudioStateRecovery(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const runtimeValidationSignals = createRuntimeValidationSignals(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorRecoveryGuidance = createOperatorRecoveryGuidance(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const workflowSessionSummary = createWorkflowSessionSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const workflowTransitionPlan = createWorkflowTransitionPlan(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const commandResultSummary = createCommandResultSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const studioWorkflowRuntimeAggregateSummary = createStudioWorkflowRuntimeAggregateSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const studioWorkflowRuntimeFinalClosure = createStudioWorkflowRuntimeFinalClosure(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorWorkflowMap = createOperatorWorkflowMap(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorTaskSelection = createOperatorTaskSelection(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorStepDetail = createOperatorStepDetail(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorHandoffReadiness = createOperatorHandoffReadiness(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorWorkflowDesignAggregateSummary = createOperatorWorkflowDesignAggregateSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const operatorWorkflowDesignFinalClosure = createOperatorWorkflowDesignFinalClosure(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const repositoryBranchStatus = createRepositoryBranchStatus(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const pullRequestReadiness = createPullRequestReadiness(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const reviewEvidenceSummary = createReviewEvidenceSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const mergeReadiness = createMergeReadiness(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const repositoryCollaborationAggregateSummary = createRepositoryCollaborationAggregateSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const repositoryCollaborationFinalClosure = createRepositoryCollaborationFinalClosure(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const pullRequestReviewPackage = createPullRequestReviewPackage(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const ciEvidenceSummary = createCiEvidenceSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const mainMergePlan = createMainMergePlan(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const releaseTagReadiness = createReleaseTagReadiness(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const mainlineAggregateSummary = createMainlineAggregateSummary(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
+  const mainlineFinalClosure = createMainlineFinalClosure(store, operatorRunbookExecution.runId, {
+    stateSource: contextPackWorkflow.stateSource,
+    stateStatus: contextPackWorkflow.repositoryStateStatus,
+    completedActionCount: contextPackWorkflow.completedActionCount,
+    completedActionIds: contextPackWorkflow.completedActionIds
+  });
   const diagnostics = {
     title: 'Studio diagnostics',
     packageCount: 3,
@@ -227,6 +420,35 @@ export function createBrandOSStudioShell(options = {}) {
     draftReview,
     agentHandoffClosure,
     agentHandoffRuntimeSummary,
+    agentHandoffRuntimeAggregateSummary,
+    agentHandoffRuntimeFinalClosure,
+    runtimeHealthSummary,
+    studioStateRecovery,
+    runtimeValidationSignals,
+    operatorRecoveryGuidance,
+    workflowSessionSummary,
+    workflowTransitionPlan,
+    commandResultSummary,
+    studioWorkflowRuntimeAggregateSummary,
+    studioWorkflowRuntimeFinalClosure,
+    operatorWorkflowMap,
+    operatorTaskSelection,
+    operatorStepDetail,
+    operatorHandoffReadiness,
+    operatorWorkflowDesignAggregateSummary,
+    operatorWorkflowDesignFinalClosure,
+    repositoryBranchStatus,
+    pullRequestReadiness,
+    reviewEvidenceSummary,
+    mergeReadiness,
+    repositoryCollaborationAggregateSummary,
+    repositoryCollaborationFinalClosure,
+    pullRequestReviewPackage,
+    ciEvidenceSummary,
+    mainMergePlan,
+    releaseTagReadiness,
+    mainlineAggregateSummary,
+    mainlineFinalClosure,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

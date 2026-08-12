@@ -1,0 +1,14 @@
+{
+  "id": "component_pull_request_review_package_panel",
+  "name": "Pull Request Review Package Panel",
+  "status": "draft",
+  "purpose": "Shows whether closed repository collaboration evidence is ready to package for pull request review before mainline work.",
+  "productObjects": ["workflow-action", "operator-run", "context-pack"],
+  "states": ["blocked", "ready"],
+  "accessibility": [
+    "Expose review package status, pull request title, source branch, target branch, review mode, merge policy, checklist, summary artifact, review items, evidence, blockers, decision, summary, and next workflow as visible text.",
+    "Do not rely on color alone to communicate pull request review package readiness.",
+    "Keep main branch action policy readable so operators understand review must happen before main changes."
+  ],
+  "tokens": ["color.surface.default", "color.surface.muted", "type.body", "type.body.strong", "space.2", "space.3", "radius.2"]
+}

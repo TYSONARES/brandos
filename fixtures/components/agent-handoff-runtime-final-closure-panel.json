@@ -1,0 +1,29 @@
+{
+  "id": "component_agent_handoff_runtime_final_closure_panel",
+  "name": "Agent Handoff Runtime Final Closure Panel",
+  "status": "draft",
+  "purpose": "Shows final closure state for Agent Handoff Runtime v1.2.",
+  "productObjects": [
+    "operator-run",
+    "workflow-action",
+    "context-pack"
+  ],
+  "states": [
+    "blocked",
+    "closed"
+  ],
+  "accessibility": [
+    "Expose final closure status, decision, summary, release artifacts, evidence, checks, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate final closure.",
+    "Keep release artifact and evidence rows readable so users can archive the runtime package confidently."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}

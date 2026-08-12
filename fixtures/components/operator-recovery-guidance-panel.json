@@ -1,0 +1,29 @@
+{
+  "id": "component_operator_recovery_guidance_panel",
+  "name": "Operator Recovery Guidance Panel",
+  "status": "draft",
+  "purpose": "Shows operator-facing recovery guidance for local Studio runtime reliability.",
+  "productObjects": [
+    "workflow-action",
+    "operator-run",
+    "context-pack"
+  ],
+  "states": [
+    "action-required",
+    "ready"
+  ],
+  "accessibility": [
+    "Expose recovery status, source, completed action count, decision, summary, steps, signals, commands, evidence, blockers, and next workflow as visible text.",
+    "Do not rely on color alone to communicate operator recovery state.",
+    "Keep recovery steps and commands readable so operators can repeat the recovery workflow."
+  ],
+  "tokens": [
+    "color.surface.default",
+    "color.surface.muted",
+    "type.body",
+    "type.body.strong",
+    "space.2",
+    "space.3",
+    "radius.2"
+  ]
+}
