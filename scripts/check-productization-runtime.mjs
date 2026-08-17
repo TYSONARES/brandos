@@ -14,9 +14,19 @@ const required = [
   'docs/development/iteration-v1.9-studio-product-mode.md',
   'docs/development/release-v1.9-studio-product-mode.md',
   'docs/development/closure-v1.9-studio-product-mode.md',
+  'docs/development/iteration-v1.9-product-evidence-pack.md',
+  'docs/development/release-v1.9-product-evidence-pack.md',
+  'docs/development/closure-v1.9-product-evidence-pack.md',
+  'docs/development/iteration-v1.9-productization-aggregate-summary.md',
+  'docs/development/release-v1.9-aggregate-summary.md',
+  'docs/development/closure-v1.9-aggregate-summary.md',
+  'docs/development/iteration-v1.9-productization-final-closure.md',
+  'docs/development/release-v1.9-final-closure.md',
+  'docs/development/closure-v1.9-final-closure.md',
   'docs/product/product-surface-inventory.md',
   'docs/product/product-workflow-prioritization.md',
   'docs/product/studio-product-mode.md',
+  'docs/product/product-evidence-pack.md',
   'docs/product/README.md',
   'apps/studio/src/app.mjs',
   'apps/studio/src/render-html.mjs',
@@ -51,9 +61,19 @@ const priorityClosure = readFileSync('docs/development/closure-v1.9-product-work
 const productModeIteration = readFileSync('docs/development/iteration-v1.9-studio-product-mode.md', 'utf8');
 const productModeRelease = readFileSync('docs/development/release-v1.9-studio-product-mode.md', 'utf8');
 const productModeClosure = readFileSync('docs/development/closure-v1.9-studio-product-mode.md', 'utf8');
+const evidenceIteration = readFileSync('docs/development/iteration-v1.9-product-evidence-pack.md', 'utf8');
+const evidenceRelease = readFileSync('docs/development/release-v1.9-product-evidence-pack.md', 'utf8');
+const evidenceClosure = readFileSync('docs/development/closure-v1.9-product-evidence-pack.md', 'utf8');
+const aggregateIteration = readFileSync('docs/development/iteration-v1.9-productization-aggregate-summary.md', 'utf8');
+const aggregateRelease = readFileSync('docs/development/release-v1.9-aggregate-summary.md', 'utf8');
+const aggregateClosure = readFileSync('docs/development/closure-v1.9-aggregate-summary.md', 'utf8');
+const finalIteration = readFileSync('docs/development/iteration-v1.9-productization-final-closure.md', 'utf8');
+const finalRelease = readFileSync('docs/development/release-v1.9-final-closure.md', 'utf8');
+const finalClosure = readFileSync('docs/development/closure-v1.9-final-closure.md', 'utf8');
 const productSurfaceInventory = readFileSync('docs/product/product-surface-inventory.md', 'utf8');
 const productWorkflowPrioritization = readFileSync('docs/product/product-workflow-prioritization.md', 'utf8');
 const studioProductMode = readFileSync('docs/product/studio-product-mode.md', 'utf8');
+const productEvidencePack = readFileSync('docs/product/product-evidence-pack.md', 'utf8');
 const productIndex = readFileSync('docs/product/README.md', 'utf8');
 const studioApp = readFileSync('apps/studio/src/app.mjs', 'utf8');
 const studioRender = readFileSync('apps/studio/src/render-html.mjs', 'utf8');
@@ -106,6 +126,28 @@ const requiredSnippets = [
   ['docs/development/closure-v1.9-studio-product-mode.md', productModeClosure, 'Closed.'],
   ['docs/product/studio-product-mode.md', studioProductMode, '# Studio Product Mode'],
   ['docs/product/studio-product-mode.md', studioProductMode, 'Mode: `context-pack-readiness`'],
+  ['docs/development/iteration-v1.9-product-evidence-pack.md', evidenceIteration, '# Productization Runtime v1.9 Iteration: Product Evidence Pack'],
+  ['docs/development/iteration-v1.9-product-evidence-pack.md', evidenceIteration, 'Studio Product Mode is productization-ready'],
+  ['docs/development/release-v1.9-product-evidence-pack.md', evidenceRelease, '# Productization Runtime v1.9 Release Notes: Product Evidence Pack'],
+  ['docs/development/release-v1.9-product-evidence-pack.md', evidenceRelease, 'Proceed to Productization Aggregate Summary.'],
+  ['docs/development/closure-v1.9-product-evidence-pack.md', evidenceClosure, '# Productization Runtime v1.9 Closure Checklist: Product Evidence Pack'],
+  ['docs/development/closure-v1.9-product-evidence-pack.md', evidenceClosure, 'Closed.'],
+  ['docs/product/product-evidence-pack.md', productEvidencePack, '# Product Evidence Pack'],
+  ['docs/product/product-evidence-pack.md', productEvidencePack, 'Product Decision Evidence'],
+  ['docs/product/product-evidence-pack.md', productEvidencePack, 'Runtime Evidence'],
+  ['docs/product/product-evidence-pack.md', productEvidencePack, '`npm run check:all`'],
+  ['docs/development/iteration-v1.9-productization-aggregate-summary.md', aggregateIteration, '# Productization Runtime v1.9 Iteration: Productization Aggregate Summary'],
+  ['docs/development/iteration-v1.9-productization-aggregate-summary.md', aggregateIteration, 'Productization Runtime v1.9 is ready for final closure'],
+  ['docs/development/release-v1.9-aggregate-summary.md', aggregateRelease, '# Productization Runtime v1.9 Release Notes: Aggregate Summary'],
+  ['docs/development/release-v1.9-aggregate-summary.md', aggregateRelease, 'Proceed to Productization Final Closure.'],
+  ['docs/development/closure-v1.9-aggregate-summary.md', aggregateClosure, '# Productization Runtime v1.9 Closure Checklist: Aggregate Summary'],
+  ['docs/development/closure-v1.9-aggregate-summary.md', aggregateClosure, 'Closed.'],
+  ['docs/development/iteration-v1.9-productization-final-closure.md', finalIteration, '# Productization Runtime v1.9 Iteration: Productization Final Closure'],
+  ['docs/development/iteration-v1.9-productization-final-closure.md', finalIteration, 'Productization Runtime v1.9 is closed at implementation cycle level.'],
+  ['docs/development/release-v1.9-final-closure.md', finalRelease, '# Productization Runtime v1.9 Release Notes: Final Closure'],
+  ['docs/development/release-v1.9-final-closure.md', finalRelease, 'Studio Product Mode for Context Pack Readiness'],
+  ['docs/development/closure-v1.9-final-closure.md', finalClosure, '# Productization Runtime v1.9 Closure Checklist: Final Closure'],
+  ['docs/development/closure-v1.9-final-closure.md', finalClosure, 'Productization Runtime v1.9 is complete at implementation cycle level.'],
   ['apps/studio/src/app.mjs', studioApp, 'studioProductMode'],
   ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Studio Product Mode"'],
   ['apps/studio/src/render-html.mjs', studioRender, 'Product mode status:'],
@@ -114,6 +156,7 @@ const requiredSnippets = [
   ['docs/product/README.md', productIndex, '`product-surface-inventory.md`'],
   ['docs/product/README.md', productIndex, '`product-workflow-prioritization.md`'],
   ['docs/product/README.md', productIndex, '`studio-product-mode.md`'],
+  ['docs/product/README.md', productIndex, '`product-evidence-pack.md`'],
   ['docs/decisions/0031-productization-runtime-start.md', decision, '# ADR 0031: Productization Runtime v1.9 Start'],
   ['docs/decisions/0031-productization-runtime-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Active workstream: Productization Runtime v1.9'],
@@ -130,14 +173,29 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.9-studio-product-mode.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.9-studio-product-mode.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.9-studio-product-mode.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.9-product-evidence-pack.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.9-product-evidence-pack.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.9-product-evidence-pack.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.9-productization-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.9-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.9-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.9-productization-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.9-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.9-final-closure.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0031-productization-runtime-start.md`'],
+  ['README.md', rootReadme, '- Latest completed implementation cycle: Productization Runtime v1.9'],
   ['README.md', rootReadme, '- Active workstream: Productization Runtime v1.9'],
+  ['PROJECT_MANIFEST.md', manifest, '- Latest completed implementation cycle: Productization Runtime v1.9'],
   ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Productization Runtime v1.9'],
   ['PROJECT_MANIFEST.md', manifest, '## v1.9 Scope'],
+  ['PROJECT_MANIFEST.md', manifest, '## v1.9 Completion'],
   ['CHANGELOG.md', changelog, 'Started Productization Runtime v1.9 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Product Surface Inventory release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Product Workflow Prioritization release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Studio Product Mode release notes, closure checklist, runtime panel, and tests.'],
+  ['CHANGELOG.md', changelog, 'Added Product Evidence Pack release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added Productization Runtime v1.9 aggregate release summary and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Closed Productization Runtime v1.9 with final release notes and closure checklist.'],
   ['package.json', packageJson, '"check:productization-runtime"']
 ];
 

@@ -7,6 +7,9 @@
 - Added Product Surface Inventory release notes and closure checklist.
 - Added Product Workflow Prioritization release notes and closure checklist.
 - Added Studio Product Mode release notes, closure checklist, runtime panel, and tests.
+- Added Product Evidence Pack release notes and closure checklist.
+- Added Productization Runtime v1.9 aggregate release summary and closure checklist.
+- Closed Productization Runtime v1.9 with final release notes and closure checklist.
 - Added Productization Runtime validation command.
 
 ## Unreleased - Release Governance v1.8

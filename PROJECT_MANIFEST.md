@@ -5,7 +5,7 @@
 - Name: BrandOS
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Release Governance v1.8
+- Latest completed implementation cycle: Productization Runtime v1.9
 - Active workstream: Productization Runtime v1.9
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
@@ -132,6 +132,12 @@ runtime track. It defines productization scope, product surface inventory, workf
 Studio Product Mode, product evidence packs, aggregate summary, and final closure without adding
 production deployment, database integration, authentication runtime, external integrations, hosted
 infrastructure, or live AI model execution.
+
+## v1.9 Completion
+
+Productization Runtime v1.9 is complete at implementation cycle level on the productization branch.
+See `docs/development/release-v1.9-final-closure.md` and
+`docs/development/closure-v1.9-final-closure.md`.
 
 ## Definition of Done
 

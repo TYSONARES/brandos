@@ -24,12 +24,13 @@ Product Core v0.2 defines what BrandOS is before implementation begins.
 11. `product-surface-inventory.md`
 12. `product-workflow-prioritization.md`
 13. `studio-product-mode.md`
-14. `personas.md`
-15. `workflows.md`
-16. `workflows/README.md`
-17. `user-journeys.md`
-18. `success-metrics.md`
-19. `non-goals.md`
+14. `product-evidence-pack.md`
+15. `personas.md`
+16. `workflows.md`
+17. `workflows/README.md`
+18. `user-journeys.md`
+19. `success-metrics.md`
+20. `non-goals.md`
 
 ## Product Promise
 
