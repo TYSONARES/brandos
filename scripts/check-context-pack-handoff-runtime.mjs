@@ -14,6 +14,9 @@ const required = [
   'docs/development/iteration-v1.11-studio-handoff-detail.md',
   'docs/development/release-v1.11-studio-handoff-detail.md',
   'docs/development/closure-v1.11-studio-handoff-detail.md',
+  'docs/development/iteration-v1.11-context-pack-handoff-aggregate-summary.md',
+  'docs/development/release-v1.11-aggregate-summary.md',
+  'docs/development/closure-v1.11-aggregate-summary.md',
   'docs/decisions/0033-context-pack-handoff-runtime-start.md',
   'packages/domain/src/use-cases.mjs',
   'packages/domain/src/index.mjs',
@@ -50,6 +53,9 @@ const contextClosure = readFileSync('docs/development/closure-v1.11-agent-contex
 const studioHandoffIteration = readFileSync('docs/development/iteration-v1.11-studio-handoff-detail.md', 'utf8');
 const studioHandoffRelease = readFileSync('docs/development/release-v1.11-studio-handoff-detail.md', 'utf8');
 const studioHandoffClosure = readFileSync('docs/development/closure-v1.11-studio-handoff-detail.md', 'utf8');
+const aggregateIteration = readFileSync('docs/development/iteration-v1.11-context-pack-handoff-aggregate-summary.md', 'utf8');
+const aggregateRelease = readFileSync('docs/development/release-v1.11-aggregate-summary.md', 'utf8');
+const aggregateClosure = readFileSync('docs/development/closure-v1.11-aggregate-summary.md', 'utf8');
 const decision = readFileSync('docs/decisions/0033-context-pack-handoff-runtime-start.md', 'utf8');
 const domainUseCases = readFileSync('packages/domain/src/use-cases.mjs', 'utf8');
 const domainIndex = readFileSync('packages/domain/src/index.mjs', 'utf8');
@@ -95,35 +101,50 @@ const requiredSnippets = [
   ['docs/development/release-v1.11-studio-handoff-detail.md', studioHandoffRelease, 'Proceed to Context Pack Handoff Aggregate Summary.'],
   ['docs/development/closure-v1.11-studio-handoff-detail.md', studioHandoffClosure, '# Context Pack Handoff Runtime v1.11 Closure Checklist: Studio Handoff Detail'],
   ['docs/development/closure-v1.11-studio-handoff-detail.md', studioHandoffClosure, 'Closed.'],
+  ['docs/development/iteration-v1.11-context-pack-handoff-aggregate-summary.md', aggregateIteration, '# Context Pack Handoff Runtime v1.11 Iteration: Context Pack Handoff Aggregate Summary'],
+  ['docs/development/iteration-v1.11-context-pack-handoff-aggregate-summary.md', aggregateIteration, 'Context Pack Handoff Runtime v1.11 is ready for final closure.'],
+  ['docs/development/release-v1.11-aggregate-summary.md', aggregateRelease, '# Context Pack Handoff Runtime v1.11 Release Notes: Aggregate Summary'],
+  ['docs/development/release-v1.11-aggregate-summary.md', aggregateRelease, 'Proceed to Context Pack Handoff Final Closure.'],
+  ['docs/development/closure-v1.11-aggregate-summary.md', aggregateClosure, '# Context Pack Handoff Runtime v1.11 Closure Checklist: Aggregate Summary'],
+  ['docs/development/closure-v1.11-aggregate-summary.md', aggregateClosure, 'Closed.'],
   ['docs/decisions/0033-context-pack-handoff-runtime-start.md', decision, '# ADR 0033: Context Pack Handoff Runtime v1.11 Start'],
   ['docs/decisions/0033-context-pack-handoff-runtime-start.md', decision, '- Status: accepted'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createContextPackHandoffSourcePackage'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createAgentContextReadiness'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createStudioHandoffDetail'],
+  ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createContextPackHandoffAggregateSummary'],
   ['packages/domain/src/index.mjs', domainIndex, 'createContextPackHandoffSourcePackage'],
   ['packages/domain/src/index.mjs', domainIndex, 'createAgentContextReadiness'],
   ['packages/domain/src/index.mjs', domainIndex, 'createStudioHandoffDetail'],
+  ['packages/domain/src/index.mjs', domainIndex, 'createContextPackHandoffAggregateSummary'],
   ['apps/studio/src/app.mjs', studioApp, 'const contextPackHandoffSourcePackage = createContextPackHandoffSourcePackage'],
   ['apps/studio/src/app.mjs', studioApp, 'const agentContextReadiness = createAgentContextReadiness'],
   ['apps/studio/src/app.mjs', studioApp, 'const studioHandoffDetail = createStudioHandoffDetail'],
+  ['apps/studio/src/app.mjs', studioApp, 'const contextPackHandoffAggregateSummary = createContextPackHandoffAggregateSummary'],
   ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Context Pack Handoff Source Package"'],
   ['apps/studio/src/render-html.mjs', studioRender, 'Context Pack handoff source policy:'],
   ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Agent Context Readiness"'],
   ['apps/studio/src/render-html.mjs', studioRender, 'Agent context readiness decision:'],
   ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Studio Handoff Detail"'],
   ['apps/studio/src/render-html.mjs', studioRender, 'Studio handoff detail status:'],
+  ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Context Pack Handoff Aggregate Summary"'],
+  ['apps/studio/src/render-html.mjs', studioRender, 'Context Pack handoff aggregate decision:'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Context Pack Handoff Source Package blocks until readiness evidence is clear'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Context Pack Handoff Source Package opens agent context readiness for ready evidence'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Agent Context Readiness blocks when handoff sources are not ready'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Agent Context Readiness opens Studio handoff detail for ready source packages'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Studio Handoff Detail summarizes blocked handoff readiness for Studio'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Studio Handoff Detail summarizes ready handoff state for Studio'],
+  ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Context Pack Handoff Aggregate Summary blocks until handoff packages are ready'],
+  ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Context Pack Handoff Aggregate Summary opens final closure when all packages are ready'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Context Pack handoff package status: blocked'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Context Pack handoff package status: ready'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Agent context readiness status: blocked'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Agent context readiness status: ready'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Studio handoff detail status: blocked'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Studio handoff detail status: ready'],
+  ['tests/studio/render-html.test.mjs', studioTest, 'Context Pack handoff aggregate status: blocked'],
+  ['tests/studio/render-html.test.mjs', studioTest, 'Context Pack handoff aggregate status: ready'],
   ['docs/development/README.md', developmentIndex, '- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10'],
   ['docs/development/README.md', developmentIndex, '- Active workstream: Context Pack Handoff Runtime v1.11'],
   ['docs/development/README.md', developmentIndex, '`v1.11-scope.md`'],
@@ -139,6 +160,9 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.11-studio-handoff-detail.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.11-studio-handoff-detail.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.11-studio-handoff-detail.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.11-context-pack-handoff-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.11-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.11-aggregate-summary.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0033-context-pack-handoff-runtime-start.md`'],
   ['README.md', rootReadme, '- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10'],
   ['README.md', rootReadme, '- Active workstream: Context Pack Handoff Runtime v1.11'],
@@ -151,6 +175,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Handoff Source Package release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['CHANGELOG.md', changelog, 'Added Agent Context Readiness release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['CHANGELOG.md', changelog, 'Added Studio Handoff Detail release notes, closure checklist, runtime model, Studio panel, and tests.'],
+  ['CHANGELOG.md', changelog, 'Added Context Pack Handoff Runtime v1.11 aggregate release summary and closure checklist.'],
   ['package.json', packageJson, '"check:context-pack-handoff-runtime"']
 ];
 

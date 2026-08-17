@@ -367,6 +367,52 @@ export function createStudioHandoffDetail(store, contextPackId) {
   };
 }
 
+export function createContextPackHandoffAggregateSummary(store, contextPackId) {
+  const sourcePackage = createContextPackHandoffSourcePackage(store, contextPackId);
+  const contextReadiness = createAgentContextReadiness(store, contextPackId);
+  const studioDetail = createStudioHandoffDetail(store, contextPackId);
+  const packageItems = [
+    {
+      label: sourcePackage.title,
+      status: sourcePackage.status,
+      ready: sourcePackage.packageReady,
+      detail: sourcePackage.handoffDecision
+    },
+    {
+      label: contextReadiness.title,
+      status: contextReadiness.status,
+      ready: contextReadiness.contextReady,
+      detail: contextReadiness.readinessDecision
+    },
+    {
+      label: studioDetail.title,
+      status: studioDetail.status,
+      ready: studioDetail.detailReady,
+      detail: studioDetail.handoffMode
+    }
+  ];
+  const aggregateReady = packageItems.every((item) => item.ready);
+
+  return {
+    title: 'Context Pack Handoff Aggregate Summary',
+    contextPackId,
+    status: aggregateReady ? 'ready' : 'blocked',
+    aggregateReady,
+    packageCount: packageItems.length,
+    readyPackageCount: packageItems.filter((item) => item.ready).length,
+    blockedPackageCount: packageItems.filter((item) => !item.ready).length,
+    includedSourceCount: sourcePackage.includedSourceCount,
+    blockedSourceCount: sourcePackage.blockedSourceCount,
+    aggregateDecision: aggregateReady ? 'context-pack-handoff-ready-for-final-closure' : 'context-pack-handoff-remains-blocked',
+    aggregateSummary: aggregateReady
+      ? 'Context Pack Handoff Runtime v1.11 has ready source package, agent context readiness, and Studio handoff detail.'
+      : 'Context Pack Handoff Runtime v1.11 aggregate waits for source package and agent context readiness.',
+    packageItems,
+    blockers: [...new Set([...sourcePackage.missingContext, ...contextReadiness.blockers, ...studioDetail.blockers])],
+    nextWorkflow: aggregateReady ? 'Context Pack Handoff Final Closure' : 'Studio Handoff Detail'
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

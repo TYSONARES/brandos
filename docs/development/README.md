@@ -172,6 +172,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 159. `iteration-v1.11-studio-handoff-detail.md`
 160. `release-v1.11-studio-handoff-detail.md`
 161. `closure-v1.11-studio-handoff-detail.md`
+162. `iteration-v1.11-context-pack-handoff-aggregate-summary.md`
+163. `release-v1.11-aggregate-summary.md`
+164. `closure-v1.11-aggregate-summary.md`
 153. `iteration-v1.2-agent-handoff-context.md`
 154. `release-v1.2-agent-handoff-context.md`
 155. `closure-v1.2-agent-handoff-context.md`

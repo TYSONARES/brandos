@@ -2954,6 +2954,21 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <section class="panel" aria-label="Context Pack Handoff Aggregate Summary">
+      <h2>${escapeHtml(shell.contextPackHandoffAggregateSummary.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Context Pack handoff aggregate status: ${shell.contextPackHandoffAggregateSummary.status}`)}
+        ${renderGuidanceRow('Decision', `Context Pack handoff aggregate decision: ${shell.contextPackHandoffAggregateSummary.aggregateDecision}`)}
+        ${renderGuidanceRow('Summary', `Context Pack handoff aggregate summary: ${shell.contextPackHandoffAggregateSummary.aggregateSummary}`)}
+        ${renderGuidanceRow('Packages', `Context Pack handoff aggregate packages: ${shell.contextPackHandoffAggregateSummary.readyPackageCount}/${shell.contextPackHandoffAggregateSummary.packageCount} ready`)}
+        ${renderGuidanceRow('Sources', `Context Pack handoff aggregate sources: ${shell.contextPackHandoffAggregateSummary.includedSourceCount} included, ${shell.contextPackHandoffAggregateSummary.blockedSourceCount} blocked`)}
+        ${renderGuidanceRow('Next workflow', `Context Pack handoff aggregate next workflow: ${shell.contextPackHandoffAggregateSummary.nextWorkflow}`)}
+      </div>
+      <div class="usage-step-list">
+        ${shell.contextPackHandoffAggregateSummary.packageItems.map(renderContextPackHandoffAggregateItem).join('')}
+      </div>
+    </section>
+
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
       <div class="usage-list">
@@ -4039,6 +4054,15 @@ function renderStudioHandoffDetailRow(row) {
     <div class="usage-step">
       <span class="usage-step-label">Studio handoff detail row: ${escapeHtml(row.label)}</span>
       <span class="usage-step-detail">Studio handoff detail value: ${escapeHtml(row.value)}</span>
+    </div>
+  `;
+}
+
+function renderContextPackHandoffAggregateItem(item) {
+  return `
+    <div class="usage-step">
+      <span class="usage-step-label">Context Pack handoff aggregate item: ${escapeHtml(item.label)}</span>
+      <span class="usage-step-detail">Context Pack handoff aggregate detail: ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
     </div>
   `;
 }

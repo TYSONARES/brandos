@@ -13,6 +13,7 @@ import {
   createCiEvidenceSummary,
   createCommandResultSummary,
   createAgentContextReadiness,
+  createContextPackHandoffAggregateSummary,
   createContextPackHandoffSourcePackage,
   createContextPackUsageFlow,
   createDraftReview,
@@ -80,6 +81,7 @@ export function createBrandOSStudioShell(options = {}) {
   const contextPackHandoffSourcePackage = createContextPackHandoffSourcePackage(store, 'context_pack_example_001');
   const agentContextReadiness = createAgentContextReadiness(store, 'context_pack_example_001');
   const studioHandoffDetail = createStudioHandoffDetail(store, 'context_pack_example_001');
+  const contextPackHandoffAggregateSummary = createContextPackHandoffAggregateSummary(store, 'context_pack_example_001');
   const contextPackUsageFlow = createContextPackUsageFlow(store, 'context_pack_example_001');
   const reviewResolutionWorkflow = createReviewResolutionWorkflow(store, 'review_example_001');
   const operatorRunQueue = createOperatorRunQueue(store);
@@ -451,6 +453,7 @@ export function createBrandOSStudioShell(options = {}) {
     contextPackHandoffSourcePackage,
     agentContextReadiness,
     studioHandoffDetail,
+    contextPackHandoffAggregateSummary,
     contextPackUsageFlow,
     reviewResolutionWorkflow,
     operatorRunQueue,

@@ -15,6 +15,7 @@ import {
   createCiEvidenceSummary,
   createCommandResultSummary,
   createContextPackHandoffSourcePackage,
+  createContextPackHandoffAggregateSummary,
   createContextPackUsageFlow,
   createDraftReview,
   createExampleProductCoreState,
@@ -320,6 +321,33 @@ test('Studio Handoff Detail summarizes ready handoff state for Studio', () => {
   assert.equal(detail.passedReadinessCheckCount, 4);
   assert.equal(detail.recommendedNextWorkflow, 'Context Pack Handoff Aggregate Summary');
   assert.deepEqual(detail.blockers, []);
+});
+
+test('Context Pack Handoff Aggregate Summary blocks until handoff packages are ready', () => {
+  const aggregate = createContextPackHandoffAggregateSummary(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(aggregate.title, 'Context Pack Handoff Aggregate Summary');
+  assert.equal(aggregate.status, 'blocked');
+  assert.equal(aggregate.aggregateReady, false);
+  assert.equal(aggregate.packageCount, 3);
+  assert.equal(aggregate.readyPackageCount, 0);
+  assert.equal(aggregate.blockedPackageCount, 3);
+  assert.equal(aggregate.aggregateDecision, 'context-pack-handoff-remains-blocked');
+  assert.equal(aggregate.nextWorkflow, 'Studio Handoff Detail');
+});
+
+test('Context Pack Handoff Aggregate Summary opens final closure when all packages are ready', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const aggregate = createContextPackHandoffAggregateSummary(store, 'context_pack_example_001');
+
+  assert.equal(aggregate.status, 'ready');
+  assert.equal(aggregate.aggregateReady, true);
+  assert.equal(aggregate.readyPackageCount, 3);
+  assert.equal(aggregate.blockedPackageCount, 0);
+  assert.equal(aggregate.aggregateDecision, 'context-pack-handoff-ready-for-final-closure');
+  assert.equal(aggregate.nextWorkflow, 'Context Pack Handoff Final Closure');
+  assert.deepEqual(aggregate.blockers, []);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {

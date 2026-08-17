@@ -52,6 +52,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Agent Context Readiness/);
   assert.match(html, /aria-label="Studio Handoff Detail"/);
   assert.match(html, /Studio Handoff Detail/);
+  assert.match(html, /aria-label="Context Pack Handoff Aggregate Summary"/);
+  assert.match(html, /Context Pack Handoff Aggregate Summary/);
   assert.match(html, /Product mode: context-pack-readiness/);
   assert.match(html, /Selected product workflow: Context Pack Readiness/);
   assert.match(html, /Product evidence: docs\/product\/product-surface-inventory.md, docs\/product\/product-workflow-prioritization.md/);
@@ -193,6 +195,10 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Studio handoff sources: 5 included, 2 blocked/);
   assert.match(html, /Studio handoff checks: 3\/4 passed/);
   assert.match(html, /Studio handoff next workflow: Agent Context Readiness/);
+  assert.match(html, /Context Pack handoff aggregate status: blocked/);
+  assert.match(html, /Context Pack handoff aggregate decision: context-pack-handoff-remains-blocked/);
+  assert.match(html, /Context Pack handoff aggregate packages: 0\/3 ready/);
+  assert.match(html, /Context Pack handoff aggregate next workflow: Studio Handoff Detail/);
   assert.match(html, /Current step: resolve-review/);
   assert.match(html, /Action status: pending/);
   assert.match(html, /action-status-badge action-status-pending/);
@@ -887,6 +893,10 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Studio handoff sources: 5 included, 0 blocked/);
   assert.match(html, /Studio handoff checks: 4\/4 passed/);
   assert.match(html, /Studio handoff next workflow: Context Pack Handoff Aggregate Summary/);
+  assert.match(html, /Context Pack handoff aggregate status: ready/);
+  assert.match(html, /Context Pack handoff aggregate decision: context-pack-handoff-ready-for-final-closure/);
+  assert.match(html, /Context Pack handoff aggregate packages: 3\/3 ready/);
+  assert.match(html, /Context Pack handoff aggregate next workflow: Context Pack Handoff Final Closure/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /Completed action: workflow_action_example_001/);
   assert.match(html, /Workflow state source: <span class="state-source-badge state-source-command">command<\/span>/);
