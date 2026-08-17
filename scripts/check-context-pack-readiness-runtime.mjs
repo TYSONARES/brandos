@@ -14,6 +14,12 @@ const required = [
   'docs/development/iteration-v1.10-studio-readiness-detail.md',
   'docs/development/release-v1.10-studio-readiness-detail.md',
   'docs/development/closure-v1.10-studio-readiness-detail.md',
+  'docs/development/iteration-v1.10-context-pack-readiness-aggregate-summary.md',
+  'docs/development/release-v1.10-aggregate-summary.md',
+  'docs/development/closure-v1.10-aggregate-summary.md',
+  'docs/development/iteration-v1.10-context-pack-readiness-final-closure.md',
+  'docs/development/release-v1.10-final-closure.md',
+  'docs/development/closure-v1.10-final-closure.md',
   'docs/decisions/0032-context-pack-readiness-runtime-start.md',
   'packages/domain/src/use-cases.mjs',
   'packages/domain/src/index.mjs',
@@ -50,6 +56,12 @@ const decisionStateClosure = readFileSync('docs/development/closure-v1.10-operat
 const studioDetailIteration = readFileSync('docs/development/iteration-v1.10-studio-readiness-detail.md', 'utf8');
 const studioDetailRelease = readFileSync('docs/development/release-v1.10-studio-readiness-detail.md', 'utf8');
 const studioDetailClosure = readFileSync('docs/development/closure-v1.10-studio-readiness-detail.md', 'utf8');
+const aggregateIteration = readFileSync('docs/development/iteration-v1.10-context-pack-readiness-aggregate-summary.md', 'utf8');
+const aggregateRelease = readFileSync('docs/development/release-v1.10-aggregate-summary.md', 'utf8');
+const aggregateClosure = readFileSync('docs/development/closure-v1.10-aggregate-summary.md', 'utf8');
+const finalIteration = readFileSync('docs/development/iteration-v1.10-context-pack-readiness-final-closure.md', 'utf8');
+const finalRelease = readFileSync('docs/development/release-v1.10-final-closure.md', 'utf8');
+const finalClosure = readFileSync('docs/development/closure-v1.10-final-closure.md', 'utf8');
 const decision = readFileSync('docs/decisions/0032-context-pack-readiness-runtime-start.md', 'utf8');
 const domainUseCases = readFileSync('packages/domain/src/use-cases.mjs', 'utf8');
 const domainIndex = readFileSync('packages/domain/src/index.mjs', 'utf8');
@@ -94,6 +106,18 @@ const requiredSnippets = [
   ['docs/development/release-v1.10-studio-readiness-detail.md', studioDetailRelease, 'Proceed to Context Pack Readiness Aggregate Summary.'],
   ['docs/development/closure-v1.10-studio-readiness-detail.md', studioDetailClosure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Studio Readiness Detail'],
   ['docs/development/closure-v1.10-studio-readiness-detail.md', studioDetailClosure, 'Closed.'],
+  ['docs/development/iteration-v1.10-context-pack-readiness-aggregate-summary.md', aggregateIteration, '# Context Pack Readiness Runtime v1.10 Iteration: Context Pack Readiness Aggregate Summary'],
+  ['docs/development/iteration-v1.10-context-pack-readiness-aggregate-summary.md', aggregateIteration, 'Context Pack Readiness Runtime v1.10 is ready for final closure'],
+  ['docs/development/release-v1.10-aggregate-summary.md', aggregateRelease, '# Context Pack Readiness Runtime v1.10 Release Notes: Aggregate Summary'],
+  ['docs/development/release-v1.10-aggregate-summary.md', aggregateRelease, 'Proceed to Context Pack Readiness Final Closure.'],
+  ['docs/development/closure-v1.10-aggregate-summary.md', aggregateClosure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Aggregate Summary'],
+  ['docs/development/closure-v1.10-aggregate-summary.md', aggregateClosure, 'Closed.'],
+  ['docs/development/iteration-v1.10-context-pack-readiness-final-closure.md', finalIteration, '# Context Pack Readiness Runtime v1.10 Iteration: Context Pack Readiness Final Closure'],
+  ['docs/development/iteration-v1.10-context-pack-readiness-final-closure.md', finalIteration, 'Context Pack Readiness Runtime v1.10 is closed at implementation cycle level.'],
+  ['docs/development/release-v1.10-final-closure.md', finalRelease, '# Context Pack Readiness Runtime v1.10 Release Notes: Final Closure'],
+  ['docs/development/release-v1.10-final-closure.md', finalRelease, 'Studio Readiness Detail'],
+  ['docs/development/closure-v1.10-final-closure.md', finalClosure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Final Closure'],
+  ['docs/development/closure-v1.10-final-closure.md', finalClosure, 'Context Pack Readiness Runtime v1.10 is complete at implementation cycle level.'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createReadinessEvidenceModel'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createOperatorDecisionState'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createStudioReadinessDetail'],
@@ -129,15 +153,26 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.10-studio-readiness-detail.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.10-studio-readiness-detail.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.10-studio-readiness-detail.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.10-context-pack-readiness-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.10-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.10-aggregate-summary.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.10-context-pack-readiness-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.10-final-closure.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.10-final-closure.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0032-context-pack-readiness-runtime-start.md`'],
+  ['README.md', rootReadme, '- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10'],
   ['README.md', rootReadme, '- Active workstream: Context Pack Readiness Runtime v1.10'],
+  ['PROJECT_MANIFEST.md', manifest, '- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10'],
   ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Context Pack Readiness Runtime v1.10'],
   ['PROJECT_MANIFEST.md', manifest, '## v1.10 Scope'],
+  ['PROJECT_MANIFEST.md', manifest, '## v1.10 Completion'],
   ['CHANGELOG.md', changelog, 'Started Context Pack Readiness Runtime v1.10 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Context Pack Readiness Runtime Scope release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Readiness Evidence Model release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['CHANGELOG.md', changelog, 'Added Operator Decision State release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['CHANGELOG.md', changelog, 'Added Studio Readiness Detail release notes, closure checklist, runtime model, Studio panel, and tests.'],
+  ['CHANGELOG.md', changelog, 'Added Context Pack Readiness Runtime v1.10 aggregate release summary and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Closed Context Pack Readiness Runtime v1.10 with final release notes and closure checklist.'],
   ['package.json', packageJson, '"check:context-pack-readiness-runtime"']
 ];
 

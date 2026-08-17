@@ -7,6 +7,8 @@
 - Added Readiness Evidence Model release notes, closure checklist, runtime model, Studio panel, and tests.
 - Added Operator Decision State release notes, closure checklist, runtime model, Studio panel, and tests.
 - Added Studio Readiness Detail release notes, closure checklist, runtime model, Studio panel, and tests.
+- Added Context Pack Readiness Runtime v1.10 aggregate release summary and closure checklist.
+- Closed Context Pack Readiness Runtime v1.10 with final release notes and closure checklist.
 - Added Context Pack Readiness Runtime validation command.
 
 ## Unreleased - Productization Runtime v1.9

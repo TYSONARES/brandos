@@ -8,9 +8,9 @@ architecture decisions, and delivery workflow.
 
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
-- Latest completed implementation cycle: Productization Runtime v1.9
+- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10
 - Active workstream: Context Pack Readiness Runtime v1.10
-- Status: context pack readiness runtime started on branch
+- Status: context pack readiness runtime closed on branch; draft PR pending review
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -55,8 +55,9 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 ## Active Workstream
 
 Context Pack Readiness Runtime v1.10 turns the first productized Studio Product Mode path into a
-dedicated readiness runtime track. It starts from Productization Runtime v1.9 and remains local,
-deterministic, repository-backed, and non-production.
+dedicated readiness runtime track. It is closed on the context pack readiness branch with Readiness
+Evidence Model, Operator Decision State, Studio Readiness Detail, aggregate summary, and final closure
+evidence.
 
 ## Repository Contract
 
