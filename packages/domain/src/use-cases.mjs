@@ -103,6 +103,106 @@ export function evaluateContextPackReadiness(store, contextPackId) {
   };
 }
 
+export function createReadinessEvidenceModel(store, contextPackId) {
+  const contextPack = requireRecord(store, 'context-pack', contextPackId);
+  const readiness = evaluateContextPackReadiness(store, contextPackId);
+  const claims = contextPack.includedClaims.map((claimId) => requireRecord(store, 'claim', claimId));
+  const decisions = contextPack.includedDecisions.map((decisionId) => requireRecord(store, 'decision', decisionId));
+  const reviews = store
+    .list('review')
+    .filter((review) => review.targetObjectType === 'context-pack' && review.targetObjectId === contextPack.id);
+  const workflowActions = store
+    .list('workflow-action')
+    .filter((action) => action.targetObjectId === contextPack.id || reviews.some((review) => review.id === action.targetObjectId));
+  const evidenceItems = [
+    ...claims.map((claim) => ({
+      type: 'claim',
+      id: claim.id,
+      status: claim.status === 'supported' || claim.status === 'approved' ? 'pass' : 'blocked',
+      label: `Claim evidence ${claim.id}`,
+      detail: claim.status
+    })),
+    ...decisions.map((decision) => ({
+      type: 'decision',
+      id: decision.id,
+      status: decision.status === 'accepted' ? 'pass' : 'blocked',
+      label: `Decision evidence ${decision.id}`,
+      detail: decision.status
+    })),
+    ...reviews.map((review) => ({
+      type: 'review',
+      id: review.id,
+      status: review.status === 'approved' ? 'pass' : 'blocked',
+      label: `Review evidence ${review.id}`,
+      detail: review.status
+    })),
+    ...workflowActions.map((action) => ({
+      type: 'workflow-action',
+      id: action.id,
+      status: action.status === 'complete' ? 'pass' : 'attention',
+      label: `Workflow Action evidence ${action.id}`,
+      detail: action.status
+    }))
+  ];
+
+  return {
+    title: 'Readiness Evidence Model',
+    contextPackId: contextPack.id,
+    status: readiness.ready ? 'ready' : 'blocked',
+    evidenceCount: evidenceItems.length,
+    blockingEvidenceCount: evidenceItems.filter((item) => item.status === 'blocked' || item.status === 'attention').length,
+    readinessDecision: readiness.ready ? 'ready-for-use' : 'needs-operator-resolution',
+    evidenceItems,
+    blockers: readiness.blockingReasons,
+    nextActions: readiness.nextActions
+  };
+}
+
+export function createOperatorDecisionState(store, contextPackId) {
+  const evidence = createReadinessEvidenceModel(store, contextPackId);
+  const primaryAction = evidence.nextActions[0] ?? null;
+  const ready = evidence.status === 'ready';
+
+  return {
+    title: 'Operator Decision State',
+    contextPackId,
+    status: ready ? 'ready' : 'needs-action',
+    decision: ready ? 'use-context-pack' : 'resolve-readiness-blocker',
+    reason: ready ? 'Readiness evidence has no blocking items.' : evidence.blockers[0] ?? 'Readiness evidence requires operator review.',
+    recommendedAction: primaryAction?.label || (ready ? 'Use Context Pack' : 'Review readiness evidence'),
+    command: ready ? 'Open Context Pack workflow' : 'Complete pending Workflow Action',
+    targetId: primaryAction?.targetId || contextPackId,
+    owner: primaryAction?.owner || 'operator@example.local',
+    evidenceStatus: evidence.status,
+    blockingEvidenceCount: evidence.blockingEvidenceCount
+  };
+}
+
+export function createStudioReadinessDetail(store, contextPackId) {
+  const readiness = evaluateContextPackReadiness(store, contextPackId);
+  const evidence = createReadinessEvidenceModel(store, contextPackId);
+  const decision = createOperatorDecisionState(store, contextPackId);
+
+  return {
+    title: 'Studio Readiness Detail',
+    contextPackId,
+    status: readiness.ready ? 'ready' : 'blocked',
+    summary: readiness.ready ? 'Context Pack is ready for Studio product use.' : 'Context Pack needs operator resolution before Studio product use.',
+    readinessState: readiness.ready ? 'ready-for-use' : 'blocked-by-evidence',
+    evidenceSummary: `${evidence.evidenceCount} evidence items, ${evidence.blockingEvidenceCount} blocking`,
+    operatorDecision: decision.decision,
+    primaryAction: decision.recommendedAction,
+    detailRows: [
+      { label: 'Readiness', value: readiness.ready ? 'ready' : 'blocked' },
+      { label: 'Evidence', value: evidence.status },
+      { label: 'Operator decision', value: decision.decision },
+      { label: 'Primary action', value: decision.recommendedAction },
+      { label: 'Owner', value: decision.owner }
+    ],
+    blockers: readiness.blockingReasons
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

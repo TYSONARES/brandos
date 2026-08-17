@@ -2861,6 +2861,53 @@ export function renderStudioHtml(shell, options = {}) {
       </article>
     </section>
 
+    <p class="section-title">Readiness evidence</p>
+    <section class="workflow-grid" aria-label="Readiness Evidence Model">
+      <article class="panel">
+        <h2>${escapeHtml(shell.readinessEvidenceModel.title)}</h2>
+        <p class="meta">Evidence status: ${escapeHtml(shell.readinessEvidenceModel.status)}</p>
+        <p class="meta">Readiness decision: ${escapeHtml(shell.readinessEvidenceModel.readinessDecision)}</p>
+        <p class="meta">Evidence count: ${shell.readinessEvidenceModel.evidenceCount}</p>
+        <p class="meta">Blocking evidence: ${shell.readinessEvidenceModel.blockingEvidenceCount}</p>
+      </article>
+      <article class="panel">
+        <h2>Evidence items</h2>
+        <ul>
+          ${shell.readinessEvidenceModel.evidenceItems.map(renderReadinessEvidenceItem).join('')}
+        </ul>
+      </article>
+    </section>
+
+    <p class="section-title">Operator decision</p>
+    <section class="panel" aria-label="Operator Decision State">
+      <h2>${escapeHtml(shell.operatorDecisionState.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator decision status: ${shell.operatorDecisionState.status}`)}
+        ${renderGuidanceRow('Decision', `Operator decision: ${shell.operatorDecisionState.decision}`)}
+        ${renderGuidanceRow('Reason', `Operator decision reason: ${shell.operatorDecisionState.reason}`)}
+        ${renderGuidanceRow('Action', `Operator decision action: ${shell.operatorDecisionState.recommendedAction}`)}
+        ${renderGuidanceRow('Command', `Operator decision command: ${shell.operatorDecisionState.command}`)}
+        ${renderGuidanceRow('Owner', `Operator decision owner: ${shell.operatorDecisionState.owner}`)}
+        ${renderGuidanceRow('Evidence', `Operator decision evidence: ${shell.operatorDecisionState.evidenceStatus}, ${shell.operatorDecisionState.blockingEvidenceCount} blocking`)}
+      </div>
+    </section>
+
+    <p class="section-title">Studio readiness detail</p>
+    <section class="panel" aria-label="Studio Readiness Detail">
+      <h2>${escapeHtml(shell.studioReadinessDetail.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio readiness detail status: ${shell.studioReadinessDetail.status}`)}
+        ${renderGuidanceRow('Summary', `Studio readiness detail summary: ${shell.studioReadinessDetail.summary}`)}
+        ${renderGuidanceRow('State', `Studio readiness state: ${shell.studioReadinessDetail.readinessState}`)}
+        ${renderGuidanceRow('Evidence', `Studio readiness evidence: ${shell.studioReadinessDetail.evidenceSummary}`)}
+        ${renderGuidanceRow('Decision', `Studio readiness decision: ${shell.studioReadinessDetail.operatorDecision}`)}
+        ${renderGuidanceRow('Primary action', `Studio readiness primary action: ${shell.studioReadinessDetail.primaryAction}`)}
+      </div>
+      <div class="guidance-list">
+        ${shell.studioReadinessDetail.detailRows.map(renderStudioReadinessDetailRow).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Context Pack usage flow</p>
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
@@ -3046,6 +3093,20 @@ function renderProductModeRow(label, value) {
   return `<div class="product-mode-row">
           <span class="product-mode-label">${escapeHtml(label)}</span>
           <span class="product-mode-value">${escapeHtml(value)}</span>
+        </div>`;
+}
+
+function renderReadinessEvidenceItem(item) {
+  return `<li>
+          Readiness evidence item: ${escapeHtml(item.type)} ${escapeHtml(item.id)} -
+          ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}
+        </li>`;
+}
+
+function renderStudioReadinessDetailRow(row) {
+  return `<div class="guidance-row">
+          <span class="guidance-label">${escapeHtml(row.label)}</span>
+          <span class="guidance-value">Studio readiness detail row: ${escapeHtml(row.label)} - ${escapeHtml(row.value)}</span>
         </div>`;
 }
 

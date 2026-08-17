@@ -20,6 +20,7 @@ import {
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
+  createOperatorDecisionState,
   createOperatorRunQueue,
   createOperatorStepDetail,
   createOperatorTaskSelection,
@@ -29,6 +30,7 @@ import {
   createOperatorRunbookExecution,
   createPullRequestReadiness,
   createPullRequestReviewPackage,
+  createReadinessEvidenceModel,
   createRepositoryCollaborationAggregateSummary,
   createRepositoryCollaborationFinalClosure,
   createRepositoryBranchStatus,
@@ -36,6 +38,7 @@ import {
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioReadinessDetail,
   createStudioWorkflowRuntimeAggregateSummary,
   createStudioWorkflowRuntimeFinalClosure,
   createStudioStateRecovery,
@@ -68,6 +71,9 @@ export function createBrandOSStudioShell(options = {}) {
   const state = summarizeProductCoreState(store);
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+  const readinessEvidenceModel = createReadinessEvidenceModel(store, 'context_pack_example_001');
+  const operatorDecisionState = createOperatorDecisionState(store, 'context_pack_example_001');
+  const studioReadinessDetail = createStudioReadinessDetail(store, 'context_pack_example_001');
   const contextPackUsageFlow = createContextPackUsageFlow(store, 'context_pack_example_001');
   const reviewResolutionWorkflow = createReviewResolutionWorkflow(store, 'review_example_001');
   const operatorRunQueue = createOperatorRunQueue(store);
@@ -433,6 +439,9 @@ export function createBrandOSStudioShell(options = {}) {
     state,
     brandProfileOverview,
     contextPackReadiness,
+    readinessEvidenceModel,
+    operatorDecisionState,
+    studioReadinessDetail,
     contextPackUsageFlow,
     reviewResolutionWorkflow,
     operatorRunQueue,
