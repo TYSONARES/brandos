@@ -9,8 +9,8 @@ architecture decisions, and delivery workflow.
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
 - Latest completed implementation cycle: Context Pack Readiness Runtime v1.10
-- Active workstream: Context Pack Readiness Runtime v1.10
-- Status: context pack readiness runtime closed on branch; draft PR pending review
+- Active workstream: Context Pack Handoff Runtime v1.11
+- Status: context pack handoff runtime started on branch
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,10 +54,10 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Context Pack Readiness Runtime v1.10 turns the first productized Studio Product Mode path into a
-dedicated readiness runtime track. It is closed on the context pack readiness branch with Readiness
-Evidence Model, Operator Decision State, Studio Readiness Detail, aggregate summary, and final closure
-evidence.
+Context Pack Handoff Runtime v1.11 turns completed Context Pack readiness evidence into a deterministic
+handoff runtime track. It will package approved Context Pack sources, operator decision state, Studio
+readiness detail, and agent context requirements into a repository-backed handoff surface without live
+AI model execution.
 
 ## Repository Contract
 

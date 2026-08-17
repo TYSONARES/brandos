@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - Context Pack Handoff Runtime v1.11
+
+- Started Context Pack Handoff Runtime v1.11 scope and decision record.
+- Added Context Pack Handoff Runtime Scope release notes and closure checklist.
+- Added Context Pack Handoff Runtime validation command.
+
 ## Unreleased - Context Pack Readiness Runtime v1.10
 
 - Started Context Pack Readiness Runtime v1.10 scope and decision record.

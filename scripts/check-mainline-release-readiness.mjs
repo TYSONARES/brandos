@@ -87,7 +87,7 @@ const requiredSnippets = [
   ['docs/decisions/0029-mainline-release-readiness-start.md', decision, '# ADR 0029: Mainline Release Readiness v1.7 Start'],
   ['docs/decisions/0029-mainline-release-readiness-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10'],
-  ['docs/development/README.md', developmentIndex, '- Active workstream: Context Pack Readiness Runtime v1.10'],
+  ['docs/development/README.md', developmentIndex, '- Active workstream: Context Pack Handoff Runtime v1.11'],
   ['docs/development/README.md', developmentIndex, '`v1.7-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-pull-request-review-package.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-ci-evidence-summary.md`'],
