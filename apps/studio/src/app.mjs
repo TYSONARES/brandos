@@ -352,6 +352,30 @@ export function createBrandOSStudioShell(options = {}) {
       { label: 'Use Context Pack', status: 'blocked', detail: 'Context Pack use waits for the pending Workflow Action.' }
     ]
   };
+  const studioProductMode = {
+    title: 'Studio Product Mode',
+    mode: 'context-pack-readiness',
+    status: contextPackReadiness.ready ? 'ready' : 'needs-action',
+    selectedWorkflow: 'Context Pack Readiness',
+    primarySurface: 'Context Pack Readiness',
+    productDecision: contextPackReadiness.ready
+      ? 'Context Pack is ready for operator use.'
+      : 'Resolve readiness blocker before product use.',
+    readiness: contextPackReadiness.ready ? 'ready' : 'blocked',
+    evidence: [
+      'docs/product/product-surface-inventory.md',
+      'docs/product/product-workflow-prioritization.md',
+      'docs/product/context-pack.md',
+      'docs/ai/context-loading.md'
+    ],
+    blockers: contextPackReadiness.blockingReasons,
+    nextActions: contextPackReadiness.nextActions.map((action) => ({
+      label: action.label,
+      status: action.status,
+      owner: action.owner,
+      targetId: action.targetId
+    }))
+  };
   const studioWorkflowAuditTrail = {
     title: 'Studio workflow audit trail',
     status: contextPackReadiness.ready ? 'resolved' : 'open',
@@ -449,6 +473,7 @@ export function createBrandOSStudioShell(options = {}) {
     releaseTagReadiness,
     mainlineAggregateSummary,
     mainlineFinalClosure,
+    studioProductMode,
     contextPackWorkflow,
     studioStateInspection,
     multiActionWorkflowState,

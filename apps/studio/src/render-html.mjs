@@ -397,6 +397,33 @@ export function renderStudioHtml(shell, options = {}) {
       text-align: center;
       text-decoration: none;
     }
+    .product-mode-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .product-mode-row {
+      align-items: start;
+      background: #fbfcfe;
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding: 8px;
+    }
+    .product-mode-label {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .product-mode-value {
+      color: var(--text);
+      display: grid;
+      font-size: 13px;
+      gap: 3px;
+      overflow-wrap: anywhere;
+    }
     .operator-run-queue-list {
       display: grid;
       gap: 8px;
@@ -1668,6 +1695,7 @@ export function renderStudioHtml(shell, options = {}) {
       .release-tag-readiness-row,
       .mainline-aggregate-summary-row,
       .mainline-final-closure-row,
+      .product-mode-row,
       .operator-control-row { grid-template-columns: 1fr; }
       .operator-control-action button,
       .operator-control-action a { width: 100%; }
@@ -1702,6 +1730,22 @@ export function renderStudioHtml(shell, options = {}) {
         <span class="metric">${shell.contextPackReadiness.blockingReasons.length}</span>
         <span class="label">Readiness blockers</span>
       </article>
+    </section>
+
+    <p class="section-title">Studio Product Mode</p>
+    <section class="panel" aria-label="Studio Product Mode">
+      <h2>${escapeHtml(shell.studioProductMode.title)}</h2>
+      <div class="product-mode-list">
+        ${renderProductModeRow('Mode', `Product mode: ${shell.studioProductMode.mode}`)}
+        ${renderProductModeRow('Status', `Product mode status: ${shell.studioProductMode.status}`)}
+        ${renderProductModeRow('Workflow', `Selected product workflow: ${shell.studioProductMode.selectedWorkflow}`)}
+        ${renderProductModeRow('Surface', `Primary product surface: ${shell.studioProductMode.primarySurface}`)}
+        ${renderProductModeRow('Decision', `Product decision: ${shell.studioProductMode.productDecision}`)}
+        ${renderProductModeRow('Readiness', `Product readiness: ${shell.studioProductMode.readiness}`)}
+        ${renderProductModeRow('Evidence', `Product evidence: ${shell.studioProductMode.evidence.join(', ')}`)}
+        ${renderProductModeRow('Blockers', `Product blockers: ${shell.studioProductMode.blockers.length ? shell.studioProductMode.blockers.join(', ') : 'none'}`)}
+        ${renderProductModeRow('Next actions', `Product next actions: ${shell.studioProductMode.nextActions.map((action) => `${action.status} ${action.label}`).join(', ')}`)}
+      </div>
     </section>
 
     <p class="section-title">Studio diagnostics</p>
@@ -2996,6 +3040,13 @@ function renderOperatorControlAction(control) {
   }
 
   return `<div class="operator-control-action"><a href="${escapeHtml(control.target)}">${escapeHtml(control.label)}</a></div>`;
+}
+
+function renderProductModeRow(label, value) {
+  return `<div class="product-mode-row">
+          <span class="product-mode-label">${escapeHtml(label)}</span>
+          <span class="product-mode-value">${escapeHtml(value)}</span>
+        </div>`;
 }
 
 function renderOperatorRunQueueItem(item) {
