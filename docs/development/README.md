@@ -5,9 +5,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 ## Status
 
 - Released baseline: Development Ready v1.0
-- Latest completed implementation cycle: Context Pack Readiness Runtime v1.10
+- Latest completed implementation cycle: Context Pack Handoff Runtime v1.11
 - Active workstream: Context Pack Handoff Runtime v1.11
-- Current goal: start Context Pack Handoff Runtime v1.11 after Context Pack Readiness Runtime v1.10 merge
+- Current goal: prepare draft PR readiness after Context Pack Handoff Runtime v1.11 closure
 
 ## Read Order
 
@@ -175,6 +175,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 162. `iteration-v1.11-context-pack-handoff-aggregate-summary.md`
 163. `release-v1.11-aggregate-summary.md`
 164. `closure-v1.11-aggregate-summary.md`
+165. `iteration-v1.11-context-pack-handoff-final-closure.md`
+166. `release-v1.11-final-closure.md`
+167. `closure-v1.11-final-closure.md`
 153. `iteration-v1.2-agent-handoff-context.md`
 154. `release-v1.2-agent-handoff-context.md`
 155. `closure-v1.2-agent-handoff-context.md`

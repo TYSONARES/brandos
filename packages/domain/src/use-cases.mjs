@@ -413,6 +413,36 @@ export function createContextPackHandoffAggregateSummary(store, contextPackId) {
   };
 }
 
+export function createContextPackHandoffFinalClosure(store, contextPackId) {
+  const aggregate = createContextPackHandoffAggregateSummary(store, contextPackId);
+  const closed = aggregate.aggregateReady;
+
+  return {
+    title: 'Context Pack Handoff Final Closure',
+    contextPackId,
+    status: closed ? 'closed' : 'blocked',
+    closed,
+    closureDecision: closed ? 'close-context-pack-handoff-runtime-v1.11' : 'keep-context-pack-handoff-runtime-open',
+    closureSummary: closed
+      ? 'Context Pack Handoff Runtime v1.11 is complete at implementation cycle level.'
+      : 'Context Pack Handoff Runtime v1.11 cannot close until aggregate readiness is ready.',
+    aggregateStatus: aggregate.status,
+    packageCount: aggregate.packageCount,
+    readyPackageCount: aggregate.readyPackageCount,
+    blockedPackageCount: aggregate.blockedPackageCount,
+    closureEvidence: closed
+      ? [
+        `Aggregate status: ${aggregate.status}`,
+        `Ready packages: ${aggregate.readyPackageCount}/${aggregate.packageCount}`,
+        `Included sources: ${aggregate.includedSourceCount}`,
+        'Release notes and closure checklists are present.'
+      ]
+      : aggregate.blockers,
+    blockers: aggregate.blockers,
+    nextWorkflow: closed ? 'Open v1.11 pull request for review' : aggregate.nextWorkflow
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

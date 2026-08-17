@@ -17,6 +17,7 @@ export {
   createCommandResultSummary,
   createAgentContextReadiness,
   createContextPackHandoffAggregateSummary,
+  createContextPackHandoffFinalClosure,
   createContextPackHandoffSourcePackage,
   createContextPackUsageFlow,
   createDraftReview,

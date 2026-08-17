@@ -16,6 +16,7 @@ import {
   createCommandResultSummary,
   createContextPackHandoffSourcePackage,
   createContextPackHandoffAggregateSummary,
+  createContextPackHandoffFinalClosure,
   createContextPackUsageFlow,
   createDraftReview,
   createExampleProductCoreState,
@@ -348,6 +349,30 @@ test('Context Pack Handoff Aggregate Summary opens final closure when all packag
   assert.equal(aggregate.aggregateDecision, 'context-pack-handoff-ready-for-final-closure');
   assert.equal(aggregate.nextWorkflow, 'Context Pack Handoff Final Closure');
   assert.deepEqual(aggregate.blockers, []);
+});
+
+test('Context Pack Handoff Final Closure blocks until aggregate readiness is ready', () => {
+  const closure = createContextPackHandoffFinalClosure(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(closure.title, 'Context Pack Handoff Final Closure');
+  assert.equal(closure.status, 'blocked');
+  assert.equal(closure.closed, false);
+  assert.equal(closure.closureDecision, 'keep-context-pack-handoff-runtime-open');
+  assert.equal(closure.aggregateStatus, 'blocked');
+  assert.equal(closure.nextWorkflow, 'Studio Handoff Detail');
+});
+
+test('Context Pack Handoff Final Closure closes when aggregate readiness is ready', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const closure = createContextPackHandoffFinalClosure(store, 'context_pack_example_001');
+
+  assert.equal(closure.status, 'closed');
+  assert.equal(closure.closed, true);
+  assert.equal(closure.closureDecision, 'close-context-pack-handoff-runtime-v1.11');
+  assert.equal(closure.aggregateStatus, 'ready');
+  assert.equal(closure.nextWorkflow, 'Open v1.11 pull request for review');
+  assert.deepEqual(closure.blockers, []);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {

@@ -2969,6 +2969,21 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <section class="panel" aria-label="Context Pack Handoff Final Closure">
+      <h2>${escapeHtml(shell.contextPackHandoffFinalClosure.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Context Pack handoff final closure status: ${shell.contextPackHandoffFinalClosure.status}`)}
+        ${renderGuidanceRow('Decision', `Context Pack handoff final closure decision: ${shell.contextPackHandoffFinalClosure.closureDecision}`)}
+        ${renderGuidanceRow('Summary', `Context Pack handoff final closure summary: ${shell.contextPackHandoffFinalClosure.closureSummary}`)}
+        ${renderGuidanceRow('Aggregate', `Context Pack handoff final closure aggregate: ${shell.contextPackHandoffFinalClosure.aggregateStatus}`)}
+        ${renderGuidanceRow('Packages', `Context Pack handoff final closure packages: ${shell.contextPackHandoffFinalClosure.readyPackageCount}/${shell.contextPackHandoffFinalClosure.packageCount} ready`)}
+        ${renderGuidanceRow('Next workflow', `Context Pack handoff final closure next workflow: ${shell.contextPackHandoffFinalClosure.nextWorkflow}`)}
+      </div>
+      <div class="usage-step-list">
+        ${shell.contextPackHandoffFinalClosure.closureEvidence.map(renderContextPackHandoffClosureEvidence).join('')}
+      </div>
+    </section>
+
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
       <div class="usage-list">
@@ -4063,6 +4078,15 @@ function renderContextPackHandoffAggregateItem(item) {
     <div class="usage-step">
       <span class="usage-step-label">Context Pack handoff aggregate item: ${escapeHtml(item.label)}</span>
       <span class="usage-step-detail">Context Pack handoff aggregate detail: ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}</span>
+    </div>
+  `;
+}
+
+function renderContextPackHandoffClosureEvidence(evidence) {
+  return `
+    <div class="usage-step">
+      <span class="usage-step-label">Context Pack handoff final closure evidence</span>
+      <span class="usage-step-detail">Context Pack handoff final closure evidence detail: ${escapeHtml(evidence)}</span>
     </div>
   `;
 }
