@@ -5,6 +5,11 @@ const required = [
   'docs/development/iteration-v1.9-productization-runtime-scope.md',
   'docs/development/release-v1.9-productization-runtime-scope.md',
   'docs/development/closure-v1.9-productization-runtime-scope.md',
+  'docs/development/iteration-v1.9-product-surface-inventory.md',
+  'docs/development/release-v1.9-product-surface-inventory.md',
+  'docs/development/closure-v1.9-product-surface-inventory.md',
+  'docs/product/product-surface-inventory.md',
+  'docs/product/README.md',
   'docs/decisions/0031-productization-runtime-start.md',
   'docs/development/README.md',
   'docs/decisions/README.md',
@@ -26,6 +31,11 @@ const scope = readFileSync('docs/development/v1.9-scope.md', 'utf8');
 const iteration = readFileSync('docs/development/iteration-v1.9-productization-runtime-scope.md', 'utf8');
 const release = readFileSync('docs/development/release-v1.9-productization-runtime-scope.md', 'utf8');
 const closure = readFileSync('docs/development/closure-v1.9-productization-runtime-scope.md', 'utf8');
+const inventoryIteration = readFileSync('docs/development/iteration-v1.9-product-surface-inventory.md', 'utf8');
+const inventoryRelease = readFileSync('docs/development/release-v1.9-product-surface-inventory.md', 'utf8');
+const inventoryClosure = readFileSync('docs/development/closure-v1.9-product-surface-inventory.md', 'utf8');
+const productSurfaceInventory = readFileSync('docs/product/product-surface-inventory.md', 'utf8');
+const productIndex = readFileSync('docs/product/README.md', 'utf8');
 const decision = readFileSync('docs/decisions/0031-productization-runtime-start.md', 'utf8');
 const developmentIndex = readFileSync('docs/development/README.md', 'utf8');
 const decisionsIndex = readFileSync('docs/decisions/README.md', 'utf8');
@@ -47,6 +57,17 @@ const requiredSnippets = [
   ['docs/development/release-v1.9-productization-runtime-scope.md', release, 'Proceed to Product Surface Inventory.'],
   ['docs/development/closure-v1.9-productization-runtime-scope.md', closure, '# Productization Runtime v1.9 Closure Checklist: Productization Runtime Scope'],
   ['docs/development/closure-v1.9-productization-runtime-scope.md', closure, 'Closed.'],
+  ['docs/development/iteration-v1.9-product-surface-inventory.md', inventoryIteration, '# Productization Runtime v1.9 Iteration: Product Surface Inventory'],
+  ['docs/development/iteration-v1.9-product-surface-inventory.md', inventoryIteration, 'Studio Product Mode should begin with operator-facing surfaces'],
+  ['docs/development/release-v1.9-product-surface-inventory.md', inventoryRelease, '# Productization Runtime v1.9 Release Notes: Product Surface Inventory'],
+  ['docs/development/release-v1.9-product-surface-inventory.md', inventoryRelease, 'Proceed to Product Workflow Prioritization.'],
+  ['docs/development/closure-v1.9-product-surface-inventory.md', inventoryClosure, '# Productization Runtime v1.9 Closure Checklist: Product Surface Inventory'],
+  ['docs/development/closure-v1.9-product-surface-inventory.md', inventoryClosure, 'Closed.'],
+  ['docs/product/product-surface-inventory.md', productSurfaceInventory, '# Product Surface Inventory'],
+  ['docs/product/product-surface-inventory.md', productSurfaceInventory, 'Operator-Facing Surfaces'],
+  ['docs/product/product-surface-inventory.md', productSurfaceInventory, 'Future Customer-Facing Surfaces'],
+  ['docs/product/product-surface-inventory.md', productSurfaceInventory, 'The first productization candidate is Studio Product Mode'],
+  ['docs/product/README.md', productIndex, '`product-surface-inventory.md`'],
   ['docs/decisions/0031-productization-runtime-start.md', decision, '# ADR 0031: Productization Runtime v1.9 Start'],
   ['docs/decisions/0031-productization-runtime-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Active workstream: Productization Runtime v1.9'],
@@ -54,11 +75,15 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.9-productization-runtime-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.9-productization-runtime-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.9-productization-runtime-scope.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.9-product-surface-inventory.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.9-product-surface-inventory.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.9-product-surface-inventory.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0031-productization-runtime-start.md`'],
   ['README.md', rootReadme, '- Active workstream: Productization Runtime v1.9'],
   ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Productization Runtime v1.9'],
   ['PROJECT_MANIFEST.md', manifest, '## v1.9 Scope'],
   ['CHANGELOG.md', changelog, 'Started Productization Runtime v1.9 scope and decision record.'],
+  ['CHANGELOG.md', changelog, 'Added Product Surface Inventory release notes and closure checklist.'],
   ['package.json', packageJson, '"check:productization-runtime"']
 ];
 
