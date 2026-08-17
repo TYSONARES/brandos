@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - Context Pack Readiness Runtime v1.10
+
+- Started Context Pack Readiness Runtime v1.10 scope and decision record.
+- Added Context Pack Readiness Runtime Scope release notes and closure checklist.
+- Added Context Pack Readiness Runtime validation command.
+
 ## Unreleased - Productization Runtime v1.9
 
 - Started Productization Runtime v1.9 scope and decision record.

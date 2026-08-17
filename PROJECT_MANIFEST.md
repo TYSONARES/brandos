@@ -6,7 +6,7 @@
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
 - Latest completed implementation cycle: Productization Runtime v1.9
-- Active workstream: Productization Runtime v1.9
+- Active workstream: Context Pack Readiness Runtime v1.10
 - Repository role: single source of truth
 - Primary audience: product builders, brand strategists, designers, engineers, and AI coding agents
 
@@ -138,6 +138,14 @@ infrastructure, or live AI model execution.
 Productization Runtime v1.9 is complete at implementation cycle level on the productization branch.
 See `docs/development/release-v1.9-final-closure.md` and
 `docs/development/closure-v1.9-final-closure.md`.
+
+## v1.10 Scope
+
+Context Pack Readiness Runtime v1.10 turns the first productized Studio Product Mode path into a
+dedicated readiness runtime track. It defines context pack readiness scope, readiness evidence,
+operator decision state, Studio readiness details, aggregate summary, and final closure without adding
+production deployment, database integration, authentication runtime, external integrations, hosted
+infrastructure, or live AI model execution.
 
 ## Definition of Done
 

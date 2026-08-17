@@ -12,6 +12,7 @@ Keep this index current whenever files are added, renamed, or promoted to offici
 
 ## Latest Decisions
 
+- `0032-context-pack-readiness-runtime-start.md`: starts Context Pack Readiness Runtime v1.10 after Productization Runtime v1.9 final closure.
 - `0031-productization-runtime-start.md`: starts Productization Runtime v1.9 after BrandOS v1.0.0 release and Release Governance v1.8 final closure.
 - `0030-release-governance-start.md`: starts Release Governance v1.8 after Mainline Release Readiness v1.7 final closure.
 - `0029-mainline-release-readiness-start.md`: starts Mainline Release Readiness v1.7 after Repository Collaboration Workflow v1.6 final closure.

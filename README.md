@@ -9,8 +9,8 @@ architecture decisions, and delivery workflow.
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
 - Latest completed implementation cycle: Productization Runtime v1.9
-- Active workstream: Productization Runtime v1.9
-- Status: productization runtime closed on branch; draft PR pending review
+- Active workstream: Context Pack Readiness Runtime v1.10
+- Status: context pack readiness runtime started on branch
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,9 +54,9 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Productization Runtime v1.9 turns the released BrandOS v1.0.0 baseline into the first product-facing
-runtime track. It is closed on the productization branch with Studio Product Mode for Context Pack
-Readiness, Product Evidence Pack, aggregate summary, and final closure evidence.
+Context Pack Readiness Runtime v1.10 turns the first productized Studio Product Mode path into a
+dedicated readiness runtime track. It starts from Productization Runtime v1.9 and remains local,
+deterministic, repository-backed, and non-production.
 
 ## Repository Contract
 
