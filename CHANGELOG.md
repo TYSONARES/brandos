@@ -5,6 +5,7 @@
 - Started Context Pack Readiness Runtime v1.10 scope and decision record.
 - Added Context Pack Readiness Runtime Scope release notes and closure checklist.
 - Added Readiness Evidence Model release notes, closure checklist, runtime model, Studio panel, and tests.
+- Added Operator Decision State release notes, closure checklist, runtime model, Studio panel, and tests.
 - Added Context Pack Readiness Runtime validation command.
 
 ## Unreleased - Productization Runtime v1.9

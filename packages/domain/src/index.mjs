@@ -23,6 +23,7 @@ export {
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
+  createOperatorDecisionState,
   createOperatorRunQueue,
   createOperatorStepDetail,
   createOperatorTaskSelection,

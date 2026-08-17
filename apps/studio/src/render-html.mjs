@@ -2878,6 +2878,20 @@ export function renderStudioHtml(shell, options = {}) {
       </article>
     </section>
 
+    <p class="section-title">Operator decision</p>
+    <section class="panel" aria-label="Operator Decision State">
+      <h2>${escapeHtml(shell.operatorDecisionState.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Operator decision status: ${shell.operatorDecisionState.status}`)}
+        ${renderGuidanceRow('Decision', `Operator decision: ${shell.operatorDecisionState.decision}`)}
+        ${renderGuidanceRow('Reason', `Operator decision reason: ${shell.operatorDecisionState.reason}`)}
+        ${renderGuidanceRow('Action', `Operator decision action: ${shell.operatorDecisionState.recommendedAction}`)}
+        ${renderGuidanceRow('Command', `Operator decision command: ${shell.operatorDecisionState.command}`)}
+        ${renderGuidanceRow('Owner', `Operator decision owner: ${shell.operatorDecisionState.owner}`)}
+        ${renderGuidanceRow('Evidence', `Operator decision evidence: ${shell.operatorDecisionState.evidenceStatus}, ${shell.operatorDecisionState.blockingEvidenceCount} blocking`)}
+      </div>
+    </section>
+
     <p class="section-title">Context Pack usage flow</p>
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>

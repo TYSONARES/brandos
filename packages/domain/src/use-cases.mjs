@@ -158,6 +158,26 @@ export function createReadinessEvidenceModel(store, contextPackId) {
   };
 }
 
+export function createOperatorDecisionState(store, contextPackId) {
+  const evidence = createReadinessEvidenceModel(store, contextPackId);
+  const primaryAction = evidence.nextActions[0] ?? null;
+  const ready = evidence.status === 'ready';
+
+  return {
+    title: 'Operator Decision State',
+    contextPackId,
+    status: ready ? 'ready' : 'needs-action',
+    decision: ready ? 'use-context-pack' : 'resolve-readiness-blocker',
+    reason: ready ? 'Readiness evidence has no blocking items.' : evidence.blockers[0] ?? 'Readiness evidence requires operator review.',
+    recommendedAction: primaryAction?.label || (ready ? 'Use Context Pack' : 'Review readiness evidence'),
+    command: ready ? 'Open Context Pack workflow' : 'Complete pending Workflow Action',
+    targetId: primaryAction?.targetId || contextPackId,
+    owner: primaryAction?.owner || 'operator@example.local',
+    evidenceStatus: evidence.status,
+    blockingEvidenceCount: evidence.blockingEvidenceCount
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

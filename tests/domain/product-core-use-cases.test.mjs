@@ -23,6 +23,7 @@ import {
   createMainMergePlan,
   createMergeReadiness,
   createOperatorHandoffReadiness,
+  createOperatorDecisionState,
   createOperatorRunQueue,
   createOperatorRunbookExecution,
   createOperatorRunSummary,
@@ -141,6 +142,19 @@ test('Readiness Evidence Model summarizes blocking Context Pack evidence', () =>
   ]);
 });
 
+test('Operator Decision State asks the operator to resolve blocking readiness evidence', () => {
+  const decision = createOperatorDecisionState(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(decision.title, 'Operator Decision State');
+  assert.equal(decision.status, 'needs-action');
+  assert.equal(decision.decision, 'resolve-readiness-blocker');
+  assert.equal(decision.reason, 'Review is blocking release: review_example_001');
+  assert.equal(decision.recommendedAction, 'Resolve review feedback for context_pack_example_001');
+  assert.equal(decision.command, 'Complete pending Workflow Action');
+  assert.equal(decision.targetId, 'review_example_001');
+  assert.equal(decision.blockingEvidenceCount, 2);
+});
+
 test('Context Pack readiness passes when claims, decisions, and reviews are clear', () => {
   const state = createExampleProductCoreState();
   state.review = [
@@ -175,6 +189,19 @@ test('Readiness Evidence Model passes when Context Pack evidence is clear', () =
   assert.equal(evidence.blockingEvidenceCount, 0);
   assert.equal(evidence.readinessDecision, 'ready-for-use');
   assert.deepEqual(evidence.blockers, []);
+});
+
+test('Operator Decision State lets the operator use ready Context Pack evidence', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const decision = createOperatorDecisionState(store, 'context_pack_example_001');
+
+  assert.equal(decision.status, 'ready');
+  assert.equal(decision.decision, 'use-context-pack');
+  assert.equal(decision.reason, 'Readiness evidence has no blocking items.');
+  assert.equal(decision.recommendedAction, 'Use context pack context_pack_example_001');
+  assert.equal(decision.command, 'Open Context Pack workflow');
+  assert.equal(decision.blockingEvidenceCount, 0);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {
