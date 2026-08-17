@@ -87,7 +87,7 @@ const requiredSnippets = [
   ['docs/decisions/0029-mainline-release-readiness-start.md', decision, '# ADR 0029: Mainline Release Readiness v1.7 Start'],
   ['docs/decisions/0029-mainline-release-readiness-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Latest completed implementation cycle: Release Governance v1.8'],
-  ['docs/development/README.md', developmentIndex, '- Active workstream: Next named cycle not started'],
+  ['docs/development/README.md', developmentIndex, '- Active workstream: Productization Runtime v1.9'],
   ['docs/development/README.md', developmentIndex, '`v1.7-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-pull-request-review-package.md`'],
   ['docs/development/README.md', developmentIndex, '`iteration-v1.7-ci-evidence-summary.md`'],

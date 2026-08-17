@@ -9,8 +9,8 @@ architecture decisions, and delivery workflow.
 - Released baseline: Foundation v0.1.0
 - Latest completed workstream: Development Ready v1.0
 - Latest completed implementation cycle: Release Governance v1.8
-- Active workstream: Next named cycle not started
-- Status: release governance closed
+- Active workstream: Productization Runtime v1.9
+- Status: productization runtime scope started
 - Principle: docs and manifests define the operating contract before implementation begins
 
 ## Read First
@@ -54,8 +54,9 @@ runtime baseline, quality gates, static build, local preview server, and test-co
 
 ## Active Workstream
 
-Release Governance v1.8 closed deterministic release decision, approval, publication, rollback, and
-post-release audit evidence. The next named cycle has not started yet.
+Productization Runtime v1.9 turns the released BrandOS v1.0.0 baseline into the first product-facing
+runtime track while keeping scope, product surfaces, workflow priority, evidence, and closure grounded
+in repository truth.
 
 ## Repository Contract
 

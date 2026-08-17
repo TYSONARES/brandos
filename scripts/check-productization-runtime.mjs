@@ -1,0 +1,74 @@
+import { existsSync, readFileSync } from 'node:fs';
+
+const required = [
+  'docs/development/v1.9-scope.md',
+  'docs/development/iteration-v1.9-productization-runtime-scope.md',
+  'docs/development/release-v1.9-productization-runtime-scope.md',
+  'docs/development/closure-v1.9-productization-runtime-scope.md',
+  'docs/decisions/0031-productization-runtime-start.md',
+  'docs/development/README.md',
+  'docs/decisions/README.md',
+  'README.md',
+  'PROJECT_MANIFEST.md',
+  'CHANGELOG.md',
+  'package.json',
+  'scripts/check-productization-runtime.mjs'
+];
+
+const missing = required.filter((file) => !existsSync(file));
+
+if (missing.length) {
+  console.error(`Missing Productization Runtime requirements: ${missing.join(', ')}`);
+  process.exit(1);
+}
+
+const scope = readFileSync('docs/development/v1.9-scope.md', 'utf8');
+const iteration = readFileSync('docs/development/iteration-v1.9-productization-runtime-scope.md', 'utf8');
+const release = readFileSync('docs/development/release-v1.9-productization-runtime-scope.md', 'utf8');
+const closure = readFileSync('docs/development/closure-v1.9-productization-runtime-scope.md', 'utf8');
+const decision = readFileSync('docs/decisions/0031-productization-runtime-start.md', 'utf8');
+const developmentIndex = readFileSync('docs/development/README.md', 'utf8');
+const decisionsIndex = readFileSync('docs/decisions/README.md', 'utf8');
+const rootReadme = readFileSync('README.md', 'utf8');
+const manifest = readFileSync('PROJECT_MANIFEST.md', 'utf8');
+const changelog = readFileSync('CHANGELOG.md', 'utf8');
+const packageJson = readFileSync('package.json', 'utf8');
+
+const requiredSnippets = [
+  ['docs/development/v1.9-scope.md', scope, '# Productization Runtime v1.9 Scope'],
+  ['docs/development/v1.9-scope.md', scope, 'Product Surface Inventory'],
+  ['docs/development/v1.9-scope.md', scope, 'Product Workflow Prioritization'],
+  ['docs/development/v1.9-scope.md', scope, 'Studio Product Mode'],
+  ['docs/development/v1.9-scope.md', scope, 'Product Evidence Pack'],
+  ['docs/development/v1.9-scope.md', scope, '`npm run check:productization-runtime`'],
+  ['docs/development/iteration-v1.9-productization-runtime-scope.md', iteration, '# Productization Runtime v1.9 Iteration: Productization Runtime Scope'],
+  ['docs/development/iteration-v1.9-productization-runtime-scope.md', iteration, 'Product Surface Inventory'],
+  ['docs/development/release-v1.9-productization-runtime-scope.md', release, '# Productization Runtime v1.9 Release Notes: Productization Runtime Scope'],
+  ['docs/development/release-v1.9-productization-runtime-scope.md', release, 'Proceed to Product Surface Inventory.'],
+  ['docs/development/closure-v1.9-productization-runtime-scope.md', closure, '# Productization Runtime v1.9 Closure Checklist: Productization Runtime Scope'],
+  ['docs/development/closure-v1.9-productization-runtime-scope.md', closure, 'Closed.'],
+  ['docs/decisions/0031-productization-runtime-start.md', decision, '# ADR 0031: Productization Runtime v1.9 Start'],
+  ['docs/decisions/0031-productization-runtime-start.md', decision, '- Status: accepted'],
+  ['docs/development/README.md', developmentIndex, '- Active workstream: Productization Runtime v1.9'],
+  ['docs/development/README.md', developmentIndex, '`v1.9-scope.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.9-productization-runtime-scope.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.9-productization-runtime-scope.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.9-productization-runtime-scope.md`'],
+  ['docs/decisions/README.md', decisionsIndex, '`0031-productization-runtime-start.md`'],
+  ['README.md', rootReadme, '- Active workstream: Productization Runtime v1.9'],
+  ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Productization Runtime v1.9'],
+  ['PROJECT_MANIFEST.md', manifest, '## v1.9 Scope'],
+  ['CHANGELOG.md', changelog, 'Started Productization Runtime v1.9 scope and decision record.'],
+  ['package.json', packageJson, '"check:productization-runtime"']
+];
+
+const missingSnippets = requiredSnippets
+  .filter(([, content, snippet]) => !content.includes(snippet))
+  .map(([file, , snippet]) => `${file}: ${snippet}`);
+
+if (missingSnippets.length) {
+  console.error(`Missing Productization Runtime content: ${missingSnippets.join(', ')}`);
+  process.exit(1);
+}
+
+console.log('Productization Runtime requirements passed.');

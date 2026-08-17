@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - Productization Runtime v1.9
+
+- Started Productization Runtime v1.9 scope and decision record.
+- Added Productization Runtime Scope release notes and closure checklist.
+- Added Productization Runtime validation command.
+
 ## Unreleased - Release Governance v1.8
 
 - Added mainline pull request handoff and updated the pull request template.
