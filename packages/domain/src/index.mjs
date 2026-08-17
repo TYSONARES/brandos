@@ -41,6 +41,7 @@ export {
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioHandoffDetail,
   createStudioReadinessDetail,
   createStudioWorkflowRuntimeAggregateSummary,
   createStudioWorkflowRuntimeFinalClosure,

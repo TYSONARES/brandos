@@ -333,6 +333,40 @@ export function createAgentContextReadiness(store, contextPackId) {
   };
 }
 
+export function createStudioHandoffDetail(store, contextPackId) {
+  const sourcePackage = createContextPackHandoffSourcePackage(store, contextPackId);
+  const contextReadiness = createAgentContextReadiness(store, contextPackId);
+  const detailReady = sourcePackage.packageReady && contextReadiness.contextReady;
+  const detailRows = [
+    { label: 'Source package', value: sourcePackage.status },
+    { label: 'Agent context', value: contextReadiness.status },
+    { label: 'Source policy', value: sourcePackage.sourcePolicy },
+    { label: 'Required read order', value: contextReadiness.requiredReadOrder.join(', ') },
+    { label: 'Instruction count', value: String(contextReadiness.instructionCount) },
+    { label: 'Next workflow', value: detailReady ? 'Context Pack Handoff Aggregate Summary' : contextReadiness.recommendedNextWorkflow }
+  ];
+
+  return {
+    title: 'Studio Handoff Detail',
+    contextPackId,
+    status: detailReady ? 'ready' : 'blocked',
+    detailReady,
+    handoffMode: detailReady ? 'agent-context-ready' : 'operator-resolution-required',
+    summary: detailReady
+      ? 'Studio can present a ready Context Pack handoff to the next aggregate package.'
+      : 'Studio keeps Context Pack handoff blocked until source package and agent context readiness pass.',
+    sourcePackageStatus: sourcePackage.status,
+    agentContextStatus: contextReadiness.status,
+    includedSourceCount: sourcePackage.includedSourceCount,
+    blockedSourceCount: sourcePackage.blockedSourceCount,
+    readinessCheckCount: contextReadiness.readinessChecks.length,
+    passedReadinessCheckCount: contextReadiness.readinessChecks.filter((check) => check.status === 'pass').length,
+    detailRows,
+    blockers: [...new Set([...sourcePackage.missingContext, ...contextReadiness.blockers])],
+    recommendedNextWorkflow: detailReady ? 'Context Pack Handoff Aggregate Summary' : 'Agent Context Readiness'
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

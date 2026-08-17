@@ -2939,6 +2939,21 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <section class="panel" aria-label="Studio Handoff Detail">
+      <h2>${escapeHtml(shell.studioHandoffDetail.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio handoff detail status: ${shell.studioHandoffDetail.status}`)}
+        ${renderGuidanceRow('Mode', `Studio handoff mode: ${shell.studioHandoffDetail.handoffMode}`)}
+        ${renderGuidanceRow('Summary', `Studio handoff summary: ${shell.studioHandoffDetail.summary}`)}
+        ${renderGuidanceRow('Sources', `Studio handoff sources: ${shell.studioHandoffDetail.includedSourceCount} included, ${shell.studioHandoffDetail.blockedSourceCount} blocked`)}
+        ${renderGuidanceRow('Checks', `Studio handoff checks: ${shell.studioHandoffDetail.passedReadinessCheckCount}/${shell.studioHandoffDetail.readinessCheckCount} passed`)}
+        ${renderGuidanceRow('Next workflow', `Studio handoff next workflow: ${shell.studioHandoffDetail.recommendedNextWorkflow}`)}
+      </div>
+      <div class="usage-step-list">
+        ${shell.studioHandoffDetail.detailRows.map(renderStudioHandoffDetailRow).join('')}
+      </div>
+    </section>
+
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
       <div class="usage-list">
@@ -4015,6 +4030,15 @@ function renderAgentContextReadinessCheck(check) {
     <div class="usage-step">
       <span class="usage-step-label">Agent context readiness check: ${escapeHtml(check.label)}</span>
       <span class="usage-step-detail">Agent context readiness detail: ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
+    </div>
+  `;
+}
+
+function renderStudioHandoffDetailRow(row) {
+  return `
+    <div class="usage-step">
+      <span class="usage-step-label">Studio handoff detail row: ${escapeHtml(row.label)}</span>
+      <span class="usage-step-detail">Studio handoff detail value: ${escapeHtml(row.value)}</span>
     </div>
   `;
 }

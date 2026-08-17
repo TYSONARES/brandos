@@ -44,6 +44,7 @@ import {
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioHandoffDetail,
   createStudioReadinessDetail,
   createStudioWorkflowRuntimeAggregateSummary,
   createStudioWorkflowRuntimeFinalClosure,
@@ -291,6 +292,34 @@ test('Agent Context Readiness opens Studio handoff detail for ready source packa
   assert.equal(readiness.recommendedNextWorkflow, 'Studio Handoff Detail');
   assert.deepEqual(readiness.blockers, []);
   assert.deepEqual(readiness.readinessChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
+});
+
+test('Studio Handoff Detail summarizes blocked handoff readiness for Studio', () => {
+  const detail = createStudioHandoffDetail(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(detail.title, 'Studio Handoff Detail');
+  assert.equal(detail.status, 'blocked');
+  assert.equal(detail.detailReady, false);
+  assert.equal(detail.handoffMode, 'operator-resolution-required');
+  assert.equal(detail.sourcePackageStatus, 'blocked');
+  assert.equal(detail.agentContextStatus, 'blocked');
+  assert.equal(detail.blockedSourceCount, 2);
+  assert.equal(detail.passedReadinessCheckCount, 3);
+  assert.equal(detail.recommendedNextWorkflow, 'Agent Context Readiness');
+});
+
+test('Studio Handoff Detail summarizes ready handoff state for Studio', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const detail = createStudioHandoffDetail(store, 'context_pack_example_001');
+
+  assert.equal(detail.status, 'ready');
+  assert.equal(detail.detailReady, true);
+  assert.equal(detail.handoffMode, 'agent-context-ready');
+  assert.equal(detail.blockedSourceCount, 0);
+  assert.equal(detail.passedReadinessCheckCount, 4);
+  assert.equal(detail.recommendedNextWorkflow, 'Context Pack Handoff Aggregate Summary');
+  assert.deepEqual(detail.blockers, []);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {
