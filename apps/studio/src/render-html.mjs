@@ -2892,6 +2892,22 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <p class="section-title">Studio readiness detail</p>
+    <section class="panel" aria-label="Studio Readiness Detail">
+      <h2>${escapeHtml(shell.studioReadinessDetail.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Studio readiness detail status: ${shell.studioReadinessDetail.status}`)}
+        ${renderGuidanceRow('Summary', `Studio readiness detail summary: ${shell.studioReadinessDetail.summary}`)}
+        ${renderGuidanceRow('State', `Studio readiness state: ${shell.studioReadinessDetail.readinessState}`)}
+        ${renderGuidanceRow('Evidence', `Studio readiness evidence: ${shell.studioReadinessDetail.evidenceSummary}`)}
+        ${renderGuidanceRow('Decision', `Studio readiness decision: ${shell.studioReadinessDetail.operatorDecision}`)}
+        ${renderGuidanceRow('Primary action', `Studio readiness primary action: ${shell.studioReadinessDetail.primaryAction}`)}
+      </div>
+      <div class="guidance-list">
+        ${shell.studioReadinessDetail.detailRows.map(renderStudioReadinessDetailRow).join('')}
+      </div>
+    </section>
+
     <p class="section-title">Context Pack usage flow</p>
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
@@ -3085,6 +3101,13 @@ function renderReadinessEvidenceItem(item) {
           Readiness evidence item: ${escapeHtml(item.type)} ${escapeHtml(item.id)} -
           ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}
         </li>`;
+}
+
+function renderStudioReadinessDetailRow(row) {
+  return `<div class="guidance-row">
+          <span class="guidance-label">${escapeHtml(row.label)}</span>
+          <span class="guidance-value">Studio readiness detail row: ${escapeHtml(row.label)} - ${escapeHtml(row.value)}</span>
+        </div>`;
 }
 
 function renderOperatorRunQueueItem(item) {

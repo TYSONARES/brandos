@@ -44,6 +44,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Readiness Evidence Model/);
   assert.match(html, /aria-label="Operator Decision State"/);
   assert.match(html, /Operator Decision State/);
+  assert.match(html, /aria-label="Studio Readiness Detail"/);
+  assert.match(html, /Studio Readiness Detail/);
   assert.match(html, /Product mode: context-pack-readiness/);
   assert.match(html, /Selected product workflow: Context Pack Readiness/);
   assert.match(html, /Product evidence: docs\/product\/product-surface-inventory.md, docs\/product\/product-workflow-prioritization.md/);
@@ -164,6 +166,11 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Operator decision reason: Review is blocking release: review_example_001/);
   assert.match(html, /Operator decision action: Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Operator decision evidence: blocked, 2 blocking/);
+  assert.match(html, /Studio readiness detail status: blocked/);
+  assert.match(html, /Studio readiness state: blocked-by-evidence/);
+  assert.match(html, /Studio readiness evidence: 4 evidence items, 2 blocking/);
+  assert.match(html, /Studio readiness decision: resolve-readiness-blocker/);
+  assert.match(html, /Studio readiness primary action: Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Current step: resolve-review/);
   assert.match(html, /Action status: pending/);
   assert.match(html, /action-status-badge action-status-pending/);
@@ -841,6 +848,10 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Operator decision: use-context-pack/);
   assert.match(html, /Operator decision action: Use context pack context_pack_example_001/);
   assert.match(html, /Operator decision evidence: ready, 0 blocking/);
+  assert.match(html, /Studio readiness detail status: ready/);
+  assert.match(html, /Studio readiness state: ready-for-use/);
+  assert.match(html, /Studio readiness evidence: 4 evidence items, 0 blocking/);
+  assert.match(html, /Studio readiness decision: use-context-pack/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /Completed action: workflow_action_example_001/);
   assert.match(html, /Workflow state source: <span class="state-source-badge state-source-command">command<\/span>/);

@@ -178,6 +178,31 @@ export function createOperatorDecisionState(store, contextPackId) {
   };
 }
 
+export function createStudioReadinessDetail(store, contextPackId) {
+  const readiness = evaluateContextPackReadiness(store, contextPackId);
+  const evidence = createReadinessEvidenceModel(store, contextPackId);
+  const decision = createOperatorDecisionState(store, contextPackId);
+
+  return {
+    title: 'Studio Readiness Detail',
+    contextPackId,
+    status: readiness.ready ? 'ready' : 'blocked',
+    summary: readiness.ready ? 'Context Pack is ready for Studio product use.' : 'Context Pack needs operator resolution before Studio product use.',
+    readinessState: readiness.ready ? 'ready-for-use' : 'blocked-by-evidence',
+    evidenceSummary: `${evidence.evidenceCount} evidence items, ${evidence.blockingEvidenceCount} blocking`,
+    operatorDecision: decision.decision,
+    primaryAction: decision.recommendedAction,
+    detailRows: [
+      { label: 'Readiness', value: readiness.ready ? 'ready' : 'blocked' },
+      { label: 'Evidence', value: evidence.status },
+      { label: 'Operator decision', value: decision.decision },
+      { label: 'Primary action', value: decision.recommendedAction },
+      { label: 'Owner', value: decision.owner }
+    ],
+    blockers: readiness.blockingReasons
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

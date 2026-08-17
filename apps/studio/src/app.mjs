@@ -38,6 +38,7 @@ import {
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,
   createRuntimeHealthSummary,
+  createStudioReadinessDetail,
   createStudioWorkflowRuntimeAggregateSummary,
   createStudioWorkflowRuntimeFinalClosure,
   createStudioStateRecovery,
@@ -72,6 +73,7 @@ export function createBrandOSStudioShell(options = {}) {
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
   const readinessEvidenceModel = createReadinessEvidenceModel(store, 'context_pack_example_001');
   const operatorDecisionState = createOperatorDecisionState(store, 'context_pack_example_001');
+  const studioReadinessDetail = createStudioReadinessDetail(store, 'context_pack_example_001');
   const contextPackUsageFlow = createContextPackUsageFlow(store, 'context_pack_example_001');
   const reviewResolutionWorkflow = createReviewResolutionWorkflow(store, 'review_example_001');
   const operatorRunQueue = createOperatorRunQueue(store);
@@ -439,6 +441,7 @@ export function createBrandOSStudioShell(options = {}) {
     contextPackReadiness,
     readinessEvidenceModel,
     operatorDecisionState,
+    studioReadinessDetail,
     contextPackUsageFlow,
     reviewResolutionWorkflow,
     operatorRunQueue,

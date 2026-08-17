@@ -11,6 +11,9 @@ const required = [
   'docs/development/iteration-v1.10-operator-decision-state.md',
   'docs/development/release-v1.10-operator-decision-state.md',
   'docs/development/closure-v1.10-operator-decision-state.md',
+  'docs/development/iteration-v1.10-studio-readiness-detail.md',
+  'docs/development/release-v1.10-studio-readiness-detail.md',
+  'docs/development/closure-v1.10-studio-readiness-detail.md',
   'docs/decisions/0032-context-pack-readiness-runtime-start.md',
   'packages/domain/src/use-cases.mjs',
   'packages/domain/src/index.mjs',
@@ -44,6 +47,9 @@ const evidenceClosure = readFileSync('docs/development/closure-v1.10-readiness-e
 const decisionStateIteration = readFileSync('docs/development/iteration-v1.10-operator-decision-state.md', 'utf8');
 const decisionStateRelease = readFileSync('docs/development/release-v1.10-operator-decision-state.md', 'utf8');
 const decisionStateClosure = readFileSync('docs/development/closure-v1.10-operator-decision-state.md', 'utf8');
+const studioDetailIteration = readFileSync('docs/development/iteration-v1.10-studio-readiness-detail.md', 'utf8');
+const studioDetailRelease = readFileSync('docs/development/release-v1.10-studio-readiness-detail.md', 'utf8');
+const studioDetailClosure = readFileSync('docs/development/closure-v1.10-studio-readiness-detail.md', 'utf8');
 const decision = readFileSync('docs/decisions/0032-context-pack-readiness-runtime-start.md', 'utf8');
 const domainUseCases = readFileSync('packages/domain/src/use-cases.mjs', 'utf8');
 const domainIndex = readFileSync('packages/domain/src/index.mjs', 'utf8');
@@ -82,19 +88,31 @@ const requiredSnippets = [
   ['docs/development/release-v1.10-operator-decision-state.md', decisionStateRelease, 'Proceed to Studio Readiness Detail.'],
   ['docs/development/closure-v1.10-operator-decision-state.md', decisionStateClosure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Operator Decision State'],
   ['docs/development/closure-v1.10-operator-decision-state.md', decisionStateClosure, 'Closed.'],
+  ['docs/development/iteration-v1.10-studio-readiness-detail.md', studioDetailIteration, '# Context Pack Readiness Runtime v1.10 Iteration: Studio Readiness Detail'],
+  ['docs/development/iteration-v1.10-studio-readiness-detail.md', studioDetailIteration, 'Proceed to Context Pack Readiness Aggregate Summary.'],
+  ['docs/development/release-v1.10-studio-readiness-detail.md', studioDetailRelease, '# Context Pack Readiness Runtime v1.10 Release Notes: Studio Readiness Detail'],
+  ['docs/development/release-v1.10-studio-readiness-detail.md', studioDetailRelease, 'Proceed to Context Pack Readiness Aggregate Summary.'],
+  ['docs/development/closure-v1.10-studio-readiness-detail.md', studioDetailClosure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Studio Readiness Detail'],
+  ['docs/development/closure-v1.10-studio-readiness-detail.md', studioDetailClosure, 'Closed.'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createReadinessEvidenceModel'],
   ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createOperatorDecisionState'],
+  ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createStudioReadinessDetail'],
   ['packages/domain/src/index.mjs', domainIndex, 'createReadinessEvidenceModel'],
   ['packages/domain/src/index.mjs', domainIndex, 'createOperatorDecisionState'],
+  ['packages/domain/src/index.mjs', domainIndex, 'createStudioReadinessDetail'],
   ['apps/studio/src/app.mjs', studioApp, 'const readinessEvidenceModel = createReadinessEvidenceModel'],
   ['apps/studio/src/app.mjs', studioApp, 'const operatorDecisionState = createOperatorDecisionState'],
+  ['apps/studio/src/app.mjs', studioApp, 'const studioReadinessDetail = createStudioReadinessDetail'],
   ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Readiness Evidence Model"'],
   ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Operator Decision State"'],
+  ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Studio Readiness Detail"'],
   ['apps/studio/src/render-html.mjs', studioRender, 'Readiness evidence item:'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Readiness Evidence Model summarizes blocking Context Pack evidence'],
   ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Operator Decision State asks the operator to resolve blocking readiness evidence'],
+  ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Studio Readiness Detail summarizes blocked Context Pack readiness for Studio'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Evidence status: blocked'],
   ['tests/studio/render-html.test.mjs', studioTest, 'Operator decision status: needs-action'],
+  ['tests/studio/render-html.test.mjs', studioTest, 'Studio readiness detail status: blocked'],
   ['docs/decisions/0032-context-pack-readiness-runtime-start.md', decision, '# ADR 0032: Context Pack Readiness Runtime v1.10 Start'],
   ['docs/decisions/0032-context-pack-readiness-runtime-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Active workstream: Context Pack Readiness Runtime v1.10'],
@@ -108,6 +126,9 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.10-operator-decision-state.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.10-operator-decision-state.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.10-operator-decision-state.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.10-studio-readiness-detail.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.10-studio-readiness-detail.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.10-studio-readiness-detail.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0032-context-pack-readiness-runtime-start.md`'],
   ['README.md', rootReadme, '- Active workstream: Context Pack Readiness Runtime v1.10'],
   ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Context Pack Readiness Runtime v1.10'],
@@ -116,6 +137,7 @@ const requiredSnippets = [
   ['CHANGELOG.md', changelog, 'Added Context Pack Readiness Runtime Scope release notes and closure checklist.'],
   ['CHANGELOG.md', changelog, 'Added Readiness Evidence Model release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['CHANGELOG.md', changelog, 'Added Operator Decision State release notes, closure checklist, runtime model, Studio panel, and tests.'],
+  ['CHANGELOG.md', changelog, 'Added Studio Readiness Detail release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['package.json', packageJson, '"check:context-pack-readiness-runtime"']
 ];
 
