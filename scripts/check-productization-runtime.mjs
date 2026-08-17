@@ -8,7 +8,11 @@ const required = [
   'docs/development/iteration-v1.9-product-surface-inventory.md',
   'docs/development/release-v1.9-product-surface-inventory.md',
   'docs/development/closure-v1.9-product-surface-inventory.md',
+  'docs/development/iteration-v1.9-product-workflow-prioritization.md',
+  'docs/development/release-v1.9-product-workflow-prioritization.md',
+  'docs/development/closure-v1.9-product-workflow-prioritization.md',
   'docs/product/product-surface-inventory.md',
+  'docs/product/product-workflow-prioritization.md',
   'docs/product/README.md',
   'docs/decisions/0031-productization-runtime-start.md',
   'docs/development/README.md',
@@ -34,7 +38,11 @@ const closure = readFileSync('docs/development/closure-v1.9-productization-runti
 const inventoryIteration = readFileSync('docs/development/iteration-v1.9-product-surface-inventory.md', 'utf8');
 const inventoryRelease = readFileSync('docs/development/release-v1.9-product-surface-inventory.md', 'utf8');
 const inventoryClosure = readFileSync('docs/development/closure-v1.9-product-surface-inventory.md', 'utf8');
+const priorityIteration = readFileSync('docs/development/iteration-v1.9-product-workflow-prioritization.md', 'utf8');
+const priorityRelease = readFileSync('docs/development/release-v1.9-product-workflow-prioritization.md', 'utf8');
+const priorityClosure = readFileSync('docs/development/closure-v1.9-product-workflow-prioritization.md', 'utf8');
 const productSurfaceInventory = readFileSync('docs/product/product-surface-inventory.md', 'utf8');
+const productWorkflowPrioritization = readFileSync('docs/product/product-workflow-prioritization.md', 'utf8');
 const productIndex = readFileSync('docs/product/README.md', 'utf8');
 const decision = readFileSync('docs/decisions/0031-productization-runtime-start.md', 'utf8');
 const developmentIndex = readFileSync('docs/development/README.md', 'utf8');
@@ -67,7 +75,17 @@ const requiredSnippets = [
   ['docs/product/product-surface-inventory.md', productSurfaceInventory, 'Operator-Facing Surfaces'],
   ['docs/product/product-surface-inventory.md', productSurfaceInventory, 'Future Customer-Facing Surfaces'],
   ['docs/product/product-surface-inventory.md', productSurfaceInventory, 'The first productization candidate is Studio Product Mode'],
+  ['docs/development/iteration-v1.9-product-workflow-prioritization.md', priorityIteration, '# Productization Runtime v1.9 Iteration: Product Workflow Prioritization'],
+  ['docs/development/iteration-v1.9-product-workflow-prioritization.md', priorityIteration, 'Context Pack Readiness is the first Studio Product Mode path'],
+  ['docs/development/release-v1.9-product-workflow-prioritization.md', priorityRelease, '# Productization Runtime v1.9 Release Notes: Product Workflow Prioritization'],
+  ['docs/development/release-v1.9-product-workflow-prioritization.md', priorityRelease, 'Proceed to Studio Product Mode.'],
+  ['docs/development/closure-v1.9-product-workflow-prioritization.md', priorityClosure, '# Productization Runtime v1.9 Closure Checklist: Product Workflow Prioritization'],
+  ['docs/development/closure-v1.9-product-workflow-prioritization.md', priorityClosure, 'Closed.'],
+  ['docs/product/product-workflow-prioritization.md', productWorkflowPrioritization, '# Product Workflow Prioritization'],
+  ['docs/product/product-workflow-prioritization.md', productWorkflowPrioritization, 'Context Pack Readiness'],
+  ['docs/product/product-workflow-prioritization.md', productWorkflowPrioritization, 'Studio Product Mode should begin with Context Pack Readiness'],
   ['docs/product/README.md', productIndex, '`product-surface-inventory.md`'],
+  ['docs/product/README.md', productIndex, '`product-workflow-prioritization.md`'],
   ['docs/decisions/0031-productization-runtime-start.md', decision, '# ADR 0031: Productization Runtime v1.9 Start'],
   ['docs/decisions/0031-productization-runtime-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Active workstream: Productization Runtime v1.9'],
@@ -78,12 +96,16 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.9-product-surface-inventory.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.9-product-surface-inventory.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.9-product-surface-inventory.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.9-product-workflow-prioritization.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.9-product-workflow-prioritization.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.9-product-workflow-prioritization.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0031-productization-runtime-start.md`'],
   ['README.md', rootReadme, '- Active workstream: Productization Runtime v1.9'],
   ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Productization Runtime v1.9'],
   ['PROJECT_MANIFEST.md', manifest, '## v1.9 Scope'],
   ['CHANGELOG.md', changelog, 'Started Productization Runtime v1.9 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Product Surface Inventory release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added Product Workflow Prioritization release notes and closure checklist.'],
   ['package.json', packageJson, '"check:productization-runtime"']
 ];
 

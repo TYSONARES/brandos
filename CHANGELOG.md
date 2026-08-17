@@ -5,6 +5,7 @@
 - Started Productization Runtime v1.9 scope and decision record.
 - Added Productization Runtime Scope release notes and closure checklist.
 - Added Product Surface Inventory release notes and closure checklist.
+- Added Product Workflow Prioritization release notes and closure checklist.
 - Added Productization Runtime validation command.
 
 ## Unreleased - Release Governance v1.8
