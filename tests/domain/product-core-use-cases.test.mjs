@@ -13,6 +13,7 @@ import {
   createBrandProfileOverview,
   createCiEvidenceSummary,
   createCommandResultSummary,
+  createContextPackHandoffSourcePackage,
   createContextPackUsageFlow,
   createDraftReview,
   createExampleProductCoreState,
@@ -227,6 +228,36 @@ test('Studio Readiness Detail summarizes ready Context Pack readiness for Studio
   assert.equal(detail.evidenceSummary, '4 evidence items, 0 blocking');
   assert.equal(detail.operatorDecision, 'use-context-pack');
   assert.equal(detail.primaryAction, 'Use context pack context_pack_example_001');
+});
+
+test('Context Pack Handoff Source Package blocks until readiness evidence is clear', () => {
+  const sourcePackage = createContextPackHandoffSourcePackage(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(sourcePackage.title, 'Context Pack Handoff Source Package');
+  assert.equal(sourcePackage.status, 'blocked');
+  assert.equal(sourcePackage.packageReady, false);
+  assert.equal(sourcePackage.includedSourceCount, 5);
+  assert.equal(sourcePackage.blockedSourceCount, 2);
+  assert.equal(sourcePackage.handoffDecision, 'resolve-readiness-before-handoff');
+  assert.equal(sourcePackage.recommendedNextWorkflow, 'Context Pack Readiness Runtime');
+  assert.deepEqual(sourcePackage.missingContext, ['Review is blocking release: review_example_001']);
+});
+
+test('Context Pack Handoff Source Package opens agent context readiness for ready evidence', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const sourcePackage = createContextPackHandoffSourcePackage(store, 'context_pack_example_001');
+
+  assert.equal(sourcePackage.status, 'ready');
+  assert.equal(sourcePackage.packageReady, true);
+  assert.equal(sourcePackage.blockedSourceCount, 0);
+  assert.equal(sourcePackage.handoffDecision, 'handoff-source-package-ready');
+  assert.equal(sourcePackage.recommendedNextWorkflow, 'Agent Context Readiness');
+  assert.deepEqual(sourcePackage.verification, [
+    'Readiness evidence: ready',
+    'Operator decision: ready',
+    'Studio readiness detail: ready'
+  ]);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {

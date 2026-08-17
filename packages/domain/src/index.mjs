@@ -15,6 +15,7 @@ export {
   createBrandProfileOverview,
   createCiEvidenceSummary,
   createCommandResultSummary,
+  createContextPackHandoffSourcePackage,
   createContextPackUsageFlow,
   createDraftReview,
   createHandoffAcceptance,

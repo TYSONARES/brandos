@@ -203,6 +203,72 @@ export function createStudioReadinessDetail(store, contextPackId) {
   };
 }
 
+export function createContextPackHandoffSourcePackage(store, contextPackId) {
+  const contextPack = requireRecord(store, 'context-pack', contextPackId);
+  const evidence = createReadinessEvidenceModel(store, contextPackId);
+  const decision = createOperatorDecisionState(store, contextPackId);
+  const studioDetail = createStudioReadinessDetail(store, contextPackId);
+  const usageFlow = createContextPackUsageFlow(store, contextPackId);
+  const packageReady = evidence.status === 'ready' && decision.status === 'ready' && studioDetail.status === 'ready';
+  const includedSources = [
+    ...contextPack.includedClaims.map((claimId) => ({
+      type: 'claim',
+      id: claimId,
+      status: evidence.evidenceItems.find((item) => item.type === 'claim' && item.id === claimId)?.status ?? 'unknown',
+      source: `claim:${claimId}`
+    })),
+    ...contextPack.includedDecisions.map((decisionId) => ({
+      type: 'decision',
+      id: decisionId,
+      status: evidence.evidenceItems.find((item) => item.type === 'decision' && item.id === decisionId)?.status ?? 'unknown',
+      source: `decision:${decisionId}`
+    })),
+    {
+      type: 'readiness-evidence',
+      id: `${contextPack.id}:readiness-evidence`,
+      status: evidence.status,
+      source: 'Readiness Evidence Model'
+    },
+    {
+      type: 'operator-decision',
+      id: `${contextPack.id}:operator-decision`,
+      status: decision.status,
+      source: 'Operator Decision State'
+    },
+    {
+      type: 'studio-readiness',
+      id: `${contextPack.id}:studio-readiness`,
+      status: studioDetail.status,
+      source: 'Studio Readiness Detail'
+    }
+  ];
+
+  return {
+    title: 'Context Pack Handoff Source Package',
+    contextPackId,
+    status: packageReady ? 'ready' : 'blocked',
+    packageReady,
+    taskType: contextPack.taskType,
+    intendedAudience: contextPack.intendedAudience,
+    owner: contextPack.owner,
+    sourcePolicy: 'Repository context only: Context Pack, readiness evidence, operator decision, and Studio readiness detail.',
+    includedSourceCount: includedSources.length,
+    blockedSourceCount: includedSources.filter((source) => source.status === 'blocked' || source.status === 'attention').length,
+    includedSources,
+    includedSections: usageFlow.includedSections,
+    excludedTopics: usageFlow.excludedTopics,
+    agentInstructions: usageFlow.agentInstructions,
+    handoffDecision: packageReady ? 'handoff-source-package-ready' : 'resolve-readiness-before-handoff',
+    recommendedNextWorkflow: packageReady ? 'Agent Context Readiness' : 'Context Pack Readiness Runtime',
+    missingContext: packageReady ? [] : evidence.blockers,
+    verification: [
+      `Readiness evidence: ${evidence.status}`,
+      `Operator decision: ${decision.status}`,
+      `Studio readiness detail: ${studioDetail.status}`
+    ]
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

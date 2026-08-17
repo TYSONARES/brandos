@@ -4,6 +4,7 @@
 
 - Started Context Pack Handoff Runtime v1.11 scope and decision record.
 - Added Context Pack Handoff Runtime Scope release notes and closure checklist.
+- Added Handoff Source Package release notes, closure checklist, runtime model, Studio panel, and tests.
 - Added Context Pack Handoff Runtime validation command.
 
 ## Unreleased - Context Pack Readiness Runtime v1.10

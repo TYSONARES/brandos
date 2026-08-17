@@ -2909,6 +2909,21 @@ export function renderStudioHtml(shell, options = {}) {
     </section>
 
     <p class="section-title">Context Pack usage flow</p>
+    <section class="panel" aria-label="Context Pack Handoff Source Package">
+      <h2>${escapeHtml(shell.contextPackHandoffSourcePackage.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Context Pack handoff package status: ${shell.contextPackHandoffSourcePackage.status}`)}
+        ${renderGuidanceRow('Decision', `Context Pack handoff decision: ${shell.contextPackHandoffSourcePackage.handoffDecision}`)}
+        ${renderGuidanceRow('Policy', `Context Pack handoff source policy: ${shell.contextPackHandoffSourcePackage.sourcePolicy}`)}
+        ${renderGuidanceRow('Sources', `Context Pack handoff sources: ${shell.contextPackHandoffSourcePackage.includedSourceCount} included, ${shell.contextPackHandoffSourcePackage.blockedSourceCount} blocked`)}
+        ${renderGuidanceRow('Audience', `Context Pack handoff audience: ${shell.contextPackHandoffSourcePackage.intendedAudience}`)}
+        ${renderGuidanceRow('Next workflow', `Context Pack handoff next workflow: ${shell.contextPackHandoffSourcePackage.recommendedNextWorkflow}`)}
+      </div>
+      <div class="usage-step-list">
+        ${shell.contextPackHandoffSourcePackage.includedSources.map(renderContextPackHandoffSource).join('')}
+      </div>
+    </section>
+
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
       <div class="usage-list">
@@ -3969,6 +3984,15 @@ function renderUsageStep(step) {
           <span class="usage-step-label">Context Pack usage step: ${escapeHtml(step.label)}</span>
           <span class="usage-step-detail">Context Pack usage detail: ${escapeHtml(step.detail)}</span>
         </div>`;
+}
+
+function renderContextPackHandoffSource(source) {
+  return `
+    <div class="usage-step">
+      <span class="usage-step-label">Context Pack handoff source: ${escapeHtml(source.type)} ${escapeHtml(source.id)}</span>
+      <span class="usage-step-detail">Context Pack handoff source detail: ${escapeHtml(source.status)} from ${escapeHtml(source.source)}</span>
+    </div>
+  `;
 }
 
 function renderMultiActionRow(label, value) {
