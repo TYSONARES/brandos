@@ -33,6 +33,7 @@ import {
   createOperatorWorkflowMap,
   createPullRequestReadiness,
   createPullRequestReviewPackage,
+  createReadinessEvidenceModel,
   createRepositoryBranchStatus,
   createRepositoryCollaborationAggregateSummary,
   createRepositoryCollaborationFinalClosure,
@@ -122,6 +123,24 @@ test('Context Pack readiness reports blocking review state', () => {
   ]);
 });
 
+test('Readiness Evidence Model summarizes blocking Context Pack evidence', () => {
+  const evidence = createReadinessEvidenceModel(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(evidence.title, 'Readiness Evidence Model');
+  assert.equal(evidence.contextPackId, 'context_pack_example_001');
+  assert.equal(evidence.status, 'blocked');
+  assert.equal(evidence.evidenceCount, 4);
+  assert.equal(evidence.blockingEvidenceCount, 2);
+  assert.equal(evidence.readinessDecision, 'needs-operator-resolution');
+  assert.deepEqual(evidence.blockers, ['Review is blocking release: review_example_001']);
+  assert.deepEqual(evidence.evidenceItems.map((item) => `${item.type}:${item.status}`), [
+    'claim:pass',
+    'decision:pass',
+    'review:blocked',
+    'workflow-action:attention'
+  ]);
+});
+
 test('Context Pack readiness passes when claims, decisions, and reviews are clear', () => {
   const state = createExampleProductCoreState();
   state.review = [
@@ -145,6 +164,17 @@ test('Context Pack readiness passes when claims, decisions, and reviews are clea
       owner: 'operator@example.local'
     }
   ]);
+});
+
+test('Readiness Evidence Model passes when Context Pack evidence is clear', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const evidence = createReadinessEvidenceModel(store, 'context_pack_example_001');
+
+  assert.equal(evidence.status, 'ready');
+  assert.equal(evidence.blockingEvidenceCount, 0);
+  assert.equal(evidence.readinessDecision, 'ready-for-use');
+  assert.deepEqual(evidence.blockers, []);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {

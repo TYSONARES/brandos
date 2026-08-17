@@ -29,6 +29,7 @@ import {
   createOperatorRunbookExecution,
   createPullRequestReadiness,
   createPullRequestReviewPackage,
+  createReadinessEvidenceModel,
   createRepositoryCollaborationAggregateSummary,
   createRepositoryCollaborationFinalClosure,
   createRepositoryBranchStatus,
@@ -68,6 +69,7 @@ export function createBrandOSStudioShell(options = {}) {
   const state = summarizeProductCoreState(store);
   const brandProfileOverview = createBrandProfileOverview(store, 'brand_profile_example_001');
   const contextPackReadiness = evaluateContextPackReadiness(store, 'context_pack_example_001');
+  const readinessEvidenceModel = createReadinessEvidenceModel(store, 'context_pack_example_001');
   const contextPackUsageFlow = createContextPackUsageFlow(store, 'context_pack_example_001');
   const reviewResolutionWorkflow = createReviewResolutionWorkflow(store, 'review_example_001');
   const operatorRunQueue = createOperatorRunQueue(store);
@@ -433,6 +435,7 @@ export function createBrandOSStudioShell(options = {}) {
     state,
     brandProfileOverview,
     contextPackReadiness,
+    readinessEvidenceModel,
     contextPackUsageFlow,
     reviewResolutionWorkflow,
     operatorRunQueue,

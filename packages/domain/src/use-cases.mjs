@@ -103,6 +103,61 @@ export function evaluateContextPackReadiness(store, contextPackId) {
   };
 }
 
+export function createReadinessEvidenceModel(store, contextPackId) {
+  const contextPack = requireRecord(store, 'context-pack', contextPackId);
+  const readiness = evaluateContextPackReadiness(store, contextPackId);
+  const claims = contextPack.includedClaims.map((claimId) => requireRecord(store, 'claim', claimId));
+  const decisions = contextPack.includedDecisions.map((decisionId) => requireRecord(store, 'decision', decisionId));
+  const reviews = store
+    .list('review')
+    .filter((review) => review.targetObjectType === 'context-pack' && review.targetObjectId === contextPack.id);
+  const workflowActions = store
+    .list('workflow-action')
+    .filter((action) => action.targetObjectId === contextPack.id || reviews.some((review) => review.id === action.targetObjectId));
+  const evidenceItems = [
+    ...claims.map((claim) => ({
+      type: 'claim',
+      id: claim.id,
+      status: claim.status === 'supported' || claim.status === 'approved' ? 'pass' : 'blocked',
+      label: `Claim evidence ${claim.id}`,
+      detail: claim.status
+    })),
+    ...decisions.map((decision) => ({
+      type: 'decision',
+      id: decision.id,
+      status: decision.status === 'accepted' ? 'pass' : 'blocked',
+      label: `Decision evidence ${decision.id}`,
+      detail: decision.status
+    })),
+    ...reviews.map((review) => ({
+      type: 'review',
+      id: review.id,
+      status: review.status === 'approved' ? 'pass' : 'blocked',
+      label: `Review evidence ${review.id}`,
+      detail: review.status
+    })),
+    ...workflowActions.map((action) => ({
+      type: 'workflow-action',
+      id: action.id,
+      status: action.status === 'complete' ? 'pass' : 'attention',
+      label: `Workflow Action evidence ${action.id}`,
+      detail: action.status
+    }))
+  ];
+
+  return {
+    title: 'Readiness Evidence Model',
+    contextPackId: contextPack.id,
+    status: readiness.ready ? 'ready' : 'blocked',
+    evidenceCount: evidenceItems.length,
+    blockingEvidenceCount: evidenceItems.filter((item) => item.status === 'blocked' || item.status === 'attention').length,
+    readinessDecision: readiness.ready ? 'ready-for-use' : 'needs-operator-resolution',
+    evidenceItems,
+    blockers: readiness.blockingReasons,
+    nextActions: readiness.nextActions
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

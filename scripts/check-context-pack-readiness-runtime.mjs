@@ -5,7 +5,16 @@ const required = [
   'docs/development/iteration-v1.10-context-pack-readiness-runtime-scope.md',
   'docs/development/release-v1.10-context-pack-readiness-runtime-scope.md',
   'docs/development/closure-v1.10-context-pack-readiness-runtime-scope.md',
+  'docs/development/iteration-v1.10-readiness-evidence-model.md',
+  'docs/development/release-v1.10-readiness-evidence-model.md',
+  'docs/development/closure-v1.10-readiness-evidence-model.md',
   'docs/decisions/0032-context-pack-readiness-runtime-start.md',
+  'packages/domain/src/use-cases.mjs',
+  'packages/domain/src/index.mjs',
+  'apps/studio/src/app.mjs',
+  'apps/studio/src/render-html.mjs',
+  'tests/domain/product-core-use-cases.test.mjs',
+  'tests/studio/render-html.test.mjs',
   'docs/development/README.md',
   'docs/decisions/README.md',
   'README.md',
@@ -26,7 +35,16 @@ const scope = readFileSync('docs/development/v1.10-scope.md', 'utf8');
 const iteration = readFileSync('docs/development/iteration-v1.10-context-pack-readiness-runtime-scope.md', 'utf8');
 const release = readFileSync('docs/development/release-v1.10-context-pack-readiness-runtime-scope.md', 'utf8');
 const closure = readFileSync('docs/development/closure-v1.10-context-pack-readiness-runtime-scope.md', 'utf8');
+const evidenceIteration = readFileSync('docs/development/iteration-v1.10-readiness-evidence-model.md', 'utf8');
+const evidenceRelease = readFileSync('docs/development/release-v1.10-readiness-evidence-model.md', 'utf8');
+const evidenceClosure = readFileSync('docs/development/closure-v1.10-readiness-evidence-model.md', 'utf8');
 const decision = readFileSync('docs/decisions/0032-context-pack-readiness-runtime-start.md', 'utf8');
+const domainUseCases = readFileSync('packages/domain/src/use-cases.mjs', 'utf8');
+const domainIndex = readFileSync('packages/domain/src/index.mjs', 'utf8');
+const studioApp = readFileSync('apps/studio/src/app.mjs', 'utf8');
+const studioRender = readFileSync('apps/studio/src/render-html.mjs', 'utf8');
+const domainTest = readFileSync('tests/domain/product-core-use-cases.test.mjs', 'utf8');
+const studioTest = readFileSync('tests/studio/render-html.test.mjs', 'utf8');
 const developmentIndex = readFileSync('docs/development/README.md', 'utf8');
 const decisionsIndex = readFileSync('docs/decisions/README.md', 'utf8');
 const rootReadme = readFileSync('README.md', 'utf8');
@@ -46,6 +64,19 @@ const requiredSnippets = [
   ['docs/development/release-v1.10-context-pack-readiness-runtime-scope.md', release, 'Proceed to Readiness Evidence Model.'],
   ['docs/development/closure-v1.10-context-pack-readiness-runtime-scope.md', closure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Context Pack Readiness Runtime Scope'],
   ['docs/development/closure-v1.10-context-pack-readiness-runtime-scope.md', closure, 'Closed.'],
+  ['docs/development/iteration-v1.10-readiness-evidence-model.md', evidenceIteration, '# Context Pack Readiness Runtime v1.10 Iteration: Readiness Evidence Model'],
+  ['docs/development/iteration-v1.10-readiness-evidence-model.md', evidenceIteration, 'Proceed to Operator Decision State.'],
+  ['docs/development/release-v1.10-readiness-evidence-model.md', evidenceRelease, '# Context Pack Readiness Runtime v1.10 Release Notes: Readiness Evidence Model'],
+  ['docs/development/release-v1.10-readiness-evidence-model.md', evidenceRelease, 'Proceed to Operator Decision State.'],
+  ['docs/development/closure-v1.10-readiness-evidence-model.md', evidenceClosure, '# Context Pack Readiness Runtime v1.10 Closure Checklist: Readiness Evidence Model'],
+  ['docs/development/closure-v1.10-readiness-evidence-model.md', evidenceClosure, 'Closed.'],
+  ['packages/domain/src/use-cases.mjs', domainUseCases, 'export function createReadinessEvidenceModel'],
+  ['packages/domain/src/index.mjs', domainIndex, 'createReadinessEvidenceModel'],
+  ['apps/studio/src/app.mjs', studioApp, 'const readinessEvidenceModel = createReadinessEvidenceModel'],
+  ['apps/studio/src/render-html.mjs', studioRender, 'aria-label="Readiness Evidence Model"'],
+  ['apps/studio/src/render-html.mjs', studioRender, 'Readiness evidence item:'],
+  ['tests/domain/product-core-use-cases.test.mjs', domainTest, 'Readiness Evidence Model summarizes blocking Context Pack evidence'],
+  ['tests/studio/render-html.test.mjs', studioTest, 'Evidence status: blocked'],
   ['docs/decisions/0032-context-pack-readiness-runtime-start.md', decision, '# ADR 0032: Context Pack Readiness Runtime v1.10 Start'],
   ['docs/decisions/0032-context-pack-readiness-runtime-start.md', decision, '- Status: accepted'],
   ['docs/development/README.md', developmentIndex, '- Active workstream: Context Pack Readiness Runtime v1.10'],
@@ -53,12 +84,16 @@ const requiredSnippets = [
   ['docs/development/README.md', developmentIndex, '`iteration-v1.10-context-pack-readiness-runtime-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`release-v1.10-context-pack-readiness-runtime-scope.md`'],
   ['docs/development/README.md', developmentIndex, '`closure-v1.10-context-pack-readiness-runtime-scope.md`'],
+  ['docs/development/README.md', developmentIndex, '`iteration-v1.10-readiness-evidence-model.md`'],
+  ['docs/development/README.md', developmentIndex, '`release-v1.10-readiness-evidence-model.md`'],
+  ['docs/development/README.md', developmentIndex, '`closure-v1.10-readiness-evidence-model.md`'],
   ['docs/decisions/README.md', decisionsIndex, '`0032-context-pack-readiness-runtime-start.md`'],
   ['README.md', rootReadme, '- Active workstream: Context Pack Readiness Runtime v1.10'],
   ['PROJECT_MANIFEST.md', manifest, '- Active workstream: Context Pack Readiness Runtime v1.10'],
   ['PROJECT_MANIFEST.md', manifest, '## v1.10 Scope'],
   ['CHANGELOG.md', changelog, 'Started Context Pack Readiness Runtime v1.10 scope and decision record.'],
   ['CHANGELOG.md', changelog, 'Added Context Pack Readiness Runtime Scope release notes and closure checklist.'],
+  ['CHANGELOG.md', changelog, 'Added Readiness Evidence Model release notes, closure checklist, runtime model, Studio panel, and tests.'],
   ['package.json', packageJson, '"check:context-pack-readiness-runtime"']
 ];
 

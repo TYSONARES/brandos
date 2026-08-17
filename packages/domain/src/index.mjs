@@ -33,6 +33,7 @@ export {
   createOperatorRunSummary,
   createPullRequestReadiness,
   createPullRequestReviewPackage,
+  createReadinessEvidenceModel,
   createRepositoryBranchStatus,
   createReviewEvidenceSummary,
   createReviewResolutionWorkflow,

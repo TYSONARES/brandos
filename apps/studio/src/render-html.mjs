@@ -2861,6 +2861,23 @@ export function renderStudioHtml(shell, options = {}) {
       </article>
     </section>
 
+    <p class="section-title">Readiness evidence</p>
+    <section class="workflow-grid" aria-label="Readiness Evidence Model">
+      <article class="panel">
+        <h2>${escapeHtml(shell.readinessEvidenceModel.title)}</h2>
+        <p class="meta">Evidence status: ${escapeHtml(shell.readinessEvidenceModel.status)}</p>
+        <p class="meta">Readiness decision: ${escapeHtml(shell.readinessEvidenceModel.readinessDecision)}</p>
+        <p class="meta">Evidence count: ${shell.readinessEvidenceModel.evidenceCount}</p>
+        <p class="meta">Blocking evidence: ${shell.readinessEvidenceModel.blockingEvidenceCount}</p>
+      </article>
+      <article class="panel">
+        <h2>Evidence items</h2>
+        <ul>
+          ${shell.readinessEvidenceModel.evidenceItems.map(renderReadinessEvidenceItem).join('')}
+        </ul>
+      </article>
+    </section>
+
     <p class="section-title">Context Pack usage flow</p>
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
@@ -3047,6 +3064,13 @@ function renderProductModeRow(label, value) {
           <span class="product-mode-label">${escapeHtml(label)}</span>
           <span class="product-mode-value">${escapeHtml(value)}</span>
         </div>`;
+}
+
+function renderReadinessEvidenceItem(item) {
+  return `<li>
+          Readiness evidence item: ${escapeHtml(item.type)} ${escapeHtml(item.id)} -
+          ${escapeHtml(item.status)} - ${escapeHtml(item.detail)}
+        </li>`;
 }
 
 function renderOperatorRunQueueItem(item) {
