@@ -38,6 +38,11 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Brand overview/);
   assert.match(html, /Product Core objects/);
   assert.match(html, /Readiness blockers/);
+  assert.match(html, /aria-label="Studio Product Mode"/);
+  assert.match(html, /Studio Product Mode/);
+  assert.match(html, /Product mode: context-pack-readiness/);
+  assert.match(html, /Selected product workflow: Context Pack Readiness/);
+  assert.match(html, /Product evidence: docs\/product\/product-surface-inventory.md, docs\/product\/product-workflow-prioritization.md/);
   assert.match(html, /aria-label="Studio diagnostics"/);
   assert.match(html, /Studio diagnostics/);
   assert.match(html, /aria-label="Operator guidance"/);
@@ -139,6 +144,11 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
 
   assert.match(html, /Context readiness/);
   assert.match(html, /Context Pack workflow/);
+  assert.match(html, /Product mode status: needs-action/);
+  assert.match(html, /Product decision: Resolve readiness blocker before product use./);
+  assert.match(html, /Product readiness: blocked/);
+  assert.match(html, /Product blockers: Review is blocking release: review_example_001/);
+  assert.match(html, /Product next actions: pending Resolve review feedback for context_pack_example_001/);
   assert.match(html, /Current step: resolve-review/);
   assert.match(html, /Action status: pending/);
   assert.match(html, /action-status-badge action-status-pending/);
@@ -804,6 +814,11 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /href="index.html"/);
   assert.match(html, /ready/);
   assert.match(html, /Current step: ready-for-use/);
+  assert.match(html, /Product mode status: ready/);
+  assert.match(html, /Product decision: Context Pack is ready for operator use./);
+  assert.match(html, /Product readiness: ready/);
+  assert.match(html, /Product blockers: none/);
+  assert.match(html, /Product next actions: ready Use context pack context_pack_example_001/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /Completed action: workflow_action_example_001/);
   assert.match(html, /Workflow state source: <span class="state-source-badge state-source-command">command<\/span>/);

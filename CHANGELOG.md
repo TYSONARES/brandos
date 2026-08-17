@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Productization Runtime v1.9
+
+- Started Productization Runtime v1.9 scope and decision record.
+- Added Productization Runtime Scope release notes and closure checklist.
+- Added Product Surface Inventory release notes and closure checklist.
+- Added Product Workflow Prioritization release notes and closure checklist.
+- Added Studio Product Mode release notes, closure checklist, runtime panel, and tests.
+- Added Product Evidence Pack release notes and closure checklist.
+- Added Productization Runtime v1.9 aggregate release summary and closure checklist.
+- Closed Productization Runtime v1.9 with final release notes and closure checklist.
+- Added Productization Runtime validation command.
+
 ## Unreleased - Release Governance v1.8
 
 - Added mainline pull request handoff and updated the pull request template.
