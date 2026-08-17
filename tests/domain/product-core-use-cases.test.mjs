@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   completeWorkflowAction,
   createAgentDraftExecution,
+  createAgentContextReadiness,
   createAgentHandoffClosure,
   createAgentHandoffContext,
   createAgentHandoffRuntimeAggregateSummary,
@@ -258,6 +259,38 @@ test('Context Pack Handoff Source Package opens agent context readiness for read
     'Operator decision: ready',
     'Studio readiness detail: ready'
   ]);
+});
+
+test('Agent Context Readiness blocks when handoff sources are not ready', () => {
+  const readiness = createAgentContextReadiness(createExampleStore(), 'context_pack_example_001');
+
+  assert.equal(readiness.title, 'Agent Context Readiness');
+  assert.equal(readiness.status, 'blocked');
+  assert.equal(readiness.contextReady, false);
+  assert.equal(readiness.sourcePackageStatus, 'blocked');
+  assert.equal(readiness.instructionCount, 3);
+  assert.equal(readiness.readinessDecision, 'agent-context-blocked');
+  assert.equal(readiness.recommendedNextWorkflow, 'Handoff Source Package');
+  assert.deepEqual(readiness.requiredReadOrder.slice(0, 4), [
+    'README.md',
+    'PROJECT_MANIFEST.md',
+    'CODEX.md',
+    'docs/README.md'
+  ]);
+});
+
+test('Agent Context Readiness opens Studio handoff detail for ready source packages', () => {
+  const store = createExampleStore();
+  completeWorkflowAction(store, 'workflow_action_example_001', '2026-07-18');
+  const readiness = createAgentContextReadiness(store, 'context_pack_example_001');
+
+  assert.equal(readiness.status, 'ready');
+  assert.equal(readiness.contextReady, true);
+  assert.equal(readiness.sourcePackageStatus, 'ready');
+  assert.equal(readiness.readinessDecision, 'agent-context-ready');
+  assert.equal(readiness.recommendedNextWorkflow, 'Studio Handoff Detail');
+  assert.deepEqual(readiness.blockers, []);
+  assert.deepEqual(readiness.readinessChecks.map((check) => check.status), ['pass', 'pass', 'pass', 'pass']);
 });
 
 test('Context Pack usage flow summarizes task boundary and source scope', () => {

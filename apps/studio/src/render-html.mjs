@@ -2924,6 +2924,21 @@ export function renderStudioHtml(shell, options = {}) {
       </div>
     </section>
 
+    <section class="panel" aria-label="Agent Context Readiness">
+      <h2>${escapeHtml(shell.agentContextReadiness.title)}</h2>
+      <div class="guidance-list">
+        ${renderGuidanceRow('Status', `Agent context readiness status: ${shell.agentContextReadiness.status}`)}
+        ${renderGuidanceRow('Decision', `Agent context readiness decision: ${shell.agentContextReadiness.readinessDecision}`)}
+        ${renderGuidanceRow('Source package', `Agent context source package: ${shell.agentContextReadiness.sourcePackageStatus}`)}
+        ${renderGuidanceRow('Read order', `Agent context read order: ${shell.agentContextReadiness.requiredReadOrder.join(', ')}`)}
+        ${renderGuidanceRow('Instructions', `Agent context instruction count: ${shell.agentContextReadiness.instructionCount}`)}
+        ${renderGuidanceRow('Next workflow', `Agent context next workflow: ${shell.agentContextReadiness.recommendedNextWorkflow}`)}
+      </div>
+      <div class="usage-step-list">
+        ${shell.agentContextReadiness.readinessChecks.map(renderAgentContextReadinessCheck).join('')}
+      </div>
+    </section>
+
     <section class="panel" aria-label="Context Pack usage flow">
       <h2>${escapeHtml(shell.contextPackUsageFlow.title)}</h2>
       <div class="usage-list">
@@ -3991,6 +4006,15 @@ function renderContextPackHandoffSource(source) {
     <div class="usage-step">
       <span class="usage-step-label">Context Pack handoff source: ${escapeHtml(source.type)} ${escapeHtml(source.id)}</span>
       <span class="usage-step-detail">Context Pack handoff source detail: ${escapeHtml(source.status)} from ${escapeHtml(source.source)}</span>
+    </div>
+  `;
+}
+
+function renderAgentContextReadinessCheck(check) {
+  return `
+    <div class="usage-step">
+      <span class="usage-step-label">Agent context readiness check: ${escapeHtml(check.label)}</span>
+      <span class="usage-step-detail">Agent context readiness detail: ${escapeHtml(check.status)} - ${escapeHtml(check.detail)}</span>
     </div>
   `;
 }

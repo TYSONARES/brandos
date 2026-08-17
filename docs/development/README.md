@@ -166,6 +166,9 @@ Development Ready v1.0 turns the repository definition into an implementation-re
 153. `iteration-v1.11-handoff-source-package.md`
 154. `release-v1.11-handoff-source-package.md`
 155. `closure-v1.11-handoff-source-package.md`
+156. `iteration-v1.11-agent-context-readiness.md`
+157. `release-v1.11-agent-context-readiness.md`
+158. `closure-v1.11-agent-context-readiness.md`
 153. `iteration-v1.2-agent-handoff-context.md`
 154. `release-v1.2-agent-handoff-context.md`
 155. `closure-v1.2-agent-handoff-context.md`

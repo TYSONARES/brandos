@@ -269,6 +269,70 @@ export function createContextPackHandoffSourcePackage(store, contextPackId) {
   };
 }
 
+export function createAgentContextReadiness(store, contextPackId) {
+  const sourcePackage = createContextPackHandoffSourcePackage(store, contextPackId);
+  const usageFlow = createContextPackUsageFlow(store, contextPackId);
+  const requiredReadOrder = [
+    'README.md',
+    'PROJECT_MANIFEST.md',
+    'CODEX.md',
+    'docs/README.md',
+    'docs/product/context-pack.md',
+    'docs/ai/context-loading.md'
+  ];
+  const readinessChecks = [
+    {
+      label: 'Handoff source package ready',
+      status: sourcePackage.packageReady ? 'pass' : 'blocked',
+      detail: sourcePackage.status
+    },
+    {
+      label: 'Context Pack instructions present',
+      status: usageFlow.agentInstructions.length > 0 ? 'pass' : 'blocked',
+      detail: `${usageFlow.agentInstructions.length} instructions`
+    },
+    {
+      label: 'Source policy declared',
+      status: sourcePackage.sourcePolicy ? 'pass' : 'blocked',
+      detail: sourcePackage.sourcePolicy
+    },
+    {
+      label: 'Excluded topics declared',
+      status: usageFlow.excludedTopics.length > 0 ? 'pass' : 'attention',
+      detail: usageFlow.excludedTopics.join(', ')
+    }
+  ];
+  const blockers = [
+    ...sourcePackage.missingContext,
+    ...readinessChecks
+      .filter((check) => check.status === 'blocked')
+      .map((check) => `${check.label}: ${check.detail}`)
+  ];
+  const contextReady = blockers.length === 0;
+
+  return {
+    title: 'Agent Context Readiness',
+    contextPackId,
+    status: contextReady ? 'ready' : 'blocked',
+    contextReady,
+    sourcePackageStatus: sourcePackage.status,
+    sourcePolicy: sourcePackage.sourcePolicy,
+    requiredReadOrder,
+    instructionCount: usageFlow.agentInstructions.length,
+    agentInstructions: usageFlow.agentInstructions,
+    guardrails: [
+      'Use repository context only.',
+      `Respect exclusions: ${usageFlow.excludedTopics.join(', ')}`,
+      'Stop if required source evidence is missing.',
+      'Do not rely on chat-only context.'
+    ],
+    readinessChecks,
+    blockers,
+    readinessDecision: contextReady ? 'agent-context-ready' : 'agent-context-blocked',
+    recommendedNextWorkflow: contextReady ? 'Studio Handoff Detail' : 'Handoff Source Package'
+  };
+}
+
 export function createContextPackUsageFlow(store, contextPackId) {
   const contextPack = requireRecord(store, 'context-pack', contextPackId);
 

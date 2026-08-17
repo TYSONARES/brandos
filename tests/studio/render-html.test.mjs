@@ -48,6 +48,8 @@ test('Studio HTML render includes shell identity and Product Core summary', () =
   assert.match(html, /Studio Readiness Detail/);
   assert.match(html, /aria-label="Context Pack Handoff Source Package"/);
   assert.match(html, /Context Pack Handoff Source Package/);
+  assert.match(html, /aria-label="Agent Context Readiness"/);
+  assert.match(html, /Agent Context Readiness/);
   assert.match(html, /Product mode: context-pack-readiness/);
   assert.match(html, /Selected product workflow: Context Pack Readiness/);
   assert.match(html, /Product evidence: docs\/product\/product-surface-inventory.md, docs\/product\/product-workflow-prioritization.md/);
@@ -179,6 +181,11 @@ test('Studio HTML render includes blocking Context Pack readiness reason', () =>
   assert.match(html, /Context Pack handoff sources: 5 included, 2 blocked/);
   assert.match(html, /Context Pack handoff next workflow: Context Pack Readiness Runtime/);
   assert.match(html, /Context Pack handoff source: readiness-evidence context_pack_example_001:readiness-evidence/);
+  assert.match(html, /Agent context readiness status: blocked/);
+  assert.match(html, /Agent context readiness decision: agent-context-blocked/);
+  assert.match(html, /Agent context source package: blocked/);
+  assert.match(html, /Agent context instruction count: 3/);
+  assert.match(html, /Agent context next workflow: Handoff Source Package/);
   assert.match(html, /Current step: resolve-review/);
   assert.match(html, /Action status: pending/);
   assert.match(html, /action-status-badge action-status-pending/);
@@ -864,6 +871,10 @@ test('Studio HTML render includes ready Context Pack workflow state', () => {
   assert.match(html, /Context Pack handoff decision: handoff-source-package-ready/);
   assert.match(html, /Context Pack handoff sources: 5 included, 0 blocked/);
   assert.match(html, /Context Pack handoff next workflow: Agent Context Readiness/);
+  assert.match(html, /Agent context readiness status: ready/);
+  assert.match(html, /Agent context readiness decision: agent-context-ready/);
+  assert.match(html, /Agent context source package: ready/);
+  assert.match(html, /Agent context next workflow: Studio Handoff Detail/);
   assert.match(html, /Action status: ready/);
   assert.match(html, /Completed action: workflow_action_example_001/);
   assert.match(html, /Workflow state source: <span class="state-source-badge state-source-command">command<\/span>/);
